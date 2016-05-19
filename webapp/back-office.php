@@ -37,6 +37,8 @@ if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'delete')
+	$action = 'delete_entity';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'modify')
 	$action = 'form_modify_entity';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'add')
@@ -47,8 +49,11 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'delete_entity':
+	delete_entity($_GET['table'], $_GET['id']);
+	break;
 case 'modify_entity':
-	//modify_entity($_GET['table'], $_POST);
+	modify_entity($_GET['table'], $_GET['id'], $_POST);
 	break;
 case 'form_modify_entity':
 	form_modify_entity($_GET['table'], $_GET['id']);

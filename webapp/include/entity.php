@@ -28,7 +28,8 @@ function display_entity_goody($row)
 	echo '<b>Prix :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
 	echo '<b>Stock :</b> ' . $row['stock'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('goody', $row['goody_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('goody', $row['goody_id']) . ' ' .
+	     link_delete_entity('goody', $row['goody_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_lesson($row)
@@ -53,7 +54,8 @@ function display_entity_lesson($row)
 	echo '<b>Nombre d\'inscrits :</b> ' .
 	     lesson_num_subscribers($row['lesson_id']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('lesson', $row['lesson_id']) . ' ' .
+	     link_delete_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_member($link, $row)
@@ -82,7 +84,8 @@ function display_entity_member($link, $row)
 	echo '<b>Bénévole :</b> ' . evaluate_boolean($row['volunteer']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('member', $row['member_id']) . ' ' .
+	     link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	display_entity_member_file($link, $row['member_id']);
 	echo '<br>' . PHP_EOL;
@@ -99,7 +102,8 @@ function display_entity_order($link, $row)
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	display_entity_order_content($link, $row['order_id']);
-	echo link_modify_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('order', $row['order_id']) . ' ' .
+	     link_delete_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_pre_registration($row)
@@ -129,6 +133,8 @@ function display_entity_pre_registration($row)
 	echo '<b>Cours choisi(s) :</b> ' . $row['lessons'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('pre_registration',
+				$row['pre_registration_id']) . ' ' .
+	     link_delete_entity('pre_registration',
 				$row['pre_registration_id']) . '<br>' . PHP_EOL;
 }
 
@@ -150,7 +156,8 @@ function display_entity_registration($link, $row)
 	echo '<b>Nombre de paiements :</b> ' . $row['payments'] . '<br>' .
 	     PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('registration', $row['registration_id']) .
+	echo link_modify_entity('registration', $row['registration_id']) . ' ' .
+	     link_delete_entity('registration', $row['registration_id']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	display_entity_registration_payments($link, $row['registration_id']);
@@ -168,7 +175,8 @@ function display_entity_room($row)
 	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
 	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('room', $row['room_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('room', $row['room_id']) . ' ' .
+	     link_delete_entity('room', $row['room_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_teacher($row)
@@ -190,7 +198,9 @@ function display_entity_teacher($row)
 	echo '<br>' . PHP_EOL;
 	echo '<b>Absences :</b> ' . $row['absences'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('teacher', $row['teacher_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('teacher', $row['teacher_id']) . ' ' .
+	     link_delete_entity('teacher', $row['teacher_id']) . '<br>' .
+	     PHP_EOL;
 }
 
 function display_entity($table, $id)
@@ -244,7 +254,7 @@ function form_add_entity_contains($order_id)
 {
 	echo '<h2>Ajouter un article</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=contains&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=contains" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_contains($order_id);
@@ -256,7 +266,7 @@ function form_add_entity_file($member_id)
 {
 	echo '<h2>Nouveau dossier</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=file&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=file" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_file($member_id);
@@ -268,7 +278,7 @@ function form_add_entity_goody()
 {
 	echo '<h2>Nouveau goodies</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=goody&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=goody" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_goody();
@@ -280,7 +290,7 @@ function form_add_entity_lesson()
 {
 	echo '<h2>Nouveau cours</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=lesson&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=lesson" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_lesson();
@@ -292,7 +302,7 @@ function form_add_entity_member()
 {
 	echo '<h2>Nouvel adhérent</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=member&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=member" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_member();
@@ -304,7 +314,7 @@ function form_add_entity_order()
 {
 	echo '<h2>Nouvelle commande</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=order&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=order" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_order();
@@ -316,7 +326,7 @@ function form_add_entity_payment($registration_id)
 {
 	echo '<h2>Nouveau paiement</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=payment&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=payment" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_payment($registration_id);
@@ -328,7 +338,7 @@ function form_add_entity_registration($member_id)
 {
 	echo '<h2>Nouvelle inscription</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=registration&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=registration" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_registration($member_id);
@@ -340,7 +350,7 @@ function form_add_entity_room()
 {
 	echo '<h2>Nouvelle salle</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=room&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=room" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_room();
@@ -352,7 +362,7 @@ function form_add_entity_teacher()
 {
 	echo '<h2>Nouveau professeur</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=teacher&amp;mode=add" ' .
+	echo '<form action="back-office.php?mode=add&amp;table=teacher" ' .
 	     'method="post">' . PHP_EOL;
 
 	form_entity_teacher();
@@ -583,8 +593,8 @@ function form_modify_entity_file($row)
 {
 	echo '<h2>Modifier le dossier</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=file&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=file&amp;' .
+	     'id=' . $row['file_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_file($row['member_id'], $row);
 
@@ -595,8 +605,8 @@ function form_modify_entity_goody($row)
 {
 	echo '<h2>Modifier le goodies</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=goody&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=goody&amp;' .
+	     'id=' . $row['goody_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_goody($row);
 
@@ -607,8 +617,8 @@ function form_modify_entity_lesson($row)
 {
 	echo '<h2>Modifier le cours</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=lesson&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=lesson&amp;' .
+	     'id=' . $row['lesson_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_lesson($row);
 
@@ -619,8 +629,8 @@ function form_modify_entity_member($row)
 {
 	echo '<h2>Modifier l\'adhérant</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=member&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=member&amp;' .
+	     'id=' . $row['member_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_member($row);
 
@@ -631,8 +641,8 @@ function form_modify_entity_order($row)
 {
 	echo '<h2>Modifier la commande</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=order&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=order&amp;' .
+	     'id=' . $row['order_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_order($row);
 
@@ -643,8 +653,9 @@ function form_modify_entity_payment($row)
 {
 	echo '<h2>Modifier le paiement</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=payment&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;' .
+	     'table=payment&amp;id=' . $row['payment_id'] . '" method="post">' .
+	     PHP_EOL;
 
 	form_entity_payment($row['registration_id'], $row);
 
@@ -655,8 +666,9 @@ function form_modify_entity_pre_registration($row)
 {
 	echo '<h2>Modifier la pré-inscription</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=pre_registration&amp;' .
-	     'mode=modify" method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;' .
+	     'table=pre_registration&amp;id=' . $row['pre_registration_id'] .
+	     '" method="post">' . PHP_EOL;
 
 	form_entity_pre_registration($row);
 
@@ -667,8 +679,9 @@ function form_modify_entity_registration($row)
 {
 	echo '<h2>Modifier l\'inscription</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=registration&amp;' .
-	     'mode=modify" method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;' .
+	     'table=registration&amp;id=' . $row['registration_id'] .
+	     '" method="post">' . PHP_EOL;
 
 	form_entity_registration($row['member_id'], $row);
 
@@ -679,8 +692,8 @@ function form_modify_entity_room($row)
 {
 	echo '<h2>Modifier la salle</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=room&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;table=room&amp;' .
+	     'id=' . $row['room_id'] . '" method="post">' . PHP_EOL;
 
 	form_entity_room($row);
 
@@ -691,8 +704,9 @@ function form_modify_entity_teacher($row)
 {
 	echo '<h2>Modifier le professeur</h2>' . PHP_EOL;
 
-	echo '<form action="back-office.php?table=teacher&amp;mode=modify" ' .
-	     'method="post">' . PHP_EOL;
+	echo '<form action="back-office.php?mode=modify&amp;' .
+	     'table=teacher&amp;id=' . $row['teacher_id'] . '" method="post">' .
+	     PHP_EOL;
 
 	form_entity_teacher($row);
 
@@ -948,5 +962,25 @@ function modify_entity($table, $id, $data)
 	}
 
 	mysqli_close($link);
+}
+
+/*
+ * Deletion of entity
+ */
+// TODO: delete entities which depend of the one deleted
+function delete_entity($table, $id)
+{
+	$link = connect_ins_school();
+
+	$query = 'DELETE FROM `' . $table . '` WHERE ' . $table . '_id = ' .
+		 $id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_table($table);
 }
 ?>

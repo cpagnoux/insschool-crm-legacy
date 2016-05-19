@@ -214,7 +214,7 @@ function display_summary($data)
 	foreach ($data as $key => $value) {
 		if (is_int($key) && isset($value)) {
 			echo '  <li>' . $value . '</li>' . PHP_EOL;
-			$lessons = $lessons . $key . '; ';
+			$lessons = $lessons . $key . ';';
 		}
 	}
 
@@ -252,7 +252,7 @@ function get_lessons($str_lessons)
 	while (strlen($str_lessons) > 0) {
 		sscanf($str_lessons, '%d', $id);
 		$lessons[$id] = ' checked="checked"';
-		$str_lessons = substr($str_lessons, strlen($id) + 2);
+		$str_lessons = substr($str_lessons, strlen($id) + 1);
 	}
 
 	return $lessons;

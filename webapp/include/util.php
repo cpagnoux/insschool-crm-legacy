@@ -22,8 +22,8 @@ function link_entity($table, $id)
 
 function link_add_entity($table)
 {
-	return '<a href="back-office.php?table=' . $table .
-	       '&amp;mode=add">Ajouter</a>';
+	return '<a href="back-office.php?mode=add&amp;table=' . $table .
+	       '">Ajouter</a>';
 }
 
 function link_add_entity_by_id($table, $id)
@@ -45,13 +45,19 @@ function link_add_entity_by_id($table, $id)
 		break;
 	}
 
-	return '<a href="back-office.php?table=' . $table .
-	       '&amp;mode=add&amp;id=' . $id . '">' . $message . '</a>';
+	return '<a href="back-office.php?mode=add&amp;table=' . $table .
+	       '&amp;id=' . $id . '">' . $message . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
-	return '<a href="back-office.php?table=' . $table . '&amp;id=' . $id .
-	       '&amp;mode=modify">Modifier</a>';
+	return '<a href="back-office.php?mode=modify&amp;table=' . $table .
+	       '&amp;id=' . $id . '">Modifier</a>';
+}
+
+function link_delete_entity($table, $id)
+{
+	return '<a href="back-office.php?mode=delete&amp;table=' . $table .
+	       '&amp;id=' . $id . '">Supprimer</a>';
 }
 ?>
