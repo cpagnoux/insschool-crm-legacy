@@ -411,8 +411,8 @@ function form_add_entity($table, $id)
  */
 function add_entity_contains($link, $data)
 {
-	$query = 'INSERT INTO contains VALUES ("' . $data['order_id'] . '", "' .
-		 $data['goody_id'] . '", "' . $data['quantity'] . '")';
+	$query = 'INSERT INTO contains VALUES (' . $data['order_id'] . ', ' .
+		 $data['goody_id'] . ', ' . $data['quantity'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -423,9 +423,9 @@ function add_entity_contains($link, $data)
 
 function add_entity_file($link, $data)
 {
-	$query = 'INSERT INTO file VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['medical_certificate'] . '", "' .
-		 $data['insurance'] . '", "' . $data['photo'] . '")';
+	$query = 'INSERT INTO file VALUES ("", ' . $data['member_id'] . ', ' .
+		 $data['medical_certificate'] . ', ' . $data['insurance'] .
+		 ', ' . $data['photo'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -437,8 +437,8 @@ function add_entity_file($link, $data)
 function add_entity_goody($link, $data)
 {
 	$query = 'INSERT INTO goody VALUES ("", "' . $data['name'] . '", "' .
-		 $data['description'] . '", "' . $data['price'] . '", "' .
-		 $data['stock'] . '")';
+		 $data['description'] . '", ' . $data['price'] . ', ' .
+		 $data['stock'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -449,10 +449,10 @@ function add_entity_goody($link, $data)
 
 function add_entity_lesson($link, $data)
 {
-	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
-		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
-		 $data['start_time'] . '", "' . $data['end_time'] . '", "' .
-		 $data['room_id'] . '", "' . $data['costume'] . '", "' .
+	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", ' .
+		 $data['teacher_id'] . ', "' . $data['day'] . '", "' .
+		 $data['start_time'] . '", "' . $data['end_time'] . '", ' .
+		 $data['room_id'] . ', "' . $data['costume'] . '", "' .
 		 $data['t_shirt'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -470,7 +470,7 @@ function add_entity_member($link, $data)
 		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
 		 $data['cellphone_father'] . '", "' .
 		 $data['cellphone_mother'] . '", "' . $data['phone'] . '", "' .
-		 $data['email'] . '", "' . $data['volunteer'] . '")';
+		 $data['email'] . '", ' . $data['volunteer'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -481,8 +481,8 @@ function add_entity_member($link, $data)
 
 function add_entity_order($link, $data)
 {
-	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['date'] . '")';
+	$query = 'INSERT INTO `order` VALUES ("", ' . $data['member_id'] .
+		 ', "' . $data['date'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -493,9 +493,9 @@ function add_entity_order($link, $data)
 
 function add_entity_payment($link, $data)
 {
-	$query = 'INSERT INTO payment VALUES ("", "' .
-		 $data['registration_id'] . '", "' . $data['mode'] . '", "' .
-		 $data['amount'] . '", "' . $data['date'] . '")';
+	$query = 'INSERT INTO payment VALUES ("", ' . $data['registration_id'] .
+		 ', "' . $data['mode'] . '", ' . $data['amount'] . ', "' .
+		 $data['date'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -506,10 +506,10 @@ function add_entity_payment($link, $data)
 
 function add_entity_registration($link, $data)
 {
-	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['season'] . '", "' . $data['formula'] . '", "' .
-		 $data['price'] . '", "' . $data['discount'] . '", "' .
-		 $data['payments'] . '")';
+	$query = 'INSERT INTO registration VALUES ("", ' . $data['member_id'] .
+		 ', "' . $data['season'] . '", ' . $data['formula'] . ', ' .
+		 $data['price'] . ', ' . $data['discount'] . ', ' .
+		 $data['payments'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -768,10 +768,10 @@ function form_modify_entity($table, $id)
  */
 function modify_entity_file($link, $file_id, $data)
 {
-	$query = 'UPDATE file SET medical_certificate = "' .
-		 $data['medical_certificate'] . '", insurance = "' .
-		 $data['insurance'] . '", photo = "' . $data['photo'] .
-		 '" WHERE file_id = ' . $file_id;
+	$query = 'UPDATE file SET medical_certificate = ' .
+		 $data['medical_certificate'] . ', insurance = ' .
+		 $data['insurance'] . ', photo = ' . $data['photo'] .
+		 ' WHERE file_id = ' . $file_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -783,9 +783,9 @@ function modify_entity_file($link, $file_id, $data)
 function modify_entity_goody($link, $goody_id, $data)
 {
 	$query = 'UPDATE goody SET name = "' . $data['name'] .
-		 '", description = "' . $data['description'] . '", price = "' .
-		 $data['price'] . '", stock = "' . $data['stock'] .
-		 '" WHERE goody_id = ' . $goody_id;
+		 '", description = "' . $data['description'] . '", price = ' .
+		 $data['price'] . ', stock = ' . $data['stock'] .
+		 ' WHERE goody_id = ' . $goody_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -797,10 +797,10 @@ function modify_entity_goody($link, $goody_id, $data)
 function modify_entity_lesson($link, $lesson_id, $data)
 {
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
-		 '", teacher_id = "' . $data['teacher_id'] . '", day = "' .
+		 '", teacher_id = ' . $data['teacher_id'] . ', day = "' .
 		 $data['day'] . '", start_time = "' . $data['start_time'] .
-		 '", end_time = "' . $data['end_time'] . '", room_id = "' .
-		 $data['room_id'] . '", costume = "' . $data['costume'] .
+		 '", end_time = "' . $data['end_time'] . '", room_id = ' .
+		 $data['room_id'] . ', costume = "' . $data['costume'] .
 		 '", t_shirt = "' . $data['t_shirt'] . '" WHERE lesson_id = ' .
 		 $lesson_id;
 	if (!mysqli_query($link, $query)) {
@@ -821,8 +821,8 @@ function modify_entity_member($link, $member_id, $data)
 		 $data['cellphone'] . '", cellphone_father = "' .
 		 $data['cellphone_father'] . '", cellphone_mother = "' .
 		 $data['cellphone_mother'] . '", phone = "' . $data['phone'] .
-		 '", email = "' . $data['email'] . '", volunteer = "' .
-		 $data['volunteer'] . '" WHERE member_id = ' . $member_id;
+		 '", email = "' . $data['email'] . '", volunteer = ' .
+		 $data['volunteer'] . ' WHERE member_id = ' . $member_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -833,8 +833,8 @@ function modify_entity_member($link, $member_id, $data)
 
 function modify_entity_order($link, $order_id, $data)
 {
-	$query = 'UPDATE `order` SET member_id = "' . $data['member_id'] .
-		 '", date = "' . $data['date'] . '" WHERE order_id = ' .
+	$query = 'UPDATE `order` SET member_id = ' . $data['member_id'] .
+		 ', date = "' . $data['date'] . '" WHERE order_id = ' .
 		 $order_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -847,7 +847,7 @@ function modify_entity_order($link, $order_id, $data)
 function modify_entity_payment($link, $payment_id, $data)
 {
 	$query = 'UPDATE payment SET mode = "' . $data['mode'] .
-		 '", amount = "' . $data['amount'] . '", date = "' .
+		 '", amount = ' . $data['amount'] . ', date = "' .
 		 $data['date'] . '" WHERE payment_id = ' . $payment_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -881,10 +881,10 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 function modify_entity_registration($link, $registration_id, $data)
 {
 	$query = 'UPDATE registration SET season = "' . $data['season'] .
-		 '", formula = "' . $data['formula'] . '", price = "' .
-		 $data['price'] . '", discount = "' . $data['discount'] .
-		 '", payments = "' . $data['payments'] .
-		 '" WHERE registration_id = ' . $registration_id;
+		 '", formula = ' . $data['formula'] . ', price = ' .
+		 $data['price'] . ', discount = ' . $data['discount'] .
+		 ', payments = ' . $data['payments'] .
+		 ' WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
