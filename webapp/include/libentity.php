@@ -414,7 +414,6 @@ function form_entity_payment($registration_id, $row)
 	     PHP_EOL;
 }
 
-// TODO: add checked attributes to checkboxes for lessons
 function form_entity_pre_registration($row)
 {
 	$lessons = array();
@@ -423,7 +422,7 @@ function form_entity_pre_registration($row)
 	$means_of_knowledge_word_of_mouth = '';
 
 	if (isset($row)) {
-		$lessons = get_lessons($row['lessons']);
+		$lessons = string_to_lessons($row['lessons']);
 
 		if ($row['means_of_knowledge'] == 'flyer')
 			$means_of_knowledge_flyer = ' checked="checked"';

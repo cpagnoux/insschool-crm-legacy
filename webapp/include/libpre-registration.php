@@ -170,6 +170,34 @@ function display_info()
 	     'l\'inscription.<br>' . PHP_EOL;
 }
 
+function lessons_to_string($lessons, $display)
+{
+	$string = '';
+
+	foreach ($lessons as $lesson_id => $title) {
+		if (is_int($lesson_id) && isset($title)) {
+			if ($display)
+				echo '  <li>' . $title . '</li>' . PHP_EOL;
+			$string = $string . $lesson_id . ';';
+		}
+	}
+
+	return $string;
+}
+
+function string_to_lessons($string)
+{
+	$lessons = array();
+
+	while (strlen($string) > 0) {
+		sscanf($string, '%d', $id);
+		$lessons[$id] = ' checked="checked"';
+		$string = substr($string, strlen($id) + 1);
+	}
+
+	return $lessons;
+}
+
 /*
  * Pre-registration form
  */
@@ -209,21 +237,14 @@ function display_summary($data)
 	echo 'Vous avez choisi les cours :' . PHP_EOL;
 	echo '<ul>' . PHP_EOL;
 
-	$lessons = '';
-
-	foreach ($data as $key => $value) {
-		if (is_int($key) && isset($value)) {
-			echo '  <li>' . $value . '</li>' . PHP_EOL;
-			$lessons = $lessons . $key . ';';
-		}
-	}
+	$lessons_str = lessons_to_string($data, true);
 
 	echo '</ul>' . PHP_EOL;
 
-	return $lessons;
+	return $lessons_str;
 }
 
-function insert_into_database($data, $lessons)
+function insert_into_database($data, $lessons_str)
 {
 	$link = connect_ins_school();
 
@@ -233,28 +254,12 @@ function insert_into_database($data, $lessons)
 		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
 		 $data['cellphone'] . '", "' . $data['cellphone_father'] .
 		 '", "' . $data['cellphone_mother'] . '", "' . $data['phone'] .
-		 '", "' . $data['email'] . '", "' . $lessons . '")';
+		 '", "' . $data['email'] . '", "' . $lessons_str . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
 	mysqli_close($link);
-}
-
-/*
- * Getting of selected lessons
- */
-function get_lessons($str_lessons)
-{
-	$lessons = array();
-
-	while (strlen($str_lessons) > 0) {
-		sscanf($str_lessons, '%d', $id);
-		$lessons[$id] = ' checked="checked"';
-		$str_lessons = substr($str_lessons, strlen($id) + 1);
-	}
-
-	return $lessons;
 }
 ?>

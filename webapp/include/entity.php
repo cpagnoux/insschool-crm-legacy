@@ -10,6 +10,7 @@ include_once 'include/error.php';
 include_once 'include/util.php';
 include_once 'include/routine.php';
 
+include_once 'include/libpre-registration.php';
 include_once 'include/table.php';
 
 /*
@@ -859,6 +860,8 @@ function modify_entity_payment($link, $payment_id, $data)
 
 function modify_entity_pre_registration($link, $pre_registration_id, $data)
 {
+	$lessons_str = lessons_to_string($data);
+
 	$query = 'UPDATE pre_registration SET last_name = "' .
 		 $data['last_name'] . '", first_name = "' .
 		 $data['first_name'] . '", birth_date = "' .
@@ -868,7 +871,7 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 		 '", cellphone_father = "' . $data['cellphone_father'] .
 		 '", cellphone_mother = "' . $data['cellphone_mother'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .
-		 $data['email'] . '", lessons = "' . $data['lessons'] .
+		 $data['email'] . '", lessons = "' . $lessons_str .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);

@@ -25,8 +25,8 @@ if (isset($_POST['submit']))
 
 switch ($action) {
 case 'confirm':
-	$lessons = display_summary($_POST);
-	insert_into_database($_POST, $lessons);
+	$lessons_str = display_summary($_POST);
+	insert_into_database($_POST, $lessons_str);
 	break;
 default:
 	display_pre_registration_form();
