@@ -833,7 +833,7 @@ function modify_entity_member($link, $member_id, $data)
 
 function modify_entity_order($link, $order_id, $data)
 {
-	$query = 'UPDATE order SET member_id = "' . $data['member_id'] .
+	$query = 'UPDATE `order` SET member_id = "' . $data['member_id'] .
 		 '", date = "' . $data['date'] . '" WHERE order_id = ' .
 		 $order_id;
 	if (!mysqli_query($link, $query)) {
