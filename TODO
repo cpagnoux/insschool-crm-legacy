@@ -1,7 +1,9 @@
 TODO:
 - login page
+- secure login page
+- css
 - table display limit
 - table content sorting
 - table search bar
+- security (SQL injection)
 - call sheet
-- css
