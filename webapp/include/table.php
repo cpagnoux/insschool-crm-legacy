@@ -203,11 +203,23 @@ function display_table_teacher($result)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table($table)
+function display_table($table, $limit)
 {
+	echo '<form action="back-office.php?table=' . $table .
+	     '" method="post">' . PHP_EOL;
+	echo '  <select name="limit" onchange="this.form.submit()">' . PHP_EOL;
+	echo '    <option value="25">25</option>' . PHP_EOL;
+	echo '    <option value="50">50</option>' . PHP_EOL;
+	echo '    <option value="100">100</option>' . PHP_EOL;
+	echo '  </select>' . PHP_EOL;
+	echo '</form>' . PHP_EOL;
+
+	if (!isset($limit))
+		$limit = 25;
+
 	$link = connect_ins_school();
 
-	$query = 'SELECT * FROM `' . $table . '`';
+	$query = 'SELECT * FROM `' . $table . '` LIMIT ' . $limit . ' OFFSET 0';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

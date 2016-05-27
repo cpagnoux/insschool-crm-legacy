@@ -59,6 +59,6 @@ function link_delete_entity($table, $id)
 {
 	return '<a href="back-office.php?mode=delete&amp;table=' . $table .
 	       '&amp;id=' . $id . '" onclick="return confirm(' .
-	       '\'Êtes-vous sûr(e) ?\');">Supprimer</a>';
+	       '\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 ?>
