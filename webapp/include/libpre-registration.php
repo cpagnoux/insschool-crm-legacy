@@ -203,7 +203,8 @@ function string_to_lessons($string)
  */
 function display_pre_registration_form()
 {
-	echo '<form action="pre-registration.php" method="post">' . PHP_EOL;
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">' .
+	     PHP_EOL;
 
 	form_entity_pre_registration();
 

@@ -17,29 +17,29 @@ function evaluate_boolean($value)
 function link_table_previous($table, $page)
 {
 	if ($page == 1)
-		return '<a href="back-office.php?table=' . $table .
+		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 		       '">Précédent</a>';
 
-	return '<a href="back-office.php?table=' . $table . '&amp;page=' .
-	       $page . '">Précédent</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;page=' . $page . '">Précédent</a>';
 }
 
 function link_table_next($table, $page)
 {
-	return '<a href="back-office.php?table=' . $table . '&amp;page=' .
-	       $page . '">Suivant</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;page=' . $page . '">Suivant</a>';
 }
 
 function link_entity($table, $id)
 {
-	return '<a href="back-office.php?table=' . $table . '&amp;id=' . $id .
-	       '">+ d\'infos</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;id=' . $id . '">+ d\'infos</a>';
 }
 
 function link_add_entity($table)
 {
-	return '<a href="back-office.php?mode=add&amp;table=' . $table .
-	       '">Ajouter</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
+	       $table . '">Ajouter</a>';
 }
 
 function link_add_entity_by_id($table, $id)
@@ -61,21 +61,21 @@ function link_add_entity_by_id($table, $id)
 		break;
 	}
 
-	return '<a href="back-office.php?mode=add&amp;table=' . $table .
-	       '&amp;id=' . $id . '">' . $message . '</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
+	       $table . '&amp;id=' . $id . '">' . $message . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
-	return '<a href="back-office.php?mode=modify&amp;table=' . $table .
-	       '&amp;id=' . $id . '">Modifier</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
+	       $table . '&amp;id=' . $id . '">Modifier</a>';
 }
 
 function link_delete_entity($table, $id)
 {
-	return '<a href="back-office.php?mode=delete&amp;table=' . $table .
-	       '&amp;id=' . $id . '" onclick="return confirm(' .
-	       '\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
+	       $table . '&amp;id=' . $id . '" onclick="return ' .
+	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 /*

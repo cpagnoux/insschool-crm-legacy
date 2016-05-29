@@ -5,7 +5,7 @@
 
 include_once 'include/util.php';
 
-function display_table_limit($table, $limit)
+function table_display_limit($table, $limit)
 {
 	$limit_25 = '';
 	$limit_50 = '';
@@ -20,7 +20,7 @@ function display_table_limit($table, $limit)
 			$limit_100 = ' selected="selected"';
 	}
 
-	echo '<form action="back-office.php?table=' . $table .
+	echo '<form action="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 	     '" method="post">' . PHP_EOL;
 	echo '  Lignes par page :' . PHP_EOL;
 	echo '  <select name="limit" onchange="this.form.submit()">' . PHP_EOL;
@@ -31,7 +31,7 @@ function display_table_limit($table, $limit)
 	echo '</form>' . PHP_EOL;
 }
 
-function display_table_pagination($table, $limit, $page)
+function table_pagination($table, $limit, $page)
 {
 	$num_rows = row_count($table);
 

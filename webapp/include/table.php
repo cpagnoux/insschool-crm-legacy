@@ -18,7 +18,7 @@ function display_table_goody($result, $limit)
 		return;
 	}
 
-	display_table_limit('goody', $limit);
+	table_display_limit('goody', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -48,7 +48,7 @@ function display_table_lesson($result, $limit)
 		return;
 	}
 
-	display_table_limit('lesson', $limit);
+	table_display_limit('lesson', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -78,7 +78,7 @@ function display_table_member($result, $limit)
 		return;
 	}
 
-	display_table_limit('member', $limit);
+	table_display_limit('member', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -110,7 +110,7 @@ function display_table_order($result, $limit)
 		return;
 	}
 
-	display_table_limit('order', $limit);
+	table_display_limit('order', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -140,7 +140,7 @@ function display_table_pre_registration($result, $limit)
 		return;
 	}
 
-	display_table_limit('pre_registration', $limit);
+	table_display_limit('pre_registration', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -173,7 +173,7 @@ function display_table_room($result, $limit)
 		return;
 	}
 
-	display_table_limit('room', $limit);
+	table_display_limit('room', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -203,7 +203,7 @@ function display_table_teacher($result, $limit)
 		return;
 	}
 
-	display_table_limit('teacher', $limit);
+	table_display_limit('teacher', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -226,6 +226,7 @@ function display_table_teacher($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
+// FIXME: make $limit persistent when changing page
 function display_table($table, $limit, $page)
 {
 	if (!isset($limit))
@@ -238,8 +239,8 @@ function display_table($table, $limit, $page)
 
 	$link = connect_ins_school();
 
-	$query = 'SELECT * FROM `' . $table . '` LIMIT ' . $limit . ' OFFSET ' .
-		 $offset;
+	$query = 'SELECT * FROM `' . $table . '` LIMIT ' . $offset . ', ' .
+		 $limit;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -273,7 +274,7 @@ function display_table($table, $limit, $page)
 	mysqli_close($link);
 
 	echo '<br>' . PHP_EOL;
-	display_table_pagination($table, $limit, $page);
+	table_pagination($table, $limit, $page);
 
 	if ($table != 'pre_registration') {
 		echo '<br>' . PHP_EOL;
