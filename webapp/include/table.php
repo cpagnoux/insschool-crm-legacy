@@ -18,7 +18,7 @@ function display_table_goody($result, $limit)
 		return;
 	}
 
-	table_display_limit('goody', $limit);
+	table_options_container('goody', $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -227,6 +227,7 @@ function display_table_teacher($result, $limit)
 }
 
 // FIXME: make $limit persistent when changing page
+// hint: using $_SESSION variable
 function display_table($table, $limit, $page)
 {
 	if (!isset($limit))
