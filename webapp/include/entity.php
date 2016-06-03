@@ -204,6 +204,7 @@ function display_entity_teacher($row)
 	     PHP_EOL;
 }
 
+// TODO: replace person ids by names
 function display_entity($table, $id)
 {
 	$link = connect_ins_school();

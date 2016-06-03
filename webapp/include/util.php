@@ -11,6 +11,14 @@ function evaluate_boolean($value)
 		return 'non';
 }
 
+function product_status($value)
+{
+	if ($value > 0)
+		return 'En stock';
+	else
+		return 'Produit épuisé';
+}
+
 /*
  * Hyperlinks
  */
@@ -81,6 +89,25 @@ function link_delete_entity($table, $id)
 /*
  * Database-related functions
  */
+function get_name($table, $id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT first_name, last_name FROM `' . $table . '` WHERE ' .
+		 $table . '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['first_name'] . ' ' . $row['last_name'];
+}
+
 function row_count($table)
 {
 	$link = connect_ins_school();

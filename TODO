@@ -2,7 +2,7 @@ TODO:
 - login page
 - secure login page
 - css
-- table content sorting
 - table search bar
 - security (SQL injection)
 - call sheet
+- replace SLQ stored procedures by PHP functions

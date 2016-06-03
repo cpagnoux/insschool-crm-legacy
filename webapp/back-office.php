@@ -68,7 +68,8 @@ case 'display_entity':
 	display_entity($_GET['table'], $_GET['id']);
 	break;
 case 'display_table':
-	display_table($_GET['table'], $_POST['limit'], $_GET['page']);
+	display_table($_GET['table'], $_POST['sorting'], $_GET['page'],
+		      $_POST['limit']);
 	break;
 }
 ?>

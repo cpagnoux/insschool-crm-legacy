@@ -9,7 +9,7 @@ include_once 'include/connection.php';
 include_once 'include/error.php';
 include_once 'include/util.php';
 
-function display_table_goody($result, $limit)
+function display_table_goody($result, $sorting, $limit)
 {
 	echo '<h2>Goodies</h2>' . PHP_EOL;
 
@@ -18,19 +18,24 @@ function display_table_goody($result, $limit)
 		return;
 	}
 
-	table_options_container('goody', $limit);
+	table_display_options('goody', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
 	echo '    <td><b>Désignation</b></td>' . PHP_EOL;
+	echo '    <td><b>Prix</b></td>' . PHP_EOL;
+	echo '    <td><b>Stock</b></td>' . PHP_EOL;
 	echo '    <td></td>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
+		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
+		echo '    <td>' . product_status($row['stock']) . '</td>' .
+		     PHP_EOL;
 		echo '    <td>' . link_entity('goody', $row['goody_id']) .
 		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
@@ -39,7 +44,7 @@ function display_table_goody($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_lesson($result, $limit)
+function display_table_lesson($result, $sorting, $limit)
 {
 	echo '<h2>Cours</h2>' . PHP_EOL;
 
@@ -48,7 +53,7 @@ function display_table_lesson($result, $limit)
 		return;
 	}
 
-	table_display_limit('lesson', $limit);
+	table_display_options('lesson', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -69,7 +74,7 @@ function display_table_lesson($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_member($result, $limit)
+function display_table_member($result, $sorting, $limit)
 {
 	echo '<h2>Adhérents</h2>' . PHP_EOL;
 
@@ -78,7 +83,7 @@ function display_table_member($result, $limit)
 		return;
 	}
 
-	table_display_limit('member', $limit);
+	table_display_options('member', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -101,7 +106,7 @@ function display_table_member($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_order($result, $limit)
+function display_table_order($result, $sorting, $limit)
 {
 	echo '<h2>Commandes</h2>' . PHP_EOL;
 
@@ -110,19 +115,24 @@ function display_table_order($result, $limit)
 		return;
 	}
 
-	table_display_limit('order', $limit);
+	table_display_options('order', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
 	echo '    <td><b>N° de commande</b></td>' . PHP_EOL;
+	echo '    <td><b>Adhérent</b></td>' . PHP_EOL;
+	echo '    <td><b>Date</b></td>' . PHP_EOL;
 	echo '    <td></td>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['order_id'] . '</td>' . PHP_EOL;
+		echo '    <td>' . get_name('member', $row['member_id']) .
+		     '</td>' . PHP_EOL;
+		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' . link_entity('order', $row['order_id']) .
 		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
@@ -131,7 +141,7 @@ function display_table_order($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_pre_registration($result, $limit)
+function display_table_pre_registration($result, $sorting, $limit)
 {
 	echo '<h2>Pré-inscriptions</h2>' . PHP_EOL;
 
@@ -140,7 +150,7 @@ function display_table_pre_registration($result, $limit)
 		return;
 	}
 
-	table_display_limit('pre_registration', $limit);
+	table_display_options('pre_registration', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -164,7 +174,7 @@ function display_table_pre_registration($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_room($result, $limit)
+function display_table_room($result, $sorting, $limit)
 {
 	echo '<h2>Salles</h2>' . PHP_EOL;
 
@@ -173,7 +183,7 @@ function display_table_room($result, $limit)
 		return;
 	}
 
-	table_display_limit('room', $limit);
+	table_display_options('room', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -194,7 +204,7 @@ function display_table_room($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_teacher($result, $limit)
+function display_table_teacher($result, $sorting, $limit)
 {
 	echo '<h2>Professeurs</h2>' . PHP_EOL;
 
@@ -203,7 +213,7 @@ function display_table_teacher($result, $limit)
 		return;
 	}
 
-	table_display_limit('teacher', $limit);
+	table_display_options('teacher', $sorting, $limit);
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -226,22 +236,31 @@ function display_table_teacher($result, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-// FIXME: make $limit persistent when changing page
+// FIXME: make display options persistent when changing page
 // hint: using $_SESSION variable
-function display_table($table, $limit, $page)
+function display_table($table, $sorting, $page, $limit)
 {
-	if (!isset($limit))
-		$limit = 25;
+	if (!isset($sorting) && ($table == 'goody' || $table == 'room'))
+		$sorting = 'name';
+	else if (!isset($sorting) && $table == 'lesson')
+		$sorting = 'title';
+	else if (!isset($sorting) && $table == 'order')
+		$sorting = 'date';
+	else if (!isset($sorting))
+		$sorting = 'last_name, first_name';
 
 	if (!isset($page))
 		$page = 1;
 
-	$offset = $limit * ($page - 1);
+	if (!isset($limit))
+		$limit = 25;
+
+	$offset = ($page - 1) * $limit;
 
 	$link = connect_ins_school();
 
-	$query = 'SELECT * FROM `' . $table . '` LIMIT ' . $offset . ', ' .
-		 $limit;
+	$query = 'SELECT * FROM `' . $table . '` ORDER BY ' . $sorting .
+		 ' LIMIT ' . $offset . ', ' . $limit;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -249,25 +268,25 @@ function display_table($table, $limit, $page)
 
 	switch ($table) {
 	case 'goody':
-		display_table_goody($result, $limit);
+		display_table_goody($result, $sorting, $limit);
 		break;
 	case 'lesson':
-		display_table_lesson($result, $limit);
+		display_table_lesson($result, $sorting, $limit);
 		break;
 	case 'member':
-		display_table_member($result, $limit);
+		display_table_member($result, $sorting, $limit);
 		break;
 	case 'order':
-		display_table_order($result, $limit);
+		display_table_order($result, $sorting, $limit);
 		break;
 	case 'pre_registration':
-		display_table_pre_registration($result, $limit);
+		display_table_pre_registration($result, $sorting, $limit);
 		break;
 	case 'room':
-		display_table_room($result, $limit);
+		display_table_room($result, $sorting, $limit);
 		break;
 	case 'teacher':
-		display_table_teacher($result, $limit);
+		display_table_teacher($result, $sorting, $limit);
 		break;
 	}
 
@@ -275,7 +294,7 @@ function display_table($table, $limit, $page)
 	mysqli_close($link);
 
 	echo '<br>' . PHP_EOL;
-	table_pagination($table, $limit, $page);
+	table_pagination($table, $page, $limit);
 
 	if ($table != 'pre_registration') {
 		echo '<br>' . PHP_EOL;
