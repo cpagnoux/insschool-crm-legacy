@@ -6,7 +6,7 @@
 include_once 'include/connection.php';
 include_once 'include/error.php';
 
-function file_complete($file_id)
+/*function file_complete($file_id)
 {
 	$link = connect_ins_school();
 
@@ -22,7 +22,7 @@ function file_complete($file_id)
 	mysqli_close($link);
 
 	return $row[0];
-}
+}*/
 
 function lesson_duration($lesson_id)
 {
@@ -42,7 +42,7 @@ function lesson_duration($lesson_id)
 	return $row[0];
 }
 
-function lesson_num_subscribers($lesson_id)
+/*function lesson_num_subscribers($lesson_id)
 {
 	$link = connect_ins_school();
 
@@ -58,9 +58,9 @@ function lesson_num_subscribers($lesson_id)
 	mysqli_close($link);
 
 	return $row[0];
-}
+}*/
 
-function order_amount($order_id)
+/*function order_amount($order_id)
 {
 	$link = connect_ins_school();
 
@@ -76,7 +76,7 @@ function order_amount($order_id)
 	mysqli_close($link);
 
 	return $row[0];
-}
+}*/
 
 function order_amount_goody($order_id, $goody_id)
 {

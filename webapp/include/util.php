@@ -89,6 +89,27 @@ function link_delete_entity($table, $id)
 /*
  * Database-related functions
  */
+function file_complete($file_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT * FROM file WHERE file_id = ' . $file_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	if ($row['medical_certificate'] && $row['insurance'] && $row['photo'])
+		return true;
+	else
+		return false;
+}
+
 function get_name($table, $id)
 {
 	$link = connect_ins_school();
@@ -106,6 +127,86 @@ function get_name($table, $id)
 	mysqli_close($link);
 
 	return $row['first_name'] . ' ' . $row['last_name'];
+}
+
+function get_room_name($room_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT name FROM room WHERE room_id = ' . $room_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['name'];
+}
+
+// FIXME: compute complete time (HH:MM:SS)
+/*function lesson_duration($lesson_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT start_time, end_time FROM lesson WHERE lesson_id = ' .
+		 $lesson_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['end_time'] - $row['start_time'];
+}*/
+
+function lesson_subscriber_count($lesson_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT COUNT(*) FROM participates WHERE lesson_id = ' .
+		 $lesson_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_row($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row[0];
+}
+
+function order_amount($order_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT contains.quantity, goody.price FROM contains ' .
+		 'INNER JOIN goody ON contains.goody_id = goody.goody_id ' .
+		 'WHERE contains.order_id = ' . $order_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$amount = 0;
+
+	while ($row = mysqli_fetch_assoc($result))
+		$amount = $amount + $row['quantity'] * $row['price'];
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $amount;
 }
 
 function row_count($table)

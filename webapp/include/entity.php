@@ -41,19 +41,21 @@ function display_entity_lesson($row)
 	echo '<br>' . PHP_EOL;
 	echo '<b>Intitulé :</b> ' . $row['title'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>Professeur :</b> ' . $row['teacher_id'] . '<br>' . PHP_EOL;
+	echo '<b>Professeur :</b> ' . get_name('teacher', $row['teacher_id']) .
+	     '<br>' . PHP_EOL;
 	echo '<b>Jour :</b> ' . $row['day'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de début :</b> ' . $row['start_time'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de fin :</b> ' . $row['end_time'] . '<br>' . PHP_EOL;
 	echo '<b>Durée :</b> ' . lesson_duration($row['lesson_id']) . '<br>' .
 	     PHP_EOL;
-	echo '<b>Salle :</b> ' . $row['room_id'] . '<br>' . PHP_EOL;
+	echo '<b>Salle :</b> ' . get_room_name($row['room_id']) . '<br>' .
+	     PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Costume :</b> ' . $row['costume'] . '<br>' . PHP_EOL;
 	echo '<b>T-shirt :</b> ' . $row['t_shirt'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Nombre d\'inscrits :</b> ' .
-	     lesson_num_subscribers($row['lesson_id']) . '<br>' . PHP_EOL;
+	     lesson_subscriber_count($row['lesson_id']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('lesson', $row['lesson_id']) . ' ' .
 	     link_delete_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
@@ -63,7 +65,7 @@ function display_entity_member($link, $row)
 {
 	echo '<h2>Adhérent</h2>' . PHP_EOL;
 
-	echo '<b>N° d\'adhérant :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
+	echo '<b>N° d\'adhérent :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Nom :</b> ' . $row['last_name'] . '<br>' . PHP_EOL;
 	echo '<b>Prénom :</b> ' . $row['first_name'] . '<br>' . PHP_EOL;
@@ -98,7 +100,8 @@ function display_entity_order($link, $row)
 	echo '<h2>Commande</h2>' . PHP_EOL;
 
 	echo '<b>N° de commande :</b> ' . $row['order_id'] . '<br>' . PHP_EOL;
-	echo '<b>N° d\'adhérant :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
+	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
+	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -145,7 +148,8 @@ function display_entity_registration($link, $row)
 
 	echo '<b>N° d\'inscription :</b> ' . $row['registration_id'] . '<br>' .
 	     PHP_EOL;
-	echo '<b>N° d\'adhérant :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
+	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
+	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Saison :</b> ' . $row['season'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -632,7 +636,7 @@ function form_modify_entity_lesson($row)
 
 function form_modify_entity_member($row)
 {
-	echo '<h2>Modifier l\'adhérant</h2>' . PHP_EOL;
+	echo '<h2>Modifier l\'adhérent</h2>' . PHP_EOL;
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=member&amp;id=' . $row['member_id'] .

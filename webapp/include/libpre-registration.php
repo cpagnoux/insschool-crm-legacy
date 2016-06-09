@@ -161,7 +161,7 @@ function display_info()
 	echo '    <li>1 certificat médical</li>' . PHP_EOL;
 	echo '    <li>2 photos d\'identité</li>' . PHP_EOL;
 	echo '    <li>1 attestation d\'assurance</li>' . PHP_EOL;
-	echo '    <li>1 enveloppe timbrée (au nom et adresse de l\'adhérant ' .
+	echo '    <li>1 enveloppe timbrée (au nom et adresse de l\'adhérent ' .
 	     'ou des parents pour les mineurs)</li>' . PHP_EOL;
 	echo '    <li>Le règlement du forfait (possibilité de payer en trois ' .
 	     'fois sans frais)</li>' . PHP_EOL;

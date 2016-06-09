@@ -267,7 +267,7 @@ function form_entity_file($member_id, $row)
 			$photo_false = ' checked="checked"';
 	}
 
-	echo '  N° d\'adhérant <sup>*</sup> : <input type="text" ' .
+	echo '  N° d\'adhérent <sup>*</sup> : <input type="text" ' .
 	     'name="member_id" value="' . $member_id . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Certificat médical : <input type="radio" ' .
@@ -383,7 +383,7 @@ function form_entity_member($row)
 // TODO: allow to modify number of articles
 function form_entity_order($row)
 {
-	echo '  N° d\'adhérant <sup>*</sup> : <input type="text" ' .
+	echo '  N° d\'adhérent <sup>*</sup> : <input type="text" ' .
 	     'name="member_id" value="' . $row['member_id'] . '"><br>' .
 	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
@@ -492,7 +492,7 @@ function form_entity_pre_registration($row)
 
 function form_entity_registration($member_id, $row)
 {
-	echo '  N° d\'adhérant <sup>*</sup> : <input type="text" ' .
+	echo '  N° d\'adhérent <sup>*</sup> : <input type="text" ' .
 	     'name="member_id" value="' . $member_id . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Saison <sup>*</sup> : <input type="text" name="season" ' .
