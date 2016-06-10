@@ -178,7 +178,7 @@ function lessons_to_string($lessons, $display)
 		if (is_int($lesson_id) && isset($title)) {
 			if ($display)
 				echo '  <li>' . $title . '</li>' . PHP_EOL;
-			$string = $string . $lesson_id . ';';
+			$string .= $lesson_id . ';';
 		}
 	}
 

@@ -5,7 +5,6 @@
 
 include_once 'include/error.php';
 include_once 'include/util.php';
-include_once 'include/routine.php';
 
 include_once 'include/libpre-registration.php';
 
@@ -128,8 +127,8 @@ function display_content($result, $order_id)
 		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
 		echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
-		echo '    <td>' . order_amount_goody($order_id,
-						     $row['goody_id']) .
+		echo '    <td>' .
+		     amount_by_product($row['price'], $row['quantity']) .
 		     ' €</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}

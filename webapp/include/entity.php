@@ -157,7 +157,8 @@ function display_entity_registration($link, $row)
 	echo '<b>Tarif :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
 	echo '<b>Réduction :</b> ' . $row['discount'] . ' %<br>' . PHP_EOL;
 	echo '<b>Tarif après réduction :</b> ' .
-	     registration_amount($row['registration_id']) . ' €<br>' . PHP_EOL;
+	     amount_after_discount($row['price'], $row['discount']) . ' €<br>' .
+	     PHP_EOL;
 	echo '<b>Nombre de paiements :</b> ' . $row['payments'] . '<br>' .
 	     PHP_EOL;
 	echo '<br>' . PHP_EOL;
