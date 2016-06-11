@@ -209,7 +209,6 @@ function display_entity_teacher($row)
 	     PHP_EOL;
 }
 
-// TODO: replace person ids by names
 function display_entity($table, $id)
 {
 	$link = connect_ins_school();
@@ -982,7 +981,7 @@ function modify_entity($table, $id, $data)
 /*
  * Deletion of entity
  */
-// TODO: delete entities which depend of the one deleted
+// TODO: delete entities which depend on the one deleted
 function delete_entity($table, $id)
 {
 	$link = connect_ins_school();
