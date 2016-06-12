@@ -6,7 +6,7 @@
 include_once 'include/connection.php';
 include_once 'include/error.php';
 
-function lesson_duration($lesson_id)
+/*function lesson_duration($lesson_id)
 {
 	$link = connect_ins_school();
 
@@ -22,5 +22,5 @@ function lesson_duration($lesson_id)
 	mysqli_close($link);
 
 	return $row[0];
-}
+}*/
 ?>

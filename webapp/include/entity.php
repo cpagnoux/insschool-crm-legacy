@@ -8,7 +8,6 @@ include_once 'include/libentity.php';
 include_once 'include/connection.php';
 include_once 'include/error.php';
 include_once 'include/util.php';
-include_once 'include/routine.php';
 
 include_once 'include/libpre-registration.php';
 include_once 'include/table.php';
@@ -46,8 +45,8 @@ function display_entity_lesson($row)
 	echo '<b>Jour :</b> ' . $row['day'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de début :</b> ' . $row['start_time'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de fin :</b> ' . $row['end_time'] . '<br>' . PHP_EOL;
-	echo '<b>Durée :</b> ' . lesson_duration($row['lesson_id']) . '<br>' .
-	     PHP_EOL;
+	echo '<b>Durée :</b> ' .
+	     duration($row['start_time'], $row['end_time']) . '<br>' . PHP_EOL;
 	echo '<b>Salle :</b> ' . get_room_name($row['room_id']) . '<br>' .
 	     PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -157,7 +156,7 @@ function display_entity_registration($link, $row)
 	echo '<b>Tarif :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
 	echo '<b>Réduction :</b> ' . $row['discount'] . ' %<br>' . PHP_EOL;
 	echo '<b>Tarif après réduction :</b> ' .
-	     amount_after_discount($row['price'], $row['discount']) . ' €<br>' .
+	     price_after_discount($row['price'], $row['discount']) . ' €<br>' .
 	     PHP_EOL;
 	echo '<b>Nombre de paiements :</b> ' . $row['payments'] . '<br>' .
 	     PHP_EOL;

@@ -5,11 +5,14 @@
 
 include_once 'include/util.php';
 
-// TODO: display pagination only when needed (more than 1 page)
 function table_pagination($table, $page, $limit)
 {
 	$num_rows = row_count($table);
 
+	if ($num_rows <= $limit)
+		return;
+
+	echo '<br>' . PHP_EOL;
 	echo '<nav>' . PHP_EOL;
 
 	if ($page > 1)
@@ -99,28 +102,6 @@ function table_order_sorting($sorting)
 	echo '  </select>' . PHP_EOL;
 }
 
-function table_room_sorting($sorting)
-{
-	$sorting_name = '';
-	$sorting_name_desc = '';
-
-	if (isset($sorting)) {
-		if ($sorting == 'name')
-			$sorting_name = ' selected="selected"';
-		else
-			$sorting_name_desc = ' selected="selected"';
-	}
-
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="name"' . $sorting_name .
-	     '>ordre alphabétique</option>' . PHP_EOL;
-	echo '    <option value="name DESC"' . $sorting_name_desc .
-	     '>ordre alphabétique inverse</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
-}
-
 function table_person_sorting($sorting)
 {
 	$sorting_name = '';
@@ -141,6 +122,28 @@ function table_person_sorting($sorting)
 	echo '    <option value="last_name DESC, first_name DESC"' .
 	     $sorting_name_desc . '>ordre alphabétique inverse</option>' .
 	     PHP_EOL;
+	echo '  </select>' . PHP_EOL;
+}
+
+function table_room_sorting($sorting)
+{
+	$sorting_name = '';
+	$sorting_name_desc = '';
+
+	if (isset($sorting)) {
+		if ($sorting == 'name')
+			$sorting_name = ' selected="selected"';
+		else
+			$sorting_name_desc = ' selected="selected"';
+	}
+
+	echo '  Trier par :' . PHP_EOL;
+	echo '  <select name="sorting" onchange="this.form.submit()">' .
+	     PHP_EOL;
+	echo '    <option value="name"' . $sorting_name .
+	     '>ordre alphabétique</option>' . PHP_EOL;
+	echo '    <option value="name DESC"' . $sorting_name_desc .
+	     '>ordre alphabétique inverse</option>' . PHP_EOL;
 	echo '  </select>' . PHP_EOL;
 }
 

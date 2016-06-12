@@ -293,7 +293,6 @@ function display_table($table, $sorting, $page, $limit)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	echo '<br>' . PHP_EOL;
 	table_pagination($table, $page, $limit);
 
 	if ($table != 'pre_registration') {

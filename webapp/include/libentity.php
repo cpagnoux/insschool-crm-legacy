@@ -118,7 +118,7 @@ function display_content($result, $order_id)
 	echo '    <td><b>Désignation</b></td>' . PHP_EOL;
 	echo '    <td><b>Prix unitaire</b></td>' . PHP_EOL;
 	echo '    <td><b>Quantité</b></td>' . PHP_EOL;
-	echo '    <td><b>Montant total</b></td>' . PHP_EOL;
+	echo '    <td><b>Prix total</b></td>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -128,7 +128,7 @@ function display_content($result, $order_id)
 		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
 		echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
-		     amount_by_product($row['price'], $row['quantity']) .
+		     total_by_product($row['price'], $row['quantity']) .
 		     ' €</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}
@@ -136,7 +136,7 @@ function display_content($result, $order_id)
 	echo '</table>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo '<b>TOTAL :</b> ' . order_amount($order_id) . ' €<br>' . PHP_EOL;
+	echo '<b>TOTAL :</b> ' . order_total($order_id) . ' €<br>' . PHP_EOL;
 }
 
 function display_entity_order_content($link, $order_id)
@@ -387,7 +387,7 @@ function form_entity_order($row)
 	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '"><br>' . PHP_EOL;
+	     $row['date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -406,7 +406,7 @@ function form_entity_payment($registration_id, $row)
 	     'value="' . $row['amount'] . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '"><br>' . PHP_EOL;
+	     $row['date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -552,5 +552,75 @@ function form_entity_teacher($row)
 
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
 	     PHP_EOL;
+}
+
+/*
+ * Helper functions for deleting entities
+ */
+function check_dependencies_member($link, $member_id)
+{
+	$query = 'SELECT file_id FROM file WHERE member_id = ' . $member_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		delete_entity('file', $row['file_id']);
+
+	mysqli_free_result($result);
+
+	$query = 'SELECT order_id FROM order WHERE member_id = ' . $member_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		delete_entity('order', $row['order_id']);
+
+	mysqli_free_result($result);
+
+	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
+		 $member_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		delete_entity('registration', $row['registration_id']);
+
+	mysqli_free_result($result);
+}
+
+function check_dependencies($link, $table, $id)
+{
+	switch ($table) {
+	case 'goody':
+		check_dependencies_contains($link, $id);
+		break;
+	case 'lesson':
+		check_dependencies_participates($link, $id);
+		break;
+	case 'member':
+		check_dependencies_file($link, $id);
+		check_dependencies_order($link, $id);
+		check_dependencies_participates($link, $id);
+		check_dependencies_registration($link, $id);
+		break;
+	case 'order':
+		check_dependencies_contains($link, $id);
+		break;
+	case 'registration':
+		check_dependencies_payment($link, $id);
+		break;
+	case 'room':
+		check_dependencies_lesson($link, $id);
+		break;
+	case 'teacher':
+		check_dependencies_lesson($link, $id);
+		break;
+	}
 }
 ?>

@@ -3,22 +3,43 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-function amount_after_discount($price, $discount)
-{
-	// $discount is a percentage
-	return $price * (1 - $discount / 100);
-}
-
-function amount_by_product($price, $quantity)
-{
-	return $price * $quantity;
-}
-
-// FIXME: compute complete time (HH:MM:SS)
 function duration($start_time, $end_time)
 {
 	// time is under the format HH:MM:SS
-	return $end_time - $start_time;
+	sscanf($start_time, '%d', $start_hour);
+	$start_time = substr($start_time, strlen($start_hour) + 1);
+	sscanf($start_time, '%d', $start_min);
+	$start_time = substr($start_time, strlen($start_min) + 1);
+	sscanf($start_time, '%d', $start_sec);
+
+	sscanf($end_time, '%d', $end_hour);
+	$end_time = substr($end_time, strlen($end_hour) + 1);
+	sscanf($end_time, '%d', $end_min);
+	$end_time = substr($end_time, strlen($end_min) + 1);
+	sscanf($end_time, '%d', $end_sec);
+
+	$min_restraint = 0;
+	$hour_restraint = 0;
+
+	$sec = $end_sec - $start_sec;
+	if ($sec < 0) {
+		$min_restraint = 1;
+		$sec += 60;
+	}
+
+	$min = $end_min - $start_min - $min_restraint;
+	if ($min < 0) {
+		$hour_restraint = 1;
+		$min += 60;
+	}
+
+	$hour = $end_hour - $start_hour - $hour_restraint;
+	if ($hour < 0)
+		return 'durée invalide';
+
+	$duration = $hour . ':' . $min . ':' . $sec;
+
+	return $duration;
 }
 
 function evaluate_boolean($value)
@@ -29,12 +50,23 @@ function evaluate_boolean($value)
 		return 'non';
 }
 
+function price_after_discount($price, $discount)
+{
+	// $discount is a percentage
+	return $price * (1 - $discount / 100);
+}
+
 function product_status($stock)
 {
 	if ($stock > 0)
 		return 'En stock';
 	else
 		return 'Produit épuisé';
+}
+
+function total_by_product($price, $quantity)
+{
+	return $price * $quantity;
 }
 
 /*
@@ -184,7 +216,7 @@ function lesson_subscriber_count($lesson_id)
 	return $row[0];
 }
 
-function order_amount($order_id)
+function order_total($order_id)
 {
 	$link = connect_ins_school();
 
@@ -196,18 +228,27 @@ function order_amount($order_id)
 		exit;
 	}
 
-	$amount = 0;
+	$total = 0;
 
 	while ($row = mysqli_fetch_assoc($result))
-		$amount += $row['price'] * $row['quantity'];
+		$total += $row['price'] * $row['quantity'];
 
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	return $amount;
+	return $total;
 }
 
-function registration_amount($registration_id)
+function registration_paid($registration_id)
+{
+	if (registration_total_paid($registration_id) ==
+	    registration_price($registration_id))
+		return true;
+	else
+		return false;
+}
+
+function registration_price($registration_id)
 {
 	$link = connect_ins_school();
 
@@ -223,16 +264,7 @@ function registration_amount($registration_id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	return amount_after_discount($row['price'], $row['discount']);
-}
-
-function registration_paid($registration_id)
-{
-	if (registration_total_paid($registration_id) ==
-	    registration_amount($registration_id))
-		return true;
-	else
-		return false;
+	return price_after_discount($row['price'], $row['discount']);
 }
 
 function registration_total_paid($registration_id)
