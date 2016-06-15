@@ -980,10 +980,11 @@ function modify_entity($table, $id, $data)
 /*
  * Deletion of entity
  */
-// TODO: delete entities which depend on the one deleted
 function delete_entity($table, $id)
 {
 	$link = connect_ins_school();
+
+	check_dependencies($link, $table, $id);
 
 	$query = 'DELETE FROM `' . $table . '` WHERE ' . $table . '_id = ' .
 		 $id;

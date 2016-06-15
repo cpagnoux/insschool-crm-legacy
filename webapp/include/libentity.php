@@ -7,6 +7,7 @@ include_once 'include/error.php';
 include_once 'include/util.php';
 
 include_once 'include/libpre-registration.php';
+include_once 'include/entity.php';
 
 /*
  * Helper functions for displaying member entity
@@ -557,9 +558,24 @@ function form_entity_teacher($row)
 /*
  * Helper functions for deleting entities
  */
-function check_dependencies_member($link, $member_id)
+function check_dependencies_contains($link, $table, $id)
 {
-	$query = 'SELECT file_id FROM file WHERE member_id = ' . $member_id;
+	$query = 'SELECT order_id, goody_id FROM contains WHERE ' . $table .
+		 '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		//delete_entity('contains', $row['order_id'], $row['goody_id']);
+
+	mysqli_free_result($result);
+}
+
+function check_dependencies_file($link, $table, $id)
+{
+	$query = 'SELECT file_id FROM file WHERE ' . $table . '_id = ' . $id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -569,20 +585,72 @@ function check_dependencies_member($link, $member_id)
 		delete_entity('file', $row['file_id']);
 
 	mysqli_free_result($result);
+}
 
-	$query = 'SELECT order_id FROM order WHERE member_id = ' . $member_id;
+function check_dependencies_lesson($link, $table, $id)
+{
+	$query = 'SELECT lesson_id FROM lesson WHERE ' . $table . '_id = ' .
+		 $id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
 	while ($row = mysqli_fetch_assoc($result))
+		//update_lesson($row['lesson_id'], $table);
+
+	mysqli_free_result($result);
+}
+
+function check_dependencies_order($link, $table, $id)
+{
+	$query = 'SELECT order_id FROM `order` WHERE ' . $table . '_id = ' .
+		 $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row  = mysqli_fetch_assoc($result))
 		delete_entity('order', $row['order_id']);
 
 	mysqli_free_result($result);
+}
 
-	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
-		 $member_id;
+function check_dependencies_participates($link, $table, $id)
+{
+	$query = 'SELECT member_id, lesson_id FROM participates WHERE ' .
+		 $table . '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		//delete_entity('participates', $row['member_id'], $row['lesson_id']);
+
+	mysqli_free_result($result);
+}
+
+function check_dependencies_payment($link, $table, $id)
+{
+	$query = 'SELECT payment_id FROM payment WHERE ' . $table . '_id = ' .
+		 $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		delete_entity('payment', $row['payment_id']);
+
+	mysqli_free_result($result);
+}
+
+function check_dependencies_registration($link, $table, $id)
+{
+	$query = 'SELECT registration_id FROM registration WHERE ' . $table .
+		 '_id = ' . $id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -594,32 +662,33 @@ function check_dependencies_member($link, $member_id)
 	mysqli_free_result($result);
 }
 
+// TODO: write needed delete and update functions
 function check_dependencies($link, $table, $id)
 {
 	switch ($table) {
 	case 'goody':
-		check_dependencies_contains($link, $id);
+		check_dependencies_contains($link, $table, $id);
 		break;
 	case 'lesson':
-		check_dependencies_participates($link, $id);
+		check_dependencies_participates($link, $table, $id);
 		break;
 	case 'member':
-		check_dependencies_file($link, $id);
-		check_dependencies_order($link, $id);
-		check_dependencies_participates($link, $id);
-		check_dependencies_registration($link, $id);
+		check_dependencies_file($link, $table, $id);
+		check_dependencies_order($link, $table, $id);
+		check_dependencies_participates($link, $table, $id);
+		check_dependencies_registration($link, $table, $id);
 		break;
 	case 'order':
-		check_dependencies_contains($link, $id);
+		check_dependencies_contains($link, $table, $id);
 		break;
 	case 'registration':
-		check_dependencies_payment($link, $id);
+		check_dependencies_payment($link, $table, $id);
 		break;
 	case 'room':
-		check_dependencies_lesson($link, $id);
+		check_dependencies_lesson($link, $table, $id);
 		break;
 	case 'teacher':
-		check_dependencies_lesson($link, $id);
+		check_dependencies_lesson($link, $table, $id);
 		break;
 	}
 }
