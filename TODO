@@ -5,3 +5,6 @@ TODO:
 - table search bar
 - security (SQL injection)
 - call sheet
+- use <th> tag in <table> when suitable
+- use <select> tag in forms when suitable
+- link lessons participation with registrations
