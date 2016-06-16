@@ -51,6 +51,7 @@ else if (isset($_GET['table']))
 switch ($action) {
 case 'delete_entity':
 	delete_entity($_GET['table'], $_GET['id']);
+	display_table($_GET['table']);
 	break;
 case 'modify_entity':
 	modify_entity($_GET['table'], $_GET['id'], $_POST);

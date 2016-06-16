@@ -994,7 +994,5 @@ function delete_entity($table, $id)
 	}
 
 	mysqli_close($link);
-
-	display_table($table);
 }
 ?>
