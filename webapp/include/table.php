@@ -9,7 +9,7 @@ include_once 'include/connection.php';
 include_once 'include/error.php';
 include_once 'include/util.php';
 
-function display_table_goody($result, $sorting, $limit)
+function display_table_goody($result)
 {
 	echo '<h2>Goodies</h2>' . PHP_EOL;
 
@@ -18,7 +18,7 @@ function display_table_goody($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('goody', $sorting, $limit);
+	table_display_options('goody');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -44,7 +44,7 @@ function display_table_goody($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_lesson($result, $sorting, $limit)
+function display_table_lesson($result)
 {
 	echo '<h2>Cours</h2>' . PHP_EOL;
 
@@ -53,7 +53,7 @@ function display_table_lesson($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('lesson', $sorting, $limit);
+	table_display_options('lesson');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -74,7 +74,7 @@ function display_table_lesson($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_member($result, $sorting, $limit)
+function display_table_member($result)
 {
 	echo '<h2>Adhérents</h2>' . PHP_EOL;
 
@@ -83,7 +83,7 @@ function display_table_member($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('member', $sorting, $limit);
+	table_display_options('member');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -106,7 +106,7 @@ function display_table_member($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_order($result, $sorting, $limit)
+function display_table_order($result)
 {
 	echo '<h2>Commandes</h2>' . PHP_EOL;
 
@@ -115,7 +115,7 @@ function display_table_order($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('order', $sorting, $limit);
+	table_display_options('order');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -141,7 +141,7 @@ function display_table_order($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_pre_registration($result, $sorting, $limit)
+function display_table_pre_registration($result)
 {
 	echo '<h2>Pré-inscriptions</h2>' . PHP_EOL;
 
@@ -150,7 +150,7 @@ function display_table_pre_registration($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('pre_registration', $sorting, $limit);
+	table_display_options('pre_registration');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -174,7 +174,7 @@ function display_table_pre_registration($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_room($result, $sorting, $limit)
+function display_table_room($result)
 {
 	echo '<h2>Salles</h2>' . PHP_EOL;
 
@@ -183,7 +183,7 @@ function display_table_room($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('room', $sorting, $limit);
+	table_display_options('room');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -204,7 +204,7 @@ function display_table_room($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_table_teacher($result, $sorting, $limit)
+function display_table_teacher($result)
 {
 	echo '<h2>Professeurs</h2>' . PHP_EOL;
 
@@ -213,7 +213,7 @@ function display_table_teacher($result, $sorting, $limit)
 		return;
 	}
 
-	table_display_options('teacher', $sorting, $limit);
+	table_display_options('teacher');
 	echo '<br>' . PHP_EOL;
 
 	echo '<table>' . PHP_EOL;
@@ -236,31 +236,49 @@ function display_table_teacher($result, $sorting, $limit)
 	echo '</table>' . PHP_EOL;
 }
 
-// FIXME: make display options persistent when changing page
-// hint: using $_SESSION variable
-function display_table($table, $sorting, $page, $limit)
+function display_table($table, $page)
 {
-	if (!isset($sorting) && ($table == 'goody' || $table == 'room'))
-		$sorting = 'name';
-	else if (!isset($sorting) && $table == 'lesson')
-		$sorting = 'title';
-	else if (!isset($sorting) && $table == 'order')
-		$sorting = 'date';
-	else if (!isset($sorting))
-		$sorting = 'last_name, first_name';
+	if (!isset($_SESSION['goody_sorting']))
+		$_SESSION['goody_sorting'] = 'name';
+	if (!isset($_SESSION['lesson_sorting']))
+		$_SESSION['lesson_sorting'] = 'title';
+	if (!isset($_SESSION['order_sorting']))
+		$_SESSION['order_sorting'] = 'date';
+	if (!isset($_SESSION['person_sorting']))
+		$_SESSION['person_sorting'] = 'last_name, first_name';
+	if (!isset($_SESSION['room_sorting']))
+		$_SESSION['room_sorting'] = 'name';
+
+	if (!isset($_SESSION['limit']))
+		$_SESSION['limit'] = 25;
 
 	if (!isset($page))
 		$page = 1;
 
-	if (!isset($limit))
-		$limit = 25;
+	switch ($table) {
+	case 'goody':
+		$sorting = $_SESSION['goody_sorting'];
+		break;
+	case 'lesson':
+		$sorting = $_SESSION['lesson_sorting'];
+		break;
+	case 'order':
+		$sorting = $_SESSION['order_sorting'];
+		break;
+	case 'room':
+		$sorting = $_SESSION['room_sorting'];
+		break;
+	default:
+		$sorting = $_SESSION['person_sorting'];
+		break;
+	}
 
-	$offset = ($page - 1) * $limit;
+	$offset = ($page - 1) * $_SESSION['limit'];
 
 	$link = connect_ins_school();
 
 	$query = 'SELECT * FROM `' . $table . '` ORDER BY ' . $sorting .
-		 ' LIMIT ' . $offset . ', ' . $limit;
+		 ' LIMIT ' . $offset . ', ' . $_SESSION['limit'];
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -268,32 +286,32 @@ function display_table($table, $sorting, $page, $limit)
 
 	switch ($table) {
 	case 'goody':
-		display_table_goody($result, $sorting, $limit);
+		display_table_goody($result);
 		break;
 	case 'lesson':
-		display_table_lesson($result, $sorting, $limit);
+		display_table_lesson($result);
 		break;
 	case 'member':
-		display_table_member($result, $sorting, $limit);
+		display_table_member($result);
 		break;
 	case 'order':
-		display_table_order($result, $sorting, $limit);
+		display_table_order($result);
 		break;
 	case 'pre_registration':
-		display_table_pre_registration($result, $sorting, $limit);
+		display_table_pre_registration($result);
 		break;
 	case 'room':
-		display_table_room($result, $sorting, $limit);
+		display_table_room($result);
 		break;
 	case 'teacher':
-		display_table_teacher($result, $sorting, $limit);
+		display_table_teacher($result);
 		break;
 	}
 
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	table_pagination($table, $page, $limit);
+	table_pagination($table, $page);
 
 	if ($table != 'pre_registration') {
 		echo '<br>' . PHP_EOL;

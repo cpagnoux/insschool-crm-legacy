@@ -31,6 +31,21 @@ include_once 'include/entity.php';
 <br>
 
 <?php
+session_start();
+
+if (isset($_POST['goody_sorting']))
+	$_SESSION['goody_sorting'] = $_POST['goody_sorting'];
+if (isset($_POST['lesson_sorting']))
+	$_SESSION['lesson_sorting'] = $_POST['lesson_sorting'];
+if (isset($_POST['order_sorting']))
+	$_SESSION['order_sorting'] = $_POST['order_sorting'];
+if (isset($_POST['person_sorting']))
+	$_SESSION['person_sorting'] = $_POST['person_sorting'];
+if (isset($_POST['room_sorting']))
+	$_SESSION['room_sorting'] = $_POST['room_sorting'];
+if (isset($_POST['limit']))
+	$_SESSION['limit'] = $_POST['limit'];
+
 $action = '';
 
 if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
@@ -69,8 +84,7 @@ case 'display_entity':
 	display_entity($_GET['table'], $_GET['id']);
 	break;
 case 'display_table':
-	display_table($_GET['table'], $_POST['sorting'], $_GET['page'],
-		      $_POST['limit']);
+	display_table($_GET['table'], $_GET['page']);
 	break;
 }
 ?>
