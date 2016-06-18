@@ -67,8 +67,8 @@ function display_registrations($result)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>N° d\'inscription</b></td>' . PHP_EOL;
-	echo '    <td><b>Saison</b></td>' . PHP_EOL;
+	echo '    <th><b>N° d\'inscription</b></th>' . PHP_EOL;
+	echo '    <th><b>Saison</b></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -115,11 +115,11 @@ function display_content($result, $order_id)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Référence</b></td>' . PHP_EOL;
-	echo '    <td><b>Désignation</b></td>' . PHP_EOL;
-	echo '    <td><b>Prix unitaire</b></td>' . PHP_EOL;
-	echo '    <td><b>Quantité</b></td>' . PHP_EOL;
-	echo '    <td><b>Prix total</b></td>' . PHP_EOL;
+	echo '    <th><b>Référence</b></th>' . PHP_EOL;
+	echo '    <th><b>Désignation</b></th>' . PHP_EOL;
+	echo '    <th><b>Prix unitaire</b></th>' . PHP_EOL;
+	echo '    <th><b>Quantité</b></th>' . PHP_EOL;
+	echo '    <th><b>Prix total</b></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -175,11 +175,11 @@ function display_payments($result, $registration_id)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>N° de paiement</b></td>' . PHP_EOL;
-	echo '    <td><b>Mode de paiement</b></td>' . PHP_EOL;
-	echo '    <td><b>Montant</b></td>' . PHP_EOL;
-	echo '    <td><b>Date</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>N° de paiement</b></th>' . PHP_EOL;
+	echo '    <th><b>Mode de paiement</b></th>' . PHP_EOL;
+	echo '    <th><b>Montant</b></th>' . PHP_EOL;
+	echo '    <th><b>Date</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -558,7 +558,16 @@ function form_entity_teacher($row)
 /*
  * Helper functions for deleting entities
  */
-// TODO: write update function
+function update_lesson($link, $lesson_id, $ref_table)
+{
+	$query = 'UPDATE lesson SET ' . $ref_table .
+		 '_id = 0 WHERE lesson_id = ' . $lesson_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+}
+
 function check_dependencies_lesson($link, $ref_table, $ref_id)
 {
 	$query = 'SELECT lesson_id FROM lesson WHERE ' . $ref_table . '_id = ' .
@@ -569,7 +578,7 @@ function check_dependencies_lesson($link, $ref_table, $ref_id)
 	}
 
 	while ($row = mysqli_fetch_assoc($result))
-		//update_lesson($row['lesson_id'], $table);
+		update_lesson($link, $row['lesson_id'], $ref_table);
 
 	mysqli_free_result($result);
 }

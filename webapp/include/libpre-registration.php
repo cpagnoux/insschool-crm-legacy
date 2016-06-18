@@ -24,7 +24,7 @@ function display_rooms($link)
 	echo '    <tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		echo '      <td><b>' . $row['name'] . '</b></td>' . PHP_EOL;
+		echo '      <th><b>' . $row['name'] . '</b></th>' . PHP_EOL;
 		$num_rooms++;
 	}
 
@@ -40,7 +40,7 @@ function display_day($day, $count)
 	echo '    <tr>' . PHP_EOL;
 
 	for ($i = 0; $i < $count; $i++)
-		echo '      <td><b>' . $day . '</b></td>' . PHP_EOL;
+		echo '      <th><b>' . $day . '</b></th>' . PHP_EOL;
 
 	echo '    </tr>' . PHP_EOL;
 }

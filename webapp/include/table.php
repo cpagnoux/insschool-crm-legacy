@@ -24,10 +24,10 @@ function display_table_goody($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Désignation</b></td>' . PHP_EOL;
-	echo '    <td><b>Prix</b></td>' . PHP_EOL;
-	echo '    <td><b>Stock</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Désignation</b></th>' . PHP_EOL;
+	echo '    <th><b>Prix</b></th>' . PHP_EOL;
+	echo '    <th><b>Stock</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -59,8 +59,8 @@ function display_table_lesson($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Intitulé</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Intitulé</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -89,9 +89,9 @@ function display_table_member($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Nom</b></td>' . PHP_EOL;
-	echo '    <td><b>Prénom</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Nom</b></th>' . PHP_EOL;
+	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -121,10 +121,10 @@ function display_table_order($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>N° de commande</b></td>' . PHP_EOL;
-	echo '    <td><b>Adhérent</b></td>' . PHP_EOL;
-	echo '    <td><b>Date</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>N° de commande</b></th>' . PHP_EOL;
+	echo '    <th><b>Adhérent</b></th>' . PHP_EOL;
+	echo '    <th><b>Date</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -156,9 +156,9 @@ function display_table_pre_registration($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Nom</b></td>' . PHP_EOL;
-	echo '    <td><b>Prénom</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Nom</b></th>' . PHP_EOL;
+	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -189,8 +189,8 @@ function display_table_room($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Nom</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Nom</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -219,9 +219,9 @@ function display_table_teacher($result, $sorting, $limit)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <td><b>Nom</b></td>' . PHP_EOL;
-	echo '    <td><b>Prénom</b></td>' . PHP_EOL;
-	echo '    <td></td>' . PHP_EOL;
+	echo '    <th><b>Nom</b></th>' . PHP_EOL;
+	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
