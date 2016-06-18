@@ -133,7 +133,8 @@ function display_entity_pre_registration($row)
 	echo '<b>Fixe :</b> ' . $row['phone'] . '<br>' . PHP_EOL;
 	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>Cours choisi(s) :</b> ' . $row['lessons'] . '<br>' . PHP_EOL;
+	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
+	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('pre_registration',
 				$row['pre_registration_id']) . ' ' .

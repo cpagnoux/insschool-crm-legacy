@@ -8,3 +8,4 @@ TODO:
 - use <select> tag in forms when suitable
 - link lessons participation with registrations
 - use printf or sprintf to format output when required (times, prices)
+- function for pre-registration validation

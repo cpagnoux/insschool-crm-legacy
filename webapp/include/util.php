@@ -160,6 +160,24 @@ function file_complete($file_id)
 		return false;
 }
 
+function get_lesson_title($lesson_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT title FROM lesson WHERE lesson_id = ' . $lesson_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['title'];
+}
+
 function get_name($table, $id)
 {
 	$link = connect_ins_school();

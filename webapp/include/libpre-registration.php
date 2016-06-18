@@ -5,6 +5,7 @@
 
 include_once 'include/connection.php';
 include_once 'include/error.php';
+include_once 'include/util.php';
 
 include_once 'include/libentity.php';
 
@@ -196,6 +197,22 @@ function string_to_lessons($string)
 	}
 
 	return $lessons;
+}
+
+function chosen_lessons($lessons_str)
+{
+	$string = '';
+
+	while (strlen($lessons_str) > 0) {
+		if ($string != '')
+			$string .= ', ';
+
+		sscanf($lessons_str, '%d', $lesson_id);
+		$string .= get_lesson_title($lesson_id);
+		$lessons_str = substr($lessons_str, strlen($lesson_id) + 1);
+	}
+
+	return $string;
 }
 
 /*
