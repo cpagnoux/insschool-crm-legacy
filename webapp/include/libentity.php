@@ -19,7 +19,7 @@ function display_file($result, $member_id)
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun dossier<br>' . PHP_EOL;
 		echo '<br>' . PHP_EOL;
-		echo link_add_entity_by_id('file', $member_id) . '<br>' .
+		echo link_add_entity('file', $member_id) . '<br>' .
 		     PHP_EOL;
 		return;
 	}
@@ -96,7 +96,7 @@ function display_entity_member_registrations($link, $member_id)
 	display_registrations($result);
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity_by_id('registration', $member_id) . '<br>' .
+	echo link_add_entity('registration', $member_id) . '<br>' .
 	     PHP_EOL;
 
 	mysqli_free_result($result);
@@ -155,7 +155,7 @@ function display_entity_order_content($link, $order_id)
 	display_content($result, $order_id);
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity_by_id('contains', $order_id) . '<br>' . PHP_EOL;
+	echo link_add_entity('contains', $order_id) . '<br>' . PHP_EOL;
 
 	mysqli_free_result($result);
 }
@@ -217,7 +217,7 @@ function display_entity_registration_payments($link, $registration_id)
 	     evaluate_boolean(registration_paid($registration_id)) . '<br>' .
 	     PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity_by_id('payment', $registration_id) . '<br>' .
+	echo link_add_entity('payment', $registration_id) . '<br>' .
 	     PHP_EOL;
 
 	mysqli_free_result($result);

@@ -3,6 +3,74 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
+/*
+ * Hyperlinks
+ */
+function link_table_previous($table, $page)
+{
+	if ($page == 1)
+		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		       '">Précédent</a>';
+
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;page=' . $page . '">Précédent</a>';
+}
+
+function link_table_next($table, $page)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;page=' . $page . '">Suivant</a>';
+}
+
+function link_entity($table, $id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	       '&amp;id=' . $id . '">+ d\'infos</a>';
+}
+
+function link_add_entity($table, $id)
+{
+	if (!isset($id))
+		return '<a href="' . $_SERVER['PHP_SELF'] .
+		       '?mode=add&amp;table=' . $table . '">Ajouter</a>';
+
+	$message = 'Ajouter';
+
+	switch ($table) {
+	case 'contains':
+		$message = 'Ajouter un article';
+		break;
+	case 'file':
+		$message = 'En créer un';
+		break;
+	case 'payment':
+		$message = 'Ajouter un paiement';
+		break;
+	case 'registration':
+		$message = 'Ajouter une inscription';
+		break;
+	}
+
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
+	       $table . '&amp;id=' . $id . '">' . $message . '</a>';
+}
+
+function link_modify_entity($table, $id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
+	       $table . '&amp;id=' . $id . '">Modifier</a>';
+}
+
+function link_delete_entity($table, $id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
+	       $table . '&amp;id=' . $id . '" onclick="return ' .
+	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+}
+
+/*
+ * Misc
+ */
 function duration($start_time, $end_time)
 {
 	// time is under the format HH:MM:SS
@@ -37,7 +105,8 @@ function duration($start_time, $end_time)
 	if ($hour < 0)
 		return 'durée invalide';
 
-	$duration = $hour . ':' . $min . ':' . $sec;
+	$duration = sprintf('%02d', $hour) . ':' . sprintf('%02d', $min) . ':' .
+		    sprintf('%02d', $sec);
 
 	return $duration;
 }
@@ -53,7 +122,9 @@ function evaluate_boolean($value)
 function price_after_discount($price, $discount)
 {
 	// $discount is a percentage
-	return $price * (1 - $discount / 100);
+	$new_price = $price * (1 - $discount / 100);
+
+	return sprintf('%.2f', $new_price);
 }
 
 function product_status($stock)
@@ -66,74 +137,9 @@ function product_status($stock)
 
 function total_by_product($price, $quantity)
 {
-	return $price * $quantity;
-}
+	$total = $price * $quantity;
 
-/*
- * Hyperlinks
- */
-function link_table_previous($table, $page)
-{
-	if ($page == 1)
-		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		       '">Précédent</a>';
-
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;page=' . $page . '">Précédent</a>';
-}
-
-function link_table_next($table, $page)
-{
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;page=' . $page . '">Suivant</a>';
-}
-
-function link_entity($table, $id)
-{
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;id=' . $id . '">+ d\'infos</a>';
-}
-
-function link_add_entity($table)
-{
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
-	       $table . '">Ajouter</a>';
-}
-
-function link_add_entity_by_id($table, $id)
-{
-	$message = 'Ajouter';
-
-	switch ($table) {
-	case 'contains':
-		$message = 'Ajouter un article';
-		break;
-	case 'file':
-		$message = 'En créer un';
-		break;
-	case 'payment':
-		$message = 'Ajouter un paiement';
-		break;
-	case 'registration':
-		$message = 'Ajouter une inscription';
-		break;
-	}
-
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
-	       $table . '&amp;id=' . $id . '">' . $message . '</a>';
-}
-
-function link_modify_entity($table, $id)
-{
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
-	       $table . '&amp;id=' . $id . '">Modifier</a>';
-}
-
-function link_delete_entity($table, $id)
-{
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
-	       $table . '&amp;id=' . $id . '" onclick="return ' .
-	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	return sprintf('%.2f', $total);
 }
 
 /*
@@ -254,7 +260,7 @@ function order_total($order_id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	return $total;
+	return sprintf('%.2f', $total);
 }
 
 function registration_paid($registration_id)
@@ -304,7 +310,7 @@ function registration_total_paid($registration_id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	return $total_paid;
+	return sprintf('%.2f', $total_paid);
 }
 
 function row_count($table)
