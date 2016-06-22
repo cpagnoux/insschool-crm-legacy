@@ -68,6 +68,12 @@ function link_delete_entity($table, $id)
 	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+function link_commit_pre_registration($pre_registration_id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=commit&amp;id=' .
+	       $pre_registration_id . '">Valider la pré-inscription</a>';
+}
+
 /*
  * Misc
  */

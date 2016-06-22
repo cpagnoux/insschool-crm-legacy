@@ -8,6 +8,7 @@ include_once 'include/error.php';
 include_once 'include/util.php';
 
 include_once 'include/libentity.php';
+include_once 'include/entity.php';
 
 /*
  * Dynamic table for lessons
@@ -278,6 +279,70 @@ function insert_into_database($data, $lessons_str)
 		exit;
 	}
 
+	mysqli_close($link);
+}
+
+/*
+ * Commit of pre-registration
+ */
+function add_member($link, $row)
+{
+	$query = 'INSERT INTO member VALUES ("", "' . $row['first_name'] .
+		 '", "' . $row['last_name'] . '", "' . $row['birth_date'] .
+		 '", "' . $row['adress'] . '", "' . $row['postal_code'] .
+		 '", "' . $row['city'] . '", "' . $row['cellphone'] . '", "' .
+		 $row['cellphone_father'] . '", "' . $row['cellphone_mother'] .
+		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+}
+
+function get_member_id($link, $row)
+{
+	$query = 'SELECT member_id FROM member WHERE first_name = "' .
+		 $row['first_name'] . '" AND last_name = "' .
+		 $row['last_name'] . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	if (mysqli_num_rows($result) == 0) {
+		add_member($link, $row);
+		return get_member_id($link, $row);
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+
+	return $row['member_id'];
+}
+
+function add_member_to_lessons($link, $member_id, $row)
+{
+}
+
+function commit_pre_registration($pre_registration_id)
+{
+	$link = connect_ins_school();
+
+	$query = 'SELECT * FROM pre_registration WHERE pre_registration_id = ' .
+		 $pre_registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	$member_id = get_member_id($link, $row);
+	add_member_to_lessons($link, $member_id, $row);
+	delete_entity('pre_registration', $pre_registration_id);
+
+	mysqli_free_result($result);
 	mysqli_close($link);
 }
 ?>

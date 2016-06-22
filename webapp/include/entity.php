@@ -136,7 +136,8 @@ function display_entity_pre_registration($row)
 	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('pre_registration',
+	echo link_commit_pre_registration($row['pre_registration_id']) . ' ' .
+	     link_modify_entity('pre_registration',
 				$row['pre_registration_id']) . ' ' .
 	     link_delete_entity('pre_registration',
 				$row['pre_registration_id']) . '<br>' . PHP_EOL;

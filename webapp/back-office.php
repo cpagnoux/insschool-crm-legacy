@@ -3,6 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
+include_once 'include/libpre-registration.php';
 include_once 'include/table.php';
 include_once 'include/entity.php';
 ?>
@@ -52,6 +53,8 @@ if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'commit')
+	$action = 'commit_pre_registration';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'delete')
 	$action = 'delete_entity';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'modify')
@@ -64,6 +67,9 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'commit_pre_registration':
+	commit_pre_registration($_GET['id']);
+	break;
 case 'delete_entity':
 	delete_entity($_GET['table'], $_GET['id']);
 	display_table($_GET['table']);
