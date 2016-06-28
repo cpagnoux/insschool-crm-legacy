@@ -598,7 +598,7 @@ function check_dependencies_by_table($link, $table, $ref_table, $ref_id)
 	mysqli_free_result($result);
 }
 
-function check_dependencies_by_association($link, $table, $ref_table, $ref_id)
+function check_dependencies_by_relationship($link, $table, $ref_table, $ref_id)
 {
 	$query = 'DELETE FROM `' . $table . '` WHERE ' . $ref_table . '_id = ' .
 		 $ref_id;
@@ -612,22 +612,22 @@ function check_dependencies($link, $table, $id)
 {
 	switch ($table) {
 	case 'goody':
-		check_dependencies_by_association($link, 'contains', $table,
-						  $id);
+		check_dependencies_by_relationship($link, 'contains', $table,
+						   $id);
 		break;
 	case 'lesson':
-		check_dependencies_by_association($link, 'participates', $table,
-						  $id);
+		check_dependencies_by_relationship($link, 'participates',
+						   $table, $id);
 		break;
 	case 'member':
 		check_dependencies_by_table($link, 'file', $table, $id);
 		check_dependencies_by_table($link, 'order', $table, $id);
-		check_dependencies_by_association($link, 'participates', $table,
-						  $id);
+		check_dependencies_by_relationship($link, 'participates',
+						   $table, $id);
 		check_dependencies_by_table($link, 'registration', $table, $id);
 		break;
 	case 'order':
-		check_dependencies_by_association($link, 'contains', $table,
+		check_dependencies_by_relationship($link, 'contains', $table,
 						  $id);
 		break;
 	case 'registration':

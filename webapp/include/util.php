@@ -153,7 +153,7 @@ function total_by_product($price, $quantity)
  */
 function file_complete($file_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT * FROM file WHERE file_id = ' . $file_id;
 	if (!$result = mysqli_query($link, $query)) {
@@ -174,7 +174,7 @@ function file_complete($file_id)
 
 function get_lesson_title($lesson_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT title FROM lesson WHERE lesson_id = ' . $lesson_id;
 	if (!$result = mysqli_query($link, $query)) {
@@ -192,7 +192,7 @@ function get_lesson_title($lesson_id)
 
 function get_name($table, $id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT first_name, last_name FROM `' . $table . '` WHERE ' .
 		 $table . '_id = ' . $id;
@@ -211,7 +211,7 @@ function get_name($table, $id)
 
 function get_room_name($room_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT name FROM room WHERE room_id = ' . $room_id;
 	if (!$result = mysqli_query($link, $query)) {
@@ -229,7 +229,7 @@ function get_room_name($room_id)
 
 function lesson_subscriber_count($lesson_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT COUNT(*) FROM participates WHERE lesson_id = ' .
 		 $lesson_id;
@@ -248,7 +248,7 @@ function lesson_subscriber_count($lesson_id)
 
 function order_total($order_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT contains.quantity, goody.price FROM contains ' .
 		 'INNER JOIN goody ON contains.goody_id = goody.goody_id ' .
@@ -280,7 +280,7 @@ function registration_paid($registration_id)
 
 function registration_price($registration_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT price, discount FROM registration ' .
 		 'WHERE registration_id = ' . $registration_id;
@@ -299,7 +299,7 @@ function registration_price($registration_id)
 
 function registration_total_paid($registration_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT amount FROM payment WHERE registration_id = ' .
 		 $registration_id;
@@ -321,7 +321,7 @@ function registration_total_paid($registration_id)
 
 function row_count($table)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT COUNT(*) FROM `' . $table . '`';
 	if (!$result = mysqli_query($link, $query)) {

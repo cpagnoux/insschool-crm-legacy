@@ -212,7 +212,7 @@ function display_entity_teacher($row)
 
 function display_entity($table, $id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT * FROM `' . $table . '` WHERE ' . $table . '_id = ' .
 		 $id;
@@ -555,7 +555,7 @@ function add_entity_teacher($link, $data)
 
 function add_entity($table, $data)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	switch ($table) {
 	case 'contains':
@@ -728,7 +728,7 @@ function form_modify_entity_teacher($row)
 
 function form_modify_entity($table, $id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT * FROM `' . $table . '` WHERE ' . $table . '_id = ' .
 		 $id;
@@ -941,7 +941,7 @@ function modify_entity_teacher($link, $teacher_id, $data)
 
 function modify_entity($table, $id, $data)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	switch($table) {
 	case 'file':
@@ -984,7 +984,7 @@ function modify_entity($table, $id, $data)
  */
 function delete_entity($table, $id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	check_dependencies($link, $table, $id);
 

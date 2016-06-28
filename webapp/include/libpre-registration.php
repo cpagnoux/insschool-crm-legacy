@@ -126,7 +126,7 @@ function display_day_lessons($link, $day, $lessons)
 
 function display_lessons($lessons)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	echo '  <table>' . PHP_EOL;
 
@@ -232,7 +232,7 @@ function display_pre_registration_form()
 /*
  * Submission of pre-registration
  */
-function display_summary($data)
+function display_pre_registration_summary($data)
 {
 	echo '<h2>Récapitulatif :</h2>' . PHP_EOL;
 
@@ -263,9 +263,9 @@ function display_summary($data)
 	return $lessons_str;
 }
 
-function insert_into_database($data, $lessons_str)
+function save_pre_registration($data, $lessons_str)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'INSERT INTO pre_registration VALUES ("", "' .
 		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
@@ -323,11 +323,21 @@ function get_member_id($link, $row)
 
 function add_member_to_lessons($link, $member_id, $row)
 {
+	$lessons = string_to_lessons($row['lessons']);
+
+	foreach ($lessons as $lesson_id => $value) {
+		$query = 'INSERT INTO participates VALUES (' . $member_id .
+			 ', ' . $lesson_id . ', "")';
+		if (!mysqli_query($link, $query)) {
+			sql_error($link, $query);
+			exit;
+		}
+	}
 }
 
 function commit_pre_registration($pre_registration_id)
 {
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT * FROM pre_registration WHERE pre_registration_id = ' .
 		 $pre_registration_id;

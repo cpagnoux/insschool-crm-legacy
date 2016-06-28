@@ -17,9 +17,8 @@ function sql_connect_error()
 function sql_error($link, $query)
 {
 	if (DEBUG) {
-		echo 'Erreur SQL !<br>' . PHP_EOL;
+		echo 'Erreur SQL : ' . mysqli_error($link) . '<br>' . PHP_EOL;
 		echo $query . '<br>' . PHP_EOL;
-		echo mysqli_error($link) . '<br>' . PHP_EOL;
 	} else {
 		echo 'Une erreur est survenue !<br>' . PHP_EOL;
 	}

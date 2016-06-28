@@ -21,12 +21,12 @@ include_once 'include/libpre-registration.php';
 $action = '';
 
 if (isset($_POST['submit']))
-	$action = 'confirm';
+	$action = 'submit';
 
 switch ($action) {
-case 'confirm':
-	$lessons_str = display_summary($_POST);
-	insert_into_database($_POST, $lessons_str);
+case 'submit':
+	$lessons_str = display_pre_registration_summary($_POST);
+	save_pre_registration($_POST, $lessons_str);
 	break;
 default:
 	display_pre_registration_form();

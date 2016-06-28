@@ -275,7 +275,7 @@ function display_table($table, $page)
 
 	$offset = ($page - 1) * $_SESSION['limit'];
 
-	$link = connect_ins_school();
+	$link = connect_database();
 
 	$query = 'SELECT * FROM `' . $table . '` ORDER BY ' . $sorting .
 		 ' LIMIT ' . $offset . ', ' . $_SESSION['limit'];

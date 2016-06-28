@@ -10,7 +10,7 @@ define('USERNAME', 'root');
 define('PASSWORD', '210713');
 define('DATABASE', 'ins_school');
 
-function connect_ins_school()
+function connect_database()
 {
 	$link = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
 	if (mysqli_connect_errno()) {

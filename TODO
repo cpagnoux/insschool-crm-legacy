@@ -1,10 +1,9 @@
 TODO:
+- use <select> tag in forms when suitable
+- link lessons participation with registrations
 - login page
 - secure login page
 - css
 - table search bar
 - security (SQL injection)
 - call sheet
-- use <select> tag in forms when suitable
-- link lessons participation with registrations
-- function for pre-registration validation
