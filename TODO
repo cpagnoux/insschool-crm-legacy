@@ -1,5 +1,5 @@
 TODO:
-- use required attribute in input tag when needed
+- choose more appropriate types in <input> tags when possible
 - use timestamps for dates when possible
 - link lessons participation with registrations
 - add choice between quarterly and annual plan

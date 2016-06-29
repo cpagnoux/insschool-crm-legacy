@@ -411,13 +411,12 @@ function select_teacher($teacher_id)
  */
 function form_entity_contains($order_id)
 {
-	echo '  N° de commande <sup>*</sup> : <input type="text" ' .
-	     'name="order_id" value="' . $order_id .
-	     '" readonly="readonly"><br>' . PHP_EOL;
+	echo '  N° de commande : <input type="text" name="order_id" value="' .
+	     $order_id . '" readonly="readonly"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	select_goody();
-	echo '  Quantité <sup>*</sup> : <input type="text" name="quantity">' .
-	     '<br>' . PHP_EOL;
+	echo '  Quantité <sup>*</sup> : <input type="text" name="quantity" ' .
+	     'required="required"><br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -450,21 +449,22 @@ function form_entity_file($member_id, $row)
 			$photo_false = ' checked="checked"';
 	}
 
-	echo '  N° d\'adhérent <sup>*</sup> : <input type="text" ' .
-	     'name="member_id" value="' . $member_id .
-	     '" readonly="readonly"><br>' . PHP_EOL;
+	echo '  N° d\'adhérent : <input type="text" name="member_id" value="' .
+	     $member_id . '" readonly="readonly"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	echo '  Certificat médical : <input type="radio" ' .
-	     'name="medical_certificate" value="1"' .
-	     $medical_certificate_true . '> oui <input type="radio" ' .
+	echo '  Certificat médical <sup>*</sup> : <input type="radio" ' .
+	     'name="medical_certificate" value="1" required="required"' .
+	     $medical_certificate_true . '> Oui <input type="radio" ' .
 	     'name="medical_certificate" value="0"' .
-	     $medical_certificate_false . '> non<br>' . PHP_EOL;
-	echo '  Assurance : <input type="radio" name="insurance" value="1"' .
-	     $insurance_true . '> oui <input type="radio" name="insurance" ' .
-	     'value="0"' . $insurance_false . '> non<br>' . PHP_EOL;
-	echo '  Photo : <input type="radio" name="photo" value="1"' .
-	     $photo_true . '> oui <input type="radio" name="photo" value="0"' .
-	     $photo_false . '> non<br>' . PHP_EOL;
+	     $medical_certificate_false . '> Non<br>' . PHP_EOL;
+	echo '  Assurance <sup>*</sup> : <input type="radio" ' .
+	     'name="insurance" value="1" required="required"' .
+	     $insurance_true . '> Oui <input type="radio" name="insurance" ' .
+	     'value="0"' . $insurance_false . '> Non<br>' . PHP_EOL;
+	echo '  Photo <sup>*</sup> : <input type="radio" name="photo" ' .
+	     'value="1" required="required"' . $photo_true .
+	     '> Oui <input type="radio" name="photo" value="0"' . $photo_false .
+	     '> Non<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -474,7 +474,8 @@ function form_entity_file($member_id, $row)
 function form_entity_goody($row)
 {
 	echo '  Désignation <sup>*</sup> : <input type="text" name="name" ' .
-	     'value="' . $row['name'] . '">' . '<br>' . PHP_EOL;
+	     'value="' . $row['name'] . '" required="required">' . '<br>' .
+	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Description : <input type="text" name="description" value="' .
 	     $row['description'] . '"><br>' . PHP_EOL;
@@ -492,16 +493,16 @@ function form_entity_goody($row)
 function form_entity_lesson($row)
 {
 	echo '  Intitulé <sup>*</sup> : <input type="text" name="title" ' .
-	     'value="' . $row['title'] . '"><br>' . PHP_EOL;
+	     'value="' . $row['title'] . '" required="required"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	select_teacher($row['teacher_id']);
 	select_day($row['day']);
 	echo '  Heure de début <sup>*</sup> : <input type="text" ' .
-	     'name="start_time" value="' . $row['start_time'] . '"> ' .
-	     '(HH:MM:SS)<br>' . PHP_EOL;
+	     'name="start_time" value="' . $row['start_time'] .
+	     '" required="required"> (HH:MM:SS)<br>' . PHP_EOL;
 	echo '  Heure de fin <sup>*</sup> : <input type="text" ' .
-	     'name="end_time" value="' . $row['end_time'] . '"> ' .
-	     '(HH:MM:SS)<br>' . PHP_EOL;
+	     'name="end_time" value="' . $row['end_time'] .
+	     '" required="required"> (HH:MM:SS)<br>' . PHP_EOL;
 	select_room($row['room_id']);
 	echo '  <br>' . PHP_EOL;
 	echo '  Costume : <input type="text" name="costume" value="' .
@@ -527,9 +528,11 @@ function form_entity_member($row)
 	}
 
 	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '"><br>' . PHP_EOL;
+	     'value="' . $row['last_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '">' . '<br>' . PHP_EOL;
+	     'value="' . $row['first_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  Date de naissance : <input type="text" name="birth_date" ' .
 	     'value="' . $row['birth_date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
@@ -551,9 +554,10 @@ function form_entity_member($row)
 	echo '  Email : <input type="text" name="email" value="' .
 	     $row['email'] . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	echo '  Bénévole : <input type="radio" name="volunteer" value="1"' .
-	     $volunteer_true . '> oui <input type="radio" name="volunteer" ' .
-	     'value="0"' . $volunteer_false . '> non<br>' . PHP_EOL;
+	echo '  Bénévole <sup>*</sup> : <input type="radio" name="volunteer" ' .
+	     'value="1" required="required"' . $volunteer_true .
+	     '> Oui <input type="radio" name="volunteer" value="0"' .
+	     $volunteer_false . '> Non<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -566,7 +570,7 @@ function form_entity_order($row)
 	select_member($row['member_id']);
 	echo '  <br>' . PHP_EOL;
 	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
+	     $row['date'] . '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -575,17 +579,18 @@ function form_entity_order($row)
 
 function form_entity_payment($registration_id, $row)
 {
-	echo '  N° d\'inscription <sup>*</sup> : <input type="text" ' .
+	echo '  N° d\'inscription : <input type="text" ' .
 	     'name="registration_id" value="' . $registration_id .
 	     '" readonly="readonly"><br>' .
 	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	select_mode($row['mode']);
 	echo '  Montant <sup>*</sup> : <input type="text" name="amount" ' .
-	     'value="' . $row['amount'] . '"> €<br>' . PHP_EOL;
+	     'value="' . $row['amount'] . '" required="required"> €<br>' .
+	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
+	     $row['date'] . '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -611,20 +616,23 @@ function form_entity_pre_registration($row)
 	}
 
 	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '"><br>' . PHP_EOL;
+	     'value="' . $row['last_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '"><br>' . PHP_EOL;
+	     'value="' . $row['first_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  Date de naissance <sup>*</sup> : <input type="text" ' .
-	     'name="birth_date" value="' . $row['birth_date'] . '"> ' .
-	     '(AAAA-MM-JJ)<br>' . PHP_EOL;
+	     'name="birth_date" value="' . $row['birth_date'] .
+	     '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Adresse <sup>*</sup> : <input type="text" name="adress" ' .
-	     'value="' . $row['adress'] . '"><br>' . PHP_EOL;
-	echo '  Code postal <sup>*</sup> : <input type="text" ' .
-	     'name="postal_code" value="' . $row['postal_code'] . '"><br>' .
+	     'value="' . $row['adress'] . '" required="required"><br>' .
 	     PHP_EOL;
+	echo '  Code postal <sup>*</sup> : <input type="text" ' .
+	     'name="postal_code" value="' . $row['postal_code'] .
+	     '" required="required"><br>' . PHP_EOL;
 	echo '  Ville <sup>*</sup> : <input type="text" name="city" value="' .
-	     $row['city'] . '"><br>' . PHP_EOL;
+	     $row['city'] . '" required="required"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Portable élève : <input type="text" name="cellphone" value="' .
 	     $row['cellphone'] . '"><br>' . PHP_EOL;
@@ -648,9 +656,10 @@ function form_entity_pre_registration($row)
 		display_warnings();
 
 	echo '  <br>' . PHP_EOL;
-	echo '  Comment nous avez-vous connus ?<br>' . PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" value="flyer"' .
-	     $means_of_knowledge_flyer . '> Affiches, Flyers<br>' . PHP_EOL;
+	echo '  Comment nous avez-vous connus ? <sup>*</sup><br>' . PHP_EOL;
+	echo '  <input type="radio" name="means_of_knowledge" value="flyer" ' .
+	     'required="required"' . $means_of_knowledge_flyer .
+	     '> Affiches, Flyers<br>' . PHP_EOL;
 	echo '  <input type="radio" name="means_of_knowledge" ' .
 	     'value="internet"' . $means_of_knowledge_internet .
 	     '> Internet<br>' . PHP_EOL;
@@ -670,12 +679,13 @@ function form_entity_pre_registration($row)
 
 function form_entity_registration($member_id, $row)
 {
-	echo '  N° d\'adhérent <sup>*</sup> : <input type="text" ' .
+	echo '  N° d\'adhérent : <input type="text" ' .
 	     'name="member_id" value="' . $member_id .
 	     '" readonly="readonly"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Saison <sup>*</sup> : <input type="text" name="season" ' .
-	     'value="' . $row['season'] . '"> (AAAA-AAAA)<br>' . PHP_EOL;
+	     'value="' . $row['season'] .
+	     '" required="required"> (AAAA-AAAA)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Formule : <input type="text" name="formula" value="' .
 	     $row['formula'] . '"> cours<br>' . PHP_EOL;
@@ -694,7 +704,7 @@ function form_entity_registration($member_id, $row)
 function form_entity_room($row)
 {
 	echo '  Nom <sup>*</sup> : <input type="text" name="name" value="' .
-	     $row['name'] . '"><br>' . PHP_EOL;
+	     $row['name'] . '" required="required"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Adresse : <input type="text" name="adress" value="' .
 	     $row['adress'] . '"><br>' . PHP_EOL;
@@ -711,9 +721,11 @@ function form_entity_room($row)
 function form_entity_teacher($row)
 {
 	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '"><br>' . PHP_EOL;
+	     'value="' . $row['last_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '">' . '<br>' . PHP_EOL;
+	     'value="' . $row['first_name'] . '" required="required"><br>' .
+	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Adresse : <input type="text" name="adress" value="' .
 	     $row['adress'] . '"><br>' . PHP_EOL;
