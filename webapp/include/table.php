@@ -19,8 +19,8 @@ function display_table_goody($result)
 	}
 
 	table_display_options('goody');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -54,8 +54,8 @@ function display_table_lesson($result)
 	}
 
 	table_display_options('lesson');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -84,8 +84,8 @@ function display_table_member($result)
 	}
 
 	table_display_options('member');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -116,8 +116,8 @@ function display_table_order($result)
 	}
 
 	table_display_options('order');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -151,8 +151,8 @@ function display_table_pre_registration($result)
 	}
 
 	table_display_options('pre_registration');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -184,8 +184,8 @@ function display_table_room($result)
 	}
 
 	table_display_options('room');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
@@ -214,8 +214,8 @@ function display_table_teacher($result)
 	}
 
 	table_display_options('teacher');
-	echo '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;

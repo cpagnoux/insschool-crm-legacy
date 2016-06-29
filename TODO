@@ -1,6 +1,9 @@
 TODO:
-- use <select> tag in forms when suitable
+- use required attribute in input tag when needed
+- use timestamps for dates when possible
 - link lessons participation with registrations
+- add choice between quarterly and annual plan
+- rework pages layout with <div> tag
 - login page
 - secure login page
 - css

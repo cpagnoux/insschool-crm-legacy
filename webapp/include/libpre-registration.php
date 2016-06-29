@@ -144,16 +144,18 @@ function display_lessons($lessons)
 }
 
 /*
- * Misc
+ * Miscellaneous functions
  */
 function display_warnings()
 {
-	echo '  <p>* Attention : Lors des cours à INS School, merci ' .
+	echo '  <p>' . PHP_EOL;
+	echo '    * Attention : Lors des cours à INS School, merci ' .
 	     'd\'utiliser des chaussures propres dans les salles de danse ' .
 	     '(non utilisées à l\'extérieur) et une tenue confortable.<br>' .
 	     PHP_EOL;
-	echo '     * INS School se réserve le droit de modifier les horaires ' .
-	     'du planning à tout moment.</p>' . PHP_EOL;
+	echo '    * INS School se réserve le droit de modifier les horaires ' .
+	     'du planning à tout moment.' . PHP_EOL;
+	echo '  </p>' . PHP_EOL;
 }
 
 function display_info()

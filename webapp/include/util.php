@@ -3,6 +3,9 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
+include_once 'include/connection.php';
+include_once 'include/error.php';
+
 /*
  * Hyperlinks
  */
@@ -75,7 +78,7 @@ function link_commit_pre_registration($pre_registration_id)
 }
 
 /*
- * Misc
+ * Miscellaneous functions
  */
 function duration($start_time, $end_time)
 {
