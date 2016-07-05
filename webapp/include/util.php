@@ -77,6 +77,29 @@ function link_commit_pre_registration($pre_registration_id)
 	       $pre_registration_id . '">Valider la pré-inscription</a>';
 }
 
+function link_quantity_minus($order_id, $goody_id, $quantity)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=modify_quantity&amp;order_id=' . $order_id .
+	       '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
+	       '">-</a>';
+}
+
+function link_quantity_plus($order_id, $goody_id, $quantity)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=modify_quantity&amp;order_id=' . $order_id .
+	       '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
+	       '">+</a>';
+}
+
+function link_remove_product($order_id, $goody_id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=modify_quantity&amp;order_id=' . $order_id .
+	       '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
+}
+
 /*
  * Miscellaneous functions
  */

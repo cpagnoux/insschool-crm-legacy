@@ -1,4 +1,5 @@
 TODO:
+- adapt display after delete to the type of entity
 - choose more appropriate types in <input> tags when possible
 - use timestamps for dates when possible
 - link lessons participation with registrations

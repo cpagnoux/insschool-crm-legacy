@@ -53,6 +53,8 @@ if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'modify_quantity')
+	$action = 'modify_quantity';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'commit')
 	$action = 'commit_pre_registration';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'delete')
@@ -67,6 +69,14 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'modify_quantity':
+	if (isset($_GET['quantity']))
+		modify_quantity($_GET['order_id'], $_GET['goody_id'],
+				$_GET['quantity']);
+	else
+		modify_quantity($_GET['order_id'], $_GET['goody_id'],
+				$_POST['quantity']);
+	break;
 case 'commit_pre_registration':
 	commit_pre_registration($_GET['id']);
 	break;

@@ -1009,4 +1009,29 @@ function delete_entity($table, $id)
 
 	mysqli_close($link);
 }
+
+/*
+ * Modification of product quantity in orders
+ */
+function modify_quantity($order_id, $goody_id, $quantity)
+{
+	$link = connect_database();
+
+	if ($quantity == 0 || !is_numeric($quantity))
+		$query = 'DELETE FROM contains WHERE order_id = ' . $order_id .
+			 ' AND goody_id = ' . $goody_id;
+	else
+		$query = 'UPDATE contains SET quantity = ' . $quantity .
+			 ' WHERE order_id = ' . $order_id . ' AND goody_id = ' .
+			 $goody_id;
+
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_entity('order', $order_id);
+}
 ?>

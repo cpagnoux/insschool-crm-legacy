@@ -107,6 +107,19 @@ function display_entity_member_registrations($link, $member_id)
 /*
  * Helper functions for displaying order entity
  */
+function display_quantity_form($order_id, $goody_id, $quantity)
+{
+	echo '      <form action="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '&amp;goody_id=' . $goody_id . '" method="post">' . PHP_EOL;
+	echo '        ' .
+	     link_quantity_minus($order_id, $goody_id, $quantity - 1) .
+	     ' <input type="text" name="quantity" value="' . $quantity .
+	     '" size="1" onchange="this.form.submit()"> ' .
+	     link_quantity_plus($order_id, $goody_id, $quantity + 1) . PHP_EOL;
+	echo '      </form>' . PHP_EOL;
+}
+
 function display_content($result, $order_id)
 {
 	if (mysqli_num_rows($result) == 0) {
@@ -121,7 +134,8 @@ function display_content($result, $order_id)
 	echo '    <th><b>Désignation</b></th>' . PHP_EOL;
 	echo '    <th><b>Prix unitaire</b></th>' . PHP_EOL;
 	echo '    <th><b>Quantité</b></th>' . PHP_EOL;
-	echo '    <th><b>Prix total</b></th>' . PHP_EOL;
+	echo '    <th><b>Total</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -129,10 +143,22 @@ function display_content($result, $order_id)
 		echo '    <td>' . $row['goody_id'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
-		echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
+
+		if (false) {
+			echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
+		} else {
+			echo '    <td>' . PHP_EOL;
+			display_quantity_form($order_id, $row['goody_id'],
+					      $row['quantity']);
+			echo '    </td>' . PHP_EOL;
+		}
+
 		echo '    <td>' .
 		     total_by_product($row['price'], $row['quantity']) .
 		     ' €</td>' . PHP_EOL;
+		echo '    <td>' . link_remove_product($order_id,
+						      $row['goody_id']) .
+		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}
 
@@ -182,6 +208,7 @@ function display_payments($result, $registration_id)
 	echo '    <th><b>Montant</b></th>' . PHP_EOL;
 	echo '    <th><b>Date</b></th>' . PHP_EOL;
 	echo '    <th></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -192,6 +219,9 @@ function display_payments($result, $registration_id)
 		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
 		     link_modify_entity('payment', $row['payment_id']) .
+		     '</td>' . PHP_EOL;
+		echo '    <td>' .
+		     link_delete_entity('payment', $row['payment_id']) .
 		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}
@@ -564,7 +594,6 @@ function form_entity_member($row)
 	     PHP_EOL;
 }
 
-// TODO: allow to modify number of articles
 function form_entity_order($row)
 {
 	select_member($row['member_id']);
@@ -789,7 +818,7 @@ function check_dependencies_by_table($link, $table, $ref_table, $ref_id)
 	mysqli_free_result($result);
 }
 
-function check_dependencies_by_relationship($link, $table, $ref_table, $ref_id)
+function check_dependencies_by_table_2pk($link, $table, $ref_table, $ref_id)
 {
 	$query = 'DELETE FROM `' . $table . '` WHERE ' . $ref_table . '_id = ' .
 		 $ref_id;
@@ -803,23 +832,21 @@ function check_dependencies($link, $table, $id)
 {
 	switch ($table) {
 	case 'goody':
-		check_dependencies_by_relationship($link, 'contains', $table,
-						   $id);
+		check_dependencies_by_table_2pk($link, 'contains', $table, $id);
 		break;
 	case 'lesson':
-		check_dependencies_by_relationship($link, 'participates',
-						   $table, $id);
+		check_dependencies_by_table_2pk($link, 'participates', $table,
+						$id);
 		break;
 	case 'member':
 		check_dependencies_by_table($link, 'file', $table, $id);
 		check_dependencies_by_table($link, 'order', $table, $id);
-		check_dependencies_by_relationship($link, 'participates',
+		check_dependencies_by_table_2pk($link, 'participates',
 						   $table, $id);
 		check_dependencies_by_table($link, 'registration', $table, $id);
 		break;
 	case 'order':
-		check_dependencies_by_relationship($link, 'contains', $table,
-						  $id);
+		check_dependencies_by_table_2pk($link, 'contains', $table, $id);
 		break;
 	case 'registration':
 		check_dependencies_by_table($link, 'payment', $table, $id);
