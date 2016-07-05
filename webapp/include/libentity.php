@@ -113,9 +113,10 @@ function display_quantity_form($order_id, $goody_id, $quantity)
 	     '?mode=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '" method="post">' . PHP_EOL;
 	echo '        ' .
-	     link_quantity_minus($order_id, $goody_id, $quantity - 1) .
-	     ' <input type="text" name="quantity" value="' . $quantity .
-	     '" size="1" onchange="this.form.submit()"> ' .
+	     link_quantity_minus($order_id, $goody_id, $quantity - 1) . PHP_EOL;
+	echo '        <input type="text" name="quantity" value="' . $quantity .
+	     '" size="2" onchange="this.form.submit()">' . PHP_EOL;
+	echo '        ' .
 	     link_quantity_plus($order_id, $goody_id, $quantity + 1) . PHP_EOL;
 	echo '      </form>' . PHP_EOL;
 }
@@ -183,7 +184,14 @@ function display_entity_order_content($link, $order_id)
 	display_content($result, $order_id);
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity('contains', $order_id) . '<br>' . PHP_EOL;
+	echo link_add_entity('contains', $order_id);
+
+	if (true) {
+		echo PHP_EOL;
+		echo link_empty_cart($order_id);
+	}
+
+	echo '<br>' . PHP_EOL;
 
 	mysqli_free_result($result);
 }

@@ -29,8 +29,8 @@ function display_entity_goody($row)
 	echo '<b>Stock :</b> ' . $row['stock'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('goody', $row['goody_id']) . ' ' .
-	     link_delete_entity('goody', $row['goody_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('goody', $row['goody_id']) . PHP_EOL;
+	echo link_delete_entity('goody', $row['goody_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_lesson($row)
@@ -58,8 +58,8 @@ function display_entity_lesson($row)
 	     lesson_subscriber_count($row['lesson_id']) . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('lesson', $row['lesson_id']) . ' ' .
-	     link_delete_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('lesson', $row['lesson_id']) . PHP_EOL;
+	echo link_delete_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_member($link, $row)
@@ -89,8 +89,8 @@ function display_entity_member($link, $row)
 	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('member', $row['member_id']) . ' ' .
-	     link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('member', $row['member_id']) . PHP_EOL;
+	echo link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	display_entity_member_file($link, $row['member_id']);
@@ -112,8 +112,8 @@ function display_entity_order($link, $row)
 	echo '<br>' . PHP_EOL;
 	display_entity_order_content($link, $row['order_id']);
 
-	echo link_modify_entity('order', $row['order_id']) . ' ' .
-	     link_delete_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('order', $row['order_id']) . PHP_EOL;
+	echo link_delete_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_pre_registration($row)
@@ -144,10 +144,11 @@ function display_entity_pre_registration($row)
 	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_commit_pre_registration($row['pre_registration_id']) . ' ' .
-	     link_modify_entity('pre_registration',
-				$row['pre_registration_id']) . ' ' .
-	     link_delete_entity('pre_registration',
+	echo link_commit_pre_registration($row['pre_registration_id']) .
+	     PHP_EOL;
+	echo link_modify_entity('pre_registration',
+				$row['pre_registration_id']) . PHP_EOL;
+	echo link_delete_entity('pre_registration',
 				$row['pre_registration_id']) . '<br>' . PHP_EOL;
 }
 
@@ -172,8 +173,9 @@ function display_entity_registration($link, $row)
 	     PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('registration', $row['registration_id']) . ' ' .
-	     link_delete_entity('registration', $row['registration_id']) .
+	echo link_modify_entity('registration', $row['registration_id']) .
+	     PHP_EOL;
+	echo link_delete_entity('registration', $row['registration_id']) .
 	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
@@ -193,8 +195,8 @@ function display_entity_room($row)
 	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('room', $row['room_id']) . ' ' .
-	     link_delete_entity('room', $row['room_id']) . '<br>' . PHP_EOL;
+	echo link_modify_entity('room', $row['room_id']) . PHP_EOL;
+	echo link_delete_entity('room', $row['room_id']) . '<br>' . PHP_EOL;
 }
 
 function display_entity_teacher($row)
@@ -217,8 +219,8 @@ function display_entity_teacher($row)
 	echo '<b>Absences :</b> ' . $row['absences'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('teacher', $row['teacher_id']) . ' ' .
-	     link_delete_entity('teacher', $row['teacher_id']) . '<br>' .
+	echo link_modify_entity('teacher', $row['teacher_id']) . PHP_EOL;
+	echo link_delete_entity('teacher', $row['teacher_id']) . '<br>' .
 	     PHP_EOL;
 }
 
@@ -1011,7 +1013,7 @@ function delete_entity($table, $id)
 }
 
 /*
- * Modification of product quantity in orders
+ * Functions in relation with order content
  */
 function modify_quantity($order_id, $goody_id, $quantity)
 {
@@ -1025,6 +1027,21 @@ function modify_quantity($order_id, $goody_id, $quantity)
 			 ' WHERE order_id = ' . $order_id . ' AND goody_id = ' .
 			 $goody_id;
 
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_entity('order', $order_id);
+}
+
+function empty_cart($order_id)
+{
+	$link = connect_database();
+
+	$query = 'DELETE FROM contains WHERE order_id = ' . $order_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

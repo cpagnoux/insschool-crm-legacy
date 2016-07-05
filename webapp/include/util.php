@@ -7,6 +7,32 @@ include_once 'include/connection.php';
 include_once 'include/error.php';
 
 /*
+ * Navigation bar
+ */
+function navigation_bar()
+{
+	echo '<hr>' . PHP_EOL;
+	echo '<nav>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] .
+	     '?table=member">Adhérents</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] .
+	     '?table=order">Commandes</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] . '?table=lesson">Cours</a>' .
+	     PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] .
+	     '?table=goody">Goodies</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] .
+	     '?table=pre_registration">Pré-inscriptions</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] .
+	     '?table=teacher">Professeurs</a>' . PHP_EOL;
+	echo '  <a href="' . $_SERVER['PHP_SELF'] . '?table=room">Salles</a>' .
+	     PHP_EOL;
+	echo '</nav>' . PHP_EOL;
+	echo '<hr>' . PHP_EOL;
+}
+
+/*
  * Hyperlinks
  */
 function link_table_previous($table, $page)
@@ -98,6 +124,13 @@ function link_remove_product($order_id, $goody_id)
 	return '<a href="' . $_SERVER['PHP_SELF'] .
 	       '?mode=modify_quantity&amp;order_id=' . $order_id .
 	       '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
+}
+
+function link_empty_cart($order_id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=empty_cart&amp;order_id=' . $order_id .
+	       '">Vider le panier</a>';
 }
 
 /*

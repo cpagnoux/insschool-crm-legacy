@@ -3,6 +3,8 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
+include_once 'include/util.php';
+
 include_once 'include/libpre-registration.php';
 include_once 'include/table.php';
 include_once 'include/entity.php';
@@ -19,19 +21,9 @@ include_once 'include/entity.php';
 
 <h1>Gestion INS School</h1>
 
-<nav>
-  <a href="back-office.php">Accueil</a>
-  <a href="back-office.php?table=member">Adhérents</a>
-  <a href="back-office.php?table=order">Commandes</a>
-  <a href="back-office.php?table=lesson">Cours</a>
-  <a href="back-office.php?table=goody">Goodies</a>
-  <a href="back-office.php?table=pre_registration">Pré-inscriptions</a>
-  <a href="back-office.php?table=teacher">Professeurs</a>
-  <a href="back-office.php?table=room">Salles</a>
-</nav>
-<br>
-
 <?php
+navigation_bar();
+
 session_start();
 
 if (isset($_POST['goody_sorting']))
@@ -53,6 +45,8 @@ if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'empty_cart')
+	$action = 'empty_cart';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'modify_quantity')
 	$action = 'modify_quantity';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'commit')
@@ -69,6 +63,9 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'empty_cart':
+	empty_cart($_GET['order_id']);
+	break;
 case 'modify_quantity':
 	if (isset($_GET['quantity']))
 		modify_quantity($_GET['order_id'], $_GET['goody_id'],
