@@ -271,18 +271,6 @@ function display_entity($table, $id)
 /*
  * Forms for entity add
  */
-function form_add_entity_contains($order_id)
-{
-	echo '<h2>Ajouter un article</h2>' . PHP_EOL;
-
-	echo '<form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=add&amp;table=contains" method="post">' . PHP_EOL;
-
-	form_entity_contains($order_id);
-
-	echo '</form>' . PHP_EOL;
-}
-
 function form_add_entity_file($member_id)
 {
 	echo '<h2>Nouveau dossier</h2>' . PHP_EOL;
@@ -343,6 +331,18 @@ function form_add_entity_order()
 	echo '</form>' . PHP_EOL;
 }
 
+function form_add_entity_order_content($order_id)
+{
+	echo '<h2>Ajouter un article</h2>' . PHP_EOL;
+
+	echo '<form action="' . $_SERVER['PHP_SELF'] .
+	     '?mode=add&amp;table=order_content" method="post">' . PHP_EOL;
+
+	form_entity_order_content($order_id);
+
+	echo '</form>' . PHP_EOL;
+}
+
 function form_add_entity_payment($registration_id)
 {
 	echo '<h2>Nouveau paiement</h2>' . PHP_EOL;
@@ -394,9 +394,6 @@ function form_add_entity_teacher()
 function form_add_entity($table, $id)
 {
 	switch ($table) {
-	case 'contains':
-		form_add_entity_contains($id);
-		break;
 	case 'file':
 		form_add_entity_file($id);
 		break;
@@ -411,6 +408,9 @@ function form_add_entity($table, $id)
 		break;
 	case 'order':
 		form_add_entity_order();
+		break;
+	case 'order_content':
+		form_add_entity_order_content($id);
 		break;
 	case 'payment':
 		form_add_entity_payment($id);
@@ -430,18 +430,6 @@ function form_add_entity($table, $id)
 /*
  * Add of entity
  */
-function add_entity_contains($link, $data)
-{
-	$query = 'INSERT INTO contains VALUES (' . $data['order_id'] . ', ' .
-		 $data['goody_id'] . ', ' . $data['quantity'] . ')';
-	if (!mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	display_entity('order', $data['order_id']);
-}
-
 function add_entity_file($link, $data)
 {
 	$query = 'INSERT INTO file VALUES ("", ' . $data['member_id'] . ', ' .
@@ -512,6 +500,18 @@ function add_entity_order($link, $data)
 	display_table('order');
 }
 
+function add_entity_order_content($link, $data)
+{
+	$query = 'INSERT INTO order_content VALUES (' . $data['order_id'] .
+		 ', ' . $data['goody_id'] . ', ' . $data['quantity'] . ')';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	display_entity('order', $data['order_id']);
+}
+
 function add_entity_payment($link, $data)
 {
 	$query = 'INSERT INTO payment VALUES ("", ' . $data['registration_id'] .
@@ -572,9 +572,6 @@ function add_entity($table, $data)
 	$link = connect_database();
 
 	switch ($table) {
-	case 'contains':
-		add_entity_contains($link, $data);
-		break;
 	case 'file':
 		add_entity_file($link, $data);
 		break;
@@ -589,6 +586,9 @@ function add_entity($table, $data)
 		break;
 	case 'order':
 		add_entity_order($link, $data);
+		break;
+	case 'order_content':
+		add_entity_order_content($link, $data);
 		break;
 	case 'payment':
 		add_entity_payment($link, $data);
@@ -1020,10 +1020,10 @@ function modify_quantity($order_id, $goody_id, $quantity)
 	$link = connect_database();
 
 	if ($quantity == 0 || !is_numeric($quantity))
-		$query = 'DELETE FROM contains WHERE order_id = ' . $order_id .
-			 ' AND goody_id = ' . $goody_id;
+		$query = 'DELETE FROM order_content WHERE order_id = ' .
+			 $order_id . ' AND goody_id = ' . $goody_id;
 	else
-		$query = 'UPDATE contains SET quantity = ' . $quantity .
+		$query = 'UPDATE order_content SET quantity = ' . $quantity .
 			 ' WHERE order_id = ' . $order_id . ' AND goody_id = ' .
 			 $goody_id;
 
@@ -1041,7 +1041,7 @@ function empty_cart($order_id)
 {
 	$link = connect_database();
 
-	$query = 'DELETE FROM contains WHERE order_id = ' . $order_id;
+	$query = 'DELETE FROM order_content WHERE order_id = ' . $order_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

@@ -1,4 +1,4 @@
-INSERT INTO `contains` VALUES (1, 1, 1),
+INSERT INTO `order_content` VALUES (1, 1, 1),
 	(1, 3, 1),
 	(2, 5, 1),
 	(2, 2, 1);
@@ -54,7 +54,7 @@ INSERT INTO `member` VALUES ('', 'Christophe', 'Pagnoux-Vieuxfort', '1992-03-27'
 INSERT INTO `order` VALUES ('', 101, '2016-02-15'),
 	('', 102, '2016-03-27');
 
-INSERT INTO `participates` VALUES (101, 6, ''),
+INSERT INTO `lesson_participation` VALUES (101, 6, ''),
 	(101, 28, ''),
 	(101, 29, ''),
 	(102, 27, ''),

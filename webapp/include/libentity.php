@@ -171,11 +171,11 @@ function display_content($result, $order_id)
 
 function display_entity_order_content($link, $order_id)
 {
-	$query = 'SELECT contains.goody_id, contains.quantity, goody.name,
-		  goody.price FROM contains INNER JOIN goody
-		  ON contains.goody_id = goody.goody_id
-		  WHERE contains.order_id = ' . $order_id .
-		 ' ORDER BY contains.goody_id';
+	$query = 'SELECT order_content.goody_id, order_content.quantity, ' .
+		 'goody.name, goody.price FROM order_content ' .
+		 'INNER JOIN goody ON order_content.goody_id = ' .
+		 'goody.goody_id WHERE order_content.order_id = ' . $order_id .
+		 ' ORDER BY order_content.goody_id';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -184,7 +184,7 @@ function display_entity_order_content($link, $order_id)
 	display_content($result, $order_id);
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity('contains', $order_id);
+	echo link_add_entity('order_content', $order_id);
 
 	if (true) {
 		echo PHP_EOL;
@@ -447,7 +447,7 @@ function select_teacher($teacher_id)
 /*
  * Forms' content
  */
-function form_entity_contains($order_id)
+function form_entity_order_content($order_id)
 {
 	echo '  N° de commande : <input type="text" name="order_id" value="' .
 	     $order_id . '" readonly="readonly"><br>' . PHP_EOL;
@@ -840,21 +840,23 @@ function check_dependencies($link, $table, $id)
 {
 	switch ($table) {
 	case 'goody':
-		check_dependencies_by_table_2pk($link, 'contains', $table, $id);
+		check_dependencies_by_table_2pk($link, 'order_content', $table,
+						$id);
 		break;
 	case 'lesson':
-		check_dependencies_by_table_2pk($link, 'participates', $table,
-						$id);
+		check_dependencies_by_table_2pk($link, 'lesson_participation',
+						$table, $id);
 		break;
 	case 'member':
 		check_dependencies_by_table($link, 'file', $table, $id);
 		check_dependencies_by_table($link, 'order', $table, $id);
-		check_dependencies_by_table_2pk($link, 'participates',
-						   $table, $id);
+		check_dependencies_by_table_2pk($link, 'lesson_participation',
+						$table, $id);
 		check_dependencies_by_table($link, 'registration', $table, $id);
 		break;
 	case 'order':
-		check_dependencies_by_table_2pk($link, 'contains', $table, $id);
+		check_dependencies_by_table_2pk($link, 'order_content', $table,
+						$id);
 		break;
 	case 'registration':
 		check_dependencies_by_table($link, 'payment', $table, $id);

@@ -66,11 +66,11 @@ function link_add_entity($table, $id)
 	$message = 'Ajouter';
 
 	switch ($table) {
-	case 'contains':
-		$message = 'Ajouter un article';
-		break;
 	case 'file':
 		$message = 'En créer un';
+		break;
+	case 'order_content':
+		$message = 'Ajouter un article';
 		break;
 	case 'payment':
 		$message = 'Ajouter un paiement';
@@ -290,8 +290,8 @@ function lesson_subscriber_count($lesson_id)
 {
 	$link = connect_database();
 
-	$query = 'SELECT COUNT(*) FROM participates WHERE lesson_id = ' .
-		 $lesson_id;
+	$query = 'SELECT COUNT(*) FROM lesson_participation ' .
+		 'WHERE lesson_id = ' . $lesson_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -309,9 +309,10 @@ function order_total($order_id)
 {
 	$link = connect_database();
 
-	$query = 'SELECT contains.quantity, goody.price FROM contains ' .
-		 'INNER JOIN goody ON contains.goody_id = goody.goody_id ' .
-		 'WHERE contains.order_id = ' . $order_id;
+	$query = 'SELECT order_content.quantity, goody.price ' .
+		 'FROM order_content INNER JOIN goody ' .
+		 'ON order_content.goody_id = goody.goody_id ' .
+		 'WHERE order_content.order_id = ' . $order_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
