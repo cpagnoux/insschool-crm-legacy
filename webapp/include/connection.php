@@ -13,7 +13,7 @@ define('DATABASE', 'ins_school');
 function connect_database()
 {
 	$link = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	if (mysqli_connect_errno()) {
+	if (!$link) {
 		sql_connect_error();
 		exit;
 	}

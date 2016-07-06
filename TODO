@@ -1,10 +1,11 @@
 TODO:
-- adapt display after delete to the type of entity
 - choose more appropriate types in <input> tags when possible
 - use timestamps for dates when possible
+- add season column to tables requiring it
 - link lessons participation with registrations
 - add choice between quarterly and annual plan
 - rework pages layout with <div> tag
+- add return buttons on pages
 - login page
 - secure login page
 - css

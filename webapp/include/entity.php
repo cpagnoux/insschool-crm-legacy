@@ -996,8 +996,19 @@ function modify_entity($table, $id, $data)
 /*
  * Deletion of entity
  */
-function delete_entity($table, $id)
+function delete_entity($table, $id, $first_call)
 {
+	if ($first_call) {
+		switch ($table) {
+		case 'payment':
+			$registration_id = get_registration_id($id);
+			break;
+		case 'registration':
+			$member_id = get_member_id($id);
+			break;
+		}
+	}
+
 	$link = connect_database();
 
 	check_dependencies($link, $table, $id);
@@ -1010,10 +1021,24 @@ function delete_entity($table, $id)
 	}
 
 	mysqli_close($link);
+
+	if ($first_call) {
+		switch ($table) {
+		case 'payment':
+			display_entity('registration', $registration_id);
+			break;
+		case 'registration':
+			display_entity('member', $member_id);
+			break;
+		default:
+			display_table($table);
+			break;
+		}
+	}
 }
 
 /*
- * Functions in relation with order content
+ * Functions related to order content
  */
 function modify_quantity($order_id, $goody_id, $quantity)
 {

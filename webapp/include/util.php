@@ -249,6 +249,25 @@ function get_lesson_title($lesson_id)
 	return $row['title'];
 }
 
+function get_member_id($registration_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT member_id FROM registration WHERE registration_id = ' .
+		 $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['member_id'];
+}
+
 function get_name($table, $id)
 {
 	$link = connect_database();
@@ -266,6 +285,25 @@ function get_name($table, $id)
 	mysqli_close($link);
 
 	return $row['first_name'] . ' ' . $row['last_name'];
+}
+
+function get_registration_id($payment_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_id FROM payment WHERE payment_id = ' .
+		 $payment_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['registration_id'];
 }
 
 function get_room_name($room_id)

@@ -78,8 +78,7 @@ case 'commit_pre_registration':
 	commit_pre_registration($_GET['id']);
 	break;
 case 'delete_entity':
-	delete_entity($_GET['table'], $_GET['id']);
-	display_table($_GET['table']);
+	delete_entity($_GET['table'], $_GET['id'], true);
 	break;
 case 'modify_entity':
 	modify_entity($_GET['table'], $_GET['id'], $_POST);

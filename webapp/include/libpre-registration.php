@@ -301,7 +301,7 @@ function add_member($link, $row)
 	}
 }
 
-function get_member_id($link, $row)
+function get_member_id_from_name($link, $row)
 {
 	$query = 'SELECT member_id FROM member WHERE first_name = "' .
 		 $row['first_name'] . '" AND last_name = "' .
@@ -313,7 +313,7 @@ function get_member_id($link, $row)
 
 	if (mysqli_num_rows($result) == 0) {
 		add_member($link, $row);
-		return get_member_id($link, $row);
+		return get_member_id_from_name($link, $row);
 	}
 
 	$row = mysqli_fetch_assoc($result);
@@ -323,7 +323,7 @@ function get_member_id($link, $row)
 	return $row['member_id'];
 }
 
-function add_member_to_lessons($link, $member_id, $row)
+function add_lesson_participation($link, $member_id, $row)
 {
 	$lessons = string_to_lessons($row['lessons']);
 
@@ -350,8 +350,8 @@ function commit_pre_registration($pre_registration_id)
 
 	$row = mysqli_fetch_assoc($result);
 
-	$member_id = get_member_id($link, $row);
-	add_member_to_lessons($link, $member_id, $row);
+	$member_id = get_member_id_from_name($link, $row);
+	add_lesson_participation($link, $member_id, $row);
 	delete_entity('pre_registration', $pre_registration_id);
 
 	mysqli_free_result($result);
