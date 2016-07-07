@@ -69,13 +69,11 @@ function display_registrations($result)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>N° d\'inscription</b></th>' . PHP_EOL;
 	echo '    <th><b>Saison</b></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['registration_id'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['season'] . '</td>' . PHP_EOL;
 		echo '    <td>' . link_entity('registration',
 					      $row['registration_id']) .
@@ -211,9 +209,8 @@ function display_payments($result, $registration_id)
 	echo '<table>' . PHP_EOL;
 
 	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>N° de paiement</b></th>' . PHP_EOL;
-	echo '    <th><b>Mode de paiement</b></th>' . PHP_EOL;
 	echo '    <th><b>Montant</b></th>' . PHP_EOL;
+	echo '    <th><b>Mode de paiement</b></th>' . PHP_EOL;
 	echo '    <th><b>Date</b></th>' . PHP_EOL;
 	echo '    <th></th>' . PHP_EOL;
 	echo '    <th></th>' . PHP_EOL;
@@ -221,9 +218,8 @@ function display_payments($result, $registration_id)
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['payment_id'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['mode'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['amount'] . ' €</td>' . PHP_EOL;
+		echo '    <td>' . $row['mode'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
 		     link_modify_entity('payment', $row['payment_id']) .
@@ -621,10 +617,10 @@ function form_entity_payment($registration_id, $row)
 	     '" readonly="readonly"><br>' .
 	     PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	select_mode($row['mode']);
 	echo '  Montant <sup>*</sup> : <input type="text" name="amount" ' .
 	     'value="' . $row['amount'] . '" required="required"> €<br>' .
 	     PHP_EOL;
+	select_mode($row['mode']);
 	echo '  <br>' . PHP_EOL;
 	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
 	     $row['date'] . '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
@@ -730,8 +726,8 @@ function form_entity_registration($member_id, $row)
 	     $row['price'] . '"> €<br>' . PHP_EOL;
 	echo '  Réduction : <input type="text" name="discount" value="' .
 	     $row['discount'] . '"> %<br>' . PHP_EOL;
-	echo '  Nombre de paiements : <input type="text" name="payments" ' .
-	     'value="' . $row['payments'] . '"><br>' . PHP_EOL;
+	echo '  Nombre de paiements : <input type="text" name="num_payments" ' .
+	     'value="' . $row['num_payments'] . '"><br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .

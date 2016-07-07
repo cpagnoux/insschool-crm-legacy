@@ -17,11 +17,11 @@ include_once 'include/table.php';
  */
 function display_entity_goody($row)
 {
-	echo '<h2>Goodies</h2>' . PHP_EOL;
+	echo $row['name'] . '<br>' . PHP_EOL;
+
+	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
 
 	echo '<b>Référence :</b> ' . $row['goody_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Désignation :</b> ' . $row['name'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Description :</b> ' . $row['description'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -35,11 +35,11 @@ function display_entity_goody($row)
 
 function display_entity_lesson($row)
 {
-	echo '<h2>Cours</h2>' . PHP_EOL;
+	echo $row['title'] . '<br>' . PHP_EOL;
+
+	echo '<h2>' . $row['title'] . '</h2>' . PHP_EOL;
 
 	echo '<b>Référence :</b> ' . $row['lesson_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Intitulé :</b> ' . $row['title'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Professeur :</b> ' . get_name('teacher', $row['teacher_id']) .
 	     '<br>' . PHP_EOL;
@@ -64,7 +64,9 @@ function display_entity_lesson($row)
 
 function display_entity_member($link, $row)
 {
-	echo '<h2>Adhérent</h2>' . PHP_EOL;
+	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+
+	echo '<h2>Information adhérent</h2>' . PHP_EOL;
 
 	echo '<b>N° d\'adhérent :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -101,9 +103,10 @@ function display_entity_member($link, $row)
 
 function display_entity_order($link, $row)
 {
-	echo '<h2>Commande</h2>' . PHP_EOL;
+	echo 'N° ' . $row['order_id'] . '<br>' . PHP_EOL;
 
-	echo '<b>N° de commande :</b> ' . $row['order_id'] . '<br>' . PHP_EOL;
+	echo '<h2>Commande n° ' . $row['order_id'] . '</h2>' . PHP_EOL;
+
 	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -118,7 +121,9 @@ function display_entity_order($link, $row)
 
 function display_entity_pre_registration($row)
 {
-	echo '<h2>Pré-inscription</h2>' . PHP_EOL;
+	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+
+	echo '<h2>Détail pré-inscription</h2>' . PHP_EOL;
 
 	echo '<b>N° de pré-inscription :</b> ' . $row['pre_registration_id'] .
 	     '<br>' . PHP_EOL;
@@ -154,14 +159,18 @@ function display_entity_pre_registration($row)
 
 function display_entity_registration($link, $row)
 {
-	echo '<h2>Inscription</h2>' . PHP_EOL;
+	echo link_table('member') . ' >' . PHP_EOL;
+	echo link_entity('member', $row['member_id'],
+			 get_name('member', $row['member_id'])) . ' >' .
+	     PHP_EOL;
+	echo 'Inscription ' . $row['season'] . '<br>' . PHP_EOL;
+
+	echo '<h2>Inscription ' . $row['season'] . '</h2>' . PHP_EOL;
 
 	echo '<b>N° d\'inscription :</b> ' . $row['registration_id'] . '<br>' .
 	     PHP_EOL;
 	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
 	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Saison :</b> ' . $row['season'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Formule :</b> ' . $row['formula'] . ' cours<br>' . PHP_EOL;
 	echo '<b>Tarif :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
@@ -169,7 +178,7 @@ function display_entity_registration($link, $row)
 	echo '<b>Tarif après réduction :</b> ' .
 	     price_after_discount($row['price'], $row['discount']) . ' €<br>' .
 	     PHP_EOL;
-	echo '<b>Nombre de paiements :</b> ' . $row['payments'] . '<br>' .
+	echo '<b>Nombre de paiements :</b> ' . $row['num_payments'] . '<br>' .
 	     PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
@@ -184,11 +193,11 @@ function display_entity_registration($link, $row)
 
 function display_entity_room($row)
 {
-	echo '<h2>Salle</h2>' . PHP_EOL;
+	echo $row['name'] . '<br>' . PHP_EOL;
+
+	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
 
 	echo '<b>N° de salle :</b> ' . $row['room_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Nom :</b> ' . $row['name'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Adresse :</b> ' . $row['adress'] . '<br>' . PHP_EOL;
 	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
@@ -201,7 +210,10 @@ function display_entity_room($row)
 
 function display_entity_teacher($row)
 {
-	echo '<h2>Professeur</h2>' . PHP_EOL;
+	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+
+	echo '<h2>' . $row['first_name'] . ' ' . $row['last_name'] . '</h2>' .
+	     PHP_EOL;
 
 	echo '<b>Identifiant :</b> ' . $row['teacher_id'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
@@ -236,6 +248,11 @@ function display_entity($table, $id)
 	}
 
 	$row = mysqli_fetch_assoc($result);
+
+	echo link_home() . ' >' . PHP_EOL;
+
+	if ($table != 'registration')
+		echo link_table($table) . ' >' . PHP_EOL;
 
 	switch ($table) {
 	case 'goody':
@@ -515,7 +532,7 @@ function add_entity_order_content($link, $data)
 function add_entity_payment($link, $data)
 {
 	$query = 'INSERT INTO payment VALUES ("", ' . $data['registration_id'] .
-		 ', "' . $data['mode'] . '", ' . $data['amount'] . ', "' .
+		 ', ' . $data['amount'] . ', "' . $data['mode'] . '", "' .
 		 $data['date'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -530,7 +547,7 @@ function add_entity_registration($link, $data)
 	$query = 'INSERT INTO registration VALUES ("", ' . $data['member_id'] .
 		 ', "' . $data['season'] . '", ' . $data['formula'] . ', ' .
 		 $data['price'] . ', ' . $data['discount'] . ', ' .
-		 $data['payments'] . ')';
+		 $data['num_payments'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -873,9 +890,9 @@ function modify_entity_order($link, $order_id, $data)
 
 function modify_entity_payment($link, $payment_id, $data)
 {
-	$query = 'UPDATE payment SET mode = "' . $data['mode'] .
-		 '", amount = ' . $data['amount'] . ', date = "' .
-		 $data['date'] . '" WHERE payment_id = ' . $payment_id;
+	$query = 'UPDATE payment SET amount = ' . $data['amount'] .
+		 ', mode = "' . $data['mode'] . '", date = "' . $data['date'] .
+		 '" WHERE payment_id = ' . $payment_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -912,7 +929,7 @@ function modify_entity_registration($link, $registration_id, $data)
 	$query = 'UPDATE registration SET season = "' . $data['season'] .
 		 '", formula = ' . $data['formula'] . ', price = ' .
 		 $data['price'] . ', discount = ' . $data['discount'] .
-		 ', payments = ' . $data['payments'] .
+		 ', num_payments = ' . $data['num_payments'] .
 		 ' WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);

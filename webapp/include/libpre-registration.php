@@ -352,7 +352,7 @@ function commit_pre_registration($pre_registration_id)
 
 	$member_id = get_member_id_from_name($link, $row);
 	add_lesson_participation($link, $member_id, $row);
-	delete_entity('pre_registration', $pre_registration_id);
+	delete_entity('pre_registration', $pre_registration_id, true);
 
 	mysqli_free_result($result);
 	mysqli_close($link);

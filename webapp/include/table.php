@@ -11,7 +11,8 @@ include_once 'include/util.php';
 
 function display_table_goody($result)
 {
-	echo '<h2>Goodies</h2>' . PHP_EOL;
+	echo 'Goodies<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun goodies<br>' . PHP_EOL;
@@ -46,7 +47,8 @@ function display_table_goody($result)
 
 function display_table_lesson($result)
 {
-	echo '<h2>Cours</h2>' . PHP_EOL;
+	echo 'Cours<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun cours<br>' . PHP_EOL;
@@ -76,7 +78,8 @@ function display_table_lesson($result)
 
 function display_table_member($result)
 {
-	echo '<h2>Adhérents</h2>' . PHP_EOL;
+	echo 'Adhérents<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun adhérent<br>' . PHP_EOL;
@@ -108,7 +111,8 @@ function display_table_member($result)
 
 function display_table_order($result)
 {
-	echo '<h2>Commandes</h2>' . PHP_EOL;
+	echo 'Commandes<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucune commande<br>' . PHP_EOL;
@@ -143,7 +147,8 @@ function display_table_order($result)
 
 function display_table_pre_registration($result)
 {
-	echo '<h2>Pré-inscriptions</h2>' . PHP_EOL;
+	echo 'Pré-inscriptions<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucune pré-inscription<br>' . PHP_EOL;
@@ -176,7 +181,8 @@ function display_table_pre_registration($result)
 
 function display_table_room($result)
 {
-	echo '<h2>Salles</h2>' . PHP_EOL;
+	echo 'Salles<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucune salle<br>' . PHP_EOL;
@@ -206,7 +212,8 @@ function display_table_room($result)
 
 function display_table_teacher($result)
 {
-	echo '<h2>Professeurs</h2>' . PHP_EOL;
+	echo 'Professeurs<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun professeur<br>' . PHP_EOL;
@@ -283,6 +290,8 @@ function display_table($table, $page)
 		sql_error($link, $query);
 		exit;
 	}
+
+	echo link_home() . ' >' . PHP_EOL;
 
 	switch ($table) {
 	case 'goody':

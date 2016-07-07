@@ -35,6 +35,44 @@ function navigation_bar()
 /*
  * Hyperlinks
  */
+function link_home($table)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>';
+}
+
+function link_table($table)
+{
+	switch ($table) {
+	case 'goody':
+		$message = 'Goodies';
+		break;
+	case 'lesson':
+		$message = 'Cours';
+		break;
+	case 'member':
+		$message = 'Adhérents';
+		break;
+	case 'order':
+		$message = 'Commandes';
+		break;
+	case 'pre_registration':
+		$message = 'Pré-inscriptions';
+		break;
+	case 'room':
+		$message = 'Salles';
+		break;
+	case 'teacher':
+		$message = 'Professeurs';
+		break;
+	default:
+		$message = '';
+		break;
+	}
+
+	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">' .
+	       $message . '</a>';
+}
+
 function link_table_previous($table, $page)
 {
 	if ($page == 1)
@@ -51,8 +89,12 @@ function link_table_next($table, $page)
 	       '&amp;page=' . $page . '">Suivant</a>';
 }
 
-function link_entity($table, $id)
+function link_entity($table, $id, $message)
 {
+	if (isset($message))
+		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		       '&amp;id=' . $id . '">' . $message . '</a>';
+
 	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 	       '&amp;id=' . $id . '">+ d\'infos</a>';
 }
@@ -62,8 +104,6 @@ function link_add_entity($table, $id)
 	if (!isset($id))
 		return '<a href="' . $_SERVER['PHP_SELF'] .
 		       '?mode=add&amp;table=' . $table . '">Ajouter</a>';
-
-	$message = 'Ajouter';
 
 	switch ($table) {
 	case 'file':
@@ -77,6 +117,9 @@ function link_add_entity($table, $id)
 		break;
 	case 'registration':
 		$message = 'Ajouter une inscription';
+		break;
+	default:
+		$message = 'Ajouter';
 		break;
 	}
 
@@ -130,7 +173,8 @@ function link_empty_cart($order_id)
 {
 	return '<a href="' . $_SERVER['PHP_SELF'] .
 	       '?mode=empty_cart&amp;order_id=' . $order_id .
-	       '">Vider le panier</a>';
+	       '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
+	       'Vider le panier</a>';
 }
 
 /*
