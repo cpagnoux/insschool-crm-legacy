@@ -323,7 +323,7 @@ function get_member_id_from_name($link, $row)
 	return $row['member_id'];
 }
 
-function add_lesson_participation($link, $member_id, $row)
+function add_lessons_participation($link, $member_id, $row)
 {
 	$lessons = string_to_lessons($row['lessons']);
 
@@ -351,7 +351,7 @@ function commit_pre_registration($pre_registration_id)
 	$row = mysqli_fetch_assoc($result);
 
 	$member_id = get_member_id_from_name($link, $row);
-	add_lesson_participation($link, $member_id, $row);
+	add_lessons_participation($link, $member_id, $row);
 	delete_entity('pre_registration', $pre_registration_id, true);
 
 	mysqli_free_result($result);

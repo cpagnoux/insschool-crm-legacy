@@ -1,5 +1,4 @@
 TODO:
-- add payment table for orders
 - choose more appropriate types in <input> tags when possible
 - use timestamps for dates when possible
 - add season column to tables requiring it

@@ -11,7 +11,7 @@ include_once 'include/libpre-registration.php';
 include_once 'include/entity.php';
 
 /*
- * Helper functions for displaying member entity
+ * Helper functions for displaying member-related data
  */
 function display_file($result, $member_id)
 {
@@ -44,7 +44,7 @@ function display_file($result, $member_id)
 	echo link_modify_entity('file', $row['file_id']) . '<br>' . PHP_EOL;
 }
 
-function display_entity_member_file($link, $member_id)
+function display_member_file($link, $member_id)
 {
 	$query = 'SELECT * FROM file WHERE member_id = ' . $member_id;
 	if (!$result = mysqli_query($link, $query)) {
@@ -84,7 +84,7 @@ function display_registrations($result)
 	echo '</table>' . PHP_EOL;
 }
 
-function display_entity_member_registrations($link, $member_id)
+function display_member_registrations($link, $member_id)
 {
 	$query = 'SELECT * FROM registration WHERE member_id = ' . $member_id .
 		 ' ORDER BY season DESC';
@@ -103,7 +103,7 @@ function display_entity_member_registrations($link, $member_id)
 }
 
 /*
- * Helper functions for displaying order entity
+ * Helper functions for displaying order-related data
  */
 function display_quantity_form($order_id, $goody_id, $quantity)
 {
@@ -143,7 +143,7 @@ function display_content($result, $order_id)
 		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
 
-		if (false) {
+		if (order_paid($order_id)) {
 			echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
 		} else {
 			echo '    <td>' . PHP_EOL;
@@ -155,9 +155,12 @@ function display_content($result, $order_id)
 		echo '    <td>' .
 		     total_by_product($row['price'], $row['quantity']) .
 		     ' €</td>' . PHP_EOL;
-		echo '    <td>' . link_remove_product($order_id,
-						      $row['goody_id']) .
-		     '</td>' . PHP_EOL;
+
+		if (!order_paid($order_id))
+			echo '    <td>' .
+			     link_remove_product($order_id, $row['goody_id']) .
+			     '</td>' . PHP_EOL;
+
 		echo '  </tr>' . PHP_EOL;
 	}
 
@@ -167,7 +170,7 @@ function display_content($result, $order_id)
 	echo '<b>TOTAL :</b> ' . order_total($order_id) . ' €<br>' . PHP_EOL;
 }
 
-function display_entity_order_content($link, $order_id)
+function display_order_content($link, $order_id)
 {
 	$query = 'SELECT order_content.goody_id, order_content.quantity, ' .
 		 'goody.name, goody.price FROM order_content ' .
@@ -181,23 +184,19 @@ function display_entity_order_content($link, $order_id)
 
 	display_content($result, $order_id);
 
-	echo '<br>' . PHP_EOL;
-	echo link_add_entity('order_content', $order_id);
-
-	if (true) {
-		echo PHP_EOL;
-		echo link_empty_cart($order_id);
+	if (!order_paid($order_id)) {
+		echo '<br>' . PHP_EOL;
+		echo link_add_entity('order_content', $order_id) . PHP_EOL;
+		echo link_empty_cart($order_id) . '<br>' . PHP_EOL;
 	}
-
-	echo '<br>' . PHP_EOL;
 
 	mysqli_free_result($result);
 }
 
 /*
- * Helper functions for displaying registration entity
+ * Helper functions for displaying payments
  */
-function display_payments($result, $registration_id)
+function display_payments($result, $table, $id)
 {
 	echo '<h2>Paiements</h2>' . PHP_EOL;
 
@@ -222,10 +221,12 @@ function display_payments($result, $registration_id)
 		echo '    <td>' . $row['mode'] . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
-		     link_modify_entity('payment', $row['payment_id']) .
+		     link_modify_entity($table . '_payment',
+					$row[$table . '_payment_id']) .
 		     '</td>' . PHP_EOL;
 		echo '    <td>' .
-		     link_delete_entity('payment', $row['payment_id']) .
+		     link_delete_entity($table . '_payment',
+					$row[$table . '_payment_id']) .
 		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}
@@ -233,29 +234,38 @@ function display_payments($result, $registration_id)
 	echo '</table>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	echo '<b>Total payé :</b> ' .
-	     registration_total_paid($registration_id) . ' €<br>' . PHP_EOL;
+	echo '<b>Total payé :</b> ' . total_paid($table, $id) . ' €<br>' .
+	     PHP_EOL;
 }
 
-function display_entity_registration_payments($link, $registration_id)
+function display_entity_payments($link, $table, $id)
 {
-	$query = 'SELECT * FROM payment WHERE registration_id = ' .
-		 $registration_id . ' ORDER BY date';
+	$query = 'SELECT * FROM ' . $table . '_payment WHERE ' . $table .
+		 '_id = ' . $id . ' ORDER BY date';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
-	display_payments($result, $registration_id);
+	display_payments($result, $table, $id);
 
 	echo '<br>' . PHP_EOL;
-	echo '<b>Inscription réglée :</b> ' .
-	     evaluate_boolean(registration_paid($registration_id)) . '<br>' .
-	     PHP_EOL;
+
+	switch ($table) {
+	case 'order':
+		echo '<b>Commande réglée :</b> ' .
+		     evaluate_boolean(order_paid($id));
+		break;
+	case 'registration':
+		echo '<b>Inscription réglée :</b> ' .
+		     evaluate_boolean(registration_paid($id));
+		break;
+	}
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity('payment', $registration_id) . '<br>' .
-	     PHP_EOL;
+
+	echo '<br>' . PHP_EOL;
+	echo link_add_entity($table . '_payment', $id) . '<br>' . PHP_EOL;
 
 	mysqli_free_result($result);
 }
@@ -610,12 +620,19 @@ function form_entity_order($row)
 	     PHP_EOL;
 }
 
-function form_entity_payment($registration_id, $row)
+function form_entity_payment($table, $id, $row)
 {
-	echo '  N° d\'inscription : <input type="text" ' .
-	     'name="registration_id" value="' . $registration_id .
-	     '" readonly="readonly"><br>' .
-	     PHP_EOL;
+	switch ($table) {
+	case 'order':
+		echo '  N° de commande : ';
+		break;
+	case 'registration':
+		echo '  N° d\'inscription : ';
+		break;
+	}
+
+	echo '<input type="text" name="' . $table . '_id" value="' . $id .
+	     '" readonly="readonly"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Montant <sup>*</sup> : <input type="text" name="amount" ' .
 	     'value="' . $row['amount'] . '" required="required"> €<br>' .
@@ -855,7 +872,8 @@ function check_dependencies($link, $table, $id)
 						$id);
 		break;
 	case 'registration':
-		check_dependencies_by_table($link, 'payment', $table, $id);
+		check_dependencies_by_table($link, 'registration_payment',
+					    $table, $id);
 		break;
 	case 'room':
 		check_dependencies_lesson($link, $table, $id);

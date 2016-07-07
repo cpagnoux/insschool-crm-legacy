@@ -13,21 +13,14 @@ function navigation_bar()
 {
 	echo '<hr>' . PHP_EOL;
 	echo '<nav>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] .
-	     '?table=member">Adhérents</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] .
-	     '?table=order">Commandes</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] . '?table=lesson">Cours</a>' .
-	     PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] .
-	     '?table=goody">Goodies</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] .
-	     '?table=pre_registration">Pré-inscriptions</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] .
-	     '?table=teacher">Professeurs</a>' . PHP_EOL;
-	echo '  <a href="' . $_SERVER['PHP_SELF'] . '?table=room">Salles</a>' .
-	     PHP_EOL;
+	echo '  ' . link_home() . PHP_EOL;
+	echo '  ' . link_table('lesson') . PHP_EOL;
+	echo '  ' . link_table('teacher') . PHP_EOL;
+	echo '  ' . link_table('room') . PHP_EOL;
+	echo '  ' . link_table('goody') . PHP_EOL;
+	echo '  ' . link_table('order') . PHP_EOL;
+	echo '  ' . link_table('member') . PHP_EOL;
+	echo '  ' . link_table('pre_registration') . PHP_EOL;
 	echo '</nav>' . PHP_EOL;
 	echo '<hr>' . PHP_EOL;
 }
@@ -35,7 +28,7 @@ function navigation_bar()
 /*
  * Hyperlinks
  */
-function link_home($table)
+function link_home()
 {
 	return '<a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>';
 }
@@ -112,11 +105,14 @@ function link_add_entity($table, $id)
 	case 'order_content':
 		$message = 'Ajouter un article';
 		break;
-	case 'payment':
+	case 'order_payment':
 		$message = 'Ajouter un paiement';
 		break;
 	case 'registration':
 		$message = 'Ajouter une inscription';
+		break;
+	case 'registration_payment':
+		$message = 'Ajouter un paiement';
 		break;
 	default:
 		$message = 'Ajouter';
@@ -331,12 +327,31 @@ function get_name($table, $id)
 	return $row['first_name'] . ' ' . $row['last_name'];
 }
 
-function get_registration_id($payment_id)
+function get_order_id($order_payment_id)
 {
 	$link = connect_database();
 
-	$query = 'SELECT registration_id FROM payment WHERE payment_id = ' .
-		 $payment_id;
+	$query = 'SELECT order_id FROM order_payment ' .
+		 'WHERE order_payment_id = ' . $order_payment_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['order_id'];
+}
+
+function get_registration_id($registration_payment_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_id FROM registration_payment ' .
+		 'WHERE registration_payment_id = ' . $registration_payment_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -387,6 +402,14 @@ function lesson_subscriber_count($lesson_id)
 	return $row[0];
 }
 
+function order_paid($order_id)
+{
+	if (total_paid('order', $order_id) == order_total($order_id))
+		return true;
+	else
+		return false;
+}
+
 function order_total($order_id)
 {
 	$link = connect_database();
@@ -413,7 +436,7 @@ function order_total($order_id)
 
 function registration_paid($registration_id)
 {
-	if (registration_total_paid($registration_id) ==
+	if (total_paid('registration', $registration_id) ==
 	    registration_price($registration_id))
 		return true;
 	else
@@ -439,28 +462,6 @@ function registration_price($registration_id)
 	return price_after_discount($row['price'], $row['discount']);
 }
 
-function registration_total_paid($registration_id)
-{
-	$link = connect_database();
-
-	$query = 'SELECT amount FROM payment WHERE registration_id = ' .
-		 $registration_id;
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	$total_paid = 0;
-
-	while ($row = mysqli_fetch_assoc($result))
-		$total_paid += $row['amount'];
-
-	mysqli_free_result($result);
-	mysqli_close($link);
-
-	return sprintf('%.2f', $total_paid);
-}
-
 function row_count($table)
 {
 	$link = connect_database();
@@ -477,5 +478,27 @@ function row_count($table)
 	mysqli_close($link);
 
 	return $row[0];
+}
+
+function total_paid($table, $id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT amount FROM ' . $table . '_payment WHERE ' . $table .
+		 '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$total_paid = 0;
+
+	while ($row = mysqli_fetch_assoc($result))
+		$total_paid += $row['amount'];
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return sprintf('%.2f', $total_paid);
 }
 ?>

@@ -47,24 +47,26 @@ INSERT INTO `lesson` VALUES ('', 'Ragga Dancehall Débutant', 9, 'LUNDI', '18:30
 	('', 'Popping Coaching', 2, 'VENDREDI', '20:50:00', '21:50:00', 1, '', ''),
 	('', 'Break \'\'Top Rock\'\'', 4, 'VENDREDI', '18:30:00', '19:30:00', 2, '', '');
 
-INSERT INTO `order` VALUES ('', 1, '2016-02-15');
+INSERT INTO `order` VALUES ('', 1, '2016-05-01');
+
+INSERT INTO `order_payment` VALUES ('', 1, 46.00, 'CHQ', '2016-05-15');
 
 INSERT INTO `lesson_participation` VALUES (1, 6, ''),
 	(1, 28, ''),
 	(1, 29, '');
 
-INSERT INTO `payment` VALUES ('', 1, 130.00, 'CHQ', '2011-09-15'),
+INSERT INTO `registration` VALUES ('', 1, '2011-2012', 4, 380.00, 0, 3),
+	('', 1, '2012-2013', 3, 340.00, 10, 3),
+	('', 1, '2013-2014', 4, 10.00, 0, 1),
+	('', 1, '2015-2016', 2, 0.00, 0, 0);
+
+INSERT INTO `registration_payment` VALUES ('', 1, 130.00, 'CHQ', '2011-09-15'),
 	('', 1, 130.00, 'CHQ', '2011-12-01'),
 	('', 1, 120.00, 'CHQ', '2012-03-01'),
 	('', 2, 106.00, 'CHQ', '2012-09-15'),
 	('', 2, 100.00, 'CHQ', '2012-12-01'),
 	('', 2, 100.00, 'CHQ', '2013-03-01'),
 	('', 3, 10.00, 'ESP', '2013-09-15');
-
-INSERT INTO `registration` VALUES ('', 1, '2011-2012', 4, 380.00, 0, 3),
-	('', 1, '2012-2013', 3, 340.00, 10, 3),
-	('', 1, '2013-2014', 4, 10.00, 0, 1),
-	('', 1, '2015-2016', 2, 0.00, 0, 0);
 
 INSERT INTO `room` VALUES ('', 'Salle du Temps', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 1),
 	('', 'Salle Afrika Bambaataa', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 2);

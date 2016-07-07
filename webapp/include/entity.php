@@ -95,10 +95,10 @@ function display_entity_member($link, $row)
 	echo link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	display_entity_member_file($link, $row['member_id']);
+	display_member_file($link, $row['member_id']);
 
 	echo '<br>' . PHP_EOL;
-	display_entity_member_registrations($link, $row['member_id']);
+	display_member_registrations($link, $row['member_id']);
 }
 
 function display_entity_order($link, $row)
@@ -113,10 +113,15 @@ function display_entity_order($link, $row)
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	display_entity_order_content($link, $row['order_id']);
+	display_order_content($link, $row['order_id']);
 
-	echo link_modify_entity('order', $row['order_id']) . PHP_EOL;
-	echo link_delete_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
+	if (!order_paid($row['order_id'])) {
+		echo link_modify_entity('order', $row['order_id']) . PHP_EOL;
+		echo link_delete_entity('order', $row['order_id']) . '<br>' . PHP_EOL;
+	}
+
+	echo '<br>' . PHP_EOL;
+	display_entity_payments($link, 'order', $row['order_id']);
 }
 
 function display_entity_pre_registration($row)
@@ -188,7 +193,7 @@ function display_entity_registration($link, $row)
 	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	display_entity_registration_payments($link, $row['registration_id']);
+	display_entity_payments($link, 'registration', $row['registration_id']);
 }
 
 function display_entity_room($row)
@@ -360,14 +365,15 @@ function form_add_entity_order_content($order_id)
 	echo '</form>' . PHP_EOL;
 }
 
-function form_add_entity_payment($registration_id)
+function form_add_entity_payment($table, $id)
 {
 	echo '<h2>Nouveau paiement</h2>' . PHP_EOL;
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=add&amp;table=payment" method="post">' . PHP_EOL;
+	     '?mode=add&amp;table=' . $table . '_payment" method="post">' .
+	     PHP_EOL;
 
-	form_entity_payment($registration_id);
+	form_entity_payment($table, $id);
 
 	echo '</form>' . PHP_EOL;
 }
@@ -429,11 +435,14 @@ function form_add_entity($table, $id)
 	case 'order_content':
 		form_add_entity_order_content($id);
 		break;
-	case 'payment':
-		form_add_entity_payment($id);
+	case 'order_payment':
+		form_add_entity_payment('order', $id);
 		break;
 	case 'registration':
 		form_add_entity_registration($id);
+		break;
+	case 'registration_payment':
+		form_add_entity_payment('registration', $id);
 		break;
 	case 'room':
 		form_add_entity_room();
@@ -529,17 +538,17 @@ function add_entity_order_content($link, $data)
 	display_entity('order', $data['order_id']);
 }
 
-function add_entity_payment($link, $data)
+function add_entity_payment($link, $table, $data)
 {
-	$query = 'INSERT INTO payment VALUES ("", ' . $data['registration_id'] .
-		 ', ' . $data['amount'] . ', "' . $data['mode'] . '", "' .
-		 $data['date'] . '")';
+	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", ' .
+		 $data[$table . '_id'] . ', ' . $data['amount'] . ', "' .
+		 $data['mode'] . '", "' . $data['date'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
-	display_entity('registration', $data['registration_id']);
+	display_entity($table, $data[$table . '_id']);
 }
 
 function add_entity_registration($link, $data)
@@ -607,11 +616,14 @@ function add_entity($table, $data)
 	case 'order_content':
 		add_entity_order_content($link, $data);
 		break;
-	case 'payment':
-		add_entity_payment($link, $data);
+	case 'order_payment':
+		add_entity_payment($link, 'order', $data);
 		break;
 	case 'registration':
 		add_entity_registration($link, $data);
+		break;
+	case 'registration_payment':
+		add_entity_payment($link, 'registration', $data);
 		break;
 	case 'room':
 		add_entity_room($link, $data);
@@ -692,15 +704,15 @@ function form_modify_entity_order($row)
 	echo '</form>' . PHP_EOL;
 }
 
-function form_modify_entity_payment($row)
+function form_modify_entity_payment($table, $row)
 {
 	echo '<h2>Modifier le paiement</h2>' . PHP_EOL;
 
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify&amp;table=payment&amp;id=' . $row['payment_id'] .
-	     '" method="post">' . PHP_EOL;
+	     '?mode=modify&amp;table=' . $table . '_payment&amp;id=' .
+	     $row[$table . '_payment_id'] . '" method="post">' . PHP_EOL;
 
-	form_entity_payment($row['registration_id'], $row);
+	form_entity_payment($table, $row[$table . '_id'], $row);
 
 	echo '</form>' . PHP_EOL;
 }
@@ -786,14 +798,17 @@ function form_modify_entity($table, $id)
 	case 'order':
 		form_modify_entity_order($row);
 		break;
-	case 'payment':
-		form_modify_entity_payment($row);
+	case 'order_payment':
+		form_modify_entity_payment('order', $row);
 		break;
 	case 'pre_registration':
 		form_modify_entity_pre_registration($row);
 		break;
 	case 'registration':
 		form_modify_entity_registration($row);
+		break;
+	case 'registration_payment':
+		form_modify_entity_payment('registration', $row);
 		break;
 	case 'room':
 		form_modify_entity_room($row);
@@ -888,17 +903,17 @@ function modify_entity_order($link, $order_id, $data)
 	display_entity('order', $order_id);
 }
 
-function modify_entity_payment($link, $payment_id, $data)
+function modify_entity_payment($link, $table, $id, $data)
 {
-	$query = 'UPDATE payment SET amount = ' . $data['amount'] .
+	$query = 'UPDATE ' . $table . '_payment SET amount = ' . $data['amount'] .
 		 ', mode = "' . $data['mode'] . '", date = "' . $data['date'] .
-		 '" WHERE payment_id = ' . $payment_id;
+		 '" WHERE ' . $table . '_payment_id = ' . $id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
-	display_entity('registration', $data['registration_id']);
+	display_entity($table, $data[$table . '_id']);
 }
 
 function modify_entity_pre_registration($link, $pre_registration_id, $data)
@@ -990,14 +1005,17 @@ function modify_entity($table, $id, $data)
 	case 'order':
 		modify_entity_order($link, $id, $data);
 		break;
-	case 'payment':
-		modify_entity_payment($link, $id, $data);
+	case 'order_payment':
+		modify_entity_payment($link, 'order', $id, $data);
 		break;
 	case 'pre_registration':
 		modify_entity_pre_registration($link, $id, $data);
 		break;
 	case 'registration':
 		modify_entity_registration($link, $id, $data);
+		break;
+	case 'registration_payment':
+		modify_entity_payment($link, 'registration', $id, $data);
 		break;
 	case 'room':
 		modify_entity_room($link, $id, $data);
@@ -1017,11 +1035,14 @@ function delete_entity($table, $id, $first_call)
 {
 	if ($first_call) {
 		switch ($table) {
-		case 'payment':
-			$registration_id = get_registration_id($id);
+		case 'order_payment':
+			$order_id = get_order_id($id);
 			break;
 		case 'registration':
 			$member_id = get_member_id($id);
+			break;
+		case 'registration_payment':
+			$registration_id = get_registration_id($id);
 			break;
 		}
 	}
@@ -1041,11 +1062,14 @@ function delete_entity($table, $id, $first_call)
 
 	if ($first_call) {
 		switch ($table) {
-		case 'payment':
-			display_entity('registration', $registration_id);
+		case 'order_payment':
+			display_entity('order', $order_id);
 			break;
 		case 'registration':
 			display_entity('member', $member_id);
+			break;
+		case 'registration_payment':
+			display_entity('registration', $registration_id);
 			break;
 		default:
 			display_table($table);
