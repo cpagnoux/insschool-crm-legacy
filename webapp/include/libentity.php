@@ -20,8 +20,7 @@ function display_file($result, $member_id)
 	if (mysqli_num_rows($result) == 0) {
 		echo 'Aucun dossier<br>' . PHP_EOL;
 		echo '<br>' . PHP_EOL;
-		echo link_add_entity('file', $member_id) . '<br>' .
-		     PHP_EOL;
+		echo link_add_entity('file', $member_id) . '<br>' . PHP_EOL;
 		return;
 	}
 
@@ -96,8 +95,7 @@ function display_member_registrations($link, $member_id)
 	display_registrations($result);
 
 	echo '<br>' . PHP_EOL;
-	echo link_add_entity('registration', $member_id) . '<br>' .
-	     PHP_EOL;
+	echo link_add_entity('registration', $member_id) . '<br>' . PHP_EOL;
 
 	mysqli_free_result($result);
 }
@@ -184,7 +182,7 @@ function display_order_content($link, $order_id)
 
 	display_content($result, $order_id);
 
-	if (!order_paid($order_id)) {
+	if (!order_paid($order_id) || order_total($order_id) == 0) {
 		echo '<br>' . PHP_EOL;
 		echo link_add_entity('order_content', $order_id) . PHP_EOL;
 		echo link_empty_cart($order_id) . '<br>' . PHP_EOL;

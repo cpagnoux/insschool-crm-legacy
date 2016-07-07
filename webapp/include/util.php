@@ -271,6 +271,25 @@ function file_complete($file_id)
 		return false;
 }
 
+function get_entity_name($table, $id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT name FROM `' . $table . '` WHERE ' . $table .
+		 '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['name'];
+}
+
 function get_lesson_title($lesson_id)
 {
 	$link = connect_database();
@@ -365,11 +384,12 @@ function get_registration_id($registration_payment_id)
 	return $row['registration_id'];
 }
 
-function get_room_name($room_id)
+function get_registration_season($registration_id)
 {
 	$link = connect_database();
 
-	$query = 'SELECT name FROM room WHERE room_id = ' . $room_id;
+	$query = 'SELECT season FROM registration WHERE registration_id = ' .
+		 $registration_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -380,7 +400,7 @@ function get_room_name($room_id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	return $row['name'];
+	return $row['season'];
 }
 
 function lesson_subscriber_count($lesson_id)
