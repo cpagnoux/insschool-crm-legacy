@@ -575,15 +575,18 @@ function form_entity_member($row)
 	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
 	     'value="' . $row['first_name'] . '" required="required"><br>' .
 	     PHP_EOL;
-	echo '  Date de naissance : <input type="text" name="birth_date" ' .
-	     'value="' . $row['birth_date'] . '"> (AAAA-MM-JJ)<br>' . PHP_EOL;
+	echo '  Date de naissance <sup>*</sup> : <input type="text" ' .
+	     'name="birth_date" value="' . $row['birth_date'] .
+	     '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	echo '  Adresse : <input type="text" name="adress" value="' .
-	     $row['adress'] . '"><br>' . PHP_EOL;
-	echo '  Code postal : <input type="text" name="postal_code" value="' .
-	     $row['postal_code'] . '"><br>' . PHP_EOL;
-	echo '  Ville : <input type="text" name="city" value="' . $row['city'] .
-	     '"><br>' . PHP_EOL;
+	echo '  Adresse <sup>*</sup> : <input type="text" name="adress" ' .
+	     'value="' . $row['adress'] . '" required="required"><br>' .
+	     PHP_EOL;
+	echo '  Code postal <sup>*</sup> : <input type="text" ' .
+	     'name="postal_code" value="' . $row['postal_code'] .
+	     '" required="required"><br>' . PHP_EOL;
+	echo '  Ville <sup>*</sup> : <input type="text" name="city" value="' .
+	     $row['city'] . '" required="required"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Portable : <input type="text" name="cellphone" value="' .
 	     $row['cellphone'] . '"><br>' . PHP_EOL;
@@ -735,8 +738,9 @@ function form_entity_registration($member_id, $row)
 	     'value="' . $row['season'] .
 	     '" required="required"> (AAAA-AAAA)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	echo '  Formule : <input type="text" name="formula" value="' .
-	     $row['formula'] . '"> cours<br>' . PHP_EOL;
+	echo '  Formule <sup>*</sup> : <input type="text" name="formula" ' .
+	     'value="' . $row['formula'] . '" required="required"> cours<br>' .
+	     PHP_EOL;
 	echo '  Tarif : <input type="text" name="price" value="' .
 	     $row['price'] . '"> €<br>' . PHP_EOL;
 	echo '  Réduction : <input type="text" name="discount" value="' .
@@ -774,6 +778,8 @@ function form_entity_teacher($row)
 	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
 	     'value="' . $row['first_name'] . '" required="required"><br>' .
 	     PHP_EOL;
+	echo '  Date de naissance : <input type="text" name="birth_date" ' .
+	     'value="' . $row['birth_date'] . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Adresse : <input type="text" name="adress" value="' .
 	     $row['adress'] . '"><br>' . PHP_EOL;

@@ -328,8 +328,8 @@ function add_lessons_participation($link, $member_id, $row)
 	$lessons = string_to_lessons($row['lessons']);
 
 	foreach ($lessons as $lesson_id => $value) {
-		$query = 'INSERT INTO lesson_participation VALUES (' .
-			 $member_id . ', ' . $lesson_id . ', "")';
+		$query = 'INSERT INTO lesson_participation VALUES ("' .
+			 $member_id . '", "' . $lesson_id . '", "")';
 		if (!mysqli_query($link, $query)) {
 			sql_error($link, $query);
 			exit;

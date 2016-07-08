@@ -71,12 +71,12 @@ INSERT INTO `registration_payment` VALUES ('', 1, 130.00, 'CHQ', '2011-09-15'),
 INSERT INTO `room` VALUES ('', 'Salle du Temps', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 1),
 	('', 'Salle Afrika Bambaataa', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 2);
 
-INSERT INTO `teacher` VALUES ('', 'François', 'Khamny', '', '', '', '', '', '', ''),
-	('', 'Djamel', 'Dahak', '', '', '', '', '', '', ''),
-	('', 'Frédérique', 'Vitrey', '', '', '', '', '', '', ''),
-	('', 'Deem', 'Manebard', '', '', '', '', '', '', ''),
-	('', 'Mariel', 'Fikat', '', '', '', '', '', '', ''),
-	('', 'Eve', 'H', '', '', '', '', '', '', ''),
-	('', 'Arnaud', 'Ousset', '', '', '', '', '', '', ''),
-	('', 'Sophie & Hervé', 'N/A', '', '', '', '', '', '', ''),
-	('', 'Belly', 'Raveloarijaona', '', '', '', '', '', '', '');
+INSERT INTO `teacher` VALUES ('', 'François', 'Khamny', '', '', '', '', '', '', '', ''),
+	('', 'Djamel', 'Dahak', '', '', '', '', '', '', '', ''),
+	('', 'Frédérique', 'Vitrey', '', '', '', '', '', '', '', ''),
+	('', 'Deem', 'Manebard', '', '', '', '', '', '', '', ''),
+	('', 'Mariel', 'Fikat', '', '', '', '', '', '', '', ''),
+	('', 'Eve', 'H', '', '', '', '', '', '', '', ''),
+	('', 'Arnaud', 'Ousset', '', '', '', '', '', '', '', ''),
+	('', 'Sophie & Hervé', 'N/A', '', '', '', '', '', '', '', ''),
+	('', 'Belly', 'Raveloarijaona', '', '', '', '', '', '', '', '');

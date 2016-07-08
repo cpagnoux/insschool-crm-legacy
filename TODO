@@ -1,13 +1,14 @@
 TODO:
-- choose more appropriate types in <input> tags when possible
+- link lessons participation with registrations
+- link orders with goodies stock
 - use timestamps for dates when possible
 - add season column to tables requiring it
-- link lessons participation with registrations
 - add choice between quarterly and annual plan
-- rework pages layout with <div> tag
 - login page
 - secure login page
 - css
-- table search bar
 - security (SQL injection)
+- table search bar
+- choose more appropriate types in <input> tags when possible
+- rework pages layout with <div> tag
 - call sheet
