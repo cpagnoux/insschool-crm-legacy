@@ -612,9 +612,6 @@ function form_entity_member($row)
 function form_entity_order($row)
 {
 	select_member($row['member_id']);
-	echo '  <br>' . PHP_EOL;
-	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
@@ -639,9 +636,6 @@ function form_entity_payment($table, $id, $row)
 	     'value="' . $row['amount'] . '" required="required"> €<br>' .
 	     PHP_EOL;
 	select_mode($row['mode']);
-	echo '  <br>' . PHP_EOL;
-	echo '  Date <sup>*</sup> : <input type="text" name="date" value="' .
-	     $row['date'] . '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .

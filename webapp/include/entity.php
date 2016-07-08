@@ -562,7 +562,7 @@ function add_entity_member($link, $data)
 function add_entity_order($link, $data)
 {
 	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['date'] . '")';
+		 '", CURRENT_TIMESTAMP)';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -587,7 +587,7 @@ function add_entity_payment($link, $table, $data)
 {
 	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", "' .
 		 $data[$table . '_id'] . '", "' . $data['amount'] . '", "' .
-		 $data['mode'] . '", "' . $data['date'] . '")';
+		 $data['mode'] . '", CURRENT_TIMESTAMP)';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1004,8 +1004,7 @@ function modify_entity_member($link, $member_id, $data)
 function modify_entity_order($link, $order_id, $data)
 {
 	$query = 'UPDATE `order` SET member_id = "' . $data['member_id'] .
-		 '", date = "' . $data['date'] . '" WHERE order_id = ' .
-		 $order_id;
+		 '" WHERE order_id = ' . $order_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1018,8 +1017,7 @@ function modify_entity_payment($link, $table, $id, $data)
 {
 	$query = 'UPDATE ' . $table . '_payment SET amount = "' .
 		 $data['amount'] . '", mode = "' . $data['mode'] .
-		 '", date = "' . $data['date'] . '" WHERE ' . $table .
-		 '_payment_id = ' . $id;
+		 '" WHERE ' . $table . '_payment_id = ' . $id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
