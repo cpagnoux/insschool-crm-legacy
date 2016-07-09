@@ -195,7 +195,7 @@ function display_order_content($link, $order_id)
 /*
  * Helper functions for displaying registration-related data
  */
-function display_detail($result)
+function display_detail($result, $registration_id)
 {
 	echo '<h2>Cours choisis</h2>' . PHP_EOL;
 
@@ -209,12 +209,18 @@ function display_detail($result)
 	echo '  <tr>' . PHP_EOL;
 	echo '    <th><b>Cours</b></th>' . PHP_EOL;
 	echo '    <th><b>Participation à l\'INS Show</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['title'] . '</td>' . PHP_EOL;
 		echo '    <td>' . evaluate_boolean($row['show_participation']) .
+		     ' ' . link_toggle_show_participation($registration_id,
+							  $row['lesson_id']) .
+		     '</td>' . PHP_EOL;
+		echo '    <td>' .
+		     link_remove_lesson($registration_id, $row['lesson_id']) .
 		     '</td>' . PHP_EOL;
 		echo '  </tr>' . PHP_EOL;
 	}
@@ -224,8 +230,9 @@ function display_detail($result)
 
 function display_registration_detail($link, $registration_id)
 {
-	$query = 'SELECT registration_detail.show_participation, ' .
-		 'lesson.title FROM registration_detail INNER JOIN lesson ' .
+	$query = 'SELECT registration_detail.lesson_id, ' .
+		 'registration_detail.show_participation, lesson.title ' .
+		 'FROM registration_detail INNER JOIN lesson ' .
 		 'ON registration_detail.lesson_id = lesson.lesson_id ' .
 		 'WHERE registration_detail.registration_id = ' .
 		 $registration_id . ' ORDER BY lesson.title';
@@ -234,7 +241,7 @@ function display_registration_detail($link, $registration_id)
 		exit;
 	}
 
-	display_detail($result);
+	display_detail($result, $registration_id);
 
 	mysqli_free_result($result);
 
@@ -492,6 +499,21 @@ function select_room($room_id)
 	mysqli_close($link);
 }
 
+function select_season()
+{
+	echo '  Saison <sup>*</sup> :' . PHP_EOL;
+	echo '  <select name="season" required="required">' . PHP_EOL;
+
+	echo '    <option value="' . previous_season() . '">' .
+	     previous_season() . '</option>' . PHP_EOL;
+	echo '    <option value="' . current_season() .
+	     '" selected="selected">' . current_season() . '</option>' .
+	     PHP_EOL;
+
+	echo '  </select>' . PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+}
+
 function select_teacher($teacher_id)
 {
 	$link = connect_database();
@@ -721,19 +743,20 @@ function form_entity_payment($table, $id, $row)
 function form_entity_pre_registration($row)
 {
 	$lessons = array();
-	$means_of_knowledge_flyer = '';
+	$means_of_knowledge_poster_flyer = '';
 	$means_of_knowledge_internet = '';
 	$means_of_knowledge_word_of_mouth = '';
 
 	if (isset($row)) {
 		$lessons = string_to_lessons($row['lessons']);
 
-		if ($row['means_of_knowledge'] == 'flyer')
-			$means_of_knowledge_flyer = ' checked="checked"';
-		else if ($row['means_of_knowledge'] == 'internet')
+		if ($row['means_of_knowledge'] == 'POSTER_FLYER')
+			$means_of_knowledge_poster_flyer = ' checked="checked"';
+		else if ($row['means_of_knowledge'] == 'INTERNET')
 			$means_of_knowledge_internet = ' checked="checked"';
 		else
-			$means_of_knowledge_word_of_mouth = ' checked="checked"';
+			$means_of_knowledge_word_of_mouth =
+					' checked="checked"';
 	}
 
 	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
@@ -778,14 +801,15 @@ function form_entity_pre_registration($row)
 
 	echo '  <br>' . PHP_EOL;
 	echo '  Comment nous avez-vous connus ? <sup>*</sup><br>' . PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" value="flyer" ' .
-	     'required="required"' . $means_of_knowledge_flyer .
-	     '> Affiches, Flyers<br>' . PHP_EOL;
 	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="internet"' . $means_of_knowledge_internet .
+	     'value="POSTER_FLYER" required="required"' .
+	     $means_of_knowledge_poster_flyer . '> Affiches, Flyers<br>' .
+	     PHP_EOL;
+	echo '  <input type="radio" name="means_of_knowledge" ' .
+	     'value="INTERNET"' . $means_of_knowledge_internet .
 	     '> Internet<br>' . PHP_EOL;
 	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="word_of_mouth"' . $means_of_knowledge_word_of_mouth .
+	     'value="WORD_OF_MOUTH"' . $means_of_knowledge_word_of_mouth .
 	     '> Bouche-à-oreille<br>' . PHP_EOL;
 
 	if (!isset($row)) {
@@ -803,10 +827,12 @@ function form_entity_registration($member_id, $row)
 	echo '  N° d\'adhérent : <input type="text" ' .
 	     'name="member_id" value="' . $member_id .
 	     '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Saison <sup>*</sup> : <input type="text" name="season" ' .
-	     'value="' . $row['season'] .
-	     '" required="required"> (AAAA-AAAA)<br>' . PHP_EOL;
+
+	if (!isset($row)) {
+		echo '  <br>' . PHP_EOL;
+		select_season();
+	}
+
 	echo '  <br>' . PHP_EOL;
 	echo '  Tarif : <input type="text" name="price" value="' .
 	     $row['price'] . '"> €<br>' . PHP_EOL;

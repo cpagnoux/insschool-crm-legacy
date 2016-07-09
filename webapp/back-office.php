@@ -45,6 +45,10 @@ if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'remove_lesson')
+	$action = 'remove_lesson';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'toggle_show_participation')
+	$action = 'toggle_show_participation';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'empty_cart')
 	$action = 'empty_cart';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'modify_quantity')
@@ -63,6 +67,12 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'remove_lesson':
+	remove_lesson($_GET['registration_id'], $_GET['lesson_id']);
+	break;
+case 'toggle_show_participation':
+	toggle_show_participation($_GET['registration_id'], $_GET['lesson_id']);
+	break;
 case 'empty_cart':
 	empty_cart($_GET['order_id']);
 	break;

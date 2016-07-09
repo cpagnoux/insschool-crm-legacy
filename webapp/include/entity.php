@@ -54,8 +54,9 @@ function display_entity_lesson($row)
 	echo '<b>Costume :</b> ' . $row['costume'] . '<br>' . PHP_EOL;
 	echo '<b>T-shirt :</b> ' . $row['t_shirt'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>Nombre d\'inscrits :</b> ' .
-	     lesson_registrant_count($row['lesson_id']) . '<br>' . PHP_EOL;
+	echo '<b>Nombre d\'inscrits (' . current_season() . ') :</b> ' .
+	     lesson_registrant_count($row['lesson_id'], current_season()) .
+	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('lesson', $row['lesson_id']) . PHP_EOL;
@@ -594,7 +595,7 @@ function add_entity_member($link, $data)
 function add_entity_order($link, $data)
 {
 	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
-		 '", CURRENT_TIMESTAMP)';
+		 '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -619,7 +620,7 @@ function add_entity_payment($link, $table, $data)
 {
 	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", "' .
 		 $data[$table . '_id'] . '", "' . $data['amount'] . '", "' .
-		 $data['mode'] . '", CURRENT_TIMESTAMP)';
+		 $data['mode'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1086,8 +1087,9 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 		 $data['cellphone_father'] . '", cellphone_mother = "' .
 		 $data['cellphone_mother'] . '", phone = "' . $data['phone'] .
 		 '", email = "' . $data['email'] . '", lessons = "' .
-		 $lessons_str . '" WHERE pre_registration_id = ' .
-		 $pre_registration_id;
+		 $lessons_str . '", means_of_knowledge = "' .
+		 $data['means_of_knowledge'] .
+		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1273,5 +1275,42 @@ function empty_cart($order_id)
 	mysqli_close($link);
 
 	display_entity('order', $order_id);
+}
+
+/*
+ * Functions related to registration detail
+ */
+function toggle_show_participation($registration_id, $lesson_id)
+{
+	$link = connect_database();
+
+	$query = 'UPDATE registration_detail ' .
+		 'SET show_participation = NOT show_participation ' .
+		 'WHERE registration_id = ' . $registration_id .
+		 ' AND lesson_id = ' . $lesson_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_entity('registration', $registration_id);
+}
+
+function remove_lesson($registration_id, $lesson_id)
+{
+	$link = connect_database();
+
+	$query = 'DELETE FROM registration_detail WHERE registration_id = ' .
+		 $registration_id . ' AND lesson_id = ' . $lesson_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_entity('registration', $registration_id);
 }
 ?>

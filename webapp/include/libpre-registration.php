@@ -275,8 +275,8 @@ function save_pre_registration($data, $lessons_str)
 		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
 		 $data['cellphone'] . '", "' . $data['cellphone_father'] .
 		 '", "' . $data['cellphone_mother'] . '", "' . $data['phone'] .
-		 '", "' . $data['email'] . '", "' . $lessons_str .
-		 '", CURRENT_TIMESTAMP)';
+		 '", "' . $data['email'] . '", "' . $lessons_str . '", "' .
+		 $data['means_of_knowledge'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -352,7 +352,7 @@ function add_registration_detail($link, $registration_id, $lesson_id)
 
 function add_registration($link, $member_id, $row)
 {
-	$season = datetime_to_season($row['date']);
+	$season = date_to_season($row['date']);
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
 		 '", "' . $season . '", "", "", "")';

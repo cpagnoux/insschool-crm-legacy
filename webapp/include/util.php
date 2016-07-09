@@ -176,15 +176,31 @@ function link_empty_cart($order_id)
 	       'Vider le panier</a>';
 }
 
+function link_toggle_show_participation($registration_id, $lesson_id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=toggle_show_participation&amp;registration_id=' .
+	       $registration_id . '&amp;lesson_id=' . $lesson_id .
+	       '">Changer</a>';
+}
+
+function link_remove_lesson($registration_id, $lesson_id)
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=remove_lesson&amp;registration_id=' . $registration_id .
+	       '&amp;lesson_id=' . $lesson_id . '" onclick="return ' .
+	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+}
+
 /*
  * Miscellaneous functions
  */
-function datetime_to_season($datetime)
+function date_to_season($date)
 {
-	// datetime is in 'YYYY-MM-DD HH:MM:SS' format
-	sscanf($datetime, '%d', $year);
-	$datetime = substr($datetime, strlen($year) + 1);
-	sscanf($datetime, '%d', $month);
+	// date is in 'YYYY-MM-DD' format
+	sscanf($date, '%d', $year);
+	$date = substr($date, strlen($year) + 1);
+	sscanf($date, '%d', $month);
 
 	if ($month >= 6)
 		$season = $year . '-' . ($year + 1);
@@ -242,6 +258,19 @@ function evaluate_boolean($value)
 		return 'Non';
 }
 
+function previous_season()
+{
+	$current_season = current_season();
+
+	sscanf($current_season, '%d', $year1);
+	$current_season = substr($current_season, strlen($year1) + 1);
+	sscanf($current_season, '%d', $year2);
+
+	$previous_season = ($year1 - 1) . '-' . ($year2 - 1);
+
+	return $previous_season;
+}
+
 function price_after_discount($price, $discount)
 {
 	// $discount is a percentage
@@ -268,6 +297,24 @@ function total_by_product($price, $quantity)
 /*
  * Database-related functions
  */
+function current_season()
+{
+	$link = connect_database();
+
+	$query = 'SELECT CURDATE()';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_row($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return date_to_season($row[0]);
+}
+
 function file_complete($file_id)
 {
 	$link = connect_database();
@@ -421,13 +468,16 @@ function get_registration_season($registration_id)
 	return $row['season'];
 }
 
-// TODO: count by season
-function lesson_registrant_count($lesson_id)
+function lesson_registrant_count($lesson_id, $season)
 {
 	$link = connect_database();
 
-	$query = 'SELECT COUNT(*) FROM registration_detail WHERE lesson_id = ' .
-		 $lesson_id;
+	$query = 'SELECT COUNT(*) FROM registration_detail ' .
+		 'INNER JOIN registration ' .
+		 'ON registration_detail.registration_id = ' .
+		 'registration.registration_id ' .
+		 'WHERE registration_detail.lesson_id = ' . $lesson_id .
+		 ' AND registration.season = "' . $season . '"';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
