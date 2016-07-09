@@ -111,6 +111,9 @@ function link_add_entity($table, $id)
 	case 'registration':
 		$message = 'Ajouter une inscription';
 		break;
+	case 'registration_detail':
+		$message = 'Ajouter un cours';
+		break;
 	case 'registration_payment':
 		$message = 'Ajouter un paiement';
 		break;
@@ -234,9 +237,9 @@ function duration($start_time, $end_time)
 function evaluate_boolean($value)
 {
 	if ($value)
-		return 'oui';
+		return 'Oui';
 	else
-		return 'non';
+		return 'Non';
 }
 
 function price_after_discount($price, $discount)

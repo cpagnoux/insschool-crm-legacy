@@ -199,6 +199,8 @@ function display_entity_registration($link, $row)
 	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
+	display_registration_detail($link, $row['registration_id']);
+	echo '<br>' . PHP_EOL;
 	display_entity_payments($link, 'registration', $row['registration_id']);
 }
 
@@ -262,6 +264,8 @@ function display_entity($table, $id)
 
 	$row = mysqli_fetch_assoc($result);
 
+	mysqli_free_result($result);
+
 	echo link_home() . ' >' . PHP_EOL;
 
 	if ($table != 'registration')
@@ -294,7 +298,6 @@ function display_entity($table, $id)
 		break;
 	}
 
-	mysqli_free_result($result);
 	mysqli_close($link);
 }
 
@@ -430,6 +433,27 @@ function form_add_entity_registration($member_id)
 	echo '</form>' . PHP_EOL;
 }
 
+function form_add_entity_registration_detail($registration_id)
+{
+	echo link_table('member') . ' >' . PHP_EOL;
+	echo link_entity('member', get_member_id($registration_id),
+			 get_name('member', get_member_id($registration_id))) .
+	     ' >' . PHP_EOL;
+	echo link_entity('registration', $registration_id, 'Inscription ' .
+			 get_registration_season($registration_id)) . ' >' .
+	     PHP_EOL;
+	echo 'Ajouter un cours<br>' . PHP_EOL;
+
+	echo '<br>' . PHP_EOL;
+	echo '<form action="' . $_SERVER['PHP_SELF'] .
+	     '?mode=add&amp;table=registration_detail" method="post">' .
+	     PHP_EOL;
+
+	form_entity_registration_detail($registration_id);
+
+	echo '</form>' . PHP_EOL;
+}
+
 function form_add_entity_room()
 {
 	echo 'Nouvelle salle<br>' . PHP_EOL;
@@ -462,6 +486,7 @@ function form_add_entity($table, $id)
 
 	if ($table != 'file' && $table != 'order_content'
 	    && $table != 'order_payment' && $table != 'registration'
+	    && $table != 'registration_detail'
 	    && $table != 'registration_payment')
 		echo link_table($table) . ' >' . PHP_EOL;
 
@@ -489,6 +514,9 @@ function form_add_entity($table, $id)
 		break;
 	case 'registration':
 		form_add_entity_registration($id);
+		break;
+	case 'registration_detail':
+		form_add_entity_registration_detail($id);
 		break;
 	case 'registration_payment':
 		form_add_entity_payment('registration', $id);
@@ -613,6 +641,19 @@ function add_entity_registration($link, $data)
 	display_entity('member', $data['member_id']);
 }
 
+function add_entity_registration_detail($link, $data)
+{
+	$query = 'INSERT INTO registration_detail VALUES ("' .
+		 $data['registration_id'] . '", "' . $data['lesson_id'] .
+		 '", "' . $data['show_participation'] . '")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	display_entity('registration', $data['registration_id']);
+}
+
 function add_entity_room($link, $data)
 {
 	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
@@ -669,6 +710,9 @@ function add_entity($table, $data)
 		break;
 	case 'registration':
 		add_entity_registration($link, $data);
+		break;
+	case 'registration_detail':
+		add_entity_registration_detail($link, $data);
 		break;
 	case 'registration_payment':
 		add_entity_payment($link, 'registration', $data);
@@ -890,6 +934,9 @@ function form_modify_entity($table, $id)
 
 	$row = mysqli_fetch_assoc($result);
 
+	mysqli_free_result($result);
+	mysqli_close($link);
+
 	echo link_home() . ' >' . PHP_EOL;
 
 	if ($table != 'file' && $table != 'order_payment'
@@ -931,9 +978,6 @@ function form_modify_entity($table, $id)
 		form_modify_entity_teacher($row);
 		break;
 	}
-
-	mysqli_free_result($result);
-	mysqli_close($link);
 }
 
 /*

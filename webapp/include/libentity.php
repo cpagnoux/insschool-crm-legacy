@@ -69,6 +69,7 @@ function display_registrations($result)
 
 	echo '  <tr>' . PHP_EOL;
 	echo '    <th><b>Saison</b></th>' . PHP_EOL;
+	echo '    <th></th>' . PHP_EOL;
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
@@ -94,10 +95,10 @@ function display_member_registrations($link, $member_id)
 
 	display_registrations($result);
 
+	mysqli_free_result($result);
+
 	echo '<br>' . PHP_EOL;
 	echo link_add_entity('registration', $member_id) . '<br>' . PHP_EOL;
-
-	mysqli_free_result($result);
 }
 
 /*
@@ -182,13 +183,64 @@ function display_order_content($link, $order_id)
 
 	display_content($result, $order_id);
 
+	mysqli_free_result($result);
+
 	if (!order_paid($order_id) || order_total($order_id) == 0) {
 		echo '<br>' . PHP_EOL;
 		echo link_add_entity('order_content', $order_id) . PHP_EOL;
 		echo link_empty_cart($order_id) . '<br>' . PHP_EOL;
 	}
+}
+
+/*
+ * Helper functions for displaying registration-related data
+ */
+function display_detail($result)
+{
+	echo '<h2>Cours choisis</h2>' . PHP_EOL;
+
+	if (mysqli_num_rows($result) == 0) {
+		echo 'Aucun cours<br>' . PHP_EOL;
+		return;
+	}
+
+	echo '<table>' . PHP_EOL;
+
+	echo '  <tr>' . PHP_EOL;
+	echo '    <th><b>Cours</b></th>' . PHP_EOL;
+	echo '    <th><b>Participation à l\'INS Show</b></th>' . PHP_EOL;
+	echo '  </tr>' . PHP_EOL;
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		echo '  <tr>' . PHP_EOL;
+		echo '    <td>' . $row['title'] . '</td>' . PHP_EOL;
+		echo '    <td>' . evaluate_boolean($row['show_participation']) .
+		     '</td>' . PHP_EOL;
+		echo '  </tr>' . PHP_EOL;
+	}
+
+	echo '</table>' . PHP_EOL;
+}
+
+function display_registration_detail($link, $registration_id)
+{
+	$query = 'SELECT registration_detail.show_participation, ' .
+		 'lesson.title FROM registration_detail INNER JOIN lesson ' .
+		 'ON registration_detail.lesson_id = lesson.lesson_id ' .
+		 'WHERE registration_detail.registration_id = ' .
+		 $registration_id . ' ORDER BY lesson.title';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	display_detail($result);
 
 	mysqli_free_result($result);
+
+	echo '<br>' . PHP_EOL;
+	echo link_add_entity('registration_detail', $registration_id) . '<br>' .
+	     PHP_EOL;
 }
 
 /*
@@ -247,6 +299,8 @@ function display_entity_payments($link, $table, $id)
 
 	display_payments($result, $table, $id);
 
+	mysqli_free_result($result);
+
 	echo '<br>' . PHP_EOL;
 
 	switch ($table) {
@@ -264,8 +318,6 @@ function display_entity_payments($link, $table, $id)
 
 	echo '<br>' . PHP_EOL;
 	echo link_add_entity($table . '_payment', $id) . '<br>' . PHP_EOL;
-
-	mysqli_free_result($result);
 }
 
 /*
@@ -324,6 +376,30 @@ function select_goody()
 	while ($row = mysqli_fetch_assoc($result))
 		echo '    <option value="' . $row['goody_id'] . '">' .
 		     $row['name'] . '</option>' . PHP_EOL;
+
+	echo '  </select>' . PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+}
+
+function select_lesson()
+{
+	$link = connect_database();
+
+	$query = 'SELECT lesson_id, title FROM lesson ORDER BY title';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	echo '  Cours <sup>*</sup> :' . PHP_EOL;
+	echo '  <select name="lesson_id" required="required">' . PHP_EOL;
+
+	while ($row = mysqli_fetch_assoc($result))
+		echo '    <option value="' . $row['lesson_id'] . '">' .
+		     $row['title'] . '</option>' . PHP_EOL;
 
 	echo '  </select>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
@@ -451,20 +527,6 @@ function select_teacher($teacher_id)
 /*
  * Forms' content
  */
-function form_entity_order_content($order_id)
-{
-	echo '  N° de commande : <input type="text" name="order_id" value="' .
-	     $order_id . '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	select_goody();
-	echo '  Quantité <sup>*</sup> : <input type="text" name="quantity" ' .
-	     'required="required"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
 function form_entity_file($member_id, $row)
 {
 	$medical_certificate_true = '';
@@ -618,6 +680,20 @@ function form_entity_order($row)
 	     PHP_EOL;
 }
 
+function form_entity_order_content($order_id)
+{
+	echo '  N° de commande : <input type="text" name="order_id" value="' .
+	     $order_id . '" readonly="readonly"><br>' . PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+	select_goody();
+	echo '  Quantité <sup>*</sup> : <input type="text" name="quantity" ' .
+	     'required="required"><br>' . PHP_EOL;
+
+	echo '  <br>' . PHP_EOL;
+	echo '  <input type="submit" name="submit" value="Valider"><br>' .
+	     PHP_EOL;
+}
+
 function form_entity_payment($table, $id, $row)
 {
 	switch ($table) {
@@ -738,6 +814,23 @@ function form_entity_registration($member_id, $row)
 	     $row['discount'] . '"> %<br>' . PHP_EOL;
 	echo '  Nombre de paiements : <input type="text" name="num_payments" ' .
 	     'value="' . $row['num_payments'] . '"><br>' . PHP_EOL;
+
+	echo '  <br>' . PHP_EOL;
+	echo '  <input type="submit" name="submit" value="Valider"><br>' .
+	     PHP_EOL;
+}
+
+function form_entity_registration_detail($registration_id)
+{
+	echo '  N° d\'inscription : <input type="text" name=registration_id ' .
+	     'value="' . $registration_id . '" readonly="readonly"><br>' .
+	     PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+	select_lesson();
+	echo '  Participation à l\'INS Show <sup>*</sup> : <input ' .
+	     'type="radio" name="show_participation" value="1" ' .
+	     'required="required"> Oui <input type="radio" ' .
+	     'name="show_participation" value="0"> Non<br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
 	echo '  <input type="submit" name="submit" value="Valider"><br>' .
