@@ -732,9 +732,6 @@ function form_entity_registration($member_id, $row)
 	     'value="' . $row['season'] .
 	     '" required="required"> (AAAA-AAAA)<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
-	echo '  Formule <sup>*</sup> : <input type="text" name="formula" ' .
-	     'value="' . $row['formula'] . '" required="required"> cours<br>' .
-	     PHP_EOL;
 	echo '  Tarif : <input type="text" name="price" value="' .
 	     $row['price'] . '"> €<br>' . PHP_EOL;
 	echo '  Réduction : <input type="text" name="discount" value="' .
@@ -855,21 +852,23 @@ function check_dependencies($link, $table, $id)
 						$id);
 		break;
 	case 'lesson':
-		check_dependencies_by_table_2pk($link, 'lesson_participation',
+		check_dependencies_by_table_2pk($link, 'registration_detail',
 						$table, $id);
 		break;
 	case 'member':
 		check_dependencies_by_table($link, 'file', $table, $id);
 		check_dependencies_by_table($link, 'order', $table, $id);
-		check_dependencies_by_table_2pk($link, 'lesson_participation',
-						$table, $id);
 		check_dependencies_by_table($link, 'registration', $table, $id);
 		break;
 	case 'order':
 		check_dependencies_by_table_2pk($link, 'order_content', $table,
 						$id);
+		check_dependencies_by_table($link, 'order_payment', $table,
+					    $id);
 		break;
 	case 'registration':
+		check_dependencies_by_table_2pk($link, 'registration_detail',
+						$table, $id);
 		check_dependencies_by_table($link, 'registration_payment',
 					    $table, $id);
 		break;

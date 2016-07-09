@@ -176,9 +176,24 @@ function link_empty_cart($order_id)
 /*
  * Miscellaneous functions
  */
+function datetime_to_season($datetime)
+{
+	// datetime is in 'YYYY-MM-DD HH:MM:SS' format
+	sscanf($datetime, '%d', $year);
+	$datetime = substr($datetime, strlen($year) + 1);
+	sscanf($datetime, '%d', $month);
+
+	if ($month >= 6)
+		$season = $year . '-' . ($year + 1);
+	else
+		$season = ($year - 1) . '-' . $year;
+
+	return $season;
+}
+
 function duration($start_time, $end_time)
 {
-	// time is under the format HH:MM:SS
+	// time is in 'HH:MM:SS' format
 	sscanf($start_time, '%d', $start_hour);
 	$start_time = substr($start_time, strlen($start_hour) + 1);
 	sscanf($start_time, '%d', $start_min);
@@ -403,12 +418,13 @@ function get_registration_season($registration_id)
 	return $row['season'];
 }
 
-function lesson_subscriber_count($lesson_id)
+// TODO: count by season
+function lesson_registrant_count($lesson_id)
 {
 	$link = connect_database();
 
-	$query = 'SELECT COUNT(*) FROM lesson_participation ' .
-		 'WHERE lesson_id = ' . $lesson_id;
+	$query = 'SELECT COUNT(*) FROM registration_detail WHERE lesson_id = ' .
+		 $lesson_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -452,6 +468,25 @@ function order_total($order_id)
 	mysqli_close($link);
 
 	return sprintf('%.2f', $total);
+}
+
+function registration_formula($registration_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT COUNT(*) FROM registration_detail ' .
+		 'WHERE registration_id = ' . $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_row($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row[0];
 }
 
 function registration_paid($registration_id)

@@ -275,7 +275,8 @@ function save_pre_registration($data, $lessons_str)
 		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
 		 $data['cellphone'] . '", "' . $data['cellphone_father'] .
 		 '", "' . $data['cellphone_mother'] . '", "' . $data['phone'] .
-		 '", "' . $data['email'] . '", "' . $lessons_str . '")';
+		 '", "' . $data['email'] . '", "' . $lessons_str .
+		 '", CURRENT_TIMESTAMP)';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -323,18 +324,49 @@ function get_member_id_from_name($link, $row)
 	return $row['member_id'];
 }
 
-function add_lessons_participation($link, $member_id, $row)
+function get_registration_id_from_info($link, $member_id, $season)
 {
+	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
+		 $member_id . ' AND season = "' . $season . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+
+	return $row['registration_id'];
+}
+
+function add_registration_detail($link, $registration_id, $lesson_id)
+{
+	$query = 'INSERT INTO registration_detail VALUES ("' .
+		 $registration_id . '", "' . $lesson_id . '", "")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+}
+
+function add_registration($link, $member_id, $row)
+{
+	$season = datetime_to_season($row['date']);
+
+	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
+		 '", "' . $season . '", "", "", "")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$registration_id = get_registration_id_from_info($link, $member_id,
+							 $season);
 	$lessons = string_to_lessons($row['lessons']);
 
-	foreach ($lessons as $lesson_id => $value) {
-		$query = 'INSERT INTO lesson_participation VALUES ("' .
-			 $member_id . '", "' . $lesson_id . '", "")';
-		if (!mysqli_query($link, $query)) {
-			sql_error($link, $query);
-			exit;
-		}
-	}
+	foreach ($lessons as $lesson_id => $value)
+		add_registration_detail($link, $registration_id, $lesson_id);
 }
 
 function commit_pre_registration($pre_registration_id)
@@ -351,8 +383,9 @@ function commit_pre_registration($pre_registration_id)
 	$row = mysqli_fetch_assoc($result);
 
 	$member_id = get_member_id_from_name($link, $row);
-	add_lessons_participation($link, $member_id, $row);
-	delete_entity('pre_registration', $pre_registration_id, true);
+	add_registration($link, $member_id, $row);
+	delete_entity('pre_registration', $pre_registration_id);
+	display_entity('member', $member_id);
 
 	mysqli_free_result($result);
 	mysqli_close($link);

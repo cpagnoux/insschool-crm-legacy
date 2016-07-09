@@ -55,7 +55,7 @@ function display_entity_lesson($row)
 	echo '<b>T-shirt :</b> ' . $row['t_shirt'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Nombre d\'inscrits :</b> ' .
-	     lesson_subscriber_count($row['lesson_id']) . '<br>' . PHP_EOL;
+	     lesson_registrant_count($row['lesson_id']) . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('lesson', $row['lesson_id']) . PHP_EOL;
@@ -154,6 +154,8 @@ function display_entity_pre_registration($row)
 	echo '<br>' . PHP_EOL;
 	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
 	     '<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
+	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo link_commit_pre_registration($row['pre_registration_id']) .
@@ -179,7 +181,9 @@ function display_entity_registration($link, $row)
 	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>Formule :</b> ' . $row['formula'] . ' cours<br>' . PHP_EOL;
+	echo '<b>Formule :</b> ' .
+	     registration_formula($row['registration_id']) . ' cours<br>' .
+	     PHP_EOL;
 	echo '<b>Tarif :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
 	echo '<b>Réduction :</b> ' . $row['discount'] . ' %<br>' . PHP_EOL;
 	echo '<b>Tarif après réduction :</b> ' .
@@ -599,9 +603,8 @@ function add_entity_payment($link, $table, $data)
 function add_entity_registration($link, $data)
 {
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['season'] . '", "' . $data['formula'] . '", "' .
-		 $data['price'] . '", "' . $data['discount'] . '", "' .
-		 $data['num_payments'] . '")';
+		 '", "' . $data['season'] . '", "' . $data['price'] . '", "' .
+		 $data['discount'] . '", "' . $data['num_payments'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1052,10 +1055,10 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 function modify_entity_registration($link, $registration_id, $data)
 {
 	$query = 'UPDATE registration SET season = "' . $data['season'] .
-		 '", formula = "' . $data['formula'] . '", price = "' .
-		 $data['price'] . '", discount = "' . $data['discount'] .
-		 '", num_payments = "' . $data['num_payments'] .
-		 '" WHERE registration_id = ' . $registration_id;
+		 '", price = "' . $data['price'] . '", discount = "' .
+		 $data['discount'] . '", num_payments = "' .
+		 $data['num_payments'] . '" WHERE registration_id = ' .
+		 $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
