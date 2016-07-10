@@ -3,10 +3,10 @@ TODO:
 - link orders with goodies stock
 - add season column to tables requiring it (file)
 - add choice between quarterly and annual plan
-- login page
 - secure login page
 - css
 - security (SQL injection)
+- fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
 - choose more appropriate types in <input> tags when possible
 - rework pages layout with <div> tag

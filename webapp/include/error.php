@@ -3,11 +3,11 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-define('DEBUG', true);
+include_once 'include/config.php';
 
 function sql_connect_error()
 {
-	if (DEBUG)
+	if (DEBUG == 1)
 		echo 'Echec de la connexion : ' . mysqli_connect_error() .
 		     '<br>' . PHP_EOL;
 	else
@@ -16,7 +16,7 @@ function sql_connect_error()
 
 function sql_error($link, $query)
 {
-	if (DEBUG) {
+	if (DEBUG == 1) {
 		echo 'Erreur SQL : ' . mysqli_error($link) . '<br>' . PHP_EOL;
 		echo $query . '<br>' . PHP_EOL;
 	} else {

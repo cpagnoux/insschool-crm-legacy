@@ -3,7 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-include '../webapp/include/connection.php';
+include '../webapp/include/config.php';
 
 $command = 'mysql -u ' . USERNAME . ' -p' . PASSWORD . ' ';
 

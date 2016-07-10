@@ -156,6 +156,9 @@ function display_entity_pre_registration($row)
 	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
+	echo '<b>À connu INS School grâce à :</b> ' .
+	     evaluate_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;

@@ -91,3 +91,5 @@ INSERT INTO `teacher` VALUES ('', 'François', 'Khamny', '', '', '', '', '', '',
 	('', 'Arnaud', 'Ousset', '', '', '', '', '', '', '', ''),
 	('', 'Sophie & Hervé', 'N/A', '', '', '', '', '', '', '', ''),
 	('', 'Belly', 'Raveloarijaona', '', '', '', '', '', '', '', '');
+
+INSERT INTO `user` VALUES ('admin', '270392');

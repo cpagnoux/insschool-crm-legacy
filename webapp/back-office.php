@@ -3,6 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
+include_once 'include/login.php';
 include_once 'include/util.php';
 
 include_once 'include/libpre-registration.php';
@@ -22,8 +23,6 @@ include_once 'include/entity.php';
 <h1>Gestion INS School</h1>
 
 <?php
-navigation_bar();
-
 session_start();
 
 if (isset($_POST['goody_sorting']))
@@ -39,9 +38,18 @@ if (isset($_POST['room_sorting']))
 if (isset($_POST['limit']))
 	$_SESSION['limit'] = $_POST['limit'];
 
+if (session_valid()) {
+	echo link_logout();
+	navigation_bar();
+}
+
 $action = '';
 
-if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
+if (!session_valid())
+	$action = 'login';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'logout')
+	$action = 'logout';
+else if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
@@ -107,6 +115,12 @@ case 'display_entity':
 	break;
 case 'display_table':
 	display_table($_GET['table'], $_GET['page']);
+	break;
+case 'logout':
+	logout();
+	break;
+case 'login':
+	login();
 	break;
 }
 ?>

@@ -35,6 +35,8 @@ function link_home()
 
 function link_table($table)
 {
+	$message = '';
+
 	switch ($table) {
 	case 'goody':
 		$message = 'Goodies';
@@ -56,9 +58,6 @@ function link_table($table)
 		break;
 	case 'teacher':
 		$message = 'Professeurs';
-		break;
-	default:
-		$message = '';
 		break;
 	}
 
@@ -98,6 +97,8 @@ function link_add_entity($table, $id)
 		return '<a href="' . $_SERVER['PHP_SELF'] .
 		       '?mode=add&amp;table=' . $table . '">Ajouter</a>';
 
+	$message = 'Ajouter';
+
 	switch ($table) {
 	case 'file':
 		$message = 'En créer un';
@@ -116,9 +117,6 @@ function link_add_entity($table, $id)
 		break;
 	case 'registration_payment':
 		$message = 'Ajouter un paiement';
-		break;
-	default:
-		$message = 'Ajouter';
 		break;
 	}
 
@@ -192,6 +190,12 @@ function link_remove_lesson($registration_id, $lesson_id)
 	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+function link_logout()
+{
+	return '<a href="' . $_SERVER['PHP_SELF'] .
+	       '?mode=logout">Se déconnecter</a>';
+}
+
 /*
  * Miscellaneous functions
  */
@@ -248,6 +252,49 @@ function duration($start_time, $end_time)
 		    sprintf('%02d', $sec);
 
 	return $duration;
+}
+
+function evaluate_enum($value)
+{
+	$result = '';
+
+	switch ($value) {
+	// day
+	case 'LUNDI':
+		$result = 'Lundi';
+		break;
+	case 'MARDI':
+		$result = 'Mardi';
+		break;
+	case 'MERCREDI':
+		$result = 'Mercredi';
+		break;
+	case 'JEUDI':
+		$result = 'Jeudi';
+		break;
+	case 'VENDREDI':
+		$result = 'Vendredi';
+		break;
+	// means_of_knowledge
+	case 'POSTER_FLYER':
+		$result = 'Affiches, flyers';
+		break;
+	case 'INTERNET':
+		$result = 'Internet';
+		break;
+	case 'WORD_OF_MOUTH':
+		$result = 'Bouche-à-oreille';
+		break;
+	// mode
+	case 'ESP':
+		$result = 'Espèces';
+		break;
+	case 'CHQ':
+		$result = 'Chèque';
+		break;
+	}
+
+	return $result;
 }
 
 function evaluate_boolean($value)
