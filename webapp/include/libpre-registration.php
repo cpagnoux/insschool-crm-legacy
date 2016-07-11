@@ -295,7 +295,8 @@ function add_member($link, $row)
 		 '", "' . $row['adress'] . '", "' . $row['postal_code'] .
 		 '", "' . $row['city'] . '", "' . $row['cellphone'] . '", "' .
 		 $row['cellphone_father'] . '", "' . $row['cellphone_mother'] .
-		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "")';
+		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "' .
+		 $row['means_of_knowledge'] . '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

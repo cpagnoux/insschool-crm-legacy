@@ -88,6 +88,9 @@ function display_entity_member($link, $row)
 	echo '<b>Fixe :</b> ' . $row['phone'] . '<br>' . PHP_EOL;
 	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
+	echo '<b>A connu INS School grâce à :</b> ' .
+	     evaluate_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
+	echo '<br>' . PHP_EOL;
 	echo '<b>Bénévole :</b> ' . evaluate_boolean($row['volunteer']) .
 	     '<br>' . PHP_EOL;
 
@@ -156,7 +159,7 @@ function display_entity_pre_registration($row)
 	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>À connu INS School grâce à :</b> ' .
+	echo '<b>A connu INS School grâce à :</b> ' .
 	     evaluate_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
@@ -586,7 +589,8 @@ function add_entity_member($link, $data)
 		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
 		 $data['cellphone_father'] . '", "' .
 		 $data['cellphone_mother'] . '", "' . $data['phone'] . '", "' .
-		 $data['email'] . '", "' . $data['volunteer'] . '")';
+		 $data['email'] . '", "' . $data['means_of_knowledge'] .
+		 '", "' . $data['volunteer'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -1042,8 +1046,9 @@ function modify_entity_member($link, $member_id, $data)
 		 '", cellphone_father = "' . $data['cellphone_father'] .
 		 '", cellphone_mother = "' . $data['cellphone_mother'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .
-		 $data['email'] . '", volunteer = "' . $data['volunteer'] .
-		 '" WHERE member_id = ' . $member_id;
+		 $data['email'] . '", means_of_knowledge = "' .
+		 $data['means_of_knowledge'] . '", volunteer = "' .
+		 $data['volunteer'] . '" WHERE member_id = ' . $member_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

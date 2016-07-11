@@ -643,10 +643,20 @@ function form_entity_lesson($row)
 
 function form_entity_member($row)
 {
+	$means_of_knowledge_poster_flyer = '';
+	$means_of_knowledge_internet = '';
+	$means_of_knowledge_word_of_mouth = '';
 	$volunteer_true = '';
 	$volunteer_false = '';
 
 	if (isset($row)) {
+		if ($row['means_of_knowledge'] == 'POSTER_FLYER')
+			$means_of_knowledge_poster_flyer = ' checked="checked"';
+		else if ($row['means_of_knowledge'] == 'INTERNET')
+			$means_of_knowledge_internet = ' checked="checked"';
+		else
+			$means_of_knowledge_word_of_mouth =
+					' checked="checked"';
 		if ($row['volunteer'])
 			$volunteer_true = ' checked="checked"';
 		else
@@ -682,6 +692,18 @@ function form_entity_member($row)
 	     $row['phone'] . '"><br>' . PHP_EOL;
 	echo '  Email : <input type="text" name="email" value="' .
 	     $row['email'] . '"><br>' . PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+	echo '  A connu INS School grâce à :<br>' . PHP_EOL;
+	echo '  <input type="radio" name="means_of_knowledge" ' .
+	     'value="POSTER_FLYER" required="required"' .
+	     $means_of_knowledge_poster_flyer . '> Affiches, Flyers<br>' .
+	     PHP_EOL;
+	echo '  <input type="radio" name="means_of_knowledge" ' .
+	     'value="INTERNET"' . $means_of_knowledge_internet .
+	     '> Internet<br>' . PHP_EOL;
+	echo '  <input type="radio" name="means_of_knowledge" ' .
+	     'value="WORD_OF_MOUTH"' . $means_of_knowledge_word_of_mouth .
+	     '> Bouche-à-oreille<br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  Bénévole <sup>*</sup> : <input type="radio" name="volunteer" ' .
 	     'value="1" required="required"' . $volunteer_true .
@@ -800,7 +822,14 @@ function form_entity_pre_registration($row)
 		display_warnings();
 
 	echo '  <br>' . PHP_EOL;
-	echo '  Comment nous avez-vous connus ? <sup>*</sup><br>' . PHP_EOL;
+
+	if (isset($row))
+		echo '  A connu INS School grâce à : <sup>*</sup><br>' .
+		     PHP_EOL;
+	else
+		echo '  Comment nous avez-vous connus ? <sup>*</sup><br>' .
+		     PHP_EOL;
+
 	echo '  <input type="radio" name="means_of_knowledge" ' .
 	     'value="POSTER_FLYER" required="required"' .
 	     $means_of_knowledge_poster_flyer . '> Affiches, Flyers<br>' .
