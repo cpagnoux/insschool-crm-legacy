@@ -180,7 +180,7 @@ function lessons_to_string($lessons, $display)
 
 	foreach ($lessons as $lesson_id => $title) {
 		if (is_int($lesson_id) && isset($title)) {
-			if ($display)
+			if (isset($display) && $display)
 				echo '  <li>' . $title . '</li>' . PHP_EOL;
 			$string .= $lesson_id . ';';
 		}

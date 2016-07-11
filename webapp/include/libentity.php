@@ -275,7 +275,8 @@ function display_payments($result, $table, $id)
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['amount'] . ' €</td>' . PHP_EOL;
-		echo '    <td>' . $row['mode'] . '</td>' . PHP_EOL;
+		echo '    <td>' . evaluate_enum($row['mode']) . '</td>' .
+		     PHP_EOL;
 		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
 		     link_modify_entity($table . '_payment',
@@ -339,16 +340,23 @@ function select_day($day)
 	$day_friday = '';
 
 	if (isset($day)) {
-		if ($day == 'LUNDI')
+		switch ($day) {
+		case 'LUNDI':
 			$day_monday = ' selected="selected"';
-		else if ($day == 'MARDI')
+			break;
+		case 'MARDI':
 			$day_tuesday = ' selected="selected"';
-		else if ($day == 'MERCREDI')
+			break;
+		case 'MERCREDI':
 			$day_wednesday = ' selected="selected"';
-		else if ($day == 'JEUDI')
+			break;
+		case 'JEUDI':
 			$day_thursday = ' selected="selected"';
-		else
+			break;
+		case 'VENDREDI':
 			$day_friday = ' selected="selected"';
+			break;
+		}
 	}
 
 	echo '  Jour <sup>*</sup> :' . PHP_EOL;
@@ -453,10 +461,14 @@ function select_mode($mode)
 	$mode_check = '';
 
 	if (isset($mode)) {
-		if ($mode == 'ESP')
+		switch ($mode) {
+		case 'ESP':
 			$mode_cash = ' selected="selected"';
-		else
+			break;
+		case 'CHQ':
 			$mode_check = ' selected="selected"';
+			break;
+		}
 	}
 
 	echo '  Mode de paiement <sup>*</sup> :' . PHP_EOL;
@@ -650,13 +662,19 @@ function form_entity_member($row)
 	$volunteer_false = '';
 
 	if (isset($row)) {
-		if ($row['means_of_knowledge'] == 'POSTER_FLYER')
+		switch ($row['means_of_knowledge']) {
+		case 'POSTER_FLYER':
 			$means_of_knowledge_poster_flyer = ' checked="checked"';
-		else if ($row['means_of_knowledge'] == 'INTERNET')
+			break;
+		case 'INTERNET':
 			$means_of_knowledge_internet = ' checked="checked"';
-		else
+			break;
+		case 'WORD_OF_MOUTH':
 			$means_of_knowledge_word_of_mouth =
 					' checked="checked"';
+			break;
+		}
+
 		if ($row['volunteer'])
 			$volunteer_true = ' checked="checked"';
 		else
@@ -772,13 +790,18 @@ function form_entity_pre_registration($row)
 	if (isset($row)) {
 		$lessons = string_to_lessons($row['lessons']);
 
-		if ($row['means_of_knowledge'] == 'POSTER_FLYER')
+		switch ($row['means_of_knowledge']) {
+		case 'POSTER_FLYER':
 			$means_of_knowledge_poster_flyer = ' checked="checked"';
-		else if ($row['means_of_knowledge'] == 'INTERNET')
+			break;
+		case 'INTERNET':
 			$means_of_knowledge_internet = ' checked="checked"';
-		else
+			break;
+		case 'WORD_OF_MOUTH':
 			$means_of_knowledge_word_of_mouth =
 					' checked="checked"';
+			break;
+		}
 	}
 
 	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
@@ -1026,6 +1049,19 @@ function check_dependencies($link, $table, $id)
 	case 'teacher':
 		check_dependencies_lesson($link, $table, $id);
 		break;
+	}
+}
+
+/*
+ * Helper function to manage goodies stock according to orders
+ */
+function update_goody_stock($link, $goody_id, $difference)
+{
+	$query = 'UPDATE goody SET stock = stock + (' . $difference .
+		 ') WHERE goody_id = ' . $goody_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
 	}
 }
 ?>

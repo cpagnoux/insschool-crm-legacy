@@ -43,7 +43,7 @@ function display_entity_lesson($row)
 	echo '<br>' . PHP_EOL;
 	echo '<b>Professeur :</b> ' . get_name('teacher', $row['teacher_id']) .
 	     '<br>' . PHP_EOL;
-	echo '<b>Jour :</b> ' . $row['day'] . '<br>' . PHP_EOL;
+	echo '<b>Jour :</b> ' . evaluate_enum($row['day']) . '<br>' . PHP_EOL;
 	echo '<b>Heure de début :</b> ' . $row['start_time'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de fin :</b> ' . $row['end_time'] . '<br>' . PHP_EOL;
 	echo '<b>Durée :</b> ' .
@@ -619,6 +619,8 @@ function add_entity_order_content($link, $data)
 		sql_error($link, $query);
 		exit;
 	}
+
+	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
 
 	display_entity('order', $data['order_id']);
 }
@@ -1200,7 +1202,7 @@ function modify_entity($table, $id, $data)
  */
 function delete_entity($table, $id, $first_call)
 {
-	if ($first_call) {
+	if (isset($first_call) && $first_call) {
 		switch ($table) {
 		case 'order_payment':
 			$order_id = get_order_id($id);
@@ -1227,7 +1229,7 @@ function delete_entity($table, $id, $first_call)
 
 	mysqli_close($link);
 
-	if ($first_call) {
+	if (isset($first_call) && $first_call) {
 		switch ($table) {
 		case 'order_payment':
 			display_entity('order', $order_id);
@@ -1250,20 +1252,27 @@ function delete_entity($table, $id, $first_call)
  */
 function modify_quantity($order_id, $goody_id, $quantity)
 {
+	$old_quantity = get_order_content_quantity($order_id, $goody_id);
+
 	$link = connect_database();
 
-	if ($quantity == 0 || !is_numeric($quantity))
+	if ($quantity <= 0 || !is_numeric($quantity)) {
 		$query = 'DELETE FROM order_content WHERE order_id = ' .
 			 $order_id . ' AND goody_id = ' . $goody_id;
-	else
+		$quantity = 0;
+	} else {
 		$query = 'UPDATE order_content SET quantity = "' . $quantity .
 			 '" WHERE order_id = ' . $order_id .
 			 ' AND goody_id = ' . $goody_id;
+	}
 
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
+
+	$difference = $old_quantity - $quantity;
+	update_goody_stock($link, $goody_id, $difference);
 
 	mysqli_close($link);
 

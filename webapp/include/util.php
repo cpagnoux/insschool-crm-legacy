@@ -458,6 +458,25 @@ function get_name($table, $id)
 	return $row['first_name'] . ' ' . $row['last_name'];
 }
 
+function get_order_content_quantity($order_id, $goody_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT quantity FROM order_content WHERE order_id = ' .
+		 $order_id . ' AND goody_id = ' . $goody_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['quantity'];
+}
+
 function get_order_id($order_payment_id)
 {
 	$link = connect_database();

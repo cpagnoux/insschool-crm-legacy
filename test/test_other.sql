@@ -6,10 +6,10 @@ INSERT INTO `order_content` VALUES (1, 1, 1),
 INSERT INTO `file` VALUES ('', 1, 1, 1, 1);
 
 INSERT INTO `goody` VALUES ('', 'DVD INS Show 2015', '', 12.00, 500),
-	('', 'T-shirt INS School Homme Vert XL', 'Modèle : homme ; Couleur : vert ; Taille : XL', 12.00, 100),
-	('', 'T-shirt INS School Femme Bleu S', 'Modèle : femme ; Couleur : bleu ; Taille : S', 12.00, 100),
-	('', 'Clé USB', 'Clé USB 4 Go', 8.00, ''),
-	('', 'Clé USB + mixtape au choix', 'Choix disponibles : house, hip-hop, funk', 10.00, '');
+	('', 'T-shirt INS School Homme Vert XL', 'Modèle : homme ; Couleur : vert ; Taille : XL', 12.00, 0),
+	('', 'T-shirt INS School Femme Bleu S', 'Modèle : femme ; Couleur : bleu ; Taille : S', 12.00, 0),
+	('', 'Clé USB', 'Clé USB 4 Go', 8.00, 100),
+	('', 'Clé USB + mixtape au choix', 'Choix disponibles : house, hip-hop, funk', 10.00, 100);
 
 INSERT INTO `lesson` VALUES ('', 'Ragga Dancehall Débutant', 9, 'LUNDI', '18:30', '19:30', 1, '', ''),
 	('', 'Ragga Dancehall Inter.', 9, 'LUNDI', '19:35', '20:35', 1, '', ''),
