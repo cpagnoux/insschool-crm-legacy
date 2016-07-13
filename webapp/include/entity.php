@@ -613,14 +613,14 @@ function add_entity_order($link, $data)
 
 function add_entity_order_content($link, $data)
 {
+	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
+
 	$query = 'INSERT INTO order_content VALUES ("' . $data['order_id'] .
 		 '", "' . $data['goody_id'] . '", "' . $data['quantity'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
-
-	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
 
 	display_entity('order', $data['order_id']);
 }
@@ -1252,8 +1252,6 @@ function delete_entity($table, $id, $first_call)
  */
 function modify_quantity($order_id, $goody_id, $quantity)
 {
-	$old_quantity = get_order_content_quantity($order_id, $goody_id);
-
 	$link = connect_database();
 
 	if ($quantity <= 0 || !is_numeric($quantity)) {
@@ -1266,13 +1264,14 @@ function modify_quantity($order_id, $goody_id, $quantity)
 			 ' AND goody_id = ' . $goody_id;
 	}
 
+	$old_quantity = get_order_content_quantity($order_id, $goody_id);
+	$difference = $old_quantity - $quantity;
+	update_goody_stock($link, $goody_id, $difference);
+
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
-
-	$difference = $old_quantity - $quantity;
-	update_goody_stock($link, $goody_id, $difference);
 
 	mysqli_close($link);
 
@@ -1282,6 +1281,8 @@ function modify_quantity($order_id, $goody_id, $quantity)
 function empty_cart($order_id)
 {
 	$link = connect_database();
+
+	update_goody_stock_by_order($link, $order_id);
 
 	$query = 'DELETE FROM order_content WHERE order_id = ' . $order_id;
 	if (!mysqli_query($link, $query)) {

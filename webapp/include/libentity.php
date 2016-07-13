@@ -1007,6 +1007,9 @@ function check_dependencies_by_table($link, $table, $ref_table, $ref_id)
 
 function check_dependencies_by_table_2pk($link, $table, $ref_table, $ref_id)
 {
+	if ($table == 'order_content' && $ref_table == 'order')
+		update_goody_stock_by_order($link, $ref_id);
+
 	$query = 'DELETE FROM `' . $table . '` WHERE ' . $ref_table . '_id = ' .
 		 $ref_id;
 	if (!mysqli_query($link, $query)) {
@@ -1063,5 +1066,20 @@ function update_goody_stock($link, $goody_id, $difference)
 		sql_error($link, $query);
 		exit;
 	}
+}
+
+function update_goody_stock_by_order($link, $order_id)
+{
+	$query = 'SELECT goody_id, quantity FROM order_content ' .
+		 'WHERE order_id = ' . $order_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result))
+		update_goody_stock($link, $row['goody_id'], $row['quantity']);
+
+	mysqli_free_result($result);
 }
 ?>
