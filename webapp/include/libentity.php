@@ -656,7 +656,7 @@ function form_entity_member($row)
 	     'value="' . $row['cellphone_mother'] . '">' . '<br>' . PHP_EOL;
 	echo '  Fixe : <input type="text" name="phone" value="' .
 	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  Email : <input type="text" name="email" value="' .
+	echo '  Email : <input type="email" name="email" value="' .
 	     $row['email'] . '"><br>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 	echo '  A connu INS School grâce à :<br>' . PHP_EOL;
@@ -779,7 +779,7 @@ function form_entity_pre_registration($row)
 	     'value="' . $row['cellphone_mother'] . '"><br>' . PHP_EOL;
 	echo '  Téléphone fixe : <input type="text" name="phone" value="' .
 	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  E-mail : <input type="text" name="email" value="' .
+	echo '  E-mail : <input type="email" name="email" value="' .
 	     $row['email'] . '"><br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
@@ -951,7 +951,7 @@ function form_entity_teacher($row)
 	     $row['cellphone'] . '"><br>' . PHP_EOL;
 	echo '  Fixe : <input type="text" name="phone" value="' .
 	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  Email : <input type="text" name="email" value="' .
+	echo '  Email : <input type="email" name="email" value="' .
 	     $row['email'] . '"><br>' . PHP_EOL;
 
 	echo '  <br>' . PHP_EOL;
