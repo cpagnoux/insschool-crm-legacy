@@ -100,9 +100,6 @@ function link_add_entity($table, $id)
 	$message = 'Ajouter';
 
 	switch ($table) {
-	case 'file':
-		$message = 'En créer un';
-		break;
 	case 'order_content':
 		$message = 'Ajouter un article';
 		break;
@@ -362,27 +359,6 @@ function current_season()
 	return date_to_season($row[0]);
 }
 
-function file_complete($file_id)
-{
-	$link = connect_database();
-
-	$query = 'SELECT * FROM file WHERE file_id = ' . $file_id;
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	$row = mysqli_fetch_assoc($result);
-
-	mysqli_free_result($result);
-	mysqli_close($link);
-
-	if ($row['medical_certificate'] && $row['insurance'] && $row['photo'])
-		return true;
-	else
-		return false;
-}
-
 function get_entity_name($table, $id)
 {
 	$link = connect_database();
@@ -515,6 +491,25 @@ function get_registration_id($registration_payment_id)
 	return $row['registration_id'];
 }
 
+function get_registration_id_from_info($member_id, $season)
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
+		 $member_id . ' AND season = "' . $season . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['registration_id'];
+}
+
 function get_registration_season($registration_id)
 {
 	$link = connect_database();
@@ -587,6 +582,28 @@ function order_total($order_id)
 	mysqli_close($link);
 
 	return sprintf('%.2f', $total);
+}
+
+function registration_file_complete($registration_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT * FROM registration_file WHERE registration_id = ' .
+		 $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	if ($row['medical_certificate'] && $row['insurance'] && $row['photo'])
+		return true;
+	else
+		return false;
 }
 
 function registration_formula($registration_id)

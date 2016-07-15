@@ -13,49 +13,6 @@ include_once 'include/entity.php';
 /*
  * Helper functions for displaying member-related data
  */
-function display_file($result, $member_id)
-{
-	echo '<h2>Dossier</h2>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun dossier<br>' . PHP_EOL;
-		echo '<br>' . PHP_EOL;
-		echo link_add_entity('file', $member_id) . '<br>' . PHP_EOL;
-		return;
-	}
-
-	$row = mysqli_fetch_assoc($result);
-
-	echo '<b>N° de dossier :</b> ' . $row['file_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Certificat médical :</b> ' .
-	     evaluate_boolean($row['medical_certificate']) . '<br>' . PHP_EOL;
-	echo '<b>Assurance :</b> ' . evaluate_boolean($row['insurance']) .
-	     '<br>' . PHP_EOL;
-	echo '<b>Photo :</b> ' . evaluate_boolean($row['photo']) . '<br>' .
-	     PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Dossier complet :</b> ' .
-	     evaluate_boolean(file_complete($row['file_id'])) . '<br>' .
-	     PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('file', $row['file_id']) . '<br>' . PHP_EOL;
-}
-
-function display_member_file($link, $member_id)
-{
-	$query = 'SELECT * FROM file WHERE member_id = ' . $member_id;
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	display_file($result, $member_id);
-
-	mysqli_free_result($result);
-}
-
 function display_registrations($result)
 {
 	echo '<h2>Inscriptions</h2>' . PHP_EOL;
@@ -248,6 +205,47 @@ function display_registration_detail($link, $registration_id)
 	echo '<br>' . PHP_EOL;
 	echo link_add_entity('registration_detail', $registration_id) . '<br>' .
 	     PHP_EOL;
+}
+
+function display_file($result)
+{
+	echo '<h2>Dossier</h2>' . PHP_EOL;
+
+	if (mysqli_num_rows($result) == 0) {
+		echo 'Erreur : aucun dossier<br>' . PHP_EOL;
+		return;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	echo '<b>Certificat médical :</b> ' .
+	     evaluate_boolean($row['medical_certificate']) . '<br>' . PHP_EOL;
+	echo '<b>Assurance :</b> ' . evaluate_boolean($row['insurance']) .
+	     '<br>' . PHP_EOL;
+	echo '<b>Photo :</b> ' . evaluate_boolean($row['photo']) . '<br>' .
+	     PHP_EOL;
+	echo '<br>' . PHP_EOL;
+	echo '<b>Dossier complet :</b> ' .
+	     evaluate_boolean(registration_file_complete(
+			      $row['registration_id'])) . '<br>' . PHP_EOL;
+
+	echo '<br>' . PHP_EOL;
+	echo link_modify_entity('registration_file', $row['registration_id']) .
+	     '<br>' . PHP_EOL;
+}
+
+function display_registration_file($link, $registration_id)
+{
+	$query = 'SELECT * FROM registration_file WHERE registration_id = ' .
+		 $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	display_file($result);
+
+	mysqli_free_result($result);
 }
 
 /*
@@ -561,54 +559,6 @@ function select_teacher($teacher_id)
 /*
  * Forms' content
  */
-function form_entity_file($member_id, $row)
-{
-	$medical_certificate_true = '';
-	$medical_certificate_false = '';
-	$insurance_true = '';
-	$insurance_false = '';
-	$photo_true = '';
-	$photo_false = '';
-
-	if (isset($row)) {
-		if ($row['medical_certificate'])
-			$medical_certificate_true = ' checked="checked"';
-		else
-			$medical_certificate_false = ' checked="checked"';
-
-		if ($row['insurance'])
-			$insurance_true = ' checked="checked"';
-		else
-			$insurance_false = ' checked="checked"';
-
-		if ($row['photo'])
-			$photo_true = ' checked="checked"';
-		else
-			$photo_false = ' checked="checked"';
-	}
-
-	echo '  N° d\'adhérent : <input type="text" name="member_id" value="' .
-	     $member_id . '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Certificat médical <sup>*</sup> : <input type="radio" ' .
-	     'name="medical_certificate" value="1" required="required"' .
-	     $medical_certificate_true . '> Oui <input type="radio" ' .
-	     'name="medical_certificate" value="0"' .
-	     $medical_certificate_false . '> Non<br>' . PHP_EOL;
-	echo '  Assurance <sup>*</sup> : <input type="radio" ' .
-	     'name="insurance" value="1" required="required"' .
-	     $insurance_true . '> Oui <input type="radio" name="insurance" ' .
-	     'value="0"' . $insurance_false . '> Non<br>' . PHP_EOL;
-	echo '  Photo <sup>*</sup> : <input type="radio" name="photo" ' .
-	     'value="1" required="required"' . $photo_true .
-	     '> Oui <input type="radio" name="photo" value="0"' . $photo_false .
-	     '> Non<br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
 function form_entity_goody($row)
 {
 	echo '  Désignation <sup>*</sup> : <input type="text" name="name" ' .
@@ -915,6 +865,55 @@ function form_entity_registration_detail($registration_id)
 	     PHP_EOL;
 }
 
+function form_entity_registration_file($registration_id, $row)
+{
+	$medical_certificate_true = '';
+	$medical_certificate_false = '';
+	$insurance_true = '';
+	$insurance_false = '';
+	$photo_true = '';
+	$photo_false = '';
+
+	if (isset($row)) {
+		if ($row['medical_certificate'])
+			$medical_certificate_true = ' checked="checked"';
+		else
+			$medical_certificate_false = ' checked="checked"';
+
+		if ($row['insurance'])
+			$insurance_true = ' checked="checked"';
+		else
+			$insurance_false = ' checked="checked"';
+
+		if ($row['photo'])
+			$photo_true = ' checked="checked"';
+		else
+			$photo_false = ' checked="checked"';
+	}
+
+	echo '  N° d\'inscription : <input type="text" ' .
+	     'name="registration_id" value="' . $registration_id .
+	     '" readonly="readonly"><br>' . PHP_EOL;
+	echo '  <br>' . PHP_EOL;
+	echo '  Certificat médical <sup>*</sup> : <input type="radio" ' .
+	     'name="medical_certificate" value="1" required="required"' .
+	     $medical_certificate_true . '> Oui <input type="radio" ' .
+	     'name="medical_certificate" value="0"' .
+	     $medical_certificate_false . '> Non<br>' . PHP_EOL;
+	echo '  Assurance <sup>*</sup> : <input type="radio" ' .
+	     'name="insurance" value="1" required="required"' .
+	     $insurance_true . '> Oui <input type="radio" name="insurance" ' .
+	     'value="0"' . $insurance_false . '> Non<br>' . PHP_EOL;
+	echo '  Photo <sup>*</sup> : <input type="radio" name="photo" ' .
+	     'value="1" required="required"' . $photo_true .
+	     '> Oui <input type="radio" name="photo" value="0"' . $photo_false .
+	     '> Non<br>' . PHP_EOL;
+
+	echo '  <br>' . PHP_EOL;
+	echo '  <input type="submit" name="submit" value="Valider"><br>' .
+	     PHP_EOL;
+}
+
 function form_entity_room($row)
 {
 	echo '  Nom <sup>*</sup> : <input type="text" name="name" value="' .
@@ -963,6 +962,19 @@ function form_entity_teacher($row)
 }
 
 /*
+ * Helper function for adding registrations
+ */
+function add_registration_file($link, $registration_id)
+{
+	$query = 'INSERT INTO registration_file VALUES (' . $registration_id .
+		 ', "", "", "")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+}
+
+/*
  * Helper functions for deleting entities
  */
 function update_lesson($link, $lesson_id, $ref_table)
@@ -1005,7 +1017,7 @@ function check_dependencies_by_table($link, $table, $ref_table, $ref_id)
 	mysqli_free_result($result);
 }
 
-function check_dependencies_by_table_2pk($link, $table, $ref_table, $ref_id)
+function check_dependencies_by_table_by_fk($link, $table, $ref_table, $ref_id)
 {
 	if ($table == 'order_content' && $ref_table == 'order')
 		update_goody_stock_by_order($link, $ref_id);
@@ -1022,27 +1034,28 @@ function check_dependencies($link, $table, $id)
 {
 	switch ($table) {
 	case 'goody':
-		check_dependencies_by_table_2pk($link, 'order_content', $table,
-						$id);
+		check_dependencies_by_table_by_fk($link, 'order_content',
+						  $table, $id);
 		break;
 	case 'lesson':
-		check_dependencies_by_table_2pk($link, 'registration_detail',
-						$table, $id);
+		check_dependencies_by_table_by_fk($link, 'registration_detail',
+						  $table, $id);
 		break;
 	case 'member':
-		check_dependencies_by_table($link, 'file', $table, $id);
 		check_dependencies_by_table($link, 'order', $table, $id);
 		check_dependencies_by_table($link, 'registration', $table, $id);
 		break;
 	case 'order':
-		check_dependencies_by_table_2pk($link, 'order_content', $table,
-						$id);
+		check_dependencies_by_table_by_fk($link, 'order_content',
+						  $table, $id);
 		check_dependencies_by_table($link, 'order_payment', $table,
 					    $id);
 		break;
 	case 'registration':
-		check_dependencies_by_table_2pk($link, 'registration_detail',
-						$table, $id);
+		check_dependencies_by_table_by_fk($link, 'registration_detail',
+						  $table, $id);
+		check_dependencies_by_table_by_fk($link, 'registration_file',
+						  $table, $id);
 		check_dependencies_by_table($link, 'registration_payment',
 					    $table, $id);
 		break;

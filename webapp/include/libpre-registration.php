@@ -325,22 +325,6 @@ function get_member_id_from_name($link, $row)
 	return $row['member_id'];
 }
 
-function get_registration_id_from_info($link, $member_id, $season)
-{
-	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
-		 $member_id . ' AND season = "' . $season . '"';
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	$row = mysqli_fetch_assoc($result);
-
-	mysqli_free_result($result);
-
-	return $row['registration_id'];
-}
-
 function add_registration_detail($link, $registration_id, $lesson_id)
 {
 	$query = 'INSERT INTO registration_detail VALUES ("' .
@@ -362,8 +346,9 @@ function add_registration($link, $member_id, $row)
 		exit;
 	}
 
-	$registration_id = get_registration_id_from_info($link, $member_id,
-							 $season);
+	$registration_id = get_registration_id_from_info($member_id, $season);
+	add_registration_file($link, $registration_id);
+
 	$lessons = string_to_lessons($row['lessons']);
 
 	foreach ($lessons as $lesson_id => $value)

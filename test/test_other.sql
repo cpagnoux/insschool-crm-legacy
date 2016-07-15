@@ -3,8 +3,6 @@ INSERT INTO `order_content` VALUES (1, 1, 1),
 	(1, 3, 1),
 	(1, 5, 1);
 
-INSERT INTO `file` VALUES ('', 1, 1, 1, 1);
-
 INSERT INTO `goody` VALUES ('', 'DVD INS Show 2015', '', 12.00, 500),
 	('', 'T-shirt INS School Homme Vert XL', 'Modèle : homme ; Couleur : vert ; Taille : XL', 12.00, 0),
 	('', 'T-shirt INS School Femme Bleu S', 'Modèle : femme ; Couleur : bleu ; Taille : S', 12.00, 0),
@@ -70,6 +68,11 @@ INSERT INTO `registration_detail` VALUES (1, 4, ''),
 	(4, 6, ''),
 	(4, 28, ''),
 	(4, 29, '');
+
+INSERT INTO `registration_file` VALUES (1, 1, 1, 1),
+	(2, 1, 1, 1),
+	(3, 1, 1, 1),
+	(4, 0, 1, 0);
 
 INSERT INTO `registration_payment` VALUES ('', 1, 130.00, 'CHQ', '2011-09-15'),
 	('', 1, 130.00, 'CHQ', '2011-12-01'),

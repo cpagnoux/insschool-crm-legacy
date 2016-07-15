@@ -99,9 +99,6 @@ function display_entity_member($link, $row)
 	echo link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
-	display_member_file($link, $row['member_id']);
-
-	echo '<br>' . PHP_EOL;
 	display_member_registrations($link, $row['member_id']);
 }
 
@@ -205,6 +202,8 @@ function display_entity_registration($link, $row)
 	echo link_delete_entity('registration', $row['registration_id']) .
 	     '<br>' . PHP_EOL;
 
+	echo '<br>' . PHP_EOL;
+	display_registration_file($link, $row['registration_id']);
 	echo '<br>' . PHP_EOL;
 	display_registration_detail($link, $row['registration_id']);
 	echo '<br>' . PHP_EOL;
@@ -311,22 +310,6 @@ function display_entity($table, $id)
 /*
  * Forms for entity add
  */
-function form_add_entity_file($member_id)
-{
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', $member_id, get_name('member', $member_id)) .
-	     ' >' . PHP_EOL;
-	echo 'Nouveau dossier<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo '<form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=add&amp;table=file" method="post">' . PHP_EOL;
-
-	form_entity_file($member_id);
-
-	echo '</form>' . PHP_EOL;
-}
-
 function form_add_entity_goody()
 {
 	echo 'Nouveau goodies<br>' . PHP_EOL;
@@ -491,16 +474,12 @@ function form_add_entity($table, $id)
 {
 	echo link_home() . ' >' . PHP_EOL;
 
-	if ($table != 'file' && $table != 'order_content'
-	    && $table != 'order_payment' && $table != 'registration'
-	    && $table != 'registration_detail'
+	if ($table != 'order_content' && $table != 'order_payment'
+	    && $table != 'registration' && $table != 'registration_detail'
 	    && $table != 'registration_payment')
 		echo link_table($table) . ' >' . PHP_EOL;
 
 	switch ($table) {
-	case 'file':
-		form_add_entity_file($id);
-		break;
 	case 'goody':
 		form_add_entity_goody();
 		break;
@@ -540,19 +519,6 @@ function form_add_entity($table, $id)
 /*
  * Add of entity
  */
-function add_entity_file($link, $data)
-{
-	$query = 'INSERT INTO file VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['medical_certificate'] . '", "' .
-		 $data['insurance'] . '", "' . $data['photo'] . '")';
-	if (!mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	display_entity('member', $data['member_id']);
-}
-
 function add_entity_goody($link, $data)
 {
 	$query = 'INSERT INTO goody VALUES ("", "' . $data['name'] . '", "' .
@@ -648,6 +614,10 @@ function add_entity_registration($link, $data)
 		exit;
 	}
 
+	$registration_id = get_registration_id_from_info($data['member_id'],
+							 $data['season']);
+	add_registration_file($link, $registration_id);
+
 	display_entity('member', $data['member_id']);
 }
 
@@ -697,9 +667,6 @@ function add_entity($table, $data)
 	$link = connect_database();
 
 	switch ($table) {
-	case 'file':
-		add_entity_file($link, $data);
-		break;
 	case 'goody':
 		add_entity_goody($link, $data);
 		break;
@@ -741,24 +708,6 @@ function add_entity($table, $data)
 /*
  * Forms for entity modification
  */
-function form_modify_entity_file($row)
-{
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', $row['member_id'],
-			 get_name('member', $row['member_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier le dossier<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo '<form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify&amp;table=file&amp;id=' . $row['file_id'] .
-	     '" method="post">' . PHP_EOL;
-
-	form_entity_file($row['member_id'], $row);
-
-	echo '</form>' . PHP_EOL;
-}
-
 function form_modify_entity_goody($row)
 {
 	echo link_entity('goody', $row['goody_id'],
@@ -897,6 +846,27 @@ function form_modify_entity_registration($row)
 	echo '</form>' . PHP_EOL;
 }
 
+function form_modify_entity_registration_file($row)
+{
+	echo link_table('member') . ' >' . PHP_EOL;
+	echo link_entity('member', get_member_id($row['registration_id']),
+			 get_name('member', get_member_id(
+				  $row['registration_id']))) . ' >' . PHP_EOL;
+	echo link_entity('registration', $row['registration_id'],
+			 'Inscription ' . get_registration_season(
+			 $row['registration_id'])) . ' >' . PHP_EOL;
+	echo 'Modifier le dossier<br>' . PHP_EOL;
+
+	echo '<br>' . PHP_EOL;
+	echo '<form action="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify&amp;table=registration_file&amp;id=' .
+	     $row['registration_id'] . '" method="post">' . PHP_EOL;
+
+	form_entity_registration_file($row['registration_id'], $row);
+
+	echo '</form>' . PHP_EOL;
+}
+
 function form_modify_entity_room($row)
 {
 	echo link_entity('room', $row['room_id'],
@@ -933,10 +903,15 @@ function form_modify_entity_teacher($row)
 
 function form_modify_entity($table, $id)
 {
+	$ref_table = $table;
+
+	if ($table == 'registration_file')
+		$ref_table = 'registration';
+
 	$link = connect_database();
 
-	$query = 'SELECT * FROM `' . $table . '` WHERE ' . $table . '_id = ' .
-		 $id;
+	$query = 'SELECT * FROM `' . $table . '` WHERE ' . $ref_table .
+		 '_id = ' . $id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -949,14 +924,12 @@ function form_modify_entity($table, $id)
 
 	echo link_home() . ' >' . PHP_EOL;
 
-	if ($table != 'file' && $table != 'order_payment'
-	    && $table != 'registration' && $table != 'registration_payment')
+	if ($table != 'order_payment' && $table != 'registration'
+	    && $table != 'registration_file'
+	    && $table != 'registration_payment')
 		echo link_table($table) . ' >' . PHP_EOL;
 
 	switch ($table) {
-	case 'file':
-		form_modify_entity_file($row);
-		break;
 	case 'goody':
 		form_modify_entity_goody($row);
 		break;
@@ -978,6 +951,9 @@ function form_modify_entity($table, $id)
 	case 'registration':
 		form_modify_entity_registration($row);
 		break;
+	case 'registration_file':
+		form_modify_entity_registration_file($row);
+		break;
 	case 'registration_payment':
 		form_modify_entity_payment('registration', $row);
 		break;
@@ -993,20 +969,6 @@ function form_modify_entity($table, $id)
 /*
  * Modification of entity
  */
-function modify_entity_file($link, $file_id, $data)
-{
-	$query = 'UPDATE file SET medical_certificate = "' .
-		 $data['medical_certificate'] . '", insurance = "' .
-		 $data['insurance'] . '", photo = "' . $data['photo'] .
-		 '" WHERE file_id = ' . $file_id;
-	if (!mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	display_entity('member', $data['member_id']);
-}
-
 function modify_entity_goody($link, $goody_id, $data)
 {
 	$query = 'UPDATE goody SET name = "' . $data['name'] .
@@ -1123,6 +1085,20 @@ function modify_entity_registration($link, $registration_id, $data)
 	display_entity('registration', $registration_id);
 }
 
+function modify_entity_registration_file($link, $registration_id, $data)
+{
+	$query = 'UPDATE registration_file SET medical_certificate = "' .
+		 $data['medical_certificate'] . '", insurance = "' .
+		 $data['insurance'] . '", photo = "' . $data['photo'] .
+		 '" WHERE registration_id = ' . $registration_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	display_entity('registration', $data['registration_id']);
+}
+
 function modify_entity_room($link, $room_id, $data)
 {
 	$query = 'UPDATE room SET name = "' . $data['name'] . '", adress = "' .
@@ -1159,9 +1135,6 @@ function modify_entity($table, $id, $data)
 	$link = connect_database();
 
 	switch($table) {
-	case 'file':
-		modify_entity_file($link, $id, $data);
-		break;
 	case 'goody':
 		modify_entity_goody($link, $id, $data);
 		break;
@@ -1182,6 +1155,9 @@ function modify_entity($table, $id, $data)
 		break;
 	case 'registration':
 		modify_entity_registration($link, $id, $data);
+		break;
+	case 'registration_file':
+		modify_entity_registration_file($link, $id, $data);
 		break;
 	case 'registration_payment':
 		modify_entity_payment($link, 'registration', $id, $data);
