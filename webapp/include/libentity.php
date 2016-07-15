@@ -172,7 +172,7 @@ function display_detail($result, $registration_id)
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['title'] . '</td>' . PHP_EOL;
-		echo '    <td>' . evaluate_boolean($row['show_participation']) .
+		echo '    <td>' . eval_boolean($row['show_participation']) .
 		     ' ' . link_toggle_show_participation($registration_id,
 							  $row['lesson_id']) .
 		     '</td>' . PHP_EOL;
@@ -219,15 +219,14 @@ function display_file($result)
 	$row = mysqli_fetch_assoc($result);
 
 	echo '<b>Certificat médical :</b> ' .
-	     evaluate_boolean($row['medical_certificate']) . '<br>' . PHP_EOL;
-	echo '<b>Assurance :</b> ' . evaluate_boolean($row['insurance']) .
-	     '<br>' . PHP_EOL;
-	echo '<b>Photo :</b> ' . evaluate_boolean($row['photo']) . '<br>' .
+	     eval_boolean($row['medical_certificate']) . '<br>' . PHP_EOL;
+	echo '<b>Assurance :</b> ' . eval_boolean($row['insurance']) . '<br>' .
 	     PHP_EOL;
+	echo '<b>Photo :</b> ' . eval_boolean($row['photo']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Dossier complet :</b> ' .
-	     evaluate_boolean(registration_file_complete(
-			      $row['registration_id'])) . '<br>' . PHP_EOL;
+	     eval_boolean(registration_file_complete($row['registration_id'])) .
+	     '<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('registration_file', $row['registration_id']) .
@@ -273,8 +272,7 @@ function display_payments($result, $table, $id)
 	while ($row = mysqli_fetch_assoc($result)) {
 		echo '  <tr>' . PHP_EOL;
 		echo '    <td>' . $row['amount'] . ' €</td>' . PHP_EOL;
-		echo '    <td>' . evaluate_enum($row['mode']) . '</td>' .
-		     PHP_EOL;
+		echo '    <td>' . eval_enum($row['mode']) . '</td>' . PHP_EOL;
 		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
 		echo '    <td>' .
 		     link_modify_entity($table . '_payment',
@@ -312,11 +310,11 @@ function display_entity_payments($link, $table, $id)
 	switch ($table) {
 	case 'order':
 		echo '<b>Commande réglée :</b> ' .
-		     evaluate_boolean(order_paid($id));
+		     eval_boolean(order_paid($id));
 		break;
 	case 'registration':
 		echo '<b>Inscription réglée :</b> ' .
-		     evaluate_boolean(registration_paid($id));
+		     eval_boolean(registration_paid($id));
 		break;
 	}
 
@@ -339,19 +337,19 @@ function select_day($day)
 
 	if (isset($day)) {
 		switch ($day) {
-		case 'LUNDI':
+		case 'MONDAY':
 			$day_monday = ' selected="selected"';
 			break;
-		case 'MARDI':
+		case 'TUESDAY':
 			$day_tuesday = ' selected="selected"';
 			break;
-		case 'MERCREDI':
+		case 'WEDNESDAY':
 			$day_wednesday = ' selected="selected"';
 			break;
-		case 'JEUDI':
+		case 'THURSDAY':
 			$day_thursday = ' selected="selected"';
 			break;
-		case 'VENDREDI':
+		case 'FRIDAY':
 			$day_friday = ' selected="selected"';
 			break;
 		}
@@ -359,16 +357,16 @@ function select_day($day)
 
 	echo '  Jour <sup>*</sup> :' . PHP_EOL;
 	echo '  <select name="day" required="required">' . PHP_EOL;
-	echo '    <option value="LUNDI"' . $day_monday . '>Lundi</option>' .
+	echo '    <option value="MONDAY"' . $day_monday . '>Lundi</option>' .
 	     PHP_EOL;
-	echo '    <option value="MARDI"' . $day_tuesday . '>Mardi</option>' .
+	echo '    <option value="TUESDAY"' . $day_tuesday . '>Mardi</option>' .
 	     PHP_EOL;
-	echo '    <option value="MERCREDI"' . $day_wednesday .
+	echo '    <option value="WEDNESDAY"' . $day_wednesday .
 	     '>Mercredi</option>' . PHP_EOL;
-	echo '    <option value="JEUDI"' . $day_thursday . '>Jeudi</option>' .
+	echo '    <option value="THURSDAY"' . $day_thursday .
+	     '>Jeudi</option>' . PHP_EOL;
+	echo '    <option value="FRIDAY"' . $day_friday . '>Vendredi</option>' .
 	     PHP_EOL;
-	echo '    <option value="VENDREDI"' . $day_friday .
-	     '>Vendredi</option>' . PHP_EOL;
 	echo '  </select>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;
 }
@@ -460,10 +458,10 @@ function select_mode($mode)
 
 	if (isset($mode)) {
 		switch ($mode) {
-		case 'ESP':
+		case 'CASH':
 			$mode_cash = ' selected="selected"';
 			break;
-		case 'CHQ':
+		case 'CHECK':
 			$mode_check = ' selected="selected"';
 			break;
 		}
@@ -471,9 +469,9 @@ function select_mode($mode)
 
 	echo '  Mode de paiement <sup>*</sup> :' . PHP_EOL;
 	echo '  <select name="mode" required="required">' . PHP_EOL;
-	echo '    <option value="ESP"' . $mode_cash . '>Espèces</option>' .
+	echo '    <option value="CASH"' . $mode_cash . '>Espèces</option>' .
 	     PHP_EOL;
-	echo '    <option value="CHQ"' . $mode_check . '>Chèque</option>' .
+	echo '    <option value="CHECK"' . $mode_check . '>Chèque</option>' .
 	     PHP_EOL;
 	echo '  </select>' . PHP_EOL;
 	echo '  <br>' . PHP_EOL;

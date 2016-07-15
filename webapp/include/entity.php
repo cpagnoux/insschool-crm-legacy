@@ -43,7 +43,7 @@ function display_entity_lesson($row)
 	echo '<br>' . PHP_EOL;
 	echo '<b>Professeur :</b> ' . get_name('teacher', $row['teacher_id']) .
 	     '<br>' . PHP_EOL;
-	echo '<b>Jour :</b> ' . evaluate_enum($row['day']) . '<br>' . PHP_EOL;
+	echo '<b>Jour :</b> ' . eval_enum($row['day']) . '<br>' . PHP_EOL;
 	echo '<b>Heure de début :</b> ' . $row['start_time'] . '<br>' . PHP_EOL;
 	echo '<b>Heure de fin :</b> ' . $row['end_time'] . '<br>' . PHP_EOL;
 	echo '<b>Durée :</b> ' .
@@ -89,10 +89,10 @@ function display_entity_member($link, $row)
 	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>A connu INS School grâce à :</b> ' .
-	     evaluate_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
+	     eval_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
-	echo '<b>Bénévole :</b> ' . evaluate_boolean($row['volunteer']) .
-	     '<br>' . PHP_EOL;
+	echo '<b>Bénévole :</b> ' . eval_boolean($row['volunteer']) . '<br>' .
+	     PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo link_modify_entity('member', $row['member_id']) . PHP_EOL;
@@ -157,7 +157,7 @@ function display_entity_pre_registration($row)
 	     '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>A connu INS School grâce à :</b> ' .
-	     evaluate_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
+	     eval_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
 	echo '<br>' . PHP_EOL;
 	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
 

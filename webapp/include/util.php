@@ -93,32 +93,51 @@ function link_entity($table, $id, $message)
 
 function link_add_entity($table, $id)
 {
-	if (!isset($id))
-		return '<a href="' . $_SERVER['PHP_SELF'] .
-		       '?mode=add&amp;table=' . $table . '">Ajouter</a>';
-
 	$message = 'Ajouter';
 
 	switch ($table) {
+	case 'goody':
+		$message = 'Nouveau goodies';
+		break;
+	case 'lesson':
+		$message = 'Nouveau cours';
+		break;
+	case 'member':
+		$message = 'Nouvel adhérent';
+		break;
+	case 'order':
+		$message = 'Nouvelle commande';
+		break;
 	case 'order_content':
 		$message = 'Ajouter un article';
 		break;
 	case 'order_payment':
-		$message = 'Ajouter un paiement';
+		$message = 'Nouveau paiement';
 		break;
 	case 'registration':
-		$message = 'Ajouter une inscription';
+		$message = 'Nouvelle inscription';
 		break;
 	case 'registration_detail':
 		$message = 'Ajouter un cours';
 		break;
 	case 'registration_payment':
-		$message = 'Ajouter un paiement';
+		$message = 'Nouveau paiement';
+		break;
+	case 'room':
+		$message = 'Nouvelle salle';
+		break;
+	case 'teacher':
+		$message = 'Nouveau professeur';
 		break;
 	}
 
+	if (isset($id))
+		return '<a href="' . $_SERVER['PHP_SELF'] .
+		       '?mode=add&amp;table=' . $table . '&amp;id=' . $id .
+		       '">' . $message . '</a>';
+
 	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
-	       $table . '&amp;id=' . $id . '">' . $message . '</a>';
+	       $table . '">' . $message . '</a>';
 }
 
 function link_modify_entity($table, $id)
@@ -251,25 +270,25 @@ function duration($start_time, $end_time)
 	return $duration;
 }
 
-function evaluate_enum($value)
+function eval_enum($value)
 {
 	$result = '';
 
 	switch ($value) {
 	// day
-	case 'LUNDI':
+	case 'MONDAY':
 		$result = 'Lundi';
 		break;
-	case 'MARDI':
+	case 'TUESDAY':
 		$result = 'Mardi';
 		break;
-	case 'MERCREDI':
+	case 'WEDNESDAY':
 		$result = 'Mercredi';
 		break;
-	case 'JEUDI':
+	case 'THURSDAY':
 		$result = 'Jeudi';
 		break;
-	case 'VENDREDI':
+	case 'FRIDAY':
 		$result = 'Vendredi';
 		break;
 	// means_of_knowledge
@@ -283,10 +302,10 @@ function evaluate_enum($value)
 		$result = 'Bouche-à-oreille';
 		break;
 	// mode
-	case 'ESP':
+	case 'CASH':
 		$result = 'Espèces';
 		break;
-	case 'CHQ':
+	case 'CHECK':
 		$result = 'Chèque';
 		break;
 	}
@@ -294,7 +313,7 @@ function evaluate_enum($value)
 	return $result;
 }
 
-function evaluate_boolean($value)
+function eval_boolean($value)
 {
 	if ($value)
 		return 'Oui';

@@ -42,7 +42,7 @@ function display_day($day, $count)
 	echo '    <tr>' . PHP_EOL;
 
 	for ($i = 0; $i < $count; $i++)
-		echo '      <th><b>' . $day . '</b></th>' . PHP_EOL;
+		echo '      <th><b>' . eval_enum($day) . '</b></th>' . PHP_EOL;
 
 	echo '    </tr>' . PHP_EOL;
 }
@@ -131,7 +131,7 @@ function display_lessons($lessons)
 	echo '  <table>' . PHP_EOL;
 
 	$num_rooms = display_rooms($link);
-	$days = array('LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI');
+	$days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY');
 
 	foreach($days as $day) {
 		display_day($day, $num_rooms);
