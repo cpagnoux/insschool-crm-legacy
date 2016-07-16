@@ -397,6 +397,42 @@ function get_entity_name($table, $id)
 	return $row['name'];
 }
 
+function get_goody_id_from_name($name)
+{
+	$link = connect_database();
+
+	$query = 'SELECT goody_id FROM goody WHERE name = "' . $name . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['goody_id'];
+}
+
+function get_lesson_id_from_title($title)
+{
+	$link = connect_database();
+
+	$query = 'SELECT lesson_id FROM lesson WHERE title = "' . $title . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['lesson_id'];
+}
+
 function get_lesson_title($lesson_id)
 {
 	$link = connect_database();
@@ -421,6 +457,25 @@ function get_member_id($registration_id)
 
 	$query = 'SELECT member_id FROM registration WHERE registration_id = ' .
 		 $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['member_id'];
+}
+
+function get_member_id_from_name($first_name, $last_name)
+{
+	$link = connect_database();
+
+	$query = 'SELECT member_id FROM member WHERE first_name = "' .
+		 $first_name . '" AND last_name = "' . $last_name . '"';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -491,6 +546,25 @@ function get_order_id($order_payment_id)
 	return $row['order_id'];
 }
 
+function get_order_id_from_info($member_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT order_id FROM `order` WHERE member_id = ' .
+		 $member_id . ' ORDER BY date DESC';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['order_id'];
+}
+
 function get_registration_id($registration_payment_id)
 {
 	$link = connect_database();
@@ -546,6 +620,43 @@ function get_registration_season($registration_id)
 	mysqli_close($link);
 
 	return $row['season'];
+}
+
+function get_room_id_from_name($name)
+{
+	$link = connect_database();
+
+	$query = 'SELECT room_id FROM room WHERE name = "' . $name . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['room_id'];
+}
+
+function get_teacher_id_from_name($first_name, $last_name)
+{
+	$link = connect_database();
+
+	$query = 'SELECT teacher_id FROM teacher WHERE first_name = "' .
+		 $first_name . '" AND last_name = "' . $last_name . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['teacher_id'];
 }
 
 function lesson_registrant_count($lesson_id, $season)

@@ -303,7 +303,7 @@ function add_member($link, $row)
 	}
 }
 
-function get_member_id_from_name($link, $row)
+function get_member_id_or_add($link, $row)
 {
 	$query = 'SELECT member_id FROM member WHERE first_name = "' .
 		 $row['first_name'] . '" AND last_name = "' .
@@ -315,7 +315,7 @@ function get_member_id_from_name($link, $row)
 
 	if (mysqli_num_rows($result) == 0) {
 		add_member($link, $row);
-		return get_member_id_from_name($link, $row);
+		return get_member_id_or_add($link, $row);
 	}
 
 	$row = mysqli_fetch_assoc($result);
@@ -368,7 +368,7 @@ function commit_pre_registration($pre_registration_id)
 
 	$row = mysqli_fetch_assoc($result);
 
-	$member_id = get_member_id_from_name($link, $row);
+	$member_id = get_member_id_or_add($link, $row);
 	add_registration($link, $member_id, $row);
 	delete_entity('pre_registration', $pre_registration_id);
 	display_entity('member', $member_id);

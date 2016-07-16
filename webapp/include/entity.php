@@ -529,7 +529,8 @@ function add_entity_goody($link, $data)
 		exit;
 	}
 
-	display_table('goody');
+	$goody_id = get_goody_id_from_name($data['name']);
+	display_entity('goody', $goody_id);
 }
 
 function add_entity_lesson($link, $data)
@@ -544,7 +545,8 @@ function add_entity_lesson($link, $data)
 		exit;
 	}
 
-	display_table('lesson');
+	$lesson_id = get_lesson_id_from_title($data['title']);
+	display_entity('lesson', $lesson_id);
 }
 
 function add_entity_member($link, $data)
@@ -562,7 +564,9 @@ function add_entity_member($link, $data)
 		exit;
 	}
 
-	display_table('member');
+	$member_id = get_member_id_from_name($data['first_name'],
+					     $data['last_name']);
+	display_entity('member', $member_id);
 }
 
 function add_entity_order($link, $data)
@@ -574,7 +578,8 @@ function add_entity_order($link, $data)
 		exit;
 	}
 
-	display_table('order');
+	$order_id = get_order_id_from_info($data['member_id']);
+	display_entity('order', $order_id);
 }
 
 function add_entity_order_content($link, $data)
@@ -618,7 +623,7 @@ function add_entity_registration($link, $data)
 							 $data['season']);
 	add_registration_file($link, $registration_id);
 
-	display_entity('member', $data['member_id']);
+	display_entity('registration', $registration_id);
 }
 
 function add_entity_registration_detail($link, $data)
@@ -644,7 +649,8 @@ function add_entity_room($link, $data)
 		exit;
 	}
 
-	display_table('room');
+	$room_id = get_room_id_from_name($data['name']);
+	display_entity('room', $room_id);
 }
 
 function add_entity_teacher($link, $data)
@@ -659,7 +665,9 @@ function add_entity_teacher($link, $data)
 		exit;
 	}
 
-	display_table('teacher');
+	$teacher_id = get_teacher_id_from_name($data['first_name'],
+					       $data['last_name']);
+	display_entity('teacher', $teacher_id);
 }
 
 function add_entity($table, $data)
