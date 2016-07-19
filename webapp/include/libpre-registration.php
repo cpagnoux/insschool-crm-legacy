@@ -3,12 +3,12 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-include_once 'include/connection.php';
-include_once 'include/error.php';
-include_once 'include/util.php';
+require_once 'include/connection.php';
+require_once 'include/error.php';
+require_once 'include/util.php';
 
-include_once 'include/libentity.php';
-include_once 'include/entity.php';
+require_once 'include/libentity.php';
+require_once 'include/entity.php';
 
 /*
  * Dynamic table for lessons
