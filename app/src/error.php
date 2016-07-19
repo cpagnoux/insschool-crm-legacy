@@ -3,7 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/config.php';
+require_once 'config/app.config.php';
 
 function sql_connect_error()
 {

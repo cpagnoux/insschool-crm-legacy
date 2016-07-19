@@ -3,15 +3,16 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/libtable.php';
+require_once 'src/libtable.php';
 
-require_once 'include/connection.php';
-require_once 'include/error.php';
-require_once 'include/util.php';
+require_once 'src/connection.php';
+require_once 'src/error.php';
+require_once 'src/util.php';
 
 function display_table_goody($result)
 {
-	echo 'Goodies<br>' . PHP_EOL;
+	navigation_path_on_table('goody');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -47,7 +48,8 @@ function display_table_goody($result)
 
 function display_table_lesson($result)
 {
-	echo 'Cours<br>' . PHP_EOL;
+	navigation_path_on_table('lesson');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -78,7 +80,8 @@ function display_table_lesson($result)
 
 function display_table_member($result)
 {
-	echo 'Adhérents<br>' . PHP_EOL;
+	navigation_path_on_table('member');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -111,7 +114,8 @@ function display_table_member($result)
 
 function display_table_order($result)
 {
-	echo 'Commandes<br>' . PHP_EOL;
+	navigation_path_on_table('order');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -147,7 +151,8 @@ function display_table_order($result)
 
 function display_table_pre_registration($result)
 {
-	echo 'Pré-inscriptions<br>' . PHP_EOL;
+	navigation_path_on_table('pre_registration');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -181,7 +186,8 @@ function display_table_pre_registration($result)
 
 function display_table_room($result)
 {
-	echo 'Salles<br>' . PHP_EOL;
+	navigation_path_on_table('room');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -212,7 +218,8 @@ function display_table_room($result)
 
 function display_table_teacher($result)
 {
-	echo 'Professeurs<br>' . PHP_EOL;
+	navigation_path_on_table('teacher');
+
 	echo '<br>' . PHP_EOL;
 
 	if (mysqli_num_rows($result) == 0) {
@@ -290,8 +297,6 @@ function display_table($table, $page)
 		sql_error($link, $query);
 		exit;
 	}
-
-	echo link_home() . ' >' . PHP_EOL;
 
 	switch ($table) {
 	case 'goody':

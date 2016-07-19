@@ -3,7 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/util.php';
+require_once 'src/util.php';
 
 function table_pagination($table, $page)
 {

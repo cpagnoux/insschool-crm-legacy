@@ -3,8 +3,8 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/connection.php';
-require_once 'include/error.php';
+require_once 'src/connection.php';
+require_once 'src/error.php';
 
 function login()
 {

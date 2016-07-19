@@ -3,21 +3,21 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/libentity.php';
+require_once 'src/libentity.php';
 
-require_once 'include/connection.php';
-require_once 'include/error.php';
-require_once 'include/util.php';
+require_once 'src/connection.php';
+require_once 'src/error.php';
+require_once 'src/util.php';
 
-require_once 'include/libpre-registration.php';
-require_once 'include/table.php';
+require_once 'src/libpre-registration.php';
+require_once 'src/table.php';
 
 /*
  * Display of entity
  */
 function display_entity_goody($row)
 {
-	echo $row['name'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('goody', $row);
 
 	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
 
@@ -35,7 +35,7 @@ function display_entity_goody($row)
 
 function display_entity_lesson($row)
 {
-	echo $row['title'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('lesson', $row);
 
 	echo '<h2>' . $row['title'] . '</h2>' . PHP_EOL;
 
@@ -65,7 +65,7 @@ function display_entity_lesson($row)
 
 function display_entity_member($link, $row)
 {
-	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('member', $row);
 
 	echo '<h2>Information adhérent</h2>' . PHP_EOL;
 
@@ -104,7 +104,7 @@ function display_entity_member($link, $row)
 
 function display_entity_order($link, $row)
 {
-	echo 'N° ' . $row['order_id'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('order', $row);
 
 	echo '<h2>Commande n° ' . $row['order_id'] . '</h2>' . PHP_EOL;
 
@@ -129,7 +129,7 @@ function display_entity_order($link, $row)
 
 function display_entity_pre_registration($row)
 {
-	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('pre_registration', $row);
 
 	echo '<h2>Détail pré-inscription</h2>' . PHP_EOL;
 
@@ -172,11 +172,7 @@ function display_entity_pre_registration($row)
 
 function display_entity_registration($link, $row)
 {
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', $row['member_id'],
-			 get_name('member', $row['member_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Inscription ' . $row['season'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('registration', $row);
 
 	echo '<h2>Inscription ' . $row['season'] . '</h2>' . PHP_EOL;
 
@@ -212,7 +208,7 @@ function display_entity_registration($link, $row)
 
 function display_entity_room($row)
 {
-	echo $row['name'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('room', $row);
 
 	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
 
@@ -229,7 +225,7 @@ function display_entity_room($row)
 
 function display_entity_teacher($row)
 {
-	echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' . PHP_EOL;
+	navigation_path_on_display('teacher', $row);
 
 	echo '<h2>' . $row['first_name'] . ' ' . $row['last_name'] . '</h2>' .
 	     PHP_EOL;
@@ -272,11 +268,6 @@ function display_entity($table, $id)
 
 	mysqli_free_result($result);
 
-	echo link_home() . ' >' . PHP_EOL;
-
-	if ($table != 'registration')
-		echo link_table($table) . ' >' . PHP_EOL;
-
 	switch ($table) {
 	case 'goody':
 		display_entity_goody($row);
@@ -312,7 +303,7 @@ function display_entity($table, $id)
  */
 function form_add_entity_goody()
 {
-	echo 'Nouveau goodies<br>' . PHP_EOL;
+	navigation_path_on_add('goody');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -325,7 +316,7 @@ function form_add_entity_goody()
 
 function form_add_entity_lesson()
 {
-	echo 'Nouveau cours<br>' . PHP_EOL;
+	navigation_path_on_add('lesson');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -338,7 +329,7 @@ function form_add_entity_lesson()
 
 function form_add_entity_member()
 {
-	echo 'Nouvel adhérent<br>' . PHP_EOL;
+	navigation_path_on_add('member');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -351,7 +342,7 @@ function form_add_entity_member()
 
 function form_add_entity_order()
 {
-	echo 'Nouvelle commande<br>' . PHP_EOL;
+	navigation_path_on_add('order');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -364,9 +355,7 @@ function form_add_entity_order()
 
 function form_add_entity_order_content($order_id)
 {
-	echo link_table('order') . ' >' . PHP_EOL;
-	echo link_entity('order', $order_id, 'N° ' . $order_id) . ' >' . PHP_EOL;
-	echo 'Ajouter un article<br>' . PHP_EOL;
+	navigation_path_on_add('order_content', $order_id);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -381,21 +370,12 @@ function form_add_entity_payment($table, $id)
 {
 	switch ($table) {
 	case 'order':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity($table, $id, 'N° ' . $id) . ' >' . PHP_EOL;
+		navigation_path_on_add('order_payment', $id);
 		break;
 	case 'registration':
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', get_member_id($id),
-				 get_name('member', get_member_id($id))) .
-		     ' >' . PHP_EOL;
-		echo link_entity($table, $id, 'Inscription ' .
-					      get_registration_season($id)) .
-		     ' >' . PHP_EOL;
+		navigation_path_on_add('registration_payment', $id);
 		break;
 	}
-
-	echo 'Nouveau paiement<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -409,10 +389,7 @@ function form_add_entity_payment($table, $id)
 
 function form_add_entity_registration($member_id)
 {
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', $member_id, get_name('member', $member_id)) .
-	     ' >' . PHP_EOL;
-	echo 'Nouvelle inscription<br>' . PHP_EOL;
+	navigation_path_on_add('registration', $member_id);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -425,14 +402,7 @@ function form_add_entity_registration($member_id)
 
 function form_add_entity_registration_detail($registration_id)
 {
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', get_member_id($registration_id),
-			 get_name('member', get_member_id($registration_id))) .
-	     ' >' . PHP_EOL;
-	echo link_entity('registration', $registration_id, 'Inscription ' .
-			 get_registration_season($registration_id)) . ' >' .
-	     PHP_EOL;
-	echo 'Ajouter un cours<br>' . PHP_EOL;
+	navigation_path_on_add('registration_detail', $registration_id);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -446,7 +416,7 @@ function form_add_entity_registration_detail($registration_id)
 
 function form_add_entity_room()
 {
-	echo 'Nouvelle salle<br>' . PHP_EOL;
+	navigation_path_on_add('room');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -459,7 +429,7 @@ function form_add_entity_room()
 
 function form_add_entity_teacher()
 {
-	echo 'Nouveau professeur<br>' . PHP_EOL;
+	navigation_path_on_add('teacher');
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -472,13 +442,6 @@ function form_add_entity_teacher()
 
 function form_add_entity($table, $id)
 {
-	echo link_home() . ' >' . PHP_EOL;
-
-	if ($table != 'order_content' && $table != 'order_payment'
-	    && $table != 'registration' && $table != 'registration_detail'
-	    && $table != 'registration_payment')
-		echo link_table($table) . ' >' . PHP_EOL;
-
 	switch ($table) {
 	case 'goody':
 		form_add_entity_goody();
@@ -718,10 +681,7 @@ function add_entity($table, $data)
  */
 function form_modify_entity_goody($row)
 {
-	echo link_entity('goody', $row['goody_id'],
-			 get_entity_name('goody', $row['goody_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier le goodies<br>' . PHP_EOL;
+	navigation_path_on_modify('goody', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -735,9 +695,7 @@ function form_modify_entity_goody($row)
 
 function form_modify_entity_lesson($row)
 {
-	echo link_entity('lesson', $row['lesson_id'],
-			 get_lesson_title($row['lesson_id'])) . ' >' . PHP_EOL;
-	echo 'Modifier le cours<br>' . PHP_EOL;
+	navigation_path_on_modify('lesson', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -751,10 +709,7 @@ function form_modify_entity_lesson($row)
 
 function form_modify_entity_member($row)
 {
-	echo link_entity('member', $row['member_id'],
-			 get_name('member', $row['member_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier l\'adhérent<br>' . PHP_EOL;
+	navigation_path_on_modify('member', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -768,9 +723,7 @@ function form_modify_entity_member($row)
 
 function form_modify_entity_order($row)
 {
-	echo link_entity('order', $row['order_id'], 'N° ' . $row['order_id']) .
-	     ' >' . PHP_EOL;
-	echo 'Modifier la commande<br>' . PHP_EOL;
+	navigation_path_on_modify('order', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -786,24 +739,12 @@ function form_modify_entity_payment($table, $row)
 {
 	switch ($table) {
 	case 'order':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity($table, $row['order_id'],
-				 'N° ' . $row['order_id']) . ' >' . PHP_EOL;
+		navigation_path_on_modify('order_payment', $row);
 		break;
 	case 'registration':
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member',
-				 get_member_id($row['registration_id']),
-				 get_name('member', get_member_id(
-					  $row['registration_id']))) . ' >' .
-		     PHP_EOL;
-		echo link_entity($table, $row['registration_id'],
-				 'Inscription ' . get_registration_season(
-				 $row['registration_id'])) . ' >' . PHP_EOL;
+		navigation_path_on_modify('registration_payment', $row);
 		break;
 	}
-
-	echo 'Modifier le paiement<br>' . PHP_EOL;
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -817,11 +758,7 @@ function form_modify_entity_payment($table, $row)
 
 function form_modify_entity_pre_registration($row)
 {
-	echo link_entity('pre_registration', $row['pre_registration_id'],
-			 get_name('pre_registration',
-				  $row['pre_registration_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier la pré-inscription<br>' . PHP_EOL;
+	navigation_path_on_modify('pre_registration', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -835,14 +772,7 @@ function form_modify_entity_pre_registration($row)
 
 function form_modify_entity_registration($row)
 {
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', $row['member_id'],
-			 get_name('member', $row['member_id'])) . ' >' .
-	     PHP_EOL;
-	echo link_entity('registration', $row['registration_id'],
-			 'Inscription ' . get_registration_season(
-			 $row['registration_id'])) . ' >' . PHP_EOL;
-	echo 'Modifier l\'inscription<br>' . PHP_EOL;
+	navigation_path_on_modify('registration', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -856,14 +786,7 @@ function form_modify_entity_registration($row)
 
 function form_modify_entity_registration_file($row)
 {
-	echo link_table('member') . ' >' . PHP_EOL;
-	echo link_entity('member', get_member_id($row['registration_id']),
-			 get_name('member', get_member_id(
-				  $row['registration_id']))) . ' >' . PHP_EOL;
-	echo link_entity('registration', $row['registration_id'],
-			 'Inscription ' . get_registration_season(
-			 $row['registration_id'])) . ' >' . PHP_EOL;
-	echo 'Modifier le dossier<br>' . PHP_EOL;
+	navigation_path_on_modify('registration_file', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -877,10 +800,7 @@ function form_modify_entity_registration_file($row)
 
 function form_modify_entity_room($row)
 {
-	echo link_entity('room', $row['room_id'],
-			 get_entity_name('room', $row['room_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier la salle<br>' . PHP_EOL;
+	navigation_path_on_modify('room', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -894,10 +814,7 @@ function form_modify_entity_room($row)
 
 function form_modify_entity_teacher($row)
 {
-	echo link_entity('teacher', $row['teacher_id'],
-			 get_name('teacher', $row['teacher_id'])) . ' >' .
-	     PHP_EOL;
-	echo 'Modifier le professeur<br>' . PHP_EOL;
+	navigation_path_on_modify('teacher', $row);
 
 	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
@@ -929,13 +846,6 @@ function form_modify_entity($table, $id)
 
 	mysqli_free_result($result);
 	mysqli_close($link);
-
-	echo link_home() . ' >' . PHP_EOL;
-
-	if ($table != 'order_payment' && $table != 'registration'
-	    && $table != 'registration_file'
-	    && $table != 'registration_payment')
-		echo link_table($table) . ' >' . PHP_EOL;
 
 	switch ($table) {
 	case 'goody':

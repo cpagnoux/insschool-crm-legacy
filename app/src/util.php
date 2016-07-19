@@ -3,8 +3,8 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/connection.php';
-require_once 'include/error.php';
+require_once 'src/connection.php';
+require_once 'src/error.php';
 
 /*
  * Navigation bar
@@ -23,6 +23,242 @@ function navigation_bar()
 	echo '  ' . link_table('pre_registration') . PHP_EOL;
 	echo '</nav>' . PHP_EOL;
 	echo '<hr>' . PHP_EOL;
+}
+
+/*
+ * Navigation paths
+ */
+function navigation_path_on_table($table)
+{
+	echo link_home() . ' >' . PHP_EOL;
+
+	switch ($table) {
+	case 'goody':
+		echo 'Goodies<br>' . PHP_EOL;
+		break;
+	case 'lesson':
+		echo 'Cours<br>' . PHP_EOL;
+		break;
+	case 'member':
+		echo 'Adhérents<br>' . PHP_EOL;
+		break;
+	case 'order':
+		echo 'Commandes<br>' . PHP_EOL;
+		break;
+	case 'pre_registration':
+		echo 'Pré-inscriptions<br>' . PHP_EOL;
+		break;
+	case 'room':
+		echo 'Salles<br>' . PHP_EOL;
+		break;
+	case 'teacher':
+		echo 'Professeurs<br>' . PHP_EOL;
+		break;
+	}
+}
+
+function navigation_path_on_display($table, $row)
+{
+	echo link_home() . ' >' . PHP_EOL;
+
+	if ($table != 'registration')
+		echo link_table($table) . ' >' . PHP_EOL;
+
+	switch ($table) {
+	case 'goody':
+		echo $row['name'] . '<br>' . PHP_EOL;
+		break;
+	case 'lesson':
+		echo $row['title'] . '<br>' . PHP_EOL;
+		break;
+	case 'member':
+		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
+		     PHP_EOL;
+		break;
+	case 'order':
+		echo 'N° ' . $row['order_id'] . '<br>' . PHP_EOL;
+		break;
+	case 'pre_registration':
+		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
+		     PHP_EOL;
+		break;
+	case 'registration':
+		$name = get_name('member', $row['member_id']);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $row['member_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Inscription ' . $row['season'] . '<br>' . PHP_EOL;
+		break;
+	case 'room':
+		echo $row['name'] . '<br>' . PHP_EOL;
+		break;
+	case 'teacher':
+		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
+		     PHP_EOL;
+		break;
+	}
+}
+
+function navigation_path_on_add($table, $id)
+{
+	echo link_home() . ' >' . PHP_EOL;
+
+	switch ($table) {
+	case 'goody':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouveau goodies<br>' . PHP_EOL;
+		break;
+	case 'lesson':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouveau cours<br>' . PHP_EOL;
+		break;
+	case 'member':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouvel adhérent<br>' . PHP_EOL;
+		break;
+	case 'order':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouvelle commande<br>' . PHP_EOL;
+		break;
+	case 'order_content':
+		echo link_table('order') . ' >' . PHP_EOL;
+		echo link_entity('order', $id, 'N° ' . $id) . ' >' . PHP_EOL;
+		echo 'Ajouter un article<br>' . PHP_EOL;
+		break;
+	case 'order_payment':
+		echo link_table('order') . ' >' . PHP_EOL;
+		echo link_entity('order', $id, 'N° ' . $id) . ' >' . PHP_EOL;
+		echo 'Nouveau paiement<br>' . PHP_EOL;
+		break;
+	case 'registration':
+		$name = get_name('member', $id);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $id, $name) . ' >' . PHP_EOL;
+		echo 'Nouvelle inscription<br>' . PHP_EOL;
+		break;
+	case 'registration_detail':
+		$member_id = get_member_id($id);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($id);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
+		echo link_entity('registration', $id,
+				 'Inscription ' . $season) . ' >' . PHP_EOL;
+		echo 'Ajouter un cours<br>' . PHP_EOL;
+		break;
+	case 'registration_payment':
+		$member_id = get_member_id($id);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($id);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
+		echo link_entity('registration', $id,
+				 'Inscription ' . $season) . ' >' . PHP_EOL;
+		echo 'Nouveau paiement<br>' . PHP_EOL;
+		break;
+	case 'room':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouvelle salle<br>' . PHP_EOL;
+		break;
+	case 'teacher':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo 'Nouveau professeur<br>' . PHP_EOL;
+		break;
+	}
+}
+
+function navigation_path_on_modify($table, $row)
+{
+	echo link_home() . ' >' . PHP_EOL;
+
+	switch ($table) {
+	case 'goody':
+		$name = get_entity_name('goody', $row['goody_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('goody', $row['goody_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier le goodies<br>' . PHP_EOL;
+		break;
+	case 'lesson':
+		$title = get_lesson_title($row['lesson_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('lesson', $row['lesson_id'], $title) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier le cours<br>' . PHP_EOL;
+		break;
+	case 'member':
+		$name = get_name('member', $row['member_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('member', $row['member_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier l\'adhérent<br>' . PHP_EOL;
+		break;
+	case 'order':
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('order', $row['order_id'],
+				 'N° ' . $row['order_id']) . ' >' . PHP_EOL;
+		echo 'Modifier la commande<br>' . PHP_EOL;
+		break;
+	case 'order_payment':
+		echo link_table('order') . ' >' . PHP_EOL;
+		echo link_entity('order', $row['order_id'],
+				 'N° ' . $row['order_id']) . ' >' . PHP_EOL;
+		echo 'Modifier le paiement<br>' . PHP_EOL;
+		break;
+	case 'pre_registration':
+		$name = get_name('pre_registration',
+				 $row['pre_registration_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('pre_registration',
+				 $row['pre_registration_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier la pré-inscription<br>' . PHP_EOL;
+		break;
+	case 'registration':
+		$name = get_name('member', $row['member_id']);
+		$season = get_registration_season($row['registration_id']);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $row['member_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo link_entity('registration', $row['registration_id'],
+				 'Inscription ' . $season) . ' >' . PHP_EOL;
+		echo 'Modifier l\'inscription<br>' . PHP_EOL;
+		break;
+	case 'registration_file':
+		$member_id = get_member_id($row['registration_id']);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($row['registration_id']);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
+		echo link_entity('registration', $row['registration_id'],
+				 'Inscription ' . $season) . ' >' . PHP_EOL;
+		echo 'Modifier le dossier<br>' . PHP_EOL;
+		break;
+	case 'registration_payment':
+		$member_id = get_member_id($row['registration_id']);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($row['registration_id']);
+		echo link_table('member') . ' >' . PHP_EOL;
+		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
+		echo link_entity('registration', $row['registration_id'],
+				 'Inscription ' . $season) . ' >' . PHP_EOL;
+		echo 'Modifier le paiement<br>' . PHP_EOL;
+		break;
+	case 'room':
+		$name = get_entity_name('room', $row['room_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('room', $row['room_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier la salle<br>' . PHP_EOL;
+		break;
+	case 'teacher':
+		$name = get_name('teacher', $row['teacher_id']);
+		echo link_table($table) . ' >' . PHP_EOL;
+		echo link_entity('teacher', $row['teacher_id'], $name) . ' >' .
+		     PHP_EOL;
+		echo 'Modifier le professeur<br>' . PHP_EOL;
+		break;
+	}
 }
 
 /*

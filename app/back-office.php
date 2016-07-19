@@ -3,12 +3,12 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'include/login.php';
-require_once 'include/util.php';
+require_once 'src/login.php';
+require_once 'src/util.php';
 
-require_once 'include/libpre-registration.php';
-require_once 'include/table.php';
-require_once 'include/entity.php';
+require_once 'src/libpre-registration.php';
+require_once 'src/table.php';
+require_once 'src/entity.php';
 ?>
 <!DOCTYPE html>
 <html>
