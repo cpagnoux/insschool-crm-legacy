@@ -90,7 +90,10 @@ function display_content($result, $order_id)
 	echo '    <th><b>Prix unitaire</b></th>' . PHP_EOL;
 	echo '    <th><b>Quantité</b></th>' . PHP_EOL;
 	echo '    <th><b>Total</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
+
+	if (!order_paid($order_id))
+		echo '    <th></th>' . PHP_EOL;
+
 	echo '  </tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
