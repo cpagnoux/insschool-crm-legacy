@@ -15,244 +15,6 @@ require_once 'src/table.php';
 /*
  * Display of entity
  */
-function display_entity_goody($row)
-{
-	navigation_path_on_display('goody', $row);
-
-	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
-
-	echo '<b>Référence :</b> ' . $row['goody_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Description :</b> ' . $row['description'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Prix :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
-	echo '<b>Stock :</b> ' . $row['stock'] . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('goody', $row['goody_id']) . PHP_EOL;
-	echo link_delete_entity('goody', $row['goody_id']) . '<br>' . PHP_EOL;
-}
-
-function display_entity_lesson($row)
-{
-	navigation_path_on_display('lesson', $row);
-
-	echo '<h2>' . $row['title'] . '</h2>' . PHP_EOL;
-
-	echo '<b>Référence :</b> ' . $row['lesson_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Professeur :</b> ' . get_name('teacher', $row['teacher_id']) .
-	     '<br>' . PHP_EOL;
-	echo '<b>Jour :</b> ' . eval_enum($row['day']) . '<br>' . PHP_EOL;
-	echo '<b>Heure de début :</b> ' . $row['start_time'] . '<br>' . PHP_EOL;
-	echo '<b>Heure de fin :</b> ' . $row['end_time'] . '<br>' . PHP_EOL;
-	echo '<b>Durée :</b> ' .
-	     duration($row['start_time'], $row['end_time']) . '<br>' . PHP_EOL;
-	echo '<b>Salle :</b> ' . get_entity_name('room', $row['room_id']) .
-	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Costume :</b> ' . $row['costume'] . '<br>' . PHP_EOL;
-	echo '<b>T-shirt :</b> ' . $row['t_shirt'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Nombre d\'inscrits (' . current_season() . ') :</b> ' .
-	     lesson_registrant_count($row['lesson_id'], current_season()) .
-	     '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('lesson', $row['lesson_id']) . PHP_EOL;
-	echo link_delete_entity('lesson', $row['lesson_id']) . '<br>' . PHP_EOL;
-}
-
-function display_entity_member($link, $row)
-{
-	navigation_path_on_display('member', $row);
-
-	echo '<h2>Information adhérent</h2>' . PHP_EOL;
-
-	echo '<b>N° d\'adhérent :</b> ' . $row['member_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Nom :</b> ' . $row['last_name'] . '<br>' . PHP_EOL;
-	echo '<b>Prénom :</b> ' . $row['first_name'] . '<br>' . PHP_EOL;
-	echo '<b>Date de naissance :</b> ' . $row['birth_date'] . '<br>' .
-	     PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Adresse :</b> ' . $row['adress'] . '<br>' . PHP_EOL;
-	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
-	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Portable :</b> ' . $row['cellphone'] . '<br>' . PHP_EOL;
-	echo '<b>Portable père :</b> ' . $row['cellphone_father'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Portable mère :</b> ' . $row['cellphone_mother'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Fixe :</b> ' . $row['phone'] . '<br>' . PHP_EOL;
-	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>A connu INS School grâce à :</b> ' .
-	     eval_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Bénévole :</b> ' . eval_boolean($row['volunteer']) . '<br>' .
-	     PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('member', $row['member_id']) . PHP_EOL;
-	echo link_delete_entity('member', $row['member_id']) . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	display_member_registrations($link, $row['member_id']);
-}
-
-function display_entity_order($link, $row)
-{
-	navigation_path_on_display('order', $row);
-
-	echo '<h2>Commande n° ' . $row['order_id'] . '</h2>' . PHP_EOL;
-
-	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
-	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	display_order_content($link, $row['order_id']);
-
-	if (!order_paid($row['order_id'])
-	    || order_total($row['order_id']) == 0) {
-		echo link_modify_entity('order', $row['order_id']) . PHP_EOL;
-		echo link_delete_entity('order', $row['order_id']) . '<br>' .
-		     PHP_EOL;
-	}
-
-	echo '<br>' . PHP_EOL;
-	display_entity_payments($link, 'order', $row['order_id']);
-}
-
-function display_entity_pre_registration($row)
-{
-	navigation_path_on_display('pre_registration', $row);
-
-	echo '<h2>Détail pré-inscription</h2>' . PHP_EOL;
-
-	echo '<b>N° de pré-inscription :</b> ' . $row['pre_registration_id'] .
-	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Nom :</b> ' . $row['last_name'] . '<br>' . PHP_EOL;
-	echo '<b>Prénom :</b> ' . $row['first_name'] . '<br>' . PHP_EOL;
-	echo '<b>Date de naissance :</b> ' . $row['birth_date'] . '<br>' .
-	     PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Adresse :</b> ' . $row['adress'] . '<br>' . PHP_EOL;
-	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
-	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Portable :</b> ' . $row['cellphone'] . '<br>' . PHP_EOL;
-	echo '<b>Portable père :</b> ' . $row['cellphone_father'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Portable mère :</b> ' . $row['cellphone_mother'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Fixe :</b> ' . $row['phone'] . '<br>' . PHP_EOL;
-	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Cours choisi(s) :</b> ' . chosen_lessons($row['lessons']) .
-	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>A connu INS School grâce à :</b> ' .
-	     eval_enum($row['means_of_knowledge']) . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Date :</b> ' . $row['date'] . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_commit_pre_registration($row['pre_registration_id']) .
-	     PHP_EOL;
-	echo link_modify_entity('pre_registration',
-				$row['pre_registration_id']) . PHP_EOL;
-	echo link_delete_entity('pre_registration',
-				$row['pre_registration_id']) . '<br>' . PHP_EOL;
-}
-
-function display_entity_registration($link, $row)
-{
-	navigation_path_on_display('registration', $row);
-
-	echo '<h2>Inscription ' . $row['season'] . '</h2>' . PHP_EOL;
-
-	echo '<b>N° d\'inscription :</b> ' . $row['registration_id'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Adhérent :</b> ' . get_name('member', $row['member_id']) .
-	     '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Formule :</b> ' .
-	     registration_formula($row['registration_id']) . ' cours<br>' .
-	     PHP_EOL;
-	echo '<b>Tarif :</b> ' . $row['price'] . ' €<br>' . PHP_EOL;
-	echo '<b>Réduction :</b> ' . $row['discount'] . ' %<br>' . PHP_EOL;
-	echo '<b>Tarif après réduction :</b> ' .
-	     price_after_discount($row['price'], $row['discount']) . ' €<br>' .
-	     PHP_EOL;
-	echo '<b>Nombre de paiements :</b> ' . $row['num_payments'] . '<br>' .
-	     PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('registration', $row['registration_id']) .
-	     PHP_EOL;
-	echo link_delete_entity('registration', $row['registration_id']) .
-	     '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	display_registration_file($link, $row['registration_id']);
-	echo '<br>' . PHP_EOL;
-	display_registration_detail($link, $row['registration_id']);
-	echo '<br>' . PHP_EOL;
-	display_entity_payments($link, 'registration', $row['registration_id']);
-}
-
-function display_entity_room($row)
-{
-	navigation_path_on_display('room', $row);
-
-	echo '<h2>' . $row['name'] . '</h2>' . PHP_EOL;
-
-	echo '<b>N° de salle :</b> ' . $row['room_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Adresse :</b> ' . $row['adress'] . '<br>' . PHP_EOL;
-	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
-	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('room', $row['room_id']) . PHP_EOL;
-	echo link_delete_entity('room', $row['room_id']) . '<br>' . PHP_EOL;
-}
-
-function display_entity_teacher($row)
-{
-	navigation_path_on_display('teacher', $row);
-
-	echo '<h2>' . $row['first_name'] . ' ' . $row['last_name'] . '</h2>' .
-	     PHP_EOL;
-
-	echo '<b>Identifiant :</b> ' . $row['teacher_id'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Nom :</b> ' . $row['last_name'] . '<br>' . PHP_EOL;
-	echo '<b>Prénom :</b> ' . $row['first_name'] . '<br>' . PHP_EOL;
-	echo '<b>Date de naissance :</b> ' . $row['birth_date'] . '<br>' .
-	     PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Adresse :</b> ' . $row['adress'] . '<br>' . PHP_EOL;
-	echo '<b>Code postal :</b> ' . $row['postal_code'] . '<br>' . PHP_EOL;
-	echo '<b>Ville :</b> ' . $row['city'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Portable :</b> ' . $row['cellphone'] . '<br>' . PHP_EOL;
-	echo '<b>Fixe :</b> ' . $row['phone'] . '<br>' . PHP_EOL;
-	echo '<b>Email :</b> ' . $row['email'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Absences :</b> ' . $row['absences'] . '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('teacher', $row['teacher_id']) . PHP_EOL;
-	echo link_delete_entity('teacher', $row['teacher_id']) . '<br>' .
-	     PHP_EOL;
-}
-
 function display_entity($table, $id)
 {
 	$link = connect_database();
@@ -270,28 +32,28 @@ function display_entity($table, $id)
 
 	switch ($table) {
 	case 'goody':
-		display_entity_goody($row);
+		require 'views/goody.html.php';
 		break;
 	case 'lesson':
-		display_entity_lesson($row);
+		require 'views/lesson.html.php';
 		break;
 	case 'member':
-		display_entity_member($link, $row);
+		require 'views/member.html.php';
 		break;
 	case 'order':
-		display_entity_order($link, $row);
+		require 'views/order.html.php';
 		break;
 	case 'pre_registration':
-		display_entity_pre_registration($row);
+		require 'views/pre_registration.html.php';
 		break;
 	case 'registration':
-		display_entity_registration($link, $row);
+		require 'views/registration.html.php';
 		break;
 	case 'room':
-		display_entity_room($row);
+		require 'views/room.html.php';
 		break;
 	case 'teacher':
-		display_entity_teacher($row);
+		require 'views/teacher.html.php';
 		break;
 	}
 
