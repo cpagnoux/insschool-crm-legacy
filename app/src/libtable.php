@@ -12,7 +12,6 @@ function table_pagination($table, $page)
 	if ($num_rows <= $_SESSION['limit'])
 		return;
 
-	echo '<br>' . PHP_EOL;
 	echo '<nav>' . PHP_EOL;
 
 	if ($page > 1)

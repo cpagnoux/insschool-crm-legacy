@@ -13,34 +13,6 @@ require_once 'src/entity.php';
 /*
  * Helper functions for displaying member-related data
  */
-function display_registrations($result)
-{
-	echo '<h2>Inscriptions</h2>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucune inscription<br>' . PHP_EOL;
-		return;
-	}
-
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Saison</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['season'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('registration',
-					      $row['registration_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
 function display_member_registrations($link, $member_id)
 {
 	$query = 'SELECT * FROM registration WHERE member_id = ' . $member_id .
@@ -50,85 +22,14 @@ function display_member_registrations($link, $member_id)
 		exit;
 	}
 
-	display_registrations($result);
+	require 'views/member_registrations.html.php';
 
 	mysqli_free_result($result);
-
-	echo '<br>' . PHP_EOL;
-	echo link_add_entity('registration', $member_id) . '<br>' . PHP_EOL;
 }
 
 /*
  * Helper functions for displaying order-related data
  */
-function display_quantity_form($order_id, $goody_id, $quantity)
-{
-	echo '      <form action="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify_quantity&amp;order_id=' . $order_id .
-	     '&amp;goody_id=' . $goody_id . '" method="post">' . PHP_EOL;
-	echo '        ' .
-	     link_quantity_minus($order_id, $goody_id, $quantity - 1) . PHP_EOL;
-	echo '        <input type="text" name="quantity" value="' . $quantity .
-	     '" size="2" onchange="this.form.submit()">' . PHP_EOL;
-	echo '        ' .
-	     link_quantity_plus($order_id, $goody_id, $quantity + 1) . PHP_EOL;
-	echo '      </form>' . PHP_EOL;
-}
-
-function display_content($result, $order_id)
-{
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun article<br>' . PHP_EOL;
-		return;
-	}
-
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Référence</b></th>' . PHP_EOL;
-	echo '    <th><b>Désignation</b></th>' . PHP_EOL;
-	echo '    <th><b>Prix unitaire</b></th>' . PHP_EOL;
-	echo '    <th><b>Quantité</b></th>' . PHP_EOL;
-	echo '    <th><b>Total</b></th>' . PHP_EOL;
-
-	if (!order_paid($order_id))
-		echo '    <th></th>' . PHP_EOL;
-
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['goody_id'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
-
-		if (order_paid($order_id)) {
-			echo '    <td>' . $row['quantity'] . '</td>' . PHP_EOL;
-		} else {
-			echo '    <td>' . PHP_EOL;
-			display_quantity_form($order_id, $row['goody_id'],
-					      $row['quantity']);
-			echo '    </td>' . PHP_EOL;
-		}
-
-		echo '    <td>' .
-		     total_by_product($row['price'], $row['quantity']) .
-		     ' €</td>' . PHP_EOL;
-
-		if (!order_paid($order_id))
-			echo '    <td>' .
-			     link_remove_product($order_id, $row['goody_id']) .
-			     '</td>' . PHP_EOL;
-
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo '<b>TOTAL :</b> ' . order_total($order_id) . ' €<br>' . PHP_EOL;
-}
-
 function display_order_content($link, $order_id)
 {
 	$query = 'SELECT order_content.goody_id, order_content.quantity, ' .
@@ -141,53 +42,14 @@ function display_order_content($link, $order_id)
 		exit;
 	}
 
-	display_content($result, $order_id);
+	require 'views/order_content.html.php';
 
 	mysqli_free_result($result);
-
-	if (!order_paid($order_id) || order_total($order_id) == 0) {
-		echo '<br>' . PHP_EOL;
-		echo link_add_entity('order_content', $order_id) . PHP_EOL;
-		echo link_empty_cart($order_id) . '<br>' . PHP_EOL;
-	}
 }
 
 /*
  * Helper functions for displaying registration-related data
  */
-function display_detail($result, $registration_id)
-{
-	echo '<h2>Cours choisis</h2>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun cours<br>' . PHP_EOL;
-		return;
-	}
-
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Cours</b></th>' . PHP_EOL;
-	echo '    <th><b>Participation à l\'INS Show</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['title'] . '</td>' . PHP_EOL;
-		echo '    <td>' . eval_boolean($row['show_participation']) .
-		     ' ' . link_toggle_show_participation($registration_id,
-							  $row['lesson_id']) .
-		     '</td>' . PHP_EOL;
-		echo '    <td>' .
-		     link_remove_lesson($registration_id, $row['lesson_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
 function display_registration_detail($link, $registration_id)
 {
 	$query = 'SELECT registration_detail.lesson_id, ' .
@@ -201,39 +63,9 @@ function display_registration_detail($link, $registration_id)
 		exit;
 	}
 
-	display_detail($result, $registration_id);
+	require 'views/registration_detail.html.php';
 
 	mysqli_free_result($result);
-
-	echo '<br>' . PHP_EOL;
-	echo link_add_entity('registration_detail', $registration_id) . '<br>' .
-	     PHP_EOL;
-}
-
-function display_file($result)
-{
-	echo '<h2>Dossier</h2>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Erreur : aucun dossier<br>' . PHP_EOL;
-		return;
-	}
-
-	$row = mysqli_fetch_assoc($result);
-
-	echo '<b>Certificat médical :</b> ' .
-	     eval_boolean($row['medical_certificate']) . '<br>' . PHP_EOL;
-	echo '<b>Assurance :</b> ' . eval_boolean($row['insurance']) . '<br>' .
-	     PHP_EOL;
-	echo '<b>Photo :</b> ' . eval_boolean($row['photo']) . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Dossier complet :</b> ' .
-	     eval_boolean(registration_file_complete($row['registration_id'])) .
-	     '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_modify_entity('registration_file', $row['registration_id']) .
-	     '<br>' . PHP_EOL;
 }
 
 function display_registration_file($link, $registration_id)
@@ -245,7 +77,7 @@ function display_registration_file($link, $registration_id)
 		exit;
 	}
 
-	display_file($result);
+	require 'views/registration_file.html.php';
 
 	mysqli_free_result($result);
 }
@@ -253,48 +85,6 @@ function display_registration_file($link, $registration_id)
 /*
  * Helper functions for displaying payments
  */
-function display_payments($result, $table, $id)
-{
-	echo '<h2>Paiements</h2>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun paiement<br>' . PHP_EOL;
-		return;
-	}
-
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Montant</b></th>' . PHP_EOL;
-	echo '    <th><b>Mode de paiement</b></th>' . PHP_EOL;
-	echo '    <th><b>Date</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['amount'] . ' €</td>' . PHP_EOL;
-		echo '    <td>' . eval_enum($row['mode']) . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
-		echo '    <td>' .
-		     link_modify_entity($table . '_payment',
-					$row[$table . '_payment_id']) .
-		     '</td>' . PHP_EOL;
-		echo '    <td>' .
-		     link_delete_entity($table . '_payment',
-					$row[$table . '_payment_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo '<b>Total payé :</b> ' . total_paid($table, $id) . ' €<br>' .
-	     PHP_EOL;
-}
-
 function display_entity_payments($link, $table, $id)
 {
 	$query = 'SELECT * FROM ' . $table . '_payment WHERE ' . $table .
@@ -304,27 +94,9 @@ function display_entity_payments($link, $table, $id)
 		exit;
 	}
 
-	display_payments($result, $table, $id);
+	require 'views/entity_payments.html.php';
 
 	mysqli_free_result($result);
-
-	echo '<br>' . PHP_EOL;
-
-	switch ($table) {
-	case 'order':
-		echo '<b>Commande réglée :</b> ' .
-		     eval_boolean(order_paid($id));
-		break;
-	case 'registration':
-		echo '<b>Inscription réglée :</b> ' .
-		     eval_boolean(registration_paid($id));
-		break;
-	}
-
-	echo '<br>' . PHP_EOL;
-
-	echo '<br>' . PHP_EOL;
-	echo link_add_entity($table . '_payment', $id) . '<br>' . PHP_EOL;
 }
 
 /*
@@ -560,50 +332,6 @@ function select_teacher($teacher_id)
 /*
  * Forms' content
  */
-function form_entity_goody($row)
-{
-	echo '  Désignation <sup>*</sup> : <input type="text" name="name" ' .
-	     'value="' . $row['name'] . '" required="required">' . '<br>' .
-	     PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Description : <input type="text" name="description" value="' .
-	     $row['description'] . '"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Prix : <input type="text" name="price" value="' .
-	     $row['price'] . '"> €<br>' . PHP_EOL;
-	echo '  Stock : <input type="text" name="stock" value="' .
-	     $row['stock'] . '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_lesson($row)
-{
-	echo '  Intitulé <sup>*</sup> : <input type="text" name="title" ' .
-	     'value="' . $row['title'] . '" required="required"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	select_teacher($row['teacher_id']);
-	select_day($row['day']);
-	echo '  Heure de début <sup>*</sup> : <input type="text" ' .
-	     'name="start_time" value="' . $row['start_time'] .
-	     '" required="required"> (HH:MM:SS)<br>' . PHP_EOL;
-	echo '  Heure de fin <sup>*</sup> : <input type="text" ' .
-	     'name="end_time" value="' . $row['end_time'] .
-	     '" required="required"> (HH:MM:SS)<br>' . PHP_EOL;
-	select_room($row['room_id']);
-	echo '  <br>' . PHP_EOL;
-	echo '  Costume : <input type="text" name="costume" value="' .
-	     $row['costume'] . '"><br>' . PHP_EOL;
-	echo '  T-shirt : <input type="text" name="t_shirt" value="' .
-	     $row['t_shirt'] . '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
 function form_entity_member($row)
 {
 	$means_of_knowledge_poster_flyer = '';
@@ -632,103 +360,7 @@ function form_entity_member($row)
 			$volunteer_false = ' checked="checked"';
 	}
 
-	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Date de naissance <sup>*</sup> : <input type="text" ' .
-	     'name="birth_date" value="' . $row['birth_date'] .
-	     '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Adresse <sup>*</sup> : <input type="text" name="adress" ' .
-	     'value="' . $row['adress'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Code postal <sup>*</sup> : <input type="text" ' .
-	     'name="postal_code" value="' . $row['postal_code'] .
-	     '" required="required"><br>' . PHP_EOL;
-	echo '  Ville <sup>*</sup> : <input type="text" name="city" value="' .
-	     $row['city'] . '" required="required"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Portable : <input type="text" name="cellphone" value="' .
-	     $row['cellphone'] . '"><br>' . PHP_EOL;
-	echo '  Portable père : <input type="text" name="cellphone_father" ' .
-	     'value="' . $row['cellphone_father'] . '">' . '<br>' . PHP_EOL;
-	echo '  Portable mère : <input type="text" name="cellphone_mother" ' .
-	     'value="' . $row['cellphone_mother'] . '">' . '<br>' . PHP_EOL;
-	echo '  Fixe : <input type="text" name="phone" value="' .
-	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  Email : <input type="email" name="email" value="' .
-	     $row['email'] . '"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  A connu INS School grâce à :<br>' . PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="POSTER_FLYER" required="required"' .
-	     $means_of_knowledge_poster_flyer . '> Affiches, Flyers<br>' .
-	     PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="INTERNET"' . $means_of_knowledge_internet .
-	     '> Internet<br>' . PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="WORD_OF_MOUTH"' . $means_of_knowledge_word_of_mouth .
-	     '> Bouche-à-oreille<br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Bénévole <sup>*</sup> : <input type="radio" name="volunteer" ' .
-	     'value="1" required="required"' . $volunteer_true .
-	     '> Oui <input type="radio" name="volunteer" value="0"' .
-	     $volunteer_false . '> Non<br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_order($row)
-{
-	select_member($row['member_id']);
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_order_content($order_id)
-{
-	echo '  N° de commande : <input type="text" name="order_id" value="' .
-	     $order_id . '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	select_goody();
-	echo '  Quantité <sup>*</sup> : <input type="text" name="quantity" ' .
-	     'required="required"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_payment($table, $id, $row)
-{
-	switch ($table) {
-	case 'order':
-		echo '  N° de commande : ';
-		break;
-	case 'registration':
-		echo '  N° d\'inscription : ';
-		break;
-	}
-
-	echo '<input type="text" name="' . $table . '_id" value="' . $id .
-	     '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Montant <sup>*</sup> : <input type="text" name="amount" ' .
-	     'value="' . $row['amount'] . '" required="required"> €<br>' .
-	     PHP_EOL;
-	select_mode($row['mode']);
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
+	require 'views/form_member.html.php';
 }
 
 function form_entity_pre_registration($row)
@@ -755,115 +387,7 @@ function form_entity_pre_registration($row)
 		}
 	}
 
-	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Date de naissance <sup>*</sup> : <input type="text" ' .
-	     'name="birth_date" value="' . $row['birth_date'] .
-	     '" required="required"> (AAAA-MM-JJ)<br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Adresse <sup>*</sup> : <input type="text" name="adress" ' .
-	     'value="' . $row['adress'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Code postal <sup>*</sup> : <input type="text" ' .
-	     'name="postal_code" value="' . $row['postal_code'] .
-	     '" required="required"><br>' . PHP_EOL;
-	echo '  Ville <sup>*</sup> : <input type="text" name="city" value="' .
-	     $row['city'] . '" required="required"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Portable élève : <input type="text" name="cellphone" value="' .
-	     $row['cellphone'] . '"><br>' . PHP_EOL;
-	echo '  Portable père : <input type="text" name="cellphone_father" ' .
-	     'value="' . $row['cellphone_father'] . '"><br>' . PHP_EOL;
-	echo '  Portable mère : <input type="text" name="cellphone_mother" ' .
-	     'value="' . $row['cellphone_mother'] . '"><br>' . PHP_EOL;
-	echo '  Téléphone fixe : <input type="text" name="phone" value="' .
-	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  E-mail : <input type="email" name="email" value="' .
-	     $row['email'] . '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <h2>Cours suivi(s)</h2>' . PHP_EOL;
-
-	display_lessons($lessons);
-
-	echo '  <br>' . PHP_EOL;
-
-	if (!isset($row))
-		display_warnings();
-
-	echo '  <br>' . PHP_EOL;
-
-	if (isset($row))
-		echo '  A connu INS School grâce à : <sup>*</sup><br>' .
-		     PHP_EOL;
-	else
-		echo '  Comment nous avez-vous connus ? <sup>*</sup><br>' .
-		     PHP_EOL;
-
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="POSTER_FLYER" required="required"' .
-	     $means_of_knowledge_poster_flyer . '> Affiches, Flyers<br>' .
-	     PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="INTERNET"' . $means_of_knowledge_internet .
-	     '> Internet<br>' . PHP_EOL;
-	echo '  <input type="radio" name="means_of_knowledge" ' .
-	     'value="WORD_OF_MOUTH"' . $means_of_knowledge_word_of_mouth .
-	     '> Bouche-à-oreille<br>' . PHP_EOL;
-
-	if (!isset($row)) {
-		echo '  <br><br>' . PHP_EOL;
-		display_info();
-	}
-
-	echo '  <br><br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_registration($member_id, $row)
-{
-	echo '  N° d\'adhérent : <input type="text" ' .
-	     'name="member_id" value="' . $member_id .
-	     '" readonly="readonly"><br>' . PHP_EOL;
-
-	if (!isset($row)) {
-		echo '  <br>' . PHP_EOL;
-		select_season();
-	}
-
-	echo '  <br>' . PHP_EOL;
-	echo '  Tarif : <input type="text" name="price" value="' .
-	     $row['price'] . '"> €<br>' . PHP_EOL;
-	echo '  Réduction : <input type="text" name="discount" value="' .
-	     $row['discount'] . '"> %<br>' . PHP_EOL;
-	echo '  Nombre de paiements : <input type="text" name="num_payments" ' .
-	     'value="' . $row['num_payments'] . '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_registration_detail($registration_id)
-{
-	echo '  N° d\'inscription : <input type="text" name=registration_id ' .
-	     'value="' . $registration_id . '" readonly="readonly"><br>' .
-	     PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	select_lesson();
-	echo '  Participation à l\'INS Show <sup>*</sup> : <input ' .
-	     'type="radio" name="show_participation" value="1" ' .
-	     'required="required"> Oui <input type="radio" ' .
-	     'name="show_participation" value="0"> Non<br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
+	require 'views/form_pre_registration.html.php';
 }
 
 function form_entity_registration_file($registration_id, $row)
@@ -892,74 +416,7 @@ function form_entity_registration_file($registration_id, $row)
 			$photo_false = ' checked="checked"';
 	}
 
-	echo '  N° d\'inscription : <input type="text" ' .
-	     'name="registration_id" value="' . $registration_id .
-	     '" readonly="readonly"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Certificat médical <sup>*</sup> : <input type="radio" ' .
-	     'name="medical_certificate" value="1" required="required"' .
-	     $medical_certificate_true . '> Oui <input type="radio" ' .
-	     'name="medical_certificate" value="0"' .
-	     $medical_certificate_false . '> Non<br>' . PHP_EOL;
-	echo '  Assurance <sup>*</sup> : <input type="radio" ' .
-	     'name="insurance" value="1" required="required"' .
-	     $insurance_true . '> Oui <input type="radio" name="insurance" ' .
-	     'value="0"' . $insurance_false . '> Non<br>' . PHP_EOL;
-	echo '  Photo <sup>*</sup> : <input type="radio" name="photo" ' .
-	     'value="1" required="required"' . $photo_true .
-	     '> Oui <input type="radio" name="photo" value="0"' . $photo_false .
-	     '> Non<br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_room($row)
-{
-	echo '  Nom <sup>*</sup> : <input type="text" name="name" value="' .
-	     $row['name'] . '" required="required"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Adresse : <input type="text" name="adress" value="' .
-	     $row['adress'] . '"><br>' . PHP_EOL;
-	echo '  Code postal : <input type="text" name="postal_code" value="' .
-	     $row['postal_code'] . '"><br>' . PHP_EOL;
-	echo '  Ville : <input type="text" name="city" value="' . $row['city'] .
-	     '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
-}
-
-function form_entity_teacher($row)
-{
-	echo '  Nom <sup>*</sup> : <input type="text" name="last_name" ' .
-	     'value="' . $row['last_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Prénom <sup>*</sup> : <input type="text" name="first_name" ' .
-	     'value="' . $row['first_name'] . '" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Date de naissance : <input type="text" name="birth_date" ' .
-	     'value="' . $row['birth_date'] . '"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Adresse : <input type="text" name="adress" value="' .
-	     $row['adress'] . '"><br>' . PHP_EOL;
-	echo '  Code postal : <input type="text" name="postal_code" value="' .
-	     $row['postal_code'] . '"><br>' . PHP_EOL;
-	echo '  Ville : <input type="text" name="city" value="' . $row['city'] .
-	     '"><br>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
-	echo '  Portable : <input type="text" name="cellphone" value="' .
-	     $row['cellphone'] . '"><br>' . PHP_EOL;
-	echo '  Fixe : <input type="text" name="phone" value="' .
-	     $row['phone'] . '"><br>' . PHP_EOL;
-	echo '  Email : <input type="email" name="email" value="' .
-	     $row['email'] . '"><br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Valider"><br>' .
-	     PHP_EOL;
+	require 'views/form_registration_file.html.php';
 }
 
 /*

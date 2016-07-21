@@ -9,247 +9,6 @@ require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
-function display_table_goody($result)
-{
-	navigation_path_on_table('goody');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun goodies<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('goody');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Désignation</b></th>' . PHP_EOL;
-	echo '    <th><b>Prix</b></th>' . PHP_EOL;
-	echo '    <th><b>Stock</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['price'] . ' €</td>' . PHP_EOL;
-		echo '    <td>' . product_status($row['stock']) . '</td>' .
-		     PHP_EOL;
-		echo '    <td>' . link_entity('goody', $row['goody_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_lesson($result)
-{
-	navigation_path_on_table('lesson');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun cours<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('lesson');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Intitulé</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['title'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('lesson', $row['lesson_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_member($result)
-{
-	navigation_path_on_table('member');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun adhérent<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('member');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Nom</b></th>' . PHP_EOL;
-	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['last_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['first_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('member', $row['member_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_order($result)
-{
-	navigation_path_on_table('order');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucune commande<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('order');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>N° de commande</b></th>' . PHP_EOL;
-	echo '    <th><b>Adhérent</b></th>' . PHP_EOL;
-	echo '    <th><b>Date</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['order_id'] . '</td>' . PHP_EOL;
-		echo '    <td>' . get_name('member', $row['member_id']) .
-		     '</td>' . PHP_EOL;
-		echo '    <td>' . $row['date'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('order', $row['order_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_pre_registration($result)
-{
-	navigation_path_on_table('pre_registration');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucune pré-inscription<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('pre_registration');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Nom</b></th>' . PHP_EOL;
-	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['last_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['first_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('pre_registration',
-					  $row['pre_registration_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_room($result)
-{
-	navigation_path_on_table('room');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucune salle<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('room');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Nom</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('room', $row['room_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' ; PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
-function display_table_teacher($result)
-{
-	navigation_path_on_table('teacher');
-
-	echo '<br>' . PHP_EOL;
-
-	if (mysqli_num_rows($result) == 0) {
-		echo 'Aucun professeur<br>' . PHP_EOL;
-		return;
-	}
-
-	table_display_options('teacher');
-
-	echo '<br>' . PHP_EOL;
-	echo '<table>' . PHP_EOL;
-
-	echo '  <tr>' . PHP_EOL;
-	echo '    <th><b>Nom</b></th>' . PHP_EOL;
-	echo '    <th><b>Prénom</b></th>' . PHP_EOL;
-	echo '    <th></th>' . PHP_EOL;
-	echo '  </tr>' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		echo '  <tr>' . PHP_EOL;
-		echo '    <td>' . $row['last_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . $row['first_name'] . '</td>' . PHP_EOL;
-		echo '    <td>' . link_entity('teacher', $row['teacher_id']) .
-		     '</td>' . PHP_EOL;
-		echo '  </tr>' . PHP_EOL;
-	}
-
-	echo '</table>' . PHP_EOL;
-}
-
 function display_table($table, $page)
 {
 	if (!isset($_SESSION['goody_sorting']))
@@ -300,36 +59,29 @@ function display_table($table, $page)
 
 	switch ($table) {
 	case 'goody':
-		display_table_goody($result);
+		require 'views/table_goody.html.php';
 		break;
 	case 'lesson':
-		display_table_lesson($result);
+		require 'views/table_lesson.html.php';
 		break;
 	case 'member':
-		display_table_member($result);
+		require 'views/table_member.html.php';
 		break;
 	case 'order':
-		display_table_order($result);
+		require 'views/table_order.html.php';
 		break;
 	case 'pre_registration':
-		display_table_pre_registration($result);
+		require 'views/table_pre_registration.html.php';
 		break;
 	case 'room':
-		display_table_room($result);
+		require 'views/table_room.html.php';
 		break;
 	case 'teacher':
-		display_table_teacher($result);
+		require 'views/table_teacher.html.php';
 		break;
 	}
 
 	mysqli_free_result($result);
 	mysqli_close($link);
-
-	table_pagination($table, $page);
-
-	if ($table != 'pre_registration') {
-		echo '<br>' . PHP_EOL;
-		echo link_add_entity($table) . '<br>' . PHP_EOL;
-	}
 }
 ?>

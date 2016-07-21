@@ -67,11 +67,10 @@ function form_add_entity_goody()
 {
 	navigation_path_on_add('goody');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=goody" method="post">' . PHP_EOL;
 
-	form_entity_goody();
+	require 'views/form_goody.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -80,11 +79,10 @@ function form_add_entity_lesson()
 {
 	navigation_path_on_add('lesson');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=lesson" method="post">' . PHP_EOL;
 
-	form_entity_lesson();
+	require 'views/form_lesson.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -93,7 +91,6 @@ function form_add_entity_member()
 {
 	navigation_path_on_add('member');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=member" method="post">' . PHP_EOL;
 
@@ -106,11 +103,10 @@ function form_add_entity_order()
 {
 	navigation_path_on_add('order');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=order" method="post">' . PHP_EOL;
 
-	form_entity_order();
+	require 'views/form_order.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -119,11 +115,10 @@ function form_add_entity_order_content($order_id)
 {
 	navigation_path_on_add('order_content', $order_id);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=order_content" method="post">' . PHP_EOL;
 
-	form_entity_order_content($order_id);
+	require 'views/form_order_content.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -139,12 +134,11 @@ function form_add_entity_payment($table, $id)
 		break;
 	}
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=' . $table . '_payment" method="post">' .
 	     PHP_EOL;
 
-	form_entity_payment($table, $id);
+	require 'views/form_payment.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -153,11 +147,10 @@ function form_add_entity_registration($member_id)
 {
 	navigation_path_on_add('registration', $member_id);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=registration" method="post">' . PHP_EOL;
 
-	form_entity_registration($member_id);
+	require 'views/form_registration.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -166,12 +159,11 @@ function form_add_entity_registration_detail($registration_id)
 {
 	navigation_path_on_add('registration_detail', $registration_id);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=registration_detail" method="post">' .
 	     PHP_EOL;
 
-	form_entity_registration_detail($registration_id);
+	require 'views/form_registration_detail.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -180,11 +172,10 @@ function form_add_entity_room()
 {
 	navigation_path_on_add('room');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=room" method="post">' . PHP_EOL;
 
-	form_entity_room();
+	require 'views/form_room.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -193,11 +184,10 @@ function form_add_entity_teacher()
 {
 	navigation_path_on_add('teacher');
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=add&amp;table=teacher" method="post">' . PHP_EOL;
 
-	form_entity_teacher();
+	require 'views/form_teacher.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -445,12 +435,11 @@ function form_modify_entity_goody($row)
 {
 	navigation_path_on_modify('goody', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=goody&amp;id=' . $row['goody_id'] .
 	     '" method="post">' . PHP_EOL;
 
-	form_entity_goody($row);
+	require 'views/form_goody.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -459,12 +448,11 @@ function form_modify_entity_lesson($row)
 {
 	navigation_path_on_modify('lesson', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=lesson&amp;id=' . $row['lesson_id'] .
 	     '" method="post">' . PHP_EOL;
 
-	form_entity_lesson($row);
+	require 'views/form_lesson.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -473,7 +461,6 @@ function form_modify_entity_member($row)
 {
 	navigation_path_on_modify('member', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=member&amp;id=' . $row['member_id'] .
 	     '" method="post">' . PHP_EOL;
@@ -487,12 +474,11 @@ function form_modify_entity_order($row)
 {
 	navigation_path_on_modify('order', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=order&amp;id=' . $row['order_id'] .
 	     '" method="post">' . PHP_EOL;
 
-	form_entity_order($row);
+	require 'views/form_order.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -508,12 +494,12 @@ function form_modify_entity_payment($table, $row)
 		break;
 	}
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=' . $table . '_payment&amp;id=' .
 	     $row[$table . '_payment_id'] . '" method="post">' . PHP_EOL;
 
-	form_entity_payment($table, $row[$table . '_id'], $row);
+	$id = $row[$table . '_id'];
+	require 'views/form_payment.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -536,12 +522,11 @@ function form_modify_entity_registration($row)
 {
 	navigation_path_on_modify('registration', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=registration&amp;id=' .
 	     $row['registration_id'] . '" method="post">' . PHP_EOL;
 
-	form_entity_registration($row['member_id'], $row);
+	require 'views/form_registration.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -550,7 +535,6 @@ function form_modify_entity_registration_file($row)
 {
 	navigation_path_on_modify('registration_file', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=registration_file&amp;id=' .
 	     $row['registration_id'] . '" method="post">' . PHP_EOL;
@@ -564,12 +548,11 @@ function form_modify_entity_room($row)
 {
 	navigation_path_on_modify('room', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=room&amp;id=' . $row['room_id'] .
 	     '" method="post">' . PHP_EOL;
 
-	form_entity_room($row);
+	require 'views/form_room.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
@@ -578,12 +561,11 @@ function form_modify_entity_teacher($row)
 {
 	navigation_path_on_modify('teacher', $row);
 
-	echo '<br>' . PHP_EOL;
 	echo '<form action="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify&amp;table=teacher&amp;id=' . $row['teacher_id'] .
 	     '" method="post">' . PHP_EOL;
 
-	form_entity_teacher($row);
+	require 'views/form_teacher.html.php';
 
 	echo '</form>' . PHP_EOL;
 }
