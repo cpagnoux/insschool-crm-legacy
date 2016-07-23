@@ -4,24 +4,13 @@
  */
 
 require_once 'src/libpre-registration.php';
-?>
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta charset="utf-8">
-<title>Pré-inscription - INS SCHOOL</title>
-
-</head>
-<body>
-
-<h1>Pré-inscription</h1>
-
-<?php
 $action = '';
 
 if (isset($_POST['submit']))
 	$action = 'submit';
+
+require 'views/header_pre_registration.html.php';
 
 switch ($action) {
 case 'submit':
@@ -29,10 +18,9 @@ case 'submit':
 	save_pre_registration($_POST, $lessons_str);
 	break;
 default:
-	display_pre_registration_form();
+	require 'views/form_add_pre_registration.html.php';
 	break;
 }
-?>
 
-</body>
-</html>
+require 'views/footer.html.php';
+?>

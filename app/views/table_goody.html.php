@@ -1,11 +1,17 @@
-<?php navigation_path_on_table('goody') ?>
+<nav>
+  <?php link_home() ?> >
+  Goodies
+</nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun goodies</p>
+  <div>
+    <?php link_add_entity($table) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
-<p><?php table_display_options('goody') ?></p>
+<?php table_display_options('goody') ?>
 
 <table>
   <tr>
@@ -14,16 +20,20 @@
     <th><b>Stock</b></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['name'] ?></td>
       <td><?php echo $row['price'] ?> €</td>
       <td><?php echo product_status($row['stock']) ?></td>
-      <td><?php echo link_entity('goody', $row['goody_id']) ?></td>
+      <td><?php link_entity('goody', $row['goody_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
-<p><?php table_pagination($table, $page) ?></p>
+<?php table_pagination($table, $page) ?>
 
-<p><?php echo link_add_entity($table) ?></p>
+<div>
+  <?php link_add_entity($table) ?>
+</div>

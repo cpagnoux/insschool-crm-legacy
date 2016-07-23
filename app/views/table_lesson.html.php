@@ -1,25 +1,35 @@
-<?php navigation_path_on_table('lesson') ?>
+<nav>
+  <?php link_home() ?> >
+  Cours
+</nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun cours</p>
+  <div>
+    <?php link_add_entity($table) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
-<p><?php table_display_options('lesson') ?></p>
+<?php table_display_options('lesson') ?>
 
 <table>
   <tr>
     <th><b>Intitulé</b></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['title'] ?></td>
-      <td><?php echo link_entity('lesson', $row['lesson_id']) ?></td>
+      <td><?php link_entity('lesson', $row['lesson_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
-<p><?php table_pagination($table, $page) ?>
+<?php table_pagination($table, $page) ?>
 
-<p><?php echo link_add_entity($table) ?></p>
+<div>
+  <?php link_add_entity($table) ?>
+</div>

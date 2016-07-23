@@ -1,11 +1,17 @@
-<?php navigation_path_on_table('order') ?>
+<nav>
+  <?php link_home() ?> >
+  Commandes
+</nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucune commande</p>
+  <div>
+    <?php link_add_entity($table) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
-<p><?php table_display_options('order') ?></p>
+<?php table_display_options('order') ?>
 
 <table>
   <tr>
@@ -14,16 +20,20 @@
     <th><b>Date</b></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['order_id'] ?></td>
       <td><?php echo get_name('member', $row['member_id']) ?></td>
       <td><?php echo $row['date'] ?></td>
-      <td><?php echo link_entity('order', $row['order_id']) ?></td>
+      <td><?php link_entity('order', $row['order_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
-<p><?php table_pagination($table, $page) ?></p>
+<?php table_pagination($table, $page) ?>
 
-<p><?php echo link_add_entity($table) ?></p>
+<div>
+  <?php link_add_entity($table) ?>
+</div>

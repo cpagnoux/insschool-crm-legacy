@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('pre_registration', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('pre_registration') ?> >
+  <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
+</nav>
 
 <h2>Détail pré-inscription</h2>
 
@@ -24,8 +28,8 @@
 
 <p><b>Date :</b> <?php echo $row['date'] ?></p>
 
-<p><?php echo link_commit_pre_registration($row['pre_registration_id']) ?>
-
-<?php echo link_modify_entity('pre_registration', $row['pre_registration_id']) ?>
-
-<?php echo link_delete_entity('pre_registration', $row['pre_registration_id']) ?></p>
+<div>
+  <?php link_commit_pre_registration($row['pre_registration_id']) ?>
+  <?php link_modify_entity('pre_registration', $row['pre_registration_id']) ?>
+  <?php link_delete_entity('pre_registration', $row['pre_registration_id']) ?>
+</div>

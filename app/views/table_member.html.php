@@ -1,11 +1,17 @@
-<?php navigation_path_on_table('member') ?>
+<nav>
+  <?php link_home() ?> >
+  Adhérents
+</nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun adhérent</p>
+  <div>
+    <?php link_add_entity($table) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
-<p><?php table_display_options('member') ?></p>
+<?php table_display_options('member') ?>
 
 <table>
   <tr>
@@ -13,15 +19,19 @@
     <th><b>Prénom</b></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['last_name'] ?></td>
       <td><?php echo $row['first_name'] ?></td>
-      <td><?php echo link_entity('member', $row['member_id']) ?></td>
+      <td><?php link_entity('member', $row['member_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
-<p><?php table_pagination($table, $page) ?></p>
+<?php table_pagination($table, $page) ?>
 
-<p><?php echo link_add_entity($table) ?></p>
+<div>
+  <?php link_add_entity($table) ?>
+</div>

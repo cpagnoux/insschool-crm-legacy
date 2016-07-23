@@ -4,9 +4,9 @@ Date de naissance : <input type="text" name="birth_date" value="<?php echo $row[
 
 <p>Adresse : <input type="text" name="adress" value="<?php echo $row['adress'] ?>"><br>
 Code postal : <input type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>"><br>
-Ville : <input type="text" name="city" value="<?php echo $row['city'] ?>"><br>
+Ville : <input type="text" name="city" value="<?php echo $row['city'] ?>"></p>
 
-Portable : <input type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>"><br>
+<p>Portable : <input type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>"><br>
 Fixe : <input type="text" name="phone" value="<?php echo $row['phone'] ?>"><br>
 Email : <input type="email" name="email" value="<?php echo $row['email'] ?>"></p>
 

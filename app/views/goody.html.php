@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('goody', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('goody') ?> >
+  <?php echo $row['name'] ?>
+</nav>
 
 <h2><?php echo $row['name'] ?></h2>
 
@@ -9,6 +13,7 @@
 <p><b>Prix :</b> <?php echo $row['price'] ?> €<br>
 <b>Stock :</b> <?php echo $row['stock'] ?></p>
 
-<p><?php echo link_modify_entity('goody', $row['goody_id']) ?>
-
-<?php echo link_delete_entity('goody', $row['goody_id']) ?></p>
+<div>
+  <?php link_modify_entity('goody', $row['goody_id']) ?>
+  <?php link_delete_entity('goody', $row['goody_id']) ?>
+</div>

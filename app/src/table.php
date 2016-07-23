@@ -57,6 +57,8 @@ function display_table($table, $page)
 		exit;
 	}
 
+	require 'views/header.html.php';
+
 	switch ($table) {
 	case 'goody':
 		require 'views/table_goody.html.php';
@@ -80,6 +82,8 @@ function display_table($table, $page)
 		require 'views/table_teacher.html.php';
 		break;
 	}
+
+	require 'views/footer.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);

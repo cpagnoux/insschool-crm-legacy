@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('teacher', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('teacher') ?> >
+  <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
+</nav>
 
 <h2><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></h2>
 
@@ -18,6 +22,7 @@
 
 <p><b>Absences :</b> <?php echo $row['absences'] ?></p>
 
-<p><?php echo link_modify_entity('teacher', $row['teacher_id']) ?>
-
-<?php echo link_delete_entity('teacher', $row['teacher_id']) ?></p>
+<div>
+  <?php link_modify_entity('teacher', $row['teacher_id']) ?>
+  <?php link_delete_entity('teacher', $row['teacher_id']) ?>
+</div>

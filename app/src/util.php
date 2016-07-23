@@ -7,266 +7,11 @@ require_once 'src/connection.php';
 require_once 'src/error.php';
 
 /*
- * Navigation bar
- */
-function navigation_bar()
-{
-	echo '<hr>' . PHP_EOL;
-	echo '<nav>' . PHP_EOL;
-	echo '  ' . link_home() . PHP_EOL;
-	echo '  ' . link_table('lesson') . PHP_EOL;
-	echo '  ' . link_table('teacher') . PHP_EOL;
-	echo '  ' . link_table('room') . PHP_EOL;
-	echo '  ' . link_table('goody') . PHP_EOL;
-	echo '  ' . link_table('order') . PHP_EOL;
-	echo '  ' . link_table('member') . PHP_EOL;
-	echo '  ' . link_table('pre_registration') . PHP_EOL;
-	echo '</nav>' . PHP_EOL;
-	echo '<hr>' . PHP_EOL;
-}
-
-/*
- * Navigation paths
- */
-function navigation_path_on_table($table)
-{
-	echo link_home() . ' >' . PHP_EOL;
-
-	switch ($table) {
-	case 'goody':
-		echo 'Goodies<br>' . PHP_EOL;
-		break;
-	case 'lesson':
-		echo 'Cours<br>' . PHP_EOL;
-		break;
-	case 'member':
-		echo 'Adhérents<br>' . PHP_EOL;
-		break;
-	case 'order':
-		echo 'Commandes<br>' . PHP_EOL;
-		break;
-	case 'pre_registration':
-		echo 'Pré-inscriptions<br>' . PHP_EOL;
-		break;
-	case 'room':
-		echo 'Salles<br>' . PHP_EOL;
-		break;
-	case 'teacher':
-		echo 'Professeurs<br>' . PHP_EOL;
-		break;
-	}
-}
-
-function navigation_path_on_display($table, $row)
-{
-	echo link_home() . ' >' . PHP_EOL;
-
-	if ($table != 'registration')
-		echo link_table($table) . ' >' . PHP_EOL;
-
-	switch ($table) {
-	case 'goody':
-		echo $row['name'] . '<br>' . PHP_EOL;
-		break;
-	case 'lesson':
-		echo $row['title'] . '<br>' . PHP_EOL;
-		break;
-	case 'member':
-		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
-		     PHP_EOL;
-		break;
-	case 'order':
-		echo 'N° ' . $row['order_id'] . '<br>' . PHP_EOL;
-		break;
-	case 'pre_registration':
-		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
-		     PHP_EOL;
-		break;
-	case 'registration':
-		$name = get_name('member', $row['member_id']);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $row['member_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Inscription ' . $row['season'] . '<br>' . PHP_EOL;
-		break;
-	case 'room':
-		echo $row['name'] . '<br>' . PHP_EOL;
-		break;
-	case 'teacher':
-		echo $row['first_name'] . ' ' . $row['last_name'] . '<br>' .
-		     PHP_EOL;
-		break;
-	}
-}
-
-function navigation_path_on_add($table, $id)
-{
-	echo link_home() . ' >' . PHP_EOL;
-
-	switch ($table) {
-	case 'goody':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouveau goodies<br>' . PHP_EOL;
-		break;
-	case 'lesson':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouveau cours<br>' . PHP_EOL;
-		break;
-	case 'member':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouvel adhérent<br>' . PHP_EOL;
-		break;
-	case 'order':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouvelle commande<br>' . PHP_EOL;
-		break;
-	case 'order_content':
-		echo link_table('order') . ' >' . PHP_EOL;
-		echo link_entity('order', $id, 'N° ' . $id) . ' >' . PHP_EOL;
-		echo 'Ajouter un article<br>' . PHP_EOL;
-		break;
-	case 'order_payment':
-		echo link_table('order') . ' >' . PHP_EOL;
-		echo link_entity('order', $id, 'N° ' . $id) . ' >' . PHP_EOL;
-		echo 'Nouveau paiement<br>' . PHP_EOL;
-		break;
-	case 'registration':
-		$name = get_name('member', $id);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $id, $name) . ' >' . PHP_EOL;
-		echo 'Nouvelle inscription<br>' . PHP_EOL;
-		break;
-	case 'registration_detail':
-		$member_id = get_member_id($id);
-		$name = get_name('member', $member_id);
-		$season = get_registration_season($id);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
-		echo link_entity('registration', $id,
-				 'Inscription ' . $season) . ' >' . PHP_EOL;
-		echo 'Ajouter un cours<br>' . PHP_EOL;
-		break;
-	case 'registration_payment':
-		$member_id = get_member_id($id);
-		$name = get_name('member', $member_id);
-		$season = get_registration_season($id);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
-		echo link_entity('registration', $id,
-				 'Inscription ' . $season) . ' >' . PHP_EOL;
-		echo 'Nouveau paiement<br>' . PHP_EOL;
-		break;
-	case 'room':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouvelle salle<br>' . PHP_EOL;
-		break;
-	case 'teacher':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo 'Nouveau professeur<br>' . PHP_EOL;
-		break;
-	}
-}
-
-function navigation_path_on_modify($table, $row)
-{
-	echo link_home() . ' >' . PHP_EOL;
-
-	switch ($table) {
-	case 'goody':
-		$name = get_entity_name('goody', $row['goody_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('goody', $row['goody_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier le goodies<br>' . PHP_EOL;
-		break;
-	case 'lesson':
-		$title = get_lesson_title($row['lesson_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('lesson', $row['lesson_id'], $title) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier le cours<br>' . PHP_EOL;
-		break;
-	case 'member':
-		$name = get_name('member', $row['member_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('member', $row['member_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier l\'adhérent<br>' . PHP_EOL;
-		break;
-	case 'order':
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('order', $row['order_id'],
-				 'N° ' . $row['order_id']) . ' >' . PHP_EOL;
-		echo 'Modifier la commande<br>' . PHP_EOL;
-		break;
-	case 'order_payment':
-		echo link_table('order') . ' >' . PHP_EOL;
-		echo link_entity('order', $row['order_id'],
-				 'N° ' . $row['order_id']) . ' >' . PHP_EOL;
-		echo 'Modifier le paiement<br>' . PHP_EOL;
-		break;
-	case 'pre_registration':
-		$name = get_name('pre_registration',
-				 $row['pre_registration_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('pre_registration',
-				 $row['pre_registration_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier la pré-inscription<br>' . PHP_EOL;
-		break;
-	case 'registration':
-		$name = get_name('member', $row['member_id']);
-		$season = get_registration_season($row['registration_id']);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $row['member_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo link_entity('registration', $row['registration_id'],
-				 'Inscription ' . $season) . ' >' . PHP_EOL;
-		echo 'Modifier l\'inscription<br>' . PHP_EOL;
-		break;
-	case 'registration_file':
-		$member_id = get_member_id($row['registration_id']);
-		$name = get_name('member', $member_id);
-		$season = get_registration_season($row['registration_id']);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
-		echo link_entity('registration', $row['registration_id'],
-				 'Inscription ' . $season) . ' >' . PHP_EOL;
-		echo 'Modifier le dossier<br>' . PHP_EOL;
-		break;
-	case 'registration_payment':
-		$member_id = get_member_id($row['registration_id']);
-		$name = get_name('member', $member_id);
-		$season = get_registration_season($row['registration_id']);
-		echo link_table('member') . ' >' . PHP_EOL;
-		echo link_entity('member', $member_id, $name) . ' >' . PHP_EOL;
-		echo link_entity('registration', $row['registration_id'],
-				 'Inscription ' . $season) . ' >' . PHP_EOL;
-		echo 'Modifier le paiement<br>' . PHP_EOL;
-		break;
-	case 'room':
-		$name = get_entity_name('room', $row['room_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('room', $row['room_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier la salle<br>' . PHP_EOL;
-		break;
-	case 'teacher':
-		$name = get_name('teacher', $row['teacher_id']);
-		echo link_table($table) . ' >' . PHP_EOL;
-		echo link_entity('teacher', $row['teacher_id'], $name) . ' >' .
-		     PHP_EOL;
-		echo 'Modifier le professeur<br>' . PHP_EOL;
-		break;
-	}
-}
-
-/*
  * Hyperlinks
  */
 function link_home()
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '">Accueil</a>';
 }
 
 function link_table($table)
@@ -297,34 +42,34 @@ function link_table($table)
 		break;
 	}
 
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">' .
-	       $message . '</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">' .
+	     $message . '</a>';
 }
 
 function link_table_previous($table, $page)
 {
 	if ($page == 1)
-		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		       '">Précédent</a>';
-
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;page=' . $page . '">Précédent</a>';
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '">Précédent</a>';
+	else
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '&amp;page=' . $page . '">Précédent</a>';
 }
 
 function link_table_next($table, $page)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;page=' . $page . '">Suivant</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	     '&amp;page=' . $page . '">Suivant</a>';
 }
 
 function link_entity($table, $id, $message)
 {
 	if (isset($message))
-		return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		       '&amp;id=' . $id . '">' . $message . '</a>';
-
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	       '&amp;id=' . $id . '">+ d\'infos</a>';
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '&amp;id=' . $id . '">' . $message . '</a>';
+	else
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '&amp;id=' . $id . '">+ d\'infos</a>';
 }
 
 function link_add_entity($table, $id)
@@ -368,84 +113,84 @@ function link_add_entity($table, $id)
 	}
 
 	if (isset($id))
-		return '<a href="' . $_SERVER['PHP_SELF'] .
-		       '?mode=add&amp;table=' . $table . '&amp;id=' . $id .
-		       '">' . $message . '</a>';
-
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=add&amp;table=' .
-	       $table . '">' . $message . '</a>';
+		echo '<a href="' . $_SERVER['PHP_SELF'] .
+		     '?mode=add&amp;table=' . $table . '&amp;id=' . $id . '">' .
+		     $message . '</a>';
+	else
+		echo '<a href="' . $_SERVER['PHP_SELF'] .
+		     '?mode=add&amp;table=' . $table . '">' . $message . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
-	       $table . '&amp;id=' . $id . '">Modifier</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
+	     $table . '&amp;id=' . $id . '">Modifier</a>';
 }
 
 function link_delete_entity($table, $id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
-	       $table . '&amp;id=' . $id . '" onclick="return ' .
-	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
+	     $table . '&amp;id=' . $id . '" onclick="return ' .
+	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_commit_pre_registration($pre_registration_id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] . '?mode=commit&amp;id=' .
-	       $pre_registration_id . '">Valider la pré-inscription</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=commit&amp;id=' .
+	     $pre_registration_id . '">Valider la pré-inscription</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=modify_quantity&amp;order_id=' . $order_id .
-	       '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	       '">-</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
+	     '">-</a>';
 }
 
 function link_quantity_plus($order_id, $goody_id, $quantity)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=modify_quantity&amp;order_id=' . $order_id .
-	       '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	       '">+</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
+	     '">+</a>';
 }
 
 function link_remove_product($order_id, $goody_id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=modify_quantity&amp;order_id=' . $order_id .
-	       '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
 }
 
 function link_empty_cart($order_id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=empty_cart&amp;order_id=' . $order_id .
-	       '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
-	       'Vider le panier</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=empty_cart&amp;order_id=' . $order_id .
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
+	     'Vider le panier</a>';
 }
 
 function link_toggle_show_participation($registration_id, $lesson_id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=toggle_show_participation&amp;registration_id=' .
-	       $registration_id . '&amp;lesson_id=' . $lesson_id .
-	       '">Changer</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=toggle_show_participation&amp;registration_id=' .
+	     $registration_id . '&amp;lesson_id=' . $lesson_id .
+	     '">Changer</a>';
 }
 
 function link_remove_lesson($registration_id, $lesson_id)
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=remove_lesson&amp;registration_id=' . $registration_id .
-	       '&amp;lesson_id=' . $lesson_id . '" onclick="return ' .
-	       'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=remove_lesson&amp;registration_id=' . $registration_id .
+	     '&amp;lesson_id=' . $lesson_id . '" onclick="return ' .
+	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_logout()
 {
-	return '<a href="' . $_SERVER['PHP_SELF'] .
-	       '?mode=logout">Se déconnecter</a>';
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=logout">Se déconnecter</a>';
 }
 
 /*

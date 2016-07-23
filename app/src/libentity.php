@@ -130,20 +130,7 @@ function select_day($day)
 		}
 	}
 
-	echo '  Jour <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="day" required="required">' . PHP_EOL;
-	echo '    <option value="MONDAY"' . $day_monday . '>Lundi</option>' .
-	     PHP_EOL;
-	echo '    <option value="TUESDAY"' . $day_tuesday . '>Mardi</option>' .
-	     PHP_EOL;
-	echo '    <option value="WEDNESDAY"' . $day_wednesday .
-	     '>Mercredi</option>' . PHP_EOL;
-	echo '    <option value="THURSDAY"' . $day_thursday .
-	     '>Jeudi</option>' . PHP_EOL;
-	echo '    <option value="FRIDAY"' . $day_friday . '>Vendredi</option>' .
-	     PHP_EOL;
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_day.html.php';
 }
 
 function select_goody()
@@ -156,15 +143,7 @@ function select_goody()
 		exit;
 	}
 
-	echo '  Article <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="goody_id" required="required">' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result))
-		echo '    <option value="' . $row['goody_id'] . '">' .
-		     $row['name'] . '</option>' . PHP_EOL;
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_goody.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);
@@ -180,15 +159,7 @@ function select_lesson()
 		exit;
 	}
 
-	echo '  Cours <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="lesson_id" required="required">' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result))
-		echo '    <option value="' . $row['lesson_id'] . '">' .
-		     $row['title'] . '</option>' . PHP_EOL;
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_lesson.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);
@@ -205,22 +176,7 @@ function select_member($member_id)
 		exit;
 	}
 
-	echo '  Adhérent <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="member_id" required="required">' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['member_id'] == $member_id)
-			echo '    <option value="' . $row['member_id'] .
-			     '" selected="selected">' . $row['last_name'] .
-			     ' ' . $row['first_name'] . '</option>' . PHP_EOL;
-		else
-			echo '    <option value="' . $row['member_id'] . '">' .
-			     $row['last_name'] . ' ' . $row['first_name'] .
-			     '</option>' . PHP_EOL;
-	}
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_member.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);
@@ -242,14 +198,7 @@ function select_mode($mode)
 		}
 	}
 
-	echo '  Mode de paiement <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="mode" required="required">' . PHP_EOL;
-	echo '    <option value="CASH"' . $mode_cash . '>Espèces</option>' .
-	     PHP_EOL;
-	echo '    <option value="CHECK"' . $mode_check . '>Chèque</option>' .
-	     PHP_EOL;
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_mode.html.php';
 }
 
 function select_room($room_id)
@@ -262,39 +211,10 @@ function select_room($room_id)
 		exit;
 	}
 
-	echo '  Salle <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="room_id" required="required">' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['room_id'] == $room_id)
-			echo '    <option value="' . $row['room_id'] .
-			     '" selected="selected">' . $row['name'] .
-			     '</option>' . PHP_EOL;
-		else
-			echo '    <option value="' . $row['room_id'] . '">' .
-			     $row['name'] . '</option>' . PHP_EOL;
-	}
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_room.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);
-}
-
-function select_season()
-{
-	echo '  Saison <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="season" required="required">' . PHP_EOL;
-
-	echo '    <option value="' . previous_season() . '">' .
-	     previous_season() . '</option>' . PHP_EOL;
-	echo '    <option value="' . current_season() .
-	     '" selected="selected">' . current_season() . '</option>' .
-	     PHP_EOL;
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
 }
 
 function select_teacher($teacher_id)
@@ -308,22 +228,7 @@ function select_teacher($teacher_id)
 		exit;
 	}
 
-	echo '  Professeur <sup>*</sup> :' . PHP_EOL;
-	echo '  <select name="teacher_id" required="required">' . PHP_EOL;
-
-	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['teacher_id'] == $teacher_id)
-			echo '    <option value="' . $row['teacher_id'] .
-			     '" selected="selected">' . $row['last_name'] .
-			     ' ' . $row['first_name'] . '</option>' . PHP_EOL;
-		else
-			echo '    <option value="' . $row['teacher_id'] . '">' .
-			     $row['last_name'] . ' ' . $row['first_name'] .
-			     '</option>' . PHP_EOL;
-	}
-
-	echo '  </select>' . PHP_EOL;
-	echo '  <br>' . PHP_EOL;
+	require 'views/select_teacher.html.php';
 
 	mysqli_free_result($result);
 	mysqli_close($link);

@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('member', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('member') ?> >
+  <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
+</nav>
 
 <h2>Information adhérent</h2>
 
@@ -22,8 +26,9 @@
 
 <p><b>Bénévole :</b> <?php echo eval_boolean($row['volunteer']) ?></p>
 
-<p><?php echo link_modify_entity('member', $row['member_id']) ?>
-
-<?php echo link_delete_entity('member', $row['member_id']) ?></p>
+<div>
+  <?php link_modify_entity('member', $row['member_id']) ?>
+  <?php link_delete_entity('member', $row['member_id']) ?>
+</div>
 
 <?php display_member_registrations($link, $row['member_id']) ?>

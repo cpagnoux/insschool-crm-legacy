@@ -6,25 +6,6 @@
 require_once 'src/connection.php';
 require_once 'src/error.php';
 
-function login()
-{
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">' .
-	     PHP_EOL;
-
-	echo '  Nom d\'utilisateur<br>' . PHP_EOL;
-	echo '  <input type="text" name="username" required="required"><br>' .
-	     PHP_EOL;
-	echo '  Mot de passe<br>' . PHP_EOL;
-	echo '  <input type="password" name="password" required="required">' .
-	     '<br>' . PHP_EOL;
-
-	echo '  <br>' . PHP_EOL;
-	echo '  <input type="submit" name="submit" value="Se connecter"><br>' .
-	     PHP_EOL;
-
-	echo '</form>' . PHP_EOL;
-}
-
 function verify_login($username, $password)
 {
 	$link = connect_database();

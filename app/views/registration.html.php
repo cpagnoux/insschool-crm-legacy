@@ -1,4 +1,11 @@
-<?php navigation_path_on_display('registration', $row) ?>
+<?php $name = get_name('member', $row['member_id']) ?>
+
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('member') ?> >
+  <?php link_entity('member', $row['member_id'], $name) ?> >
+  Inscription <?php echo $row['season'] ?>
+</nav>
 
 <h2>Inscription <?php echo $row['season'] ?></h2>
 
@@ -11,9 +18,10 @@
 <b>Tarif après réduction :</b> <?php echo price_after_discount($row['price'], $row['discount']) ?> €<br>
 <b>Nombre de paiements :</b> <?php echo $row['num_payments'] ?></p>
 
-<p><?php echo link_modify_entity('registration', $row['registration_id']) ?>
-
-<?php echo link_delete_entity('registration', $row['registration_id']) ?></p>
+<div>
+  <?php link_modify_entity('registration', $row['registration_id']) ?>
+  <?php link_delete_entity('registration', $row['registration_id']) ?>
+</div>
 
 <?php display_registration_file($link, $row['registration_id']) ?>
 

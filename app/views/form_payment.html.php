@@ -1,12 +1,12 @@
 <?php switch ($table): ?>
-<?php case 'order': ?>
-  <p>N° de commande :
+<?php case 'order_payment': ?>
+  <p>N° de commande : <input type="text" name="order_id" value="<?php echo $id ?>" readonly="readonly"></p>
   <?php break ?>
-<?php case 'registration': ?>
-  <p>N° d'inscription :
+<?php case 'registration_payment': ?>
+  <p>N° d'inscription : <input type="text" name="registration_id" value="<?php echo $id ?>" readonly="readonly"></p>
   <?php break ?>
 <?php endswitch ?>
-<input type="text" name="<?php echo $table ?>_id" value="<?php echo $id ?>" readonly="readonly"></p>
+
 
 <p>Montant <sup>*</sup> : <input type="text" name="amount" value="<?php echo $row['amount'] ?>" required="required"> €<br>
 <?php select_mode($row['mode']) ?></p>

@@ -17,7 +17,8 @@ E-mail : <input type="email" name="email" value="<?php echo $row['email'] ?>"></
 <?php display_lessons($lessons) ?>
 
 <?php if (!isset($row)): ?>
-  <?php display_warnings() ?>
+  <p>* Attention : Lors des cours à INS School, merci d'utiliser des chaussures propres dans les salles de danse (non utilisées à l'extérieur) et une tenue confortable.<br>
+  * INS School se réserve le droit de modifier les horaires du planning à tout moment.</p>
 <?php endif ?>
 
 <?php if (isset($row)): ?>
@@ -31,7 +32,15 @@ E-mail : <input type="email" name="email" value="<?php echo $row['email'] ?>"></
 <input type="radio" name="means_of_knowledge" value="WORD_OF_MOUTH"<?php echo $means_of_knowledge_word_of_mouth ?>> Bouche-à-oreille</p>
 
 <?php if (!isset($row)): ?>
-  <?php display_info() ?>
+  <p>Documents à fournir :</p>
+    <ul>
+      <li>1 certificat médical</li>
+      <li>2 photos d'identité</li>
+      <li>1 attestation d'assurance</li>
+      <li>1 enveloppe timbrée (au nom et adresse de l'adhérent ou des parents pour les mineurs)</li>
+      <li>Le règlement du forfait (possibilité de payer en trois fois sans frais)</li>
+    </ul>
+  <p>Le règlement intérieur doit être signé et retourné lors de l'inscription.</p>
 <?php endif ?>
 
 <p><input type="submit" name="submit" value="Valider"></p>

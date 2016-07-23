@@ -9,20 +9,7 @@ require_once 'src/util.php';
 require_once 'src/libpre-registration.php';
 require_once 'src/table.php';
 require_once 'src/entity.php';
-?>
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta charset="utf-8">
-<title>Gestion INS School</title>
-
-</head>
-<body>
-
-<h1>Gestion INS School</h1>
-
-<?php
 session_start();
 
 if (isset($_POST['goody_sorting']))
@@ -37,11 +24,6 @@ if (isset($_POST['room_sorting']))
 	$_SESSION['room_sorting'] = $_POST['room_sorting'];
 if (isset($_POST['limit']))
 	$_SESSION['limit'] = $_POST['limit'];
-
-if (session_valid()) {
-	echo link_logout();
-	navigation_bar();
-}
 
 $action = '';
 
@@ -120,10 +102,11 @@ case 'logout':
 	logout();
 	break;
 case 'login':
-	login();
+	require 'views/login.html.php';
+	break;
+default:
+	require 'views/header.html.php';
+	require 'views/footer.html.php';
 	break;
 }
 ?>
-
-</body>
-</html>

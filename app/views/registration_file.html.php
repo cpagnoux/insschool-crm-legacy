@@ -13,4 +13,6 @@
 
 <p><b>Dossier complet :</b> <?php echo eval_boolean(registration_file_complete($row['registration_id'])) ?></p>
 
-<p><?php echo link_modify_entity('registration_file', $row['registration_id']) ?></p>
+<div>
+  <?php link_modify_entity('registration_file', $row['registration_id']) ?>
+</div>

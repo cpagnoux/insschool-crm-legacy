@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('order', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('order') ?> >
+  N° <?php echo $row['order_id'] ?>
+</nav>
 
 <h2>Commande n° <?php echo $row['order_id'] ?></h2>
 
@@ -9,9 +13,10 @@
 <?php display_order_content($link, $row['order_id']) ?>
 
 <?php if (!order_paid($row['order_id']) || order_total($row['order_id']) == 0):?>
-  <p><?php echo link_modify_entity('order', $row['order_id']) ?>
-
-  <?php echo link_delete_entity('order', $row['order_id']) ?></p>
+  <div>
+    <?php link_modify_entity('order', $row['order_id']) ?>
+    <?php link_delete_entity('order', $row['order_id']) ?>
+  </div>
 <?php endif ?>
 
 <?php display_entity_payments($link, 'order', $row['order_id']) ?>

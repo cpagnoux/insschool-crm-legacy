@@ -12,20 +12,10 @@ function table_pagination($table, $page)
 	if ($num_rows <= $_SESSION['limit'])
 		return;
 
-	echo '<nav>' . PHP_EOL;
-
-	if ($page > 1)
-		echo '  ' . link_table_previous($table, $page - 1) . PHP_EOL;
-
-	echo '  ' . $page . PHP_EOL;
-
-	if ($page * $_SESSION['limit'] < $num_rows)
-		echo '  ' . link_table_next($table, $page + 1) . PHP_EOL;
-
-	echo '</nav>' . PHP_EOL;
+	require 'views/table_pagination.html.php';
 }
 
-function table_goody_sorting()
+function table_sorting_goody()
 {
 	$sorting_name = '';
 	$sorting_name_desc = '';
@@ -49,21 +39,10 @@ function table_goody_sorting()
 		}
 	}
 
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="goody_sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="name"' . $sorting_name .
-	     '>ordre alphabétique</option>' . PHP_EOL;
-	echo '    <option value="name DESC"' . $sorting_name_desc .
-	     '>ordre alphabétique inverse</option>' . PHP_EOL;
-	echo '    <option value="price"' . $sorting_price .
-	     '>prix croissant</option>' . PHP_EOL;
-	echo '    <option value="price DESC"' . $sorting_price_desc .
-	     '>prix décroissant</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_sorting_goody.html.php';
 }
 
-function table_lesson_sorting()
+function table_sorting_lesson()
 {
 	$sorting_title = '';
 	$sorting_title_desc = '';
@@ -79,17 +58,10 @@ function table_lesson_sorting()
 		}
 	}
 
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="lesson_sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="title"' . $sorting_title .
-	     '>ordre alphabétique</option>' . PHP_EOL;
-	echo '    <option value="title DESC"' . $sorting_title_desc .
-	     '>ordre alphabétique inverse</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_sorting_lesson.html.php';
 }
 
-function table_order_sorting()
+function table_sorting_order()
 {
 	$sorting_date = '';
 	$sorting_date_desc = '';
@@ -105,17 +77,10 @@ function table_order_sorting()
 		}
 	}
 
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="order_sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="date"' . $sorting_date .
-	     '>date croissante</option>' . PHP_EOL;
-	echo '    <option value="date DESC"' . $sorting_date_desc .
-	     '>date décroissante</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_sorting_order.html.php';
 }
 
-function table_person_sorting()
+function table_sorting_person()
 {
 	$sorting_name = '';
 	$sorting_name_desc = '';
@@ -131,18 +96,10 @@ function table_person_sorting()
 		}
 	}
 
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="person_sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="last_name, first_name"' . $sorting_name .
-	     '>ordre alphabétique</option>' . PHP_EOL;
-	echo '    <option value="last_name DESC, first_name DESC"' .
-	     $sorting_name_desc . '>ordre alphabétique inverse</option>' .
-	     PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_sorting_person.html.php';
 }
 
-function table_room_sorting()
+function table_sorting_room()
 {
 	$sorting_name = '';
 	$sorting_name_desc = '';
@@ -158,14 +115,7 @@ function table_room_sorting()
 		}
 	}
 
-	echo '  Trier par :' . PHP_EOL;
-	echo '  <select name="room_sorting" onchange="this.form.submit()">' .
-	     PHP_EOL;
-	echo '    <option value="name"' . $sorting_name .
-	     '>ordre alphabétique</option>' . PHP_EOL;
-	echo '    <option value="name DESC"' . $sorting_name_desc .
-	     '>ordre alphabétique inverse</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_sorting_room.html.php';
 }
 
 function table_display_limit()
@@ -188,45 +138,42 @@ function table_display_limit()
 		}
 	}
 
-	echo '  Lignes par page :' . PHP_EOL;
-	echo '  <select name="limit" onchange="this.form.submit()">' . PHP_EOL;
-	echo '    <option value="25"' . $limit_25 . '>25</option>' . PHP_EOL;
-	echo '    <option value="50"' . $limit_50 . '>50</option>' . PHP_EOL;
-	echo '    <option value="100"' . $limit_100 . '>100</option>' . PHP_EOL;
-	echo '  </select>' . PHP_EOL;
+	require 'views/table_display_limit.html.php';
 }
 
 function table_display_options($table)
 {
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+	echo '<div>' . PHP_EOL;
+	echo '  <form action="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 	     '" method="post">' . PHP_EOL;
 
 	switch ($table) {
 	case 'goody':
-		table_goody_sorting();
+		table_sorting_goody();
 		break;
 	case 'lesson':
-		table_lesson_sorting();
+		table_sorting_lesson();
 		break;
 	case 'member':
-		table_person_sorting();
+		table_sorting_person();
 		break;
 	case 'order':
-		table_order_sorting();
+		table_sorting_order();
 		break;
 	case 'pre_registration':
-		table_person_sorting();
+		table_sorting_person();
 		break;
 	case 'room':
-		table_room_sorting();
+		table_sorting_room();
 		break;
 	case 'teacher':
-		table_person_sorting();
+		table_sorting_person();
 		break;
 	}
 
 	table_display_limit();
 
-	echo '</form>' . PHP_EOL;
+	echo '  </form>' . PHP_EOL;
+	echo '</div>' . PHP_EOL;
 }
 ?>

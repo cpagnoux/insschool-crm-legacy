@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('lesson', $row) ?>
+<nav>
+  <?php link_home() ?> >
+  <?php link_table('lesson') ?> >
+  <?php echo $row['title'] ?>
+</nav>
 
 <h2><?php echo $row['title'] ?></h2>
 
@@ -16,6 +20,7 @@
 
 <p><b>Nombre d'inscrits (<?php echo current_season() ?>) :</b> <?php echo lesson_registrant_count($row['lesson_id'], current_season()) ?></p>
 
-<p><?php echo link_modify_entity('lesson', $row['lesson_id']) ?>
-
-<?php echo link_delete_entity('lesson', $row['lesson_id']) ?></p>
+<div>
+  <?php link_modify_entity('lesson', $row['lesson_id']) ?>
+  <?php link_delete_entity('lesson', $row['lesson_id']) ?>
+</div>

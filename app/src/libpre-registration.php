@@ -146,32 +146,20 @@ function display_lessons($lessons)
 /*
  * Miscellaneous functions
  */
-function display_warnings()
+function chosen_lessons($lessons_str)
 {
-	echo '  <p>' . PHP_EOL;
-	echo '    * Attention : Lors des cours à INS School, merci ' .
-	     'd\'utiliser des chaussures propres dans les salles de danse ' .
-	     '(non utilisées à l\'extérieur) et une tenue confortable.<br>' .
-	     PHP_EOL;
-	echo '    * INS School se réserve le droit de modifier les horaires ' .
-	     'du planning à tout moment.' . PHP_EOL;
-	echo '  </p>' . PHP_EOL;
-}
+	$string = '';
 
-function display_info()
-{
-	echo '  Documents à fournir :' . PHP_EOL;
-	echo '  <ul>' . PHP_EOL;
-	echo '    <li>1 certificat médical</li>' . PHP_EOL;
-	echo '    <li>2 photos d\'identité</li>' . PHP_EOL;
-	echo '    <li>1 attestation d\'assurance</li>' . PHP_EOL;
-	echo '    <li>1 enveloppe timbrée (au nom et adresse de l\'adhérent ' .
-	     'ou des parents pour les mineurs)</li>' . PHP_EOL;
-	echo '    <li>Le règlement du forfait (possibilité de payer en trois ' .
-	     'fois sans frais)</li>' . PHP_EOL;
-	echo '  </ul>' . PHP_EOL;
-	echo '  Le règlement intérieur doit être signé et retourné lors de ' .
-	     'l\'inscription.<br>' . PHP_EOL;
+	while (strlen($lessons_str) > 0) {
+		if ($string != '')
+			$string .= ', ';
+
+		sscanf($lessons_str, '%d', $lesson_id);
+		$string .= get_lesson_title($lesson_id);
+		$lessons_str = substr($lessons_str, strlen($lesson_id) + 1);
+	}
+
+	return $string;
 }
 
 function lessons_to_string($lessons, $display)
@@ -202,65 +190,12 @@ function string_to_lessons($string)
 	return $lessons;
 }
 
-function chosen_lessons($lessons_str)
-{
-	$string = '';
-
-	while (strlen($lessons_str) > 0) {
-		if ($string != '')
-			$string .= ', ';
-
-		sscanf($lessons_str, '%d', $lesson_id);
-		$string .= get_lesson_title($lesson_id);
-		$lessons_str = substr($lessons_str, strlen($lesson_id) + 1);
-	}
-
-	return $string;
-}
-
-/*
- * Pre-registration form
- */
-function display_pre_registration_form()
-{
-	echo '<form action="' . $_SERVER['PHP_SELF'] . '" method="post">' .
-	     PHP_EOL;
-
-	form_entity_pre_registration();
-
-	echo '</form>' . PHP_EOL;
-}
-
 /*
  * Submission of pre-registration
  */
 function display_pre_registration_summary($data)
 {
-	echo '<h2>Récapitulatif :</h2>' . PHP_EOL;
-
-	echo '<b>Nom :</b> ' . $data['last_name'] . '<br>' . PHP_EOL;
-	echo '<b>Prénom :</b> ' . $data['first_name'] . '<br>' . PHP_EOL;
-	echo '<b>Date de naissance :</b> ' . $data['birth_date'] . '<br>' .
-	     PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Adresse :</b> ' . $data['adress'] . '<br>' . PHP_EOL;
-	echo '<b>Code postal :</b> ' . $data['postal_code'] . '<br>' . PHP_EOL;
-	echo '<b>Ville :</b> ' . $data['city'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo '<b>Portable :</b> ' . $data['cellphone'] . '<br>' . PHP_EOL;
-	echo '<b>Portable père :</b> ' . $data['cellphone_father'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Portable mère :</b> ' . $data['cellphone_mother'] . '<br>' .
-	     PHP_EOL;
-	echo '<b>Téléphone fixe :</b> ' . $data['phone'] . '<br>' . PHP_EOL;
-	echo '<b>E-mail :</b> ' . $data['email'] . '<br>' . PHP_EOL;
-	echo '<br>' . PHP_EOL;
-	echo 'Vous avez choisi les cours :' . PHP_EOL;
-	echo '<ul>' . PHP_EOL;
-
-	$lessons_str = lessons_to_string($data, true);
-
-	echo '</ul>' . PHP_EOL;
+	require 'views/pre_registration_summary.html.php';
 
 	return $lessons_str;
 }

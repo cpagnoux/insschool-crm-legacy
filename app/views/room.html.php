@@ -1,4 +1,8 @@
-<?php navigation_path_on_display('room', $row) ?>
+<nav>
+  <?php link_home() ?> <
+  <?php link_table('room') ?> >
+  <?php echo $row['name'] ?>
+</nav>
 
 <h2><?php echo $row['name'] ?></h2>
 
@@ -8,6 +12,7 @@
 <b>Code postal :</b> <?php echo $row['postal_code'] ?><br>
 <b>Ville :</b> <?php echo $row['city'] ?></p>
 
-<p><?php echo link_modify_entity('room', $row['room_id']) ?>
-
-<?php echo link_delete_entity('room', $row['room_id']) ?></p>
+<div>
+  <?php link_modify_entity('room', $row['room_id']) ?>
+  <?php link_delete_entity('room', $row['room_id']) ?>
+</div>

@@ -2,7 +2,9 @@
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun paiement</p>
-  <p><?php echo link_add_entity($table . '_payment', $id) ?></p>
+  <div>
+    <?php link_add_entity($table . '_payment', $id) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
@@ -14,15 +16,17 @@
     <th></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['amount'] ?> €</td>
       <td><?php echo eval_enum($row['mode']) ?></td>
       <td><?php echo $row['date'] ?></td>
-      <td><?php echo link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
-      <td><?php echo link_delete_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
+      <td><?php link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
+      <td><?php link_delete_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
 <p><b>Total payé :</b> <?php echo total_paid($table, $id) ?> €<br></p>
@@ -36,4 +40,6 @@
   <?php break ?>
 <?php endswitch ?>
 
-<p><?php echo link_add_entity($table . '_payment', $id) ?></p>
+<div>
+  <?php link_add_entity($table . '_payment', $id) ?>
+</div>

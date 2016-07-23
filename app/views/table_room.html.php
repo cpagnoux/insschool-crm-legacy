@@ -1,25 +1,35 @@
-<?php navigation_path_on_table('room') ?>
+<nav>
+  <?php link_home() ?> >
+  Salles
+</nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucune salle</p>
+  <div>
+    <?php link_add_entity($table) ?>
+  </div>
   <?php return ?>
 <?php endif ?>
 
-<p><?php table_display_options('room') ?></p>
+<?php table_display_options('room') ?>
 
 <table>
   <tr>
     <th><b>Nom</b></th>
     <th></th>
   </tr>
+
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
       <td><?php echo $row['name'] ?></td>
-      <td><?php echo link_entity('room', $row['room_id']) ?></td>
+      <td><?php link_entity('room', $row['room_id']) ?></td>
     </tr>
   <?php endwhile ?>
+
 </table>
 
-<p><?php table_pagination($table, $page) ?></p>
+<?php table_pagination($table, $page) ?>
 
-<p><?php echo link_add_entity($table) ?></p>
+<div>
+  <?php link_add_entity($table) ?>
+</div>
