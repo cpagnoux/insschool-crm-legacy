@@ -1,11 +1,11 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   Professeurs
 </nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun professeur</p>
-  <div>
+  <div "action-links">
     <?php link_add_entity($table) ?>
   </div>
   <?php return ?>
@@ -32,6 +32,6 @@
 
 <?php table_pagination($table, $page) ?>
 
-<div>
+<div class="action-links">
   <?php link_add_entity($table) ?>
 </div>

@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('teacher') ?> >
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
@@ -22,7 +22,7 @@
 
 <p><b>Absences :</b> <?php echo $row['absences'] ?></p>
 
-<div>
+<div class="action-links">
   <?php link_modify_entity('teacher', $row['teacher_id']) ?>
   <?php link_delete_entity('teacher', $row['teacher_id']) ?>
 </div>

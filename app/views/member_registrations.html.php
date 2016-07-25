@@ -2,7 +2,7 @@
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucune inscription</p>
-  <div>
+  <div class="action-links">
     <?php link_add_entity('registration', $member_id) ?>
   </div>
   <?php return ?>
@@ -23,6 +23,6 @@
 
 </table>
 
-<div>
+<div class="action-links">
   <?php link_add_entity('registration', $member_id) ?>
 </div>

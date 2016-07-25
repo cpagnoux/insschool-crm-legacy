@@ -1,6 +1,6 @@
 <?php $name = get_name('teacher', $row['teacher_id']) ?>
 
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('teacher') ?> >
   <?php link_entity('teacher', $row['teacher_id'], $name) ?> >

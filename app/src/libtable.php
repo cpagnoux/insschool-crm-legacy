@@ -143,7 +143,7 @@ function table_display_limit()
 
 function table_display_options($table)
 {
-	echo '<div>' . PHP_EOL;
+	echo '<div class="display-options">' . PHP_EOL;
 	echo '  <form action="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 	     '" method="post">' . PHP_EOL;
 

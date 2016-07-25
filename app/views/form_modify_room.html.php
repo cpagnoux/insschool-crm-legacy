@@ -1,6 +1,6 @@
 <?php $name = get_entity_name('room', $row['room_id']) ?>
 
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('room') ?> >
   <?php link_entity('room', $row['room_id'], $name) ?> >

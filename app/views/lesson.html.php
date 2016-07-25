@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('lesson') ?> >
   <?php echo $row['title'] ?>
@@ -20,7 +20,7 @@
 
 <p><b>Nombre d'inscrits (<?php echo current_season() ?>) :</b> <?php echo lesson_registrant_count($row['lesson_id'], current_season()) ?></p>
 
-<div>
+<div class="action-links">
   <?php link_modify_entity('lesson', $row['lesson_id']) ?>
   <?php link_delete_entity('lesson', $row['lesson_id']) ?>
 </div>

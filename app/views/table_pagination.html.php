@@ -1,4 +1,4 @@
-<nav>
+<nav class="pagination">
 
   <?php if ($page > 1): ?>
     <?php link_table_previous($table, $page - 1) ?>

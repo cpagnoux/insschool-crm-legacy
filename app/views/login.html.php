@@ -18,14 +18,16 @@
   <h1>Espace de gestion INS School</h1>
 </header>
 
-<form class="login-form" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-  <p>Nom d'utilisateur<br>
-  <input type="text" name="username" required="required"><br>
-  Mot de passe<br>
-  <input type="password" name="password" required="required"></p>
+<div class="login-form">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+    <p>Nom d'utilisateur<br>
+    <input type="text" name="username" required="required"><br>
+    Mot de passe<br>
+    <input type="password" name="password" required="required"></p>
 
-  <p><input type="submit" name="submit" value="Se connecter"></p>
-</form>
+    <p><input type="submit" name="submit" value="Se connecter"></p>
+  </form>
+</div>
 
 </body>
 </html>

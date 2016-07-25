@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('member') ?> >
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
@@ -26,7 +26,7 @@
 
 <p><b>Bénévole :</b> <?php echo eval_boolean($row['volunteer']) ?></p>
 
-<div>
+<div class="action-links">
   <?php link_modify_entity('member', $row['member_id']) ?>
   <?php link_delete_entity('member', $row['member_id']) ?>
 </div>

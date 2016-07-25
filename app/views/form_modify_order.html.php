@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('order') ?> >
   <?php link_entity('order', $row['order_id'], 'N° ' . $row['order_id']) ?> >

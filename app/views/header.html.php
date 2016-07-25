@@ -14,22 +14,23 @@
 <body>
 
 <header>
-  <img class="logo" src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
-  <h1>Espace de gestion INS School</h1>
+  <div class="logout">
+    <?php link_logout() ?>
+  </div>
 
-  <?php link_logout() ?>
+  <div class="navigation-bar">
+    <img class="logo" src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
 
-  <hr>
-  <nav>
-    <?php link_home() ?>
-    <?php link_table('lesson') ?>
-    <?php link_table('teacher') ?>
-    <?php link_table('room') ?>
-    <?php link_table('goody') ?>
-    <?php link_table('order') ?>
-    <?php link_table('member') ?>
-    <?php link_table('pre_registration') ?>
-  </nav>
-  <hr>
+    <nav>
+      <?php link_home() ?>
+      <?php link_table('lesson') ?>
+      <?php link_table('teacher') ?>
+      <?php link_table('room') ?>
+      <?php link_table('goody') ?>
+      <?php link_table('order') ?>
+      <?php link_table('member') ?>
+      <?php link_table('pre_registration') ?>
+    </nav>
+  </div>
 </header>
 

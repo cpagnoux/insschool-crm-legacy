@@ -1,6 +1,6 @@
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun article</p>
-  <div>
+  <div class="action-links">
     <?php link_add_entity('order_content', $order_id) ?>
     <?php link_empty_cart($order_id) ?>
   </div>
@@ -49,7 +49,7 @@
 <p><b>TOTAL :</b> <?php echo order_total($order_id) ?> €</p>
 
 <?php if (!order_paid($order_id) || order_total($order_id) == 0): ?>
-  <div>
+  <div class="action-links">
     <?php link_add_entity('order_content', $order_id) ?>
     <?php link_empty_cart($order_id) ?>
   </div>

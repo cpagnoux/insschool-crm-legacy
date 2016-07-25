@@ -1,11 +1,11 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   Commandes
 </nav>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucune commande</p>
-  <div>
+  <div class="action-links">
     <?php link_add_entity($table) ?>
   </div>
   <?php return ?>
@@ -34,6 +34,6 @@
 
 <?php table_pagination($table, $page) ?>
 
-<div>
+<div class="action-links">
   <?php link_add_entity($table) ?>
 </div>

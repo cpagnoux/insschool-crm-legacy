@@ -2,7 +2,7 @@
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun paiement</p>
-  <div>
+  <div class="action-links">
     <?php link_add_entity($table . '_payment', $id) ?>
   </div>
   <?php return ?>
@@ -40,6 +40,6 @@
   <?php break ?>
 <?php endswitch ?>
 
-<div>
+<div class="action-links">
   <?php link_add_entity($table . '_payment', $id) ?>
 </div>

@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('order') ?> >
   N° <?php echo $row['order_id'] ?>
@@ -13,7 +13,7 @@
 <?php display_order_content($link, $row['order_id']) ?>
 
 <?php if (!order_paid($row['order_id']) || order_total($row['order_id']) == 0):?>
-  <div>
+  <div class="action-links">
     <?php link_modify_entity('order', $row['order_id']) ?>
     <?php link_delete_entity('order', $row['order_id']) ?>
   </div>

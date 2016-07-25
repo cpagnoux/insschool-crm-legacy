@@ -1,6 +1,6 @@
 <?php $name = get_name('member', $row['member_id']) ?>
 
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('member') ?> >
   <?php link_entity('member', $row['member_id'], $name) ?> >
@@ -18,7 +18,7 @@
 <b>Tarif après réduction :</b> <?php echo price_after_discount($row['price'], $row['discount']) ?> €<br>
 <b>Nombre de paiements :</b> <?php echo $row['num_payments'] ?></p>
 
-<div>
+<div class="action-links">
   <?php link_modify_entity('registration', $row['registration_id']) ?>
   <?php link_delete_entity('registration', $row['registration_id']) ?>
 </div>

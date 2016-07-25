@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('goody') ?> >
   <?php echo $row['name'] ?>
@@ -13,7 +13,7 @@
 <p><b>Prix :</b> <?php echo $row['price'] ?> €<br>
 <b>Stock :</b> <?php echo $row['stock'] ?></p>
 
-<div>
+<div class="action-links">
   <?php link_modify_entity('goody', $row['goody_id']) ?>
   <?php link_delete_entity('goody', $row['goody_id']) ?>
 </div>

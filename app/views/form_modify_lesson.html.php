@@ -1,6 +1,6 @@
 <?php $title = get_lesson_title($row['lesson_id']) ?>
 
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('lesson') ?> >
   <?php link_entity('lesson', $row['lesson_id'], $title) ?> >

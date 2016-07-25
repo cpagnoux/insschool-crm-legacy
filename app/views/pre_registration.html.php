@@ -1,4 +1,4 @@
-<nav>
+<nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('pre_registration') ?> >
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
@@ -28,7 +28,7 @@
 
 <p><b>Date :</b> <?php echo $row['date'] ?></p>
 
-<div>
+<div class="action-links">
   <?php link_commit_pre_registration($row['pre_registration_id']) ?>
   <?php link_modify_entity('pre_registration', $row['pre_registration_id']) ?>
   <?php link_delete_entity('pre_registration', $row['pre_registration_id']) ?>

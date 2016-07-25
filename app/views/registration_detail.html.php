@@ -2,7 +2,7 @@
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun cours<br></p>
-  <div>
+  <div class="action-links">
     <?php link_add_entity('registration_detail', $registration_id) ?>
   </div>
   <?php return ?>
@@ -25,6 +25,6 @@
 
 </table>
 
-<div>
+<div class="action-links">
   <?php link_add_entity('registration_detail', $registration_id) ?>
 </div>
