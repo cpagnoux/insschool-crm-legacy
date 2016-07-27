@@ -4,6 +4,8 @@
   Nouvel adhérent
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=member" method="post">
-  <?php form_entity_member() ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=member" method="post">
+    <?php form_entity_member() ?>
+  </form>
+</div>

@@ -7,6 +7,8 @@
   Modifier le cours
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=lesson&amp;id=<?php echo $row['lesson_id'] ?>" method="post">
-  <?php require 'views/form_lesson.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=lesson&amp;id=<?php echo $row['lesson_id'] ?>" method="post">
+    <?php require 'views/form_lesson.html.php' ?>
+  </form>
+</div>

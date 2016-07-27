@@ -7,6 +7,8 @@
   Modifier le professeur
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=teacher&amp;id=<?php echo $row['teacher_id'] ?>" method="post">
-  <?php require 'views/form_teacher.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=teacher&amp;id=<?php echo $row['teacher_id'] ?>" method="post">
+    <?php require 'views/form_teacher.html.php' ?>
+  </form>
+</div>

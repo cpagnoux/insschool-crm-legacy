@@ -3,35 +3,36 @@
   Professeurs
 </nav>
 
+<div class="menu">
+  <?php link_add_entity($table) ?>
+</div>
+
 <?php if (mysqli_num_rows($result) == 0): ?>
-  <p>Aucun professeur</p>
-  <div "action-links">
-    <?php link_add_entity($table) ?>
+  <div class="container">
+    <p>Aucun professeur</p>
   </div>
   <?php return ?>
 <?php endif ?>
 
-<?php table_display_options('teacher') ?>
+<div class="container">
+  <?php table_display_options('teacher') ?>
 
-<table>
-  <tr>
-    <th><b>Nom</b></th>
-    <th><b>Prénom</b></th>
-    <th></th>
-  </tr>
-
-  <?php while ($row = mysqli_fetch_assoc($result)): ?>
+  <table>
     <tr>
-      <td><?php echo $row['last_name'] ?></td>
-      <td><?php echo $row['first_name'] ?></td>
-      <td><?php link_entity('teacher', $row['teacher_id']) ?></td>
+      <th><b>Nom</b></th>
+      <th><b>Prénom</b></th>
+      <th></th>
     </tr>
-  <?php endwhile ?>
 
-</table>
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <tr>
+        <td><?php echo $row['last_name'] ?></td>
+        <td><?php echo $row['first_name'] ?></td>
+        <td><?php link_entity('teacher', $row['teacher_id']) ?></td>
+      </tr>
+    <?php endwhile ?>
 
-<?php table_pagination($table, $page) ?>
+  </table>
 
-<div class="action-links">
-  <?php link_add_entity($table) ?>
+  <?php table_pagination($table, $page) ?>
 </div>

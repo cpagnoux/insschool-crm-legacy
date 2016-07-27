@@ -21,7 +21,9 @@
   <?php break ?>
 <?php endswitch ?>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=<?php echo $table ?>&amp;id=<?php echo $row[$table . '_id'] ?>" method="post">
-  <?php $id = $row[$ref_table . '_id'] ?>
-  <?php require 'views/form_payment.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=<?php echo $table ?>&amp;id=<?php echo $row[$table . '_id'] ?>" method="post">
+    <?php $id = $row[$ref_table . '_id'] ?>
+    <?php require 'views/form_payment.html.php' ?>
+  </form>
+</div>

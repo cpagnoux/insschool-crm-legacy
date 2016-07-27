@@ -9,6 +9,8 @@
   Modifier l'inscription
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">
-  <?php require 'views/form_registration.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">
+    <?php require 'views/form_registration.html.php' ?>
+  </form>
+</div>

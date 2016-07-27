@@ -3,33 +3,34 @@
   Cours
 </nav>
 
+<div class="menu">
+  <?php link_add_entity($table) ?>
+</div>
+
 <?php if (mysqli_num_rows($result) == 0): ?>
-  <p>Aucun cours</p>
-  <div class="action-links">
-    <?php link_add_entity($table) ?>
+  <div class="container">
+    <p>Aucun cours</p>
   </div>
   <?php return ?>
 <?php endif ?>
 
-<?php table_display_options('lesson') ?>
+<div class="container">
+  <?php table_display_options('lesson') ?>
 
-<table>
-  <tr>
-    <th><b>Intitulé</b></th>
-    <th></th>
-  </tr>
-
-  <?php while ($row = mysqli_fetch_assoc($result)): ?>
+  <table>
     <tr>
-      <td><?php echo $row['title'] ?></td>
-      <td><?php link_entity('lesson', $row['lesson_id']) ?></td>
+      <th><b>Intitulé</b></th>
+      <th></th>
     </tr>
-  <?php endwhile ?>
 
-</table>
+    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <tr>
+        <td><?php echo $row['title'] ?></td>
+        <td><?php link_entity('lesson', $row['lesson_id']) ?></td>
+      </tr>
+    <?php endwhile ?>
 
-<?php table_pagination($table, $page) ?>
+  </table>
 
-<div class="action-links">
-  <?php link_add_entity($table) ?>
+  <?php table_pagination($table, $page) ?>
 </div>

@@ -10,6 +10,8 @@
   Ajouter un cours
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=registration_detail" method="post">
-  <?php require 'views/form_registration_detail.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=registration_detail" method="post">
+    <?php require 'views/form_registration_detail.html.php' ?>
+  </form>
+</div>

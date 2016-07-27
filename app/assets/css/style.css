@@ -10,7 +10,7 @@ body {
 	line-height: 85px;
 	margin: auto;
 	margin-bottom: 100px;
-	margin-top:100px;
+	margin-top: 100px;
 	opacity: 0.8;
 	width: 700px;
 }
@@ -18,6 +18,7 @@ body {
 .login-form {
 	background-color: black;
 	margin: auto;
+	padding: 20px;
 	width: 250px;
 }
 
@@ -26,6 +27,7 @@ body {
 	line-height: 40px;
 	margin-bottom: 20px;
 	opacity: 0.8;
+	padding-right: 20px;
 	text-align: right;
 }
 
@@ -35,11 +37,29 @@ body {
 	margin: auto;
 	margin-bottom: 40px;
 	opacity: 0.8;
+	text-transform: uppercase;
 	width: 95%;
 }
 
 .breadcrumb {
 	margin-bottom: 20px;
+	margin-left: 100px;
+}
+
+.menu {
+	background-color: black;
+	float: right;
+	margin-right: 100px;
+	padding: 20px;
+	width: 300px;
+}
+
+.container {
+	background-color: black;
+	margin-bottom: 20px;
+	margin-left: 100px;
+	margin-right: 480px;
+	padding: 20px;
 }
 
 .display-options {
@@ -47,16 +67,25 @@ body {
 }
 
 .pagination {
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 .action-links {
-	margin-bottom: 40px;
 	margin-top: 20px;
+}
+
+.pre-registration-header {
+	background-color: black;
+	line-height: 85px;
+	margin: auto;
+	margin-bottom: 40px;
+	opacity: 0.8;
+	width: 95%;
 }
 
 a {
 	color: lightgrey;
+	text-decoration: none;
 }
 
 a:hover {
@@ -69,6 +98,7 @@ h1 {
 
 h2 {
 	color: white;
+	text-transform: uppercase;
 }
 
 .logo {

@@ -143,9 +143,7 @@ function table_display_limit()
 
 function table_display_options($table)
 {
-	echo '<div class="display-options">' . PHP_EOL;
-	echo '  <form action="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	     '" method="post">' . PHP_EOL;
+	require 'views/table_display_options_open.html.php';
 
 	switch ($table) {
 	case 'goody':
@@ -173,7 +171,6 @@ function table_display_options($table)
 
 	table_display_limit();
 
-	echo '  </form>' . PHP_EOL;
-	echo '</div>' . PHP_EOL;
+	require 'views/table_display_options_close.html.php';
 }
 ?>

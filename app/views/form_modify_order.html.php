@@ -5,6 +5,8 @@
   Modifier la commande
 </nav>
 
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=order&amp;id=<?php echo $row['order_id'] ?>" method="post">
-  <?php require 'views/form_order.html.php' ?>
-</form>
+<div class="container">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=order&amp;id=<?php echo $row['order_id'] ?>" method="post">
+    <?php require 'views/form_order.html.php' ?>
+  </form>
+</div>
