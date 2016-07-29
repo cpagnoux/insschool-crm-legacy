@@ -256,7 +256,7 @@ function form_entity_member($row)
 			$volunteer_false = ' checked="checked"';
 	}
 
-	require 'views/form_member.html.php';
+	require 'views/form_content_member.html.php';
 }
 
 function form_entity_pre_registration($row)
@@ -283,7 +283,7 @@ function form_entity_pre_registration($row)
 		}
 	}
 
-	require 'views/form_pre_registration.html.php';
+	require 'views/form_content_pre_registration.html.php';
 }
 
 function form_entity_registration_file($registration_id, $row)
@@ -312,7 +312,7 @@ function form_entity_registration_file($registration_id, $row)
 			$photo_false = ' checked="checked"';
 	}
 
-	require 'views/form_registration_file.html.php';
+	require 'views/form_content_registration_file.html.php';
 }
 
 /*

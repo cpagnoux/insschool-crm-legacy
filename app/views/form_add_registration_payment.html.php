@@ -12,6 +12,6 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=registration_payment" method="post">
-    <?php require 'views/form_payment.html.php' ?>
+    <?php require 'views/form_content_payment.html.php' ?>
   </form>
 </div>

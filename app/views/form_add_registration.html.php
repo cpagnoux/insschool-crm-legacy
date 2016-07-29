@@ -9,6 +9,6 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=registration" method="post">
-    <?php require 'views/form_registration.html.php' ?>
+    <?php require 'views/form_content_registration.html.php' ?>
   </form>
 </div>

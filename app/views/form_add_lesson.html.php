@@ -6,6 +6,6 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=lesson" method="post">
-    <?php require 'views/form_lesson.html.php' ?>
+    <?php require 'views/form_content_lesson.html.php' ?>
   </form>
 </div>
