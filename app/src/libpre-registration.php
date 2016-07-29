@@ -23,14 +23,14 @@ function display_rooms($link)
 
 	$num_rooms = 0;
 
-	echo '    <tr>' . PHP_EOL;
+	echo '  <tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		echo '      <th><b>' . $row['name'] . '</b></th>' . PHP_EOL;
+		echo '    <th><b>' . $row['name'] . '</b></th>' . PHP_EOL;
 		$num_rooms++;
 	}
 
-	echo '    </tr>' . PHP_EOL;
+	echo '  </tr>' . PHP_EOL;
 
 	mysqli_free_result($result);
 
@@ -39,12 +39,12 @@ function display_rooms($link)
 
 function display_day($day, $count)
 {
-	echo '    <tr>' . PHP_EOL;
+	echo '  <tr>' . PHP_EOL;
 
 	for ($i = 0; $i < $count; $i++)
-		echo '      <th><b>' . eval_enum($day) . '</b></th>' . PHP_EOL;
+		echo '    <th><b>' . eval_enum($day) . '</b></th>' . PHP_EOL;
 
-	echo '    </tr>' . PHP_EOL;
+	echo '  </tr>' . PHP_EOL;
 }
 
 function get_time_slots($link, $day)
@@ -84,7 +84,23 @@ function get_rooms($link)
 	return $rooms;
 }
 
-function display_day_lessons($link, $day, $lessons)
+function display_lesson($row, $time_slot, $room, $lessons)
+{
+	if ($row['start_time'] . ' - ' . $row['end_time'] != $time_slot ||
+	    $row['room_id'] != $room) {
+		echo '    <td>---</td>' . PHP_EOL;
+		return false;
+	}
+
+	echo '    <td><input type="checkbox" name="' . $row['lesson_id'] .
+	     '" value="' . $row['title'] . '"' . $lessons[$row['lesson_id']] .
+	     '> ' . $row['title'] . ' : ' . $row['start_time'] . ' - ' .
+	     $row['end_time'] . '</td>' . PHP_EOL;
+
+	return true;
+}
+
+function display_lessons_by_day($link, $day, $lessons)
 {
 	$time_slots = get_time_slots($link, $day);
 	$rooms = get_rooms($link);
@@ -100,25 +116,14 @@ function display_day_lessons($link, $day, $lessons)
 	$row = mysqli_fetch_assoc($result);
 
 	foreach ($time_slots as $time_slot) {
-		echo '    <tr>' . PHP_EOL;
+		echo '  <tr>' . PHP_EOL;
 
 		foreach ($rooms as $room) {
-			if ($row['start_time'] . ' - ' . $row['end_time'] ==
-			    $time_slot && $row['room_id'] == $room) {
-				echo '      <td><input type="checkbox" name="' .
-				     $row['lesson_id'] . '" value="' .
-				     $row['title'] . '"' .
-				     $lessons[$row['lesson_id']] . '> ' .
-				     $row['title'] . ' : ' .
-				     $row['start_time'] . ' - ' .
-				     $row['end_time'] . '</td>' . PHP_EOL;
+			if (display_lesson($row, $time_slot, $room, $lessons))
 				$row = mysqli_fetch_assoc($result);
-			} else {
-				echo '      <td>---</td>' . PHP_EOL;
-			}
 		}
 
-		echo '    </tr>' . PHP_EOL;
+		echo '  </tr>' . PHP_EOL;
 	}
 
 	mysqli_free_result($result);
@@ -128,17 +133,17 @@ function display_lessons($lessons)
 {
 	$link = connect_database();
 
-	echo '  <table>' . PHP_EOL;
+	echo '<table>' . PHP_EOL;
 
 	$num_rooms = display_rooms($link);
 	$days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY');
 
 	foreach($days as $day) {
 		display_day($day, $num_rooms);
-		display_day_lessons($link, $day, $lessons);
+		display_lessons_by_day($link, $day, $lessons);
 	}
 
-	echo '  </table>' . PHP_EOL;
+	echo '</table>' . PHP_EOL;
 
 	mysqli_close($link);
 }

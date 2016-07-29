@@ -11,7 +11,7 @@ require_once 'src/libpre-registration.php';
 require_once 'src/entity.php';
 
 /*
- * Helper functions for displaying member-related data
+ * Helper functions for displaying entities
  */
 function display_member_registrations($link, $member_id)
 {
@@ -27,9 +27,6 @@ function display_member_registrations($link, $member_id)
 	mysqli_free_result($result);
 }
 
-/*
- * Helper functions for displaying order-related data
- */
 function display_order_content($link, $order_id)
 {
 	$query = 'SELECT order_content.goody_id, order_content.quantity, ' .
@@ -47,9 +44,6 @@ function display_order_content($link, $order_id)
 	mysqli_free_result($result);
 }
 
-/*
- * Helper functions for displaying registration-related data
- */
 function display_registration_detail($link, $registration_id)
 {
 	$query = 'SELECT registration_detail.lesson_id, ' .
@@ -82,9 +76,6 @@ function display_registration_file($link, $registration_id)
 	mysqli_free_result($result);
 }
 
-/*
- * Helper functions for displaying payments
- */
 function display_entity_payments($link, $table, $id)
 {
 	$query = 'SELECT * FROM ' . $table . '_payment WHERE ' . $table .

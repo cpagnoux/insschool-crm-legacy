@@ -1,8 +1,22 @@
+html {
+	min-height: 100%;
+	position: relative;
+}
+
 body {
 	background-attachment: fixed;
 	background-color: black;
 	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
 	color: grey;
+}
+
+footer {
+	background-color: black;
+	bottom: 0;
+	height: 100px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
 }
 
 .login-container {
@@ -47,7 +61,7 @@ body {
 
 .container {
 	background-color: black;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	margin-left: 100px;
 	margin-right: 480px;
 	padding: 20px;
@@ -63,6 +77,10 @@ body {
 
 .action-links {
 	margin-top: 20px;
+}
+
+.footer-container {
+	height: 100px;
 }
 
 .pre-registration-header {

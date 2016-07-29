@@ -16,7 +16,5 @@
 
 <p>Vous avez choisi les cours :</p>
 <ul>
-
-<?php $lessons_str = lessons_to_string($data, true) ?>
-
+  <?php $lessons_str = lessons_to_string($data, true) ?>
 </ul>

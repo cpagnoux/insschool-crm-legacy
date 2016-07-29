@@ -74,7 +74,7 @@ function link_entity($table, $id, $message)
 
 function link_add_entity($table, $id)
 {
-	$message = 'Ajouter';
+	$message = '';
 
 	switch ($table) {
 	case 'goody':
@@ -109,6 +109,9 @@ function link_add_entity($table, $id)
 		break;
 	case 'teacher':
 		$message = 'Nouveau professeur';
+		break;
+	default:
+		$message = 'Ajouter';
 		break;
 	}
 

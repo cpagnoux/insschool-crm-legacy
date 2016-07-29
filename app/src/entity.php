@@ -89,7 +89,7 @@ function form_add_entity($table, $id)
 		require 'views/form_add_order_content.html.php';
 		break;
 	case 'order_payment':
-		require 'views/form_add_payment.html.php';
+		require 'views/form_add_order_payment.html.php';
 		break;
 	case 'registration':
 		$member_id = $id;
@@ -100,7 +100,7 @@ function form_add_entity($table, $id)
 		require 'views/form_add_registration_detail.html.php';
 		break;
 	case 'registration_payment':
-		require 'views/form_add_payment.html.php';
+		require 'views/form_add_registration_payment.html.php';
 		break;
 	case 'room':
 		require 'views/form_add_room.html.php';
@@ -350,8 +350,7 @@ function form_modify_entity($table, $id)
 		require 'views/form_modify_order.html.php';
 		break;
 	case 'order_payment':
-		$ref_table = 'order';
-		require 'views/form_modify_payment.html.php';
+		require 'views/form_modify_order_payment.html.php';
 		break;
 	case 'pre_registration':
 		require 'views/form_modify_pre_registration.html.php';
@@ -363,8 +362,7 @@ function form_modify_entity($table, $id)
 		require 'views/form_modify_registration_file.html.php';
 		break;
 	case 'registration_payment':
-		$ref_table = 'registration';
-		require 'views/form_modify_payment.html.php';
+		require 'views/form_modify_registration_payment.html.php';
 		break;
 	case 'room':
 		require 'views/form_modify_room.html.php';
