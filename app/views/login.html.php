@@ -18,7 +18,7 @@
 
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
     <p>Nom d'utilisateur<br>
-    <input type="text" name="username" required="required"><br>
+    <input type="text" name="username" required="required" autofocus="autofocus"><br>
     Mot de passe<br>
     <input type="password" name="password" required="required"></p>
 
