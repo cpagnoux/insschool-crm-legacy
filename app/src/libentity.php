@@ -423,7 +423,7 @@ function check_dependencies($link, $table, $id)
 }
 
 /*
- * Helper function to manage goodies stock according to orders
+ * Helper function for managing goodies stock according to orders
  */
 function update_goody_stock($link, $goody_id, $difference)
 {
