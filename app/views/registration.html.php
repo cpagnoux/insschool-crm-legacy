@@ -1,5 +1,3 @@
-<?php $name = get_name('member', $row['member_id']) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('member') ?> >

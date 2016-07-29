@@ -1,5 +1,3 @@
-<?php $title = get_lesson_title($row['lesson_id']) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('lesson') ?> >

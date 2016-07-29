@@ -1,9 +1,9 @@
 <?php switch ($table): ?>
 <?php case 'order_payment': ?>
-  <p>N° de commande : <input type="text" name="order_id" value="<?php echo $id ?>" readonly="readonly"></p>
+  <p>N° de commande : <input type="text" name="order_id" value="<?php echo $order_id ?>" readonly="readonly"></p>
   <?php break ?>
 <?php case 'registration_payment': ?>
-  <p>N° d'inscription : <input type="text" name="registration_id" value="<?php echo $id ?>" readonly="readonly"></p>
+  <p>N° d'inscription : <input type="text" name="registration_id" value="<?php echo $registration_id ?>" readonly="readonly"></p>
   <?php break ?>
 <?php endswitch ?>
 

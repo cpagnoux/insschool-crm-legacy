@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('order') ?> >
-  <?php link_entity('order', $id, 'N° ' . $id) ?> >
+  <?php link_entity('order', $order_id, 'N° ' . $order_id) ?> >
   Ajouter un article
 </nav>
 

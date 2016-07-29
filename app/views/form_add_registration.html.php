@@ -1,9 +1,7 @@
-<?php $name = get_name('member', $id) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('member') ?> >
-  <?php link_entity('member', $id, $name) ?> >
+  <?php link_entity('member', $member_id, $name) ?> >
   Nouvelle inscription
 </nav>
 

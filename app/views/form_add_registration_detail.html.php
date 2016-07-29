@@ -1,12 +1,8 @@
-<?php $member_id = get_member_id($id) ?>
-<?php $name = get_name('member', $member_id) ?>
-<?php $season = get_registration_season($id) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('member') ?> >
   <?php link_entity('member', $member_id, $name) ?> >
-  <?php link_entity('registration', $id, 'Inscription ' . $season) ?> >
+  <?php link_entity('registration', $registration_id, 'Inscription ' . $season) ?> >
   Ajouter un cours
 </nav>
 

@@ -49,6 +49,7 @@ function display_entity($table, $id)
 		require 'views/pre_registration.html.php';
 		break;
 	case 'registration':
+		$name = get_name('member', $row['member_id']);
 		require 'views/registration.html.php';
 		break;
 	case 'room':
@@ -89,17 +90,26 @@ function form_add_entity($table, $id)
 		require 'views/form_add_order_content.html.php';
 		break;
 	case 'order_payment':
+		$order_id = $id;
 		require 'views/form_add_order_payment.html.php';
 		break;
 	case 'registration':
 		$member_id = $id;
+		$name = get_name('member', $id);
 		require 'views/form_add_registration.html.php';
 		break;
 	case 'registration_detail':
 		$registration_id = $id;
+		$member_id = get_member_id($id);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($id);
 		require 'views/form_add_registration_detail.html.php';
 		break;
 	case 'registration_payment':
+		$registration_id = $id;
+		$member_id = get_member_id($id);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($id);
 		require 'views/form_add_registration_payment.html.php';
 		break;
 	case 'room':
@@ -338,36 +348,54 @@ function form_modify_entity($table, $id)
 
 	switch ($table) {
 	case 'goody':
+		$name = get_entity_name('goody', $row['goody_id']);
 		require 'views/form_modify_goody.html.php';
 		break;
 	case 'lesson':
+		$title = get_lesson_title($row['lesson_id']);
 		require 'views/form_modify_lesson.html.php';
 		break;
 	case 'member':
+		$name = get_name('member', $row['member_id']);
 		require 'views/form_modify_member.html.php';
 		break;
 	case 'order':
 		require 'views/form_modify_order.html.php';
 		break;
 	case 'order_payment':
+		$order_id = $row['order_id'];
 		require 'views/form_modify_order_payment.html.php';
 		break;
 	case 'pre_registration':
+		$name = get_name('pre_registration',
+				 $row['pre_registration_id']);
 		require 'views/form_modify_pre_registration.html.php';
 		break;
 	case 'registration':
+		$member_id = $row['member_id'];
+		$name = get_name('member', $row['member_id']);
+		$season = get_registration_season($row['registration_id']);
 		require 'views/form_modify_registration.html.php';
 		break;
 	case 'registration_file':
+		$member_id = get_member_id($row['registration_id']);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($row['registration_id']);
 		require 'views/form_modify_registration_file.html.php';
 		break;
 	case 'registration_payment':
+		$registration_id = $row['registration_id'];
+		$member_id = get_member_id($row['registration_id']);
+		$name = get_name('member', $member_id);
+		$season = get_registration_season($row['registration_id']);
 		require 'views/form_modify_registration_payment.html.php';
 		break;
 	case 'room':
+		$name = get_entity_name('room', $row['room_id']);
 		require 'views/form_modify_room.html.php';
 		break;
 	case 'teacher':
+		$name = get_name('teacher', $row['teacher_id']);
 		require 'views/form_modify_teacher.html.php';
 		break;
 	}

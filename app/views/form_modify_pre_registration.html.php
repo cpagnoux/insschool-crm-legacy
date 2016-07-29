@@ -1,5 +1,3 @@
-<?php $name = get_name('pre_registration', $row['pre_registration_id']) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('pre_registration') ?> >

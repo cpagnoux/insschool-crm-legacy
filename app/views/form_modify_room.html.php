@@ -1,5 +1,3 @@
-<?php $name = get_entity_name('room', $row['room_id']) ?>
-
 <nav class="breadcrumb">
   <?php link_home() ?> >
   <?php link_table('room') ?> >
