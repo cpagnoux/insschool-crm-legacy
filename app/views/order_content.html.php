@@ -9,10 +9,10 @@
 
 <table>
   <tr>
-    <th><b>Désignation</b></th>
-    <th><b>Prix unitaire</b></th>
-    <th><b>Quantité</b></th>
-    <th><b>Total</b></th>
+    <th>Désignation</th>
+    <th>Prix unitaire</th>
+    <th>Quantité</th>
+    <th>Total</th>
 
     <?php if (!order_paid($order_id)): ?>
       <th></th>
@@ -45,7 +45,7 @@
 </table>
 
 <p>
-  <b>TOTAL :</b>
+  <span class="attribute-name">TOTAL :</span>
   <?php echo order_total($order_id) ?> €
 </p>
 

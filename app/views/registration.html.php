@@ -14,20 +14,20 @@
   <h2>Inscription <?php echo $row['season'] ?></h2>
 
   <p>
-    <b>Adhérent :</b>
+    <span class="attribute-name">Adhérent :</span>
     <?php echo get_name('member', $row['member_id']) ?>
   </p>
 
   <p>
-    <b>Formule :</b>
+    <span class="attribute-name">Formule :</span>
     <?php echo registration_formula($row['registration_id']) ?> cours<br>
-    <b>Tarif :</b>
+    <span class="attribute-name">Tarif :</span>
     <?php echo $row['price'] ?> €<br>
-    <b>Réduction :</b>
+    <span class="attribute-name">Réduction :</span>
     <?php echo $row['discount'] ?> %<br>
-    <b>Tarif après réduction :</b>
+    <span class="attribute-name">Tarif après réduction :</span>
     <?php echo price_after_discount($row['price'], $row['discount']) ?> €<br>
-    <b>Nombre de paiements :</b>
+    <span class="attribute-name">Nombre de paiements :</span>
     <?php echo $row['num_payments'] ?>
   </p>
 </div>

@@ -13,7 +13,7 @@
 
   <table>
     <tr>
-      <th><b>Saison</b></th>
+      <th>Saison</th>
       <th></th>
     </tr>
 

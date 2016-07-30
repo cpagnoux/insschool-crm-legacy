@@ -13,9 +13,9 @@
 
   <table>
     <tr>
-      <th><b>Montant</b></th>
-      <th><b>Mode de paiement</b></th>
-      <th><b>Date</b></th>
+      <th>Montant</th>
+      <th>Mode de paiement</th>
+      <th>Date</th>
       <th></th>
       <th></th>
     </tr>
@@ -33,20 +33,20 @@
   </table>
 
   <p>
-    <b>Total payé :</b>
+    <span class="attribute-name">Total payé :</span>
     <?php echo total_paid($table, $id) ?> €<br>
   </p>
 
 <?php switch ($table): ?>
 <?php case 'order': ?>
   <p>
-    <b>Commande réglée :</b>
+    <span class="attribute-name">Commande réglée :</span>
     <?php echo eval_boolean(order_paid($id)) ?>
   </p>
   <?php break ?>
 <?php case 'registration': ?>
   <p>
-    <b>Inscription réglée :</b>
+    <span class="attribute-name">Inscription réglée :</span>
     <?php echo eval_boolean(registration_paid($id)) ?>
   </p>
   <?php break ?>

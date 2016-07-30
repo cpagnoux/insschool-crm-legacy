@@ -19,9 +19,9 @@
 
   <table>
     <tr>
-      <th><b>N° de commande</b></th>
-      <th><b>Adhérent</b></th>
-      <th><b>Date</b></th>
+      <th>N° de commande</th>
+      <th>Adhérent</th>
+      <th>Date</th>
       <th></th>
     </tr>
 

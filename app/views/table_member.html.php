@@ -19,8 +19,8 @@
 
   <table>
     <tr>
-      <th><b>Nom</b></th>
-      <th><b>Prénom</b></th>
+      <th>Nom</th>
+      <th>Prénom</th>
       <th></th>
     </tr>
 

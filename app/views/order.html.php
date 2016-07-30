@@ -15,12 +15,12 @@
   <h2>Commande n° <?php echo $row['order_id'] ?></h2>
 
   <p>
-    <b>Adhérent :</b>
+    <span class="attribute-name">Adhérent :</span>
     <?php echo get_name('member', $row['member_id']) ?>
   </p>
 
   <p>
-    <b>Date :</b>
+    <span class="attribute-name">Date :</span>
     <?php echo $row['date'] ?>
   </p>
 

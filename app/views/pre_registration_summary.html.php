@@ -2,33 +2,33 @@
   <h2>Récapitulatif :</h2>
 
   <p>
-    <b>Nom :</b>
+    <span class="attribute-name">Nom :</span>
     <?php echo $data['last_name'] ?><br>
-    <b>Prénom :</b>
+    <span class="attribute-name">Prénom :</span>
     <?php echo $data['first_name'] ?><br>
-    <b>Date de naissance :</b>
+    <span class="attribute-name">Date de naissance :</span>
     <?php echo $data['birth_date'] ?>
   </p>
 
   <p>
-    <b>Adresse :</b>
+    <span class="attribute-name">Adresse :</span>
     <?php echo $data['address'] ?><br>
-    <b>Code postal :</b>
+    <span class="attribute-name">Code postal :</span>
     <?php echo $data['postal_code'] ?><br>
-    <b>Ville :</b>
+    <span class="attribute-name">Ville :</span>
     <?php echo $data['city'] ?>
   </p>
 
   <p>
-    <b>Portable :</b>
+    <span class="attribute-name">Portable :</span>
     <?php echo $data['cellphone'] ?><br>
-    <b>Portable père :</b>
+    <span class="attribute-name">Portable père :</span>
     <?php echo $data['cellphone_father'] ?><br>
-    <b>Portable mère :</b>
+    <span class="attribute-name">Portable mère :</span>
     <?php echo $data['cellphone_mother'] ?><br>
-    <b>Téléphone fixe :</b>
+    <span class="attribute-name">Téléphone fixe :</span>
     <?php echo $data['phone'] ?><br>
-    <b>E-mail :</b>
+    <span class="attribute-name">E-mail :</span>
     <?php echo $data['email'] ?>
   </p>
 

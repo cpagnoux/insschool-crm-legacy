@@ -13,30 +13,30 @@
   <h2><?php echo $row['title'] ?></h2>
 
   <p>
-    <b>Professeur :</b>
+    <span class="attribute-name">Professeur :</span>
     <?php echo get_name('teacher', $row['teacher_id']) ?><br>
   </p>
 
   <p>
-    <b>Jour :</b>
+    <span class="attribute-name">Jour :</span>
     <?php echo eval_enum($row['day']) ?><br>
-    <b>Heure de début :</b>
+    <span class="attribute-name">Heure de début :</span>
     <?php echo $row['start_time'] ?><br>
-    <b>Heure de fin :</b>
+    <span class="attribute-name">Heure de fin :</span>
     <?php echo $row['end_time'] ?><br>
-    <b>Durée :</b>
+    <span class="attribute-name">Durée :</span>
     <?php echo duration($row['start_time'], $row['end_time']) ?><br>
-    <b>Salle :</b>
+    <span class="attribute-name">Salle :</span>
     <?php echo get_entity_name('room', $row['room_id']) ?>
   </p>
 
   <p>
-    <b>Costume :</b>
+    <span class="attribute-name">Costume :</span><br>
     <?php echo $row['costume'] ?>
   </p>
 
   <p>
-    <b>Nombre d'inscrits (<?php echo current_season() ?>) :</b>
+    <span class="attribute-name">Nombre d'inscrits (<?php echo current_season() ?>) :</span>
     <?php echo lesson_registrant_count($row['lesson_id'], current_season()) ?>
   </p>
 </div>

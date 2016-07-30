@@ -13,34 +13,34 @@
   <h2><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></h2>
 
   <p>
-    <b>Nom :</b>
+    <span class="attribute-name">Nom :</span>
     <?php echo $row['last_name'] ?><br>
-    <b>Prénom :</b>
+    <span class="attribute-name">Prénom :</span>
     <?php echo $row['first_name'] ?><br>
-    <b>Date de naissance :</b>
+    <span class="attribute-name">Date de naissance :</span>
     <?php echo $row['birth_date'] ?>
   </p>
 
   <p>
-    <b>Adresse :</b>
+    <span class="attribute-name">Adresse :</span>
     <?php echo $row['address'] ?><br>
-    <b>Code postal :</b>
+    <span class="attribute-name">Code postal :</span>
     <?php echo $row['postal_code'] ?><br>
-    <b>Ville :</b>
+    <span class="attribute-name">Ville :</span>
     <?php echo $row['city'] ?>
   </p>
 
   <p>
-    <b>Portable :</b>
+    <span class="attribute-name">Portable :</span>
     <?php echo $row['cellphone'] ?><br>
-    <b>Fixe :</b>
+    <span class="attribute-name">Fixe :</span>
     <?php echo $row['phone'] ?><br>
-    <b>Email :</b>
+    <span class="attribute-name">Email :</span>
     <?php echo $row['email'] ?>
   </p>
 
   <p>
-    <b>Absences :</b>
+    <span class="attribute-name">Absences :</span>
     <?php echo $row['absences'] ?>
   </p>
 </div>

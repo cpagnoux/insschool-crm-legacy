@@ -13,11 +13,11 @@
   <h2><?php echo $row['name'] ?></h2>
 
   <p>
-    <b>Adresse :</b>
+    <span class="attribute-name">Adresse :</span>
     <?php echo $row['address'] ?><br>
-    <b>Code postal :</b>
+    <span class="attribute-name">Code postal :</span>
     <?php echo $row['postal_code'] ?><br>
-    <b>Ville :</b>
+    <span class="attribute-name">Ville :</span>
     <?php echo $row['city'] ?>
   </p>
 </div>

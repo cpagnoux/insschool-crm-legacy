@@ -19,7 +19,7 @@
 
   <table>
     <tr>
-      <th><b>Nom</b></th>
+      <th>Nom</th>
       <th></th>
     </tr>
 

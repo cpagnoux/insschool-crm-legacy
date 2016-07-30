@@ -15,16 +15,16 @@
   <?php endif ?>
 
   <p>
-    <b>Certificat médical :</b>
+    <span class="attribute-name">Certificat médical :</span>
     <?php echo eval_boolean($row['medical_certificate']) ?><br>
-    <b>Assurance :</b>
+    <span class="attribute-name">Assurance :</span>
     <?php echo eval_boolean($row['insurance']) ?><br>
-    <b>Photo :</b>
+    <span class="attribute-name">Photo :</span>
     <?php echo eval_boolean($row['photo']) ?>
   </p>
 
   <p>
-    <b>Dossier complet :</b>
+    <span class="attribute-name">Dossier complet :</span>
     <?php echo eval_boolean(registration_file_complete($row['registration_id'])) ?>
   </p>
 </div>

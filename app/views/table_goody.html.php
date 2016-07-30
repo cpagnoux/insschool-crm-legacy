@@ -19,9 +19,9 @@
 
   <table>
     <tr>
-      <th><b>Désignation</b></th>
-      <th><b>Prix</b></th>
-      <th><b>Stock</b></th>
+      <th>Désignation</th>
+      <th>Prix</th>
+      <th>Stock</th>
       <th></th>
     </tr>
 

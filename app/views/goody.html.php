@@ -13,14 +13,14 @@
   <h2><?php echo $row['name'] ?></h2>
 
   <p>
-    <b>Description :</b>
+    <span class="attribute-name">Description :</span><br>
     <?php echo $row['description'] ?>
   </p>
 
   <p>
-    <b>Prix :</b>
+    <span class="attribute-name">Prix :</span>
     <?php echo $row['price'] ?> €<br>
-    <b>Stock :</b>
+    <span class="attribute-name">Stock :</span>
     <?php echo $row['stock'] ?>
   </p>
 </div>

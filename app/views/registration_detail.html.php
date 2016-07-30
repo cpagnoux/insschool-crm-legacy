@@ -13,8 +13,8 @@
 
   <table>
     <tr>
-      <th><b>Cours</b></th>
-      <th><b>Participation à l'INS Show</b></th>
+      <th>Cours</th>
+      <th>Participation à l'INS Show</th>
       <th></th>
     </tr>
 
