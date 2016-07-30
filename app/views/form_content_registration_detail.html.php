@@ -11,9 +11,9 @@
   <div class="form-row">
     Participation à l'INS Show <sup>*</sup> :<br>
     <input id="show_participation_true" type="radio" name="show_participation" value="1" required="required">
-    <label for="show_participation_true">Oui</label>
+    <label class="label-radio" for="show_participation_true">Oui</label>
     <input id="show_participation_false" type="radio" name="show_participation" value="0">
-    <label for="show_participation_false">Non</label>
+    <label class="label-radio" for="show_participation_false">Non</label>
   </div>
 </fieldset>
 

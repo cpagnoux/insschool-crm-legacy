@@ -199,12 +199,26 @@ function link_logout()
 /*
  * Miscellaneous functions
  */
+function current_season()
+{
+	$season = '';
+
+	if (date('m') >= 6)
+		$season = date('Y') . '-' . (date('Y') + 1);
+	else
+		$season = (date('Y') - 1) . '-' . date('Y');
+
+	return $season;
+}
+
 function date_to_season($date)
 {
 	// date is in 'YYYY-MM-DD' format
 	sscanf($date, '%d', $year);
 	$date = substr($date, strlen($year) + 1);
 	sscanf($date, '%d', $month);
+
+	$season = '';
 
 	if ($month >= 6)
 		$season = $year . '-' . ($year + 1);
@@ -307,15 +321,14 @@ function eval_boolean($value)
 
 function previous_season()
 {
-	$current_season = current_season();
+	$season = '';
 
-	sscanf($current_season, '%d', $year1);
-	$current_season = substr($current_season, strlen($year1) + 1);
-	sscanf($current_season, '%d', $year2);
+	if (date('m') >= 6)
+		$season = (date('Y') - 1) . '-' . date('Y');
+	else
+		$season = (date('Y') - 2) . '-' . (date('Y') - 1);
 
-	$previous_season = ($year1 - 1) . '-' . ($year2 - 1);
-
-	return $previous_season;
+	return $season;
 }
 
 function price_after_discount($price, $discount)
@@ -344,24 +357,6 @@ function total_by_product($price, $quantity)
 /*
  * Database-related functions
  */
-function current_season()
-{
-	$link = connect_database();
-
-	$query = 'SELECT CURDATE()';
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	$row = mysqli_fetch_row($result);
-
-	mysqli_free_result($result);
-	mysqli_close($link);
-
-	return date_to_season($row[0]);
-}
-
 function get_entity_name($table, $id)
 {
 	$link = connect_database();

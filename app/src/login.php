@@ -11,7 +11,7 @@ function verify_login($username, $password)
 	$link = connect_database();
 
 	$query = 'SELECT * FROM user WHERE username = "' . $username .
-		 '" AND password = "' . $password . '"';
+		 '" AND password = "' . hash('sha512', $password) . '"';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

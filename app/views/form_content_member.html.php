@@ -75,9 +75,9 @@
   <div class="form-row">
     Bénévole <sup>*</sup> :<br>
     <input id="volunteer_true" type="radio" name="volunteer" value="1" required="required"<?php echo $volunteer_true ?>>
-    <label for="volunteer_true">Oui</label>
+    <label class="label-radio" for="volunteer_true">Oui</label>
     <input id="volunteer_false" type="radio" name="volunteer" value="0"<?php echo $volunteer_false ?>>
-    <label for="volunteer_false">Non</label>
+    <label class="label-radio" for="volunteer_false">Non</label>
   </div>
 </fieldset>
 
