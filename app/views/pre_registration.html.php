@@ -4,11 +4,11 @@
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
 </nav>
 
-<div class="menu">
-  <?php link_commit_pre_registration($row['pre_registration_id']) ?><br>
-  <?php link_modify_entity('pre_registration', $row['pre_registration_id']) ?><br>
-  <?php link_delete_entity('pre_registration', $row['pre_registration_id']) ?>
-</div>
+<ul class="menu">
+  <li><?php link_commit_pre_registration($row['pre_registration_id']) ?></li>
+  <li><?php link_modify_entity('pre_registration', $row['pre_registration_id']) ?></li>
+  <li><?php link_delete_entity('pre_registration', $row['pre_registration_id']) ?></li>
+</ul>
 
 <div class="container">
   <h2>Détail pré-inscription</h2>

@@ -3,9 +3,9 @@
   Commandes
 </nav>
 
-<div class="menu">
-  <?php link_add_entity($table) ?>
-</div>
+<ul class="menu">
+  <li><?php link_add_entity($table) ?></li>
+</ul>
 
 <?php if (mysqli_num_rows($result) == 0): ?>
   <div class="container">

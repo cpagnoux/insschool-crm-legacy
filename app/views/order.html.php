@@ -5,10 +5,10 @@
 </nav>
 
 <?php if (!order_paid($row['order_id']) || order_total($row['order_id']) == 0):?>
-  <div class="menu">
-    <?php link_modify_entity('order', $row['order_id']) ?><br>
-    <?php link_delete_entity('order', $row['order_id']) ?>
-  </div>
+  <ul class="menu">
+    <li><?php link_modify_entity('order', $row['order_id']) ?></li>
+    <li><?php link_delete_entity('order', $row['order_id']) ?></li>
+  </ul>
 <?php endif ?>
 
 <div class="container">

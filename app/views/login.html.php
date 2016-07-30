@@ -17,12 +17,17 @@
   <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
 
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-    <p>Nom d'utilisateur<br>
-    <input type="text" name="username" required="required" autofocus="autofocus"><br>
-    Mot de passe<br>
-    <input type="password" name="password" required="required"></p>
+    <div class="form-row">
+      <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required="required" autofocus="autofocus">
+    </div>
 
-    <p><input type="submit" name="submit" value="Se connecter"></p>
+    <div class="form-row">
+      <input id="password" type="password" name="password" placeholder="Mot de passe" required="required">
+    </div>
+
+    <div class="form-row">
+      <input type="submit" name="submit" value="Se connecter">
+    </div>
   </form>
 </div>
 

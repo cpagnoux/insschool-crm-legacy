@@ -4,10 +4,10 @@
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
 </nav>
 
-<div class="menu">
-  <?php link_modify_entity('member', $row['member_id']) ?><br>
-  <?php link_delete_entity('member', $row['member_id']) ?>
-</div>
+<ul class="menu">
+  <li><?php link_modify_entity('member', $row['member_id']) ?></li>
+  <li><?php link_delete_entity('member', $row['member_id']) ?></li>
+</ul>
 
 <div class="container">
   <h2>Information adhérent</h2>

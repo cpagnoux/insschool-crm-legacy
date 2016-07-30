@@ -1,8 +1,8 @@
 <?php if (mysqli_num_rows($result) != 0): ?>
   <?php $row = mysqli_fetch_assoc($result) ?>
-  <div class="menu">
-    <?php link_modify_entity('registration_file', $row['registration_id']) ?>
-  </div>
+  <ul class="menu">
+    <li><?php link_modify_entity('registration_file', $row['registration_id']) ?></li>
+  </ul>
 <?php endif ?>
 
 <div class="container">

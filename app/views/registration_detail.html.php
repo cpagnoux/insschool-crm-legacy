@@ -1,6 +1,6 @@
-<div class="menu">
-  <?php link_add_entity('registration_detail', $registration_id) ?>
-</div>
+<ul class="menu">
+  <li><?php link_add_entity('registration_detail', $registration_id) ?></li>
+</ul>
 
 <div class="container">
   <h2>Cours choisis</h2>

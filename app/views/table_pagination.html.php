@@ -1,13 +1,15 @@
 <nav class="pagination">
+  <ul>
 
-  <?php if ($page > 1): ?>
-    <?php link_table_previous($table, $page - 1) ?>
-  <?php endif ?>
+    <?php if ($page > 1): ?>
+      </li><?php link_table_previous($table, $page - 1) ?></li>
+    <?php endif ?>
 
-  <?php echo $page ?>
+    <li><?php echo $page ?></li>
 
-  <?php if ($page * $_SESSION['limit'] < $num_rows): ?>
-    <?php link_table_next($table, $page + 1) ?>
-  <?php endif ?>
+    <?php if ($page * $_SESSION['limit'] < $num_rows): ?>
+      <li><?php link_table_next($table, $page + 1) ?></li>
+    <?php endif ?>
 
+  </ul>
 </nav>

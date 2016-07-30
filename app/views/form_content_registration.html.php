@@ -1,11 +1,35 @@
-<p>N° d'adhérent : <input type="text" name="member_id" value="<?php echo $member_id ?>" readonly="readonly"></p>
+<fieldset>
+  <div class="form-row">
+    <label for="member_id">N° d'adhérent :</label><br>
+    <input id="member_id" type="text" name="member_id" value="<?php echo $member_id ?>" readonly="readonly">
+  </div>
+</fieldset>
 
 <?php if (!isset($row)): ?>
-  <p><?php require 'views/select_season.html.php' ?></p>
+  <fieldset>
+    <?php require 'views/select_season.html.php' ?>
+  </fieldset>
 <?php endif ?>
 
-<p>Tarif : <input type="text" name="price" value="<?php echo $row['price'] ?>"> €<br>
-Réduction : <input type="text" name="discount" value="<?php echo $row['discount'] ?>"> %<br>
-Nombre de paiements : <input type="text" name="num_payments" value="<?php $row['num_payments'] ?>"></p>
+<fieldset>
+  <div class="form-row">
+    <label for="price">Tarif :</label><br>
+    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
+  </div>
 
-<p><input type="submit" name="submit" value="Valider"></p>
+  <div class="form-row">
+    <label for="discount">Réduction :</label><br>
+    <input id="discount" type="text" name="discount" value="<?php echo $row['discount'] ?>"> %
+  </div>
+
+  <div class="form-row">
+    <label for="num_payments">Nombre de paiements :</label><br>
+    <input id="num_payments" type="text" name="num_payments" value="<?php $row['num_payments'] ?>">
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="form-row">
+    <input type="submit" name="submit" value="Valider">
+  </div>
+</fieldset>

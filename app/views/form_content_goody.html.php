@@ -1,8 +1,31 @@
-<p>Désignation <sup>*</sup> : <input type="text" name="name" value="<?php echo $row['name'] ?>" required="required"></p>
+<fieldset>
+  <div class="form-row">
+    <label for="name">Désignation <sup>*</sup> :</label><br>
+    <input id="name" type="text" name="name" value="<?php echo $row['name'] ?>" required="required">
+  </div>
+</fieldset>
 
-<p>Description : <input type="text" name="description" value="<?php echo $row['description'] ?>"></p>
+<fieldset>
+  <div class="form-row">
+    <label for="description">Description :</label><br>
+    <textarea id="description" name="description"><?php echo $row['description'] ?></textarea>
+  </div>
+</fieldset>
 
-<p>Prix : <input type="text" name="price" value="<?php echo $row['price'] ?>"> €<br>
-Stock : <input type="text" name="stock" value="<?php echo $row['stock'] ?>"></p>
+<fieldset>
+  <div class="form-row">
+    <label for="price">Prix :</label><br>
+    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
+  </div>
 
-<p><input type="submit" name="submit" value="Valider"></p>
+  <div class="form-row">
+    <label for="stock">Stock :</label><br>
+    <input id="stock" type="text" name="stock" value="<?php echo $row['stock'] ?>">
+  </div>
+</fieldset>
+
+<fieldset>
+  <div class="form-row">
+    <input type="submit" name="submit" value="Valider">
+  </div>
+</fieldset>

@@ -1,14 +1,31 @@
+<fieldset>
+  <div class="form-row">
+
 <?php switch ($table): ?>
 <?php case 'order_payment': ?>
-  <p>N° de commande : <input type="text" name="order_id" value="<?php echo $order_id ?>" readonly="readonly"></p>
+  <label for="order_id">N° de commande :</label><br>
+  <input id="order_id" type="text" name="order_id" value="<?php echo $order_id ?>" readonly="readonly">
   <?php break ?>
 <?php case 'registration_payment': ?>
-  <p>N° d'inscription : <input type="text" name="registration_id" value="<?php echo $registration_id ?>" readonly="readonly"></p>
+  <label for="registration_id">N° d'inscription :</label><br>
+  <input id="registration_id" type="text" name="registration_id" value="<?php echo $registration_id ?>" readonly="readonly">
   <?php break ?>
 <?php endswitch ?>
 
+  </div>
+</fieldset>
 
-<p>Montant <sup>*</sup> : <input type="text" name="amount" value="<?php echo $row['amount'] ?>" required="required"> €<br>
-<?php select_mode($row['mode']) ?></p>
+<fieldset>
+  <div class="form-row">
+    <label for="amount">Montant <sup>*</sup> :</label><br>
+    <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required="required"> €
+  </div>
 
-<p><input type="submit" name="submit" value="Valider"></p>
+  <?php select_mode($row['mode']) ?>
+</fieldset>
+
+<fieldset>
+  <div class="form-row">
+    <input type="submit" name="submit" value="Valider">
+  </div>
+</fieldset>

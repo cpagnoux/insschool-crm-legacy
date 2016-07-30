@@ -1,6 +1,6 @@
-<div class="menu">
-  <?php link_add_entity($table . '_payment', $id) ?>
-</div>
+<ul class="menu">
+  <li><?php link_add_entity($table . '_payment', $id) ?></li>
+</ul>
 
 <div class="container">
   <h2>Paiements</h2>

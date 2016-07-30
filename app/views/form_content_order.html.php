@@ -1,3 +1,9 @@
-<p><?php select_member($row['member_id']) ?></p>
+<fieldset>
+  <?php select_member($row['member_id']) ?>
+</fieldset>
 
-<p><input type="submit" name="submit" value="Valider"></p>
+<fieldset>
+  <div class="form-row">
+    <input type="submit" name="submit" value="Valider">
+  </div>
+</fieldset>

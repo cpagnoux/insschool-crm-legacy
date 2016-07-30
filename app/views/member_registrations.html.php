@@ -1,6 +1,6 @@
-<div class="menu">
-  <?php link_add_entity('registration', $member_id) ?>
-</div>
+<ul class="menu">
+  <li><?php link_add_entity('registration', $member_id) ?></li>
+</ul>
 
 <div class="container">
   <h2>Inscriptions</h2>

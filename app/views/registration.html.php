@@ -5,10 +5,10 @@
   Inscription <?php echo $row['season'] ?>
 </nav>
 
-<div class="menu">
-  <?php link_modify_entity('registration', $row['registration_id']) ?><br>
-  <?php link_delete_entity('registration', $row['registration_id']) ?>
-</div>
+<ul class="menu">
+  <li><?php link_modify_entity('registration', $row['registration_id']) ?></li>
+  <li><?php link_delete_entity('registration', $row['registration_id']) ?></li>
+</ul>
 
 <div class="container">
   <h2>Inscription <?php echo $row['season'] ?></h2>

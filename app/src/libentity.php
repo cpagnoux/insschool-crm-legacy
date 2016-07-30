@@ -230,22 +230,22 @@ function select_teacher($teacher_id)
  */
 function form_entity_member($row)
 {
-	$means_of_knowledge_poster_flyer = '';
-	$means_of_knowledge_internet = '';
-	$means_of_knowledge_word_of_mouth = '';
+	$mok_poster_flyer = '';
+	$mok_internet = '';
+	$mok_word_of_mouth = '';
 	$volunteer_true = '';
 	$volunteer_false = '';
 
 	if (isset($row)) {
 		switch ($row['means_of_knowledge']) {
 		case 'POSTER_FLYER':
-			$means_of_knowledge_poster_flyer = ' checked="checked"';
+			$mok_poster_flyer = ' checked="checked"';
 			break;
 		case 'INTERNET':
-			$means_of_knowledge_internet = ' checked="checked"';
+			$mok_internet = ' checked="checked"';
 			break;
 		case 'WORD_OF_MOUTH':
-			$means_of_knowledge_word_of_mouth =
+			$mok_word_of_mouth =
 					' checked="checked"';
 			break;
 		}
@@ -262,22 +262,22 @@ function form_entity_member($row)
 function form_entity_pre_registration($row)
 {
 	$lessons = array();
-	$means_of_knowledge_poster_flyer = '';
-	$means_of_knowledge_internet = '';
-	$means_of_knowledge_word_of_mouth = '';
+	$mok_poster_flyer = '';
+	$mok_internet = '';
+	$mok_word_of_mouth = '';
 
 	if (isset($row)) {
 		$lessons = string_to_lessons($row['lessons']);
 
 		switch ($row['means_of_knowledge']) {
 		case 'POSTER_FLYER':
-			$means_of_knowledge_poster_flyer = ' checked="checked"';
+			$mok_poster_flyer = ' checked="checked"';
 			break;
 		case 'INTERNET':
-			$means_of_knowledge_internet = ' checked="checked"';
+			$mok_internet = ' checked="checked"';
 			break;
 		case 'WORD_OF_MOUTH':
-			$means_of_knowledge_word_of_mouth =
+			$mok_word_of_mouth =
 					' checked="checked"';
 			break;
 		}
