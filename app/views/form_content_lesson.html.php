@@ -30,11 +30,6 @@
     <label for="costume">Costume :</label><br>
     <textarea id="costume" name="costume"><?php echo $row['costume'] ?></textarea>
   </div>
-
-  <div class="form-row">
-    <label for="t_shirt">T-shirt :</label><br>
-    <textarea id="t_shirt" name="t_shirt"><?php echo $row['t_shirt'] ?></textarea>
-  </div>
 </fieldset>
 
 <fieldset>

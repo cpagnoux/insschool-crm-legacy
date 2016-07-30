@@ -9,7 +9,6 @@
 
 <table>
   <tr>
-    <th><b>Référence</b></th>
     <th><b>Désignation</b></th>
     <th><b>Prix unitaire</b></th>
     <th><b>Quantité</b></th>
@@ -23,7 +22,6 @@
 
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
     <tr>
-      <td><?php echo $row['goody_id'] ?></td>
       <td><?php echo $row['name'] ?></td>
       <td><?php echo $row['price'] ?> €</td>
 
@@ -46,7 +44,10 @@
 
 </table>
 
-<p><b>TOTAL :</b> <?php echo order_total($order_id) ?> €</p>
+<p>
+  <b>TOTAL :</b>
+  <?php echo order_total($order_id) ?> €
+</p>
 
 <?php if (!order_paid($order_id) || order_total($order_id) == 0): ?>
   <div class="action-links">

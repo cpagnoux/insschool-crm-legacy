@@ -145,8 +145,7 @@ function add_entity_lesson($link, $data)
 	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
 		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
 		 $data['start_time'] . '", "' . $data['end_time'] . '", "' .
-		 $data['room_id'] . '", "' . $data['costume'] . '", "' .
-		 $data['t_shirt'] . '")';
+		 $data['room_id'] . '", "' . $data['costume'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -160,7 +159,7 @@ function add_entity_member($link, $data)
 {
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
-		 '", "' . $data['adress'] . '", "' . $data['postal_code'] .
+		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
 		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
 		 $data['cellphone_father'] . '", "' .
 		 $data['cellphone_mother'] . '", "' . $data['phone'] . '", "' .
@@ -249,7 +248,7 @@ function add_entity_registration_detail($link, $data)
 function add_entity_room($link, $data)
 {
 	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
-		 $data['adress'] . '", "' . $data['postal_code'] . '", "' .
+		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
 		 $data['city'] . '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -264,7 +263,7 @@ function add_entity_teacher($link, $data)
 {
 	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
-		 '", "' . $data['adress'] . '", "' . $data['postal_code'] .
+		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
 		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
 		 $data['phone'] . '", "' . $data['email'] . '", "")';
 	if (!mysqli_query($link, $query)) {
@@ -427,8 +426,7 @@ function modify_entity_lesson($link, $lesson_id, $data)
 		 $data['day'] . '", start_time = "' . $data['start_time'] .
 		 '", end_time = "' . $data['end_time'] . '", room_id = "' .
 		 $data['room_id'] . '", costume = "' . $data['costume'] .
-		 '", t_shirt = "' . $data['t_shirt'] . '" WHERE lesson_id = ' .
-		 $lesson_id;
+		 '" WHERE lesson_id = ' . $lesson_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -441,7 +439,7 @@ function modify_entity_member($link, $member_id, $data)
 {
 	$query = 'UPDATE member SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 $data['birth_date'] . '", adress = "' . $data['adress'] .
+		 $data['birth_date'] . '", address = "' . $data['address'] .
 		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
 		 $data['city'] . '", cellphone = "' . $data['cellphone'] .
 		 '", cellphone_father = "' . $data['cellphone_father'] .
@@ -489,15 +487,15 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 
 	$query = 'UPDATE pre_registration SET first_name = "' .
 		 $data['first_name'] . '", last_name = "' . $data['last_name'] .
-		 '", birth_date = "' . $data['birth_date'] . '", adress = "' .
-		 $data['adress'] . '", postal_code = "' . $data['postal_code'] .
-		 '", city = "' . $data['city'] . '", cellphone = "' .
-		 $data['cellphone'] . '", cellphone_father = "' .
-		 $data['cellphone_father'] . '", cellphone_mother = "' .
-		 $data['cellphone_mother'] . '", phone = "' . $data['phone'] .
-		 '", email = "' . $data['email'] . '", lessons = "' .
-		 $lessons_str . '", means_of_knowledge = "' .
-		 $data['means_of_knowledge'] .
+		 '", birth_date = "' . $data['birth_date'] . '", address = "' .
+		 $data['address'] . '", postal_code = "' .
+		 $data['postal_code'] . '", city = "' . $data['city'] .
+		 '", cellphone = "' . $data['cellphone'] .
+		 '", cellphone_father = "' . $data['cellphone_father'] .
+		 '", cellphone_mother = "' . $data['cellphone_mother'] .
+		 '", phone = "' . $data['phone'] . '", email = "' .
+		 $data['email'] . '", lessons = "' . $lessons_str .
+		 '", means_of_knowledge = "' . $data['means_of_knowledge'] .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -538,10 +536,10 @@ function modify_entity_registration_file($link, $registration_id, $data)
 
 function modify_entity_room($link, $room_id, $data)
 {
-	$query = 'UPDATE room SET name = "' . $data['name'] . '", adress = "' .
-		 $data['adress'] . '", postal_code = "' . $data['postal_code'] .
-		 '", city = "' . $data['city'] . '" WHERE room_id = ' .
-		 $room_id;
+	$query = 'UPDATE room SET name = "' . $data['name'] . '", address = "' .
+		 $data['address'] . '", postal_code = "' .
+		 $data['postal_code'] . '", city = "' . $data['city'] .
+		 '" WHERE room_id = ' . $room_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -554,7 +552,7 @@ function modify_entity_teacher($link, $teacher_id, $data)
 {
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 $data['birth_date'] . '", adress = "' . $data['adress'] .
+		 $data['birth_date'] . '", address = "' . $data['address'] .
 		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
 		 $data['city'] . '", cellphone = "' . $data['cellphone'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .

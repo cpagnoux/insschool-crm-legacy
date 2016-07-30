@@ -215,7 +215,7 @@ function save_pre_registration($data, $lessons_str)
 
 	$query = 'INSERT INTO pre_registration VALUES ("", "' .
 		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
-		 $data['birth_date'] . '", "' . $data['adress'] . '", "' .
+		 $data['birth_date'] . '", "' . $data['address'] . '", "' .
 		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
 		 $data['cellphone'] . '", "' . $data['cellphone_father'] .
 		 '", "' . $data['cellphone_mother'] . '", "' . $data['phone'] .
@@ -236,7 +236,7 @@ function add_member($link, $row)
 {
 	$query = 'INSERT INTO member VALUES ("", "' . $row['first_name'] .
 		 '", "' . $row['last_name'] . '", "' . $row['birth_date'] .
-		 '", "' . $row['adress'] . '", "' . $row['postal_code'] .
+		 '", "' . $row['address'] . '", "' . $row['postal_code'] .
 		 '", "' . $row['city'] . '", "' . $row['cellphone'] . '", "' .
 		 $row['cellphone_father'] . '", "' . $row['cellphone_mother'] .
 		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "' .

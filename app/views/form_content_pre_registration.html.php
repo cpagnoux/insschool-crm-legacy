@@ -17,8 +17,8 @@
 
 <fieldset>
   <div class="form-row">
-    <label for="adress">Adresse <sup>*</sup> :</label><br>
-    <input id="adress" type="text" name="adress" value="<?php echo $row['adress'] ?>" required="required">
+    <label for="address">Adresse <sup>*</sup> :</label><br>
+    <input id="address" type="text" name="address" value="<?php echo $row['address'] ?>" required="required">
   </div>
 
   <div class="form-row">
@@ -66,8 +66,10 @@
 </fieldset>
 
 <?php if (!isset($row)): ?>
-  <p>* Attention : Lors des cours à INS School, merci d'utiliser des chaussures propres dans les salles de danse (non utilisées à l'extérieur) et une tenue confortable.<br>
-  * INS School se réserve le droit de modifier les horaires du planning à tout moment.</p>
+  <p>
+    * Attention : Lors des cours à INS School, merci d'utiliser des chaussures propres dans les salles de danse (non utilisées à l'extérieur) et une tenue confortable.<br>
+    * INS School se réserve le droit de modifier les horaires du planning à tout moment.
+  </p>
 <?php endif ?>
 
 <fieldset>
@@ -94,7 +96,7 @@
       <li>1 certificat médical</li>
       <li>2 photos d'identité</li>
       <li>1 attestation d'assurance</li>
-      <li>1 enveloppe timbrée (au nom et adresse de l'adhérent ou des parents pour les mineurs)</li>
+      <li>1 enveloppe timbrée (au nom et addresse de l'adhérent ou des parents pour les mineurs)</li>
       <li>Le règlement du forfait (possibilité de payer en trois fois sans frais)</li>
     </ul>
   <p>Le règlement intérieur doit être signé et retourné lors de l'inscription.</p>

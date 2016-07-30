@@ -32,14 +32,23 @@
 
   </table>
 
-  <p><b>Total payé :</b> <?php echo total_paid($table, $id) ?> €<br></p>
+  <p>
+    <b>Total payé :</b>
+    <?php echo total_paid($table, $id) ?> €<br>
+  </p>
 
 <?php switch ($table): ?>
 <?php case 'order': ?>
-  <p><b>Commande réglée :</b> <?php echo eval_boolean(order_paid($id)) ?></p>
+  <p>
+    <b>Commande réglée :</b>
+    <?php echo eval_boolean(order_paid($id)) ?>
+  </p>
   <?php break ?>
 <?php case 'registration': ?>
-  <p><b>Inscription réglée :</b> <?php echo eval_boolean(registration_paid($id)) ?></p>
+  <p>
+    <b>Inscription réglée :</b>
+    <?php echo eval_boolean(registration_paid($id)) ?>
+  </p>
   <?php break ?>
 <?php endswitch ?>
 </div>

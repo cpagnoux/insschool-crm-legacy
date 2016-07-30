@@ -14,9 +14,15 @@
 <div class="container">
   <h2>Commande n° <?php echo $row['order_id'] ?></h2>
 
-  <p><b>Adhérent :</b> <?php echo get_name('member', $row['member_id']) ?></p>
+  <p>
+    <b>Adhérent :</b>
+    <?php echo get_name('member', $row['member_id']) ?>
+  </p>
 
-  <p><b>Date :</b> <?php echo $row['date'] ?></p>
+  <p>
+    <b>Date :</b>
+    <?php echo $row['date'] ?>
+  </p>
 
   <?php display_order_content($link, $row['order_id']) ?>
 </div>

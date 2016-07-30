@@ -7,6 +7,6 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=member&amp;id=<?php echo $row['member_id'] ?>" method="post">
-    <?php form_entity_member($row) ?>
+    <?php form_content_member($row) ?>
   </form>
 </div>

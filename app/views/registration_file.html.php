@@ -14,9 +14,17 @@
     <?php return ?>
   <?php endif ?>
 
-  <p><b>Certificat médical :</b> <?php echo eval_boolean($row['medical_certificate']) ?><br>
-  <b>Assurance :</b> <?php echo eval_boolean($row['insurance']) ?><br>
-  <b>Photo :</b> <?php echo eval_boolean($row['photo']) ?></p>
+  <p>
+    <b>Certificat médical :</b>
+    <?php echo eval_boolean($row['medical_certificate']) ?><br>
+    <b>Assurance :</b>
+    <?php echo eval_boolean($row['insurance']) ?><br>
+    <b>Photo :</b>
+    <?php echo eval_boolean($row['photo']) ?>
+  </p>
 
-  <p><b>Dossier complet :</b> <?php echo eval_boolean(registration_file_complete($row['registration_id'])) ?></p>
+  <p>
+    <b>Dossier complet :</b>
+    <?php echo eval_boolean(registration_file_complete($row['registration_id'])) ?>
+  </p>
 </div>

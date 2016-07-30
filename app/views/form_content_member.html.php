@@ -17,8 +17,8 @@
 
 <fieldset>
   <div class="form-row">
-    <label for="adress">Adresse <sup>*</sup> :</label><br>
-    <input id="adress" type="text" name="adress" value="<?php echo $row['adress'] ?>" required="required">
+    <label for="address">Adresse <sup>*</sup> :</label><br>
+    <input id="address" type="text" name="address" value="<?php echo $row['address'] ?>" required="required">
   </div>
 
   <div class="form-row">

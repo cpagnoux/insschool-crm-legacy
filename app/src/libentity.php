@@ -228,7 +228,7 @@ function select_teacher($teacher_id)
 /*
  * Forms' content
  */
-function form_entity_member($row)
+function form_content_member($row)
 {
 	$mok_poster_flyer = '';
 	$mok_internet = '';
@@ -259,7 +259,7 @@ function form_entity_member($row)
 	require 'views/form_content_member.html.php';
 }
 
-function form_entity_pre_registration($row)
+function form_content_pre_registration($row)
 {
 	$lessons = array();
 	$mok_poster_flyer = '';
@@ -286,7 +286,7 @@ function form_entity_pre_registration($row)
 	require 'views/form_content_pre_registration.html.php';
 }
 
-function form_entity_registration_file($registration_id, $row)
+function form_content_registration_file($registration_id, $row)
 {
 	$medical_certificate_true = '';
 	$medical_certificate_false = '';
