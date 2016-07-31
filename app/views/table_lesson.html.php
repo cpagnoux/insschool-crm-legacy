@@ -11,6 +11,7 @@
   <div class="container">
     <p>Aucun cours</p>
   </div>
+
   <?php return ?>
 <?php endif ?>
 
@@ -29,7 +30,6 @@
         <td><?php link_entity('lesson', $row['lesson_id']) ?></td>
       </tr>
     <?php endwhile ?>
-
   </table>
 
   <?php table_pagination($table, $page) ?>

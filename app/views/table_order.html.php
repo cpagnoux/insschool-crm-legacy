@@ -11,6 +11,7 @@
   <div class="container">
     <p>Aucune commande</p>
   </div>
+
   <?php return ?>
 <?php endif ?>
 
@@ -33,7 +34,6 @@
         <td><?php link_entity('order', $row['order_id']) ?></td>
       </tr>
     <?php endwhile ?>
-
   </table>
 
   <?php table_pagination($table, $page) ?>

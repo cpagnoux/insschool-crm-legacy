@@ -1,9 +1,11 @@
 <?php if (mysqli_num_rows($result) == 0): ?>
   <p>Aucun article</p>
-  <div class="action-links">
-    <?php link_add_entity('order_content', $order_id) ?>
-    <?php link_empty_cart($order_id) ?>
-  </div>
+
+  <ul class="action-links">
+    <li><?php link_add_entity('order_content', $order_id) ?></li>
+    <li><?php link_empty_cart($order_id) ?></li>
+  </ul>
+
   <?php return ?>
 <?php endif ?>
 
@@ -17,7 +19,6 @@
     <?php if (!order_paid($order_id)): ?>
       <th></th>
     <?php endif ?>
-
   </tr>
 
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -38,10 +39,8 @@
       <?php if (!order_paid($order_id)): ?>
 	<td><?php link_remove_product($order_id, $row['goody_id']) ?></td>
       <?php endif ?>
-
     </tr>
   <?php endwhile ?>
-
 </table>
 
 <p>
@@ -50,8 +49,8 @@
 </p>
 
 <?php if (!order_paid($order_id) || order_total($order_id) == 0): ?>
-  <div class="action-links">
-    <?php link_add_entity('order_content', $order_id) ?>
-    <?php link_empty_cart($order_id) ?>
-  </div>
+  <ul class="action-links">
+    <li><?php link_add_entity('order_content', $order_id) ?></li>
+    <li><?php link_empty_cart($order_id) ?></li>
+  </ul>
 <?php endif ?>

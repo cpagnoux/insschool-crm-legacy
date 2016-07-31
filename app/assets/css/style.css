@@ -1,14 +1,14 @@
 a {
-	color: lightgrey;
+	color: #e0e0e0;
 	text-decoration: none;
 }
 
 a:hover {
-	color: white;
+	color: #ffffff;
 }
 
 h1, h2 {
-	color: white;
+	color: #ffffff;
 }
 
 h2 {
@@ -23,20 +23,53 @@ textarea {
 	width: 230px;
 }
 
+td a, .action-links a {
+	background-color: #808080;
+	color: #ffffff;
+	display: inline-block;
+	padding: 5px 10px;
+}
+
+td a:hover, .action-links a:hover {
+	background-color: #a0a0a0;
+}
+
 .attribute-name {
 	font-weight: bold;
 }
 
-.input-quantity {
+.quantity-button a {
+	text-align: center;
+	border-radius: 100%;
+	line-height: 25px;
+	padding: 0;
+	width: 25px;
+}
+
+.quantity-input {
 	width: 20px;
 }
 
-.label-radio {
-	padding-right: 20px;
+.toggle-button {
+	padding-left: 20px;
 }
 
-.logo {
-	float: left;
+table, th, td {
+	border: 1px solid #202020;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+th {
+	background-color: #404040;
+	color: #ffffff;
 }
 
 html {
@@ -46,13 +79,13 @@ html {
 
 body {
 	background-attachment: fixed;
-	/*background-color: black;
-	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");*/
-	color: grey;
+	background-color: #000000;
+	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
+	color: #808080;
 }
 
 footer {
-	background-color: black;
+	background-color: #000000;
 	bottom: 0;
 	height: 100px;
 	position: absolute;
@@ -64,13 +97,13 @@ fieldset {
 	border-style: none;
 }
 
-.navigation-bar ul, .menu, .pagination ul {
+.navigation-bar ul, .menu, .pagination ul, .action-links {
 	margin: 0;
 	padding: 0;
 }
 
 .login-container {
-	background-color: black;
+	background-color: #000000;
 	margin: auto;
 	margin-top: 40px;
 	padding: 20px;
@@ -88,7 +121,7 @@ fieldset {
 }
 
 .logout {
-	background-color: black;
+	background-color: #000000;
 	line-height: 40px;
 	margin-bottom: 20px;
 	opacity: 0.8;
@@ -97,7 +130,8 @@ fieldset {
 }
 
 .navigation-bar {
-	background-color: black;
+	background-color: #000000;
+	height: 85px;
 	line-height: 85px;
 	margin-bottom: 40px;
 	margin-left: 40px;
@@ -106,18 +140,26 @@ fieldset {
 	text-transform: uppercase;
 }
 
+.navigation-bar img {
+	border-right: 1px solid #202020;
+	float: left;
+}
+
 .navigation-bar li {
 	display: inline;
 }
 
 .navigation-bar li a {
+	border-right: 1px solid #202020;
+	color: #ffffff;
 	display: inline-block;
+	float: left;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
 .navigation-bar li a:hover {
-	background-color: dimgrey;
+	background-color: #202020;
 }
 
 .breadcrumb {
@@ -126,7 +168,7 @@ fieldset {
 }
 
 .menu {
-	background-color: black;
+	background-color: #000000;
 	float: right;
 	margin-right: 100px;
 	padding: 20px;
@@ -138,7 +180,7 @@ fieldset {
 }
 
 .container {
-	background-color: black;
+	background-color: #000000;
 	margin-bottom: 20px;
 	margin-left: 100px;
 	margin-right: 480px;
@@ -149,21 +191,54 @@ fieldset {
 	margin-bottom: 20px;
 }
 
+.display-option {
+	display: inline-block;
+	padding-right: 20px;
+}
+
 .pagination {
 	margin-top: 20px;
+}
+
+.pagination ul {
+	display: inline-block;
 }
 
 .pagination li {
 	display: inline;
 }
 
+.pagination li a, .pagination li .active {
+	color: #ffffff;
+	display: inline-block;
+	float: left;
+	padding: 5px 10px;
+}
+
+.pagination li a:hover {
+	background-color: #202020;
+}
+
+.pagination li .active {
+	background-color: #404040;
+}
+
 .action-links {
 	margin-top: 20px;
+}
+
+.action-links li {
+	display: inline;
 }
 
 .form-row {
 	margin-bottom: 1em;
 	margin-top: 1em;
+}
+
+.form-row-option {
+	display: inline-block;
+	padding-right: 20px;
 }
 
 .footer-container {
@@ -172,10 +247,14 @@ fieldset {
 }
 
 .pre-registration-header {
-	background-color: black;
+	background-color: #000000;
 	line-height: 85px;
 	margin-bottom: 40px;
 	margin-left: 40px;
 	margin-right: 40px;
 	opacity: 0.8;
+}
+
+.pre-registration-header img {
+	float: left;
 }

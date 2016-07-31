@@ -20,7 +20,7 @@
 
   <nav class="navigation-bar">
     <a href="<?php echo $_SERVER['PHP_SELF'] ?>">
-      <img class="logo" src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
+      <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
     </a>
 
     <ul>

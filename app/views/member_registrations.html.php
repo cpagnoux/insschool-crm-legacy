@@ -8,6 +8,7 @@
   <?php if (mysqli_num_rows($result) == 0): ?>
       <p>Aucune inscription</p>
     </div>
+
     <?php return ?>
   <?php endif ?>
 
@@ -23,7 +24,5 @@
         <td><?php link_entity('registration', $row['registration_id']) ?></td>
       </tr>
     <?php endwhile ?>
-
   </table>
-
 </div>

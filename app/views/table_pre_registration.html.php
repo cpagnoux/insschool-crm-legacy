@@ -7,6 +7,7 @@
   <div class="container">
     <p>Aucune pré-inscription</p>
   </div>
+
   <?php return ?>
 <?php endif ?>
 
@@ -27,7 +28,6 @@
         <td><?php link_entity('pre_registration', $row['pre_registration_id']) ?></td>
       </tr>
     <?php endwhile ?>
-
   </table>
 
   <?php table_pagination($table, $page) ?>

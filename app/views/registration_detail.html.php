@@ -8,6 +8,7 @@
   <?php if (mysqli_num_rows($result) == 0): ?>
       <p>Aucun cours<br></p>
     </div>
+
     <?php return ?>
   <?php endif ?>
 
@@ -21,10 +22,14 @@
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
       <tr>
         <td><?php echo $row['title'] ?></td>
-        <td><?php echo eval_boolean($row['show_participation']) ?> <?php link_toggle_show_participation($registration_id, $row['lesson_id']) ?></td>
+
+        <td>
+          <?php echo eval_boolean($row['show_participation']) ?>
+          <span class="toggle-button"><?php link_toggle_show_participation($registration_id, $row['lesson_id']) ?></span>
+        </td>
+
         <td><?php link_remove_lesson($registration_id, $row['lesson_id']) ?></td>
       </tr>
     <?php endwhile ?>
-
   </table>
 </div>

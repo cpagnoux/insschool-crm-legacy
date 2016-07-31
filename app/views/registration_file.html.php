@@ -1,5 +1,6 @@
 <?php if (mysqli_num_rows($result) != 0): ?>
   <?php $row = mysqli_fetch_assoc($result) ?>
+
   <ul class="menu">
     <li><?php link_modify_entity('registration_file', $row['registration_id']) ?></li>
   </ul>
@@ -11,6 +12,7 @@
   <?php if (mysqli_num_rows($result) == 0): ?>
       <p>Erreur : aucun dossier</p>
     </div>
+
     <?php return ?>
   <?php endif ?>
 

@@ -8,6 +8,7 @@
   <?php if (mysqli_num_rows($result) == 0): ?>
       <p>Aucun paiement</p>
     </div>
+
     <?php return ?>
   <?php endif ?>
 
@@ -17,7 +18,6 @@
       <th>Mode de paiement</th>
       <th>Date</th>
       <th></th>
-      <th></th>
     </tr>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -25,11 +25,13 @@
         <td><?php echo $row['amount'] ?> €</td>
         <td><?php echo eval_enum($row['mode']) ?></td>
         <td><?php echo $row['date'] ?></td>
-        <td><?php link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
-        <td><?php link_delete_entity($table . '_payment', $row[$table . '_payment_id']) ?></td>
+
+        <td>
+          <?php link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?>
+          <?php link_delete_entity($table . '_payment', $row[$table . '_payment_id']) ?>
+        </td>
       </tr>
     <?php endwhile ?>
-
   </table>
 
   <p>
