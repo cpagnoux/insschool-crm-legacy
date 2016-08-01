@@ -97,8 +97,8 @@ function display_lesson($row, $time_slot, $room, $lessons)
 	     '" type="checkbox" name="' . $row['lesson_id'] . '" value="' .
 	     $row['title'] . '"' . $lessons[$row['lesson_id']] . '>' . PHP_EOL;
 	echo '      <label for="' . $row['lesson_id'] . '">' . $row['title'] .
-	     ' : ' . $row['start_time'] . ' - ' . $row['end_time'] .
-	     '</label>' . PHP_EOL;
+	     ' : ' . format_time($row['start_time']) . ' - ' .
+	     format_time($row['end_time']) . '</label>' . PHP_EOL;
 	echo '    </td>' . PHP_EOL;
 
 	return true;

@@ -214,71 +214,49 @@ function link_logout()
  */
 function current_season()
 {
-	$season = '';
-
 	if (date('m') >= 6)
-		$season = date('Y') . '-' . (date('Y') + 1);
-	else
-		$season = (date('Y') - 1) . '-' . date('Y');
+		return date('Y') . '-' . (date('Y') + 1);
 
-	return $season;
+	return (date('Y') - 1) . '-' . date('Y');
 }
 
 function date_to_season($date)
 {
 	// date is in 'YYYY-MM-DD' format
 	sscanf($date, '%d', $year);
-	$date = substr($date, strlen($year) + 1);
+	$date = substr($date, 5);
 	sscanf($date, '%d', $month);
 
-	$season = '';
-
 	if ($month >= 6)
-		$season = $year . '-' . ($year + 1);
-	else
-		$season = ($year - 1) . '-' . $year;
+		return $year . '-' . ($year + 1);
 
-	return $season;
+	return ($year - 1) . '-' . $year;
 }
 
 function duration($start_time, $end_time)
 {
 	// time is in 'HH:MM:SS' format
 	sscanf($start_time, '%d', $start_hour);
-	$start_time = substr($start_time, strlen($start_hour) + 1);
-	sscanf($start_time, '%d', $start_min);
-	$start_time = substr($start_time, strlen($start_min) + 1);
-	sscanf($start_time, '%d', $start_sec);
+	$start_time = substr($start_time, 3);
+	sscanf($start_time, '%d', $start_minute);
 
 	sscanf($end_time, '%d', $end_hour);
-	$end_time = substr($end_time, strlen($end_hour) + 1);
-	sscanf($end_time, '%d', $end_min);
-	$end_time = substr($end_time, strlen($end_min) + 1);
-	sscanf($end_time, '%d', $end_sec);
+	$end_time = substr($end_time, 3);
+	sscanf($end_time, '%d', $end_minute);
 
-	$min_restraint = 0;
 	$hour_restraint = 0;
 
-	$sec = $end_sec - $start_sec;
-	if ($sec < 0) {
-		$min_restraint = 1;
-		$sec += 60;
-	}
-
-	$min = $end_min - $start_min - $min_restraint;
-	if ($min < 0) {
+	$minute = $end_minute - $start_minute;
+	if ($minute < 0) {
 		$hour_restraint = 1;
-		$min += 60;
+		$minute += 60;
 	}
 
 	$hour = $end_hour - $start_hour - $hour_restraint;
 	if ($hour < 0)
 		return 'durée invalide';
 
-	$duration = sprintf('%02d', $hour) . ':' . sprintf('%02d', $min) . ':' .
-		    sprintf('%02d', $sec);
-
-	return $duration;
+	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
 }
 
 function eval_enum($value)
@@ -328,20 +306,42 @@ function eval_boolean($value)
 {
 	if ($value)
 		return 'Oui';
-	else
-		return 'Non';
+
+	return 'Non';
+}
+
+function format_date($date)
+{
+	if ($date == '0000-00-00')
+		return 'Inconnue';
+
+	// date is in 'YYYY-MM-DD' format
+	sscanf($date, '%d', $year);
+	$date = substr($date, 5);
+	sscanf($date, '%d', $month);
+	$date = substr($date, 3);
+	sscanf($date, '%d', $day);
+
+	return sprintf('%02d', $day) . '/' . sprintf('%02d', $month) . '/' .
+	       $year;
+}
+
+function format_time($time)
+{
+	// time is in 'HH:MM:SS' format
+	sscanf($time, '%d', $hour);
+	$time = substr($time, 3);
+	sscanf($time, '%d', $minute);
+
+	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
 }
 
 function previous_season()
 {
-	$season = '';
-
 	if (date('m') >= 6)
-		$season = (date('Y') - 1) . '-' . date('Y');
-	else
-		$season = (date('Y') - 2) . '-' . (date('Y') - 1);
+		return (date('Y') - 1) . '-' . date('Y');
 
-	return $season;
+	return (date('Y') - 2) . '-' . (date('Y') - 1);
 }
 
 function price_after_discount($price, $discount)
@@ -356,8 +356,8 @@ function product_status($stock)
 {
 	if ($stock > 0)
 		return 'En stock';
-	else
-		return 'Produit épuisé';
+
+	return 'Produit épuisé';
 }
 
 function total_by_product($price, $quantity)

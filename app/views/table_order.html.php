@@ -23,7 +23,7 @@
         <tr>
           <td><?php echo $row['order_id'] ?></td>
           <td><?php echo get_name('member', $row['member_id']) ?></td>
-          <td><?php echo $row['date'] ?></td>
+          <td><?php echo format_date($row['date']) ?></td>
           <td><?php link_entity('order', $row['order_id']) ?></td>
         </tr>
       <?php endwhile ?>

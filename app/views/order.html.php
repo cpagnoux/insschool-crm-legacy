@@ -14,7 +14,7 @@
 
   <p>
     <span class="attribute-name">Date :</span>
-    <?php echo $row['date'] ?>
+    <?php echo format_date($row['date']) ?>
   </p>
 
   <?php display_order_content($link, $row['order_id']) ?>

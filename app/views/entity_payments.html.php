@@ -14,7 +14,7 @@
         <tr>
           <td><?php echo $row['amount'] ?> €</td>
           <td><?php echo eval_enum($row['mode']) ?></td>
-          <td><?php echo $row['date'] ?></td>
+          <td><?php echo format_date($row['date']) ?></td>
 
           <td>
             <?php link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?>

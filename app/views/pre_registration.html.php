@@ -13,7 +13,7 @@
     <span class="attribute-name">Prénom :</span>
     <?php echo $row['first_name'] ?><br>
     <span class="attribute-name">Date de naissance :</span>
-    <?php echo $row['birth_date'] ?>
+    <?php echo format_date($row['birth_date']) ?>
   </p>
 
   <p>
@@ -49,8 +49,8 @@
   </p>
 
   <p>
-    <span class="attribute-name">Date :</span>
-    <?php echo $row['date'] ?>
+    <span class="attribute-name">Date de pré-inscription :</span>
+    <?php echo format_date($row['date']) ?>
   </p>
 
   <ul class="action-links">

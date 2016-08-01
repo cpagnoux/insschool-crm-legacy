@@ -16,9 +16,9 @@
     <span class="attribute-name">Jour :</span>
     <?php echo eval_enum($row['day']) ?><br>
     <span class="attribute-name">Heure de début :</span>
-    <?php echo $row['start_time'] ?><br>
+    <?php echo format_time($row['start_time']) ?><br>
     <span class="attribute-name">Heure de fin :</span>
-    <?php echo $row['end_time'] ?><br>
+    <?php echo format_time($row['end_time']) ?><br>
     <span class="attribute-name">Durée :</span>
     <?php echo duration($row['start_time'], $row['end_time']) ?><br>
     <span class="attribute-name">Salle :</span>
