@@ -4,17 +4,12 @@
   <?php echo $row['title'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('lesson', $row['lesson_id']) ?></li>
-  <li><?php link_delete_entity('lesson', $row['lesson_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2><?php echo $row['title'] ?></h2>
 
   <p>
     <span class="attribute-name">Professeur :</span>
-    <?php echo get_name('teacher', $row['teacher_id']) ?><br>
+    <?php echo link_entity('teacher', $row['teacher_id'], get_name('teacher', $row['teacher_id'])) ?><br>
   </p>
 
   <p>
@@ -27,7 +22,7 @@
     <span class="attribute-name">Durée :</span>
     <?php echo duration($row['start_time'], $row['end_time']) ?><br>
     <span class="attribute-name">Salle :</span>
-    <?php echo get_entity_name('room', $row['room_id']) ?>
+    <?php echo link_entity('room', $row['room_id'], get_entity_name('room', $row['room_id'])) ?>
   </p>
 
   <p>
@@ -39,4 +34,9 @@
     <span class="attribute-name">Nombre d'inscrits (<?php echo current_season() ?>) :</span>
     <?php echo lesson_registrant_count($row['lesson_id'], current_season()) ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('lesson', $row['lesson_id']) ?></li>
+    <li><?php link_delete_entity('lesson', $row['lesson_id']) ?></li>
+  </ul>
 </div>

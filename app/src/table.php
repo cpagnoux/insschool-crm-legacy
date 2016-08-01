@@ -173,6 +173,11 @@ function table_pagination($table, $page)
 	if ($num_rows <= $_SESSION['limit'])
 		return;
 
+	$num_pages = intdiv($num_rows, $_SESSION['limit']);
+
+	if ($num_rows % $_SESSION['limit'] != 0)
+		$num_pages++;
+
 	require 'views/table_pagination.html.php';
 }
 

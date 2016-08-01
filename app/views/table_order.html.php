@@ -3,38 +3,34 @@
   Commandes
 </nav>
 
-<ul class="menu">
-  <li><?php link_add_entity($table) ?></li>
-</ul>
-
-<?php if (mysqli_num_rows($result) == 0): ?>
-  <div class="container">
-    <p>Aucune commande</p>
-  </div>
-
-  <?php return ?>
-<?php endif ?>
-
 <div class="container">
-  <?php table_display_options('order') ?>
+  <ul class="action-links">
+    <li><?php link_add_entity($table) ?></li>
+  </ul>
 
-  <table>
-    <tr>
-      <th>N° de commande</th>
-      <th>Adhérent</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
+  <?php if (mysqli_num_rows($result) != 0): ?>
+    <?php table_display_options('order') ?>
 
-    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <table>
       <tr>
-        <td><?php echo $row['order_id'] ?></td>
-        <td><?php echo get_name('member', $row['member_id']) ?></td>
-        <td><?php echo $row['date'] ?></td>
-        <td><?php link_entity('order', $row['order_id']) ?></td>
+        <th>N° de commande</th>
+        <th>Adhérent</th>
+        <th>Date</th>
+        <th></th>
       </tr>
-    <?php endwhile ?>
-  </table>
 
-  <?php table_pagination($table, $page) ?>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <tr>
+          <td><?php echo $row['order_id'] ?></td>
+          <td><?php echo get_name('member', $row['member_id']) ?></td>
+          <td><?php echo $row['date'] ?></td>
+          <td><?php link_entity('order', $row['order_id']) ?></td>
+        </tr>
+      <?php endwhile ?>
+    </table>
+
+    <?php table_pagination($table, $page) ?>
+  <?php else: ?>
+    <p>Aucune commande</p>
+  <?php endif ?>
 </div>

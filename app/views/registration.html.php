@@ -5,17 +5,12 @@
   Inscription <?php echo $row['season'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('registration', $row['registration_id']) ?></li>
-  <li><?php link_delete_entity('registration', $row['registration_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2>Inscription <?php echo $row['season'] ?></h2>
 
   <p>
     <span class="attribute-name">Adhérent :</span>
-    <?php echo get_name('member', $row['member_id']) ?>
+    <?php echo link_entity('member', $row['member_id'], get_name('member', $row['member_id'])) ?>
   </p>
 
   <p>
@@ -30,6 +25,11 @@
     <span class="attribute-name">Nombre de paiements :</span>
     <?php echo $row['num_payments'] ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('registration', $row['registration_id']) ?></li>
+    <li><?php link_delete_entity('registration', $row['registration_id']) ?></li>
+  </ul>
 </div>
 
 <?php display_registration_file($link, $row['registration_id']) ?>

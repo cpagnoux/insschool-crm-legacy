@@ -4,11 +4,6 @@
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('member', $row['member_id']) ?></li>
-  <li><?php link_delete_entity('member', $row['member_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2>Information adhérent</h2>
 
@@ -52,6 +47,11 @@
     <span class="attribute-name">Bénévole :</span>
     <?php echo eval_boolean($row['volunteer']) ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('member', $row['member_id']) ?></li>
+    <li><?php link_delete_entity('member', $row['member_id']) ?></li>
+  </ul>
 </div>
 
 <?php display_member_registrations($link, $row['member_id']) ?>

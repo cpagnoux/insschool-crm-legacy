@@ -4,11 +4,6 @@
   <?php echo $row['name'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('goody', $row['goody_id']) ?></li>
-  <li><?php link_delete_entity('goody', $row['goody_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2><?php echo $row['name'] ?></h2>
 
@@ -23,4 +18,9 @@
     <span class="attribute-name">Stock :</span>
     <?php echo $row['stock'] ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('goody', $row['goody_id']) ?></li>
+    <li><?php link_delete_entity('goody', $row['goody_id']) ?></li>
+  </ul>
 </div>

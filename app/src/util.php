@@ -50,16 +50,26 @@ function link_table_previous($table, $page)
 {
 	if ($page == 1)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '">Précédent</a>';
+		     '"><<</a>';
 	else
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '&amp;page=' . $page . '">Précédent</a>';
+		     '&amp;page=' . $page . '"><<</a>';
 }
 
 function link_table_next($table, $page)
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	     '&amp;page=' . $page . '">Suivant</a>';
+	     '&amp;page=' . $page . '">>></a>';
+}
+
+function link_table_page($table, $page)
+{
+	if ($page == 1)
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '">' . $page . '</a>';
+	else
+		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
+		     '&amp;page=' . $page . '">' . $page . '</a>';
 }
 
 function link_entity($table, $id, $message)
@@ -68,8 +78,8 @@ function link_entity($table, $id, $message)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 		     '&amp;id=' . $id . '">' . $message . '</a>';
 	else
-		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '&amp;id=' . $id . '">+ d\'infos</a>';
+		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+		     '?table=' . $table . '&amp;id=' . $id . '">+ d\'infos</a>';
 }
 
 function link_add_entity($table, $id)
@@ -116,36 +126,39 @@ function link_add_entity($table, $id)
 	}
 
 	if (isset($id))
-		echo '<a href="' . $_SERVER['PHP_SELF'] .
+		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 		     '?mode=add&amp;table=' . $table . '&amp;id=' . $id . '">' .
 		     $message . '</a>';
 	else
-		echo '<a href="' . $_SERVER['PHP_SELF'] .
+		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 		     '?mode=add&amp;table=' . $table . '">' . $message . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=modify&amp;table=' .
-	     $table . '&amp;id=' . $id . '">Modifier</a>';
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=modify&amp;table=' . $table . '&amp;id=' . $id .
+	     '">Modifier</a>';
 }
 
 function link_delete_entity($table, $id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=delete&amp;table=' .
-	     $table . '&amp;id=' . $id . '" onclick="return ' .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=delete&amp;table=' . $table . '&amp;id=' . $id .
+	     '" onclick="return ' .
 	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_commit_pre_registration($pre_registration_id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] . '?mode=commit&amp;id=' .
-	     $pre_registration_id . '">Valider la pré-inscription</a>';
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=commit&amp;id=' . $pre_registration_id .
+	     '">Valider la pré-inscription</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
 	     '">-</a>';
@@ -153,7 +166,7 @@ function link_quantity_minus($order_id, $goody_id, $quantity)
 
 function link_quantity_plus($order_id, $goody_id, $quantity)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
 	     '">+</a>';
@@ -161,14 +174,14 @@ function link_quantity_plus($order_id, $goody_id, $quantity)
 
 function link_remove_product($order_id, $goody_id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
 }
 
 function link_empty_cart($order_id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=empty_cart&amp;order_id=' . $order_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
 	     'Vider le panier</a>';
@@ -176,7 +189,7 @@ function link_empty_cart($order_id)
 
 function link_toggle_show_participation($registration_id, $lesson_id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="toggle-button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
 	     '">Changer</a>';
@@ -184,7 +197,7 @@ function link_toggle_show_participation($registration_id, $lesson_id)
 
 function link_remove_lesson($registration_id, $lesson_id)
 {
-	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=remove_lesson&amp;registration_id=' . $registration_id .
 	     '&amp;lesson_id=' . $lesson_id . '" onclick="return ' .
 	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';

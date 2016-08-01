@@ -4,11 +4,6 @@
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('teacher', $row['teacher_id']) ?></li>
-  <li><?php link_delete_entity('teacher', $row['teacher_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></h2>
 
@@ -43,4 +38,9 @@
     <span class="attribute-name">Absences :</span>
     <?php echo $row['absences'] ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('teacher', $row['teacher_id']) ?></li>
+    <li><?php link_delete_entity('teacher', $row['teacher_id']) ?></li>
+  </ul>
 </div>

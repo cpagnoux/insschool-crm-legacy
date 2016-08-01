@@ -3,38 +3,34 @@
   Goodies
 </nav>
 
-<ul class="menu">
-  <li><?php link_add_entity($table) ?></li>
-</ul>
-
-<?php if (mysqli_num_rows($result) == 0): ?>
-  <div class="container">
-    <p>Aucun goodies</p>
-  </div>
-
-  <?php return ?>
-<?php endif ?>
-
 <div class="container">
-  <?php table_display_options('goody') ?>
+  <ul class="action-links">
+    <li><?php link_add_entity($table) ?></li>
+  </ul>
 
-  <table>
-    <tr>
-      <th>Désignation</th>
-      <th>Prix</th>
-      <th>Stock</th>
-      <th></th>
-    </tr>
+  <?php if (mysqli_num_rows($result) != 0): ?>
+    <?php table_display_options('goody') ?>
 
-    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+    <table>
       <tr>
-        <td><?php echo $row['name'] ?></td>
-        <td><?php echo $row['price'] ?> €</td>
-        <td><?php echo product_status($row['stock']) ?></td>
-        <td><?php link_entity('goody', $row['goody_id']) ?></td>
+        <th>Désignation</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th></th>
       </tr>
-    <?php endwhile ?>
-  </table>
 
-  <?php table_pagination($table, $page) ?>
+      <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <tr>
+          <td><?php echo $row['name'] ?></td>
+          <td><?php echo $row['price'] ?> €</td>
+          <td><?php echo product_status($row['stock']) ?></td>
+          <td><?php link_entity('goody', $row['goody_id']) ?></td>
+        </tr>
+      <?php endwhile ?>
+    </table>
+
+    <?php table_pagination($table, $page) ?>
+  <?php else: ?>
+    <p>Aucun goodies</p>
+  <?php endif ?>
 </div>

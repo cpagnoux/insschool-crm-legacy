@@ -4,11 +4,6 @@
   <?php echo $row['name'] ?>
 </nav>
 
-<ul class="menu">
-  <li><?php link_modify_entity('room', $row['room_id']) ?></li>
-  <li><?php link_delete_entity('room', $row['room_id']) ?></li>
-</ul>
-
 <div class="container">
   <h2><?php echo $row['name'] ?></h2>
 
@@ -20,4 +15,9 @@
     <span class="attribute-name">Ville :</span>
     <?php echo $row['city'] ?>
   </p>
+
+  <ul class="action-links">
+    <li><?php link_modify_entity('room', $row['room_id']) ?></li>
+    <li><?php link_delete_entity('room', $row['room_id']) ?></li>
+  </ul>
 </div>
