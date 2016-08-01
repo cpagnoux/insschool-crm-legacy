@@ -232,7 +232,7 @@ function save_pre_registration($data, $lessons_str)
 /*
  * Commit of pre-registration
  */
-function add_member($link, $row)
+function add_member_from_pr($link, $row)
 {
 	$query = 'INSERT INTO member VALUES ("", "' . $row['first_name'] .
 		 '", "' . $row['last_name'] . '", "' . $row['birth_date'] .
@@ -258,7 +258,7 @@ function get_member_id_or_add($link, $row)
 	}
 
 	if (mysqli_num_rows($result) == 0) {
-		add_member($link, $row);
+		add_member_from_pr($link, $row);
 		return get_member_id_or_add($link, $row);
 	}
 
@@ -269,7 +269,7 @@ function get_member_id_or_add($link, $row)
 	return $row['member_id'];
 }
 
-function add_registration_detail($link, $registration_id, $lesson_id)
+function add_registration_detail_from_pr($link, $registration_id, $lesson_id)
 {
 	$query = 'INSERT INTO registration_detail VALUES ("' .
 		 $registration_id . '", "' . $lesson_id . '", "")';
@@ -279,7 +279,7 @@ function add_registration_detail($link, $registration_id, $lesson_id)
 	}
 }
 
-function add_registration($link, $member_id, $row)
+function add_registration_from_pr($link, $member_id, $row)
 {
 	$season = date_to_season($row['date']);
 
@@ -296,7 +296,8 @@ function add_registration($link, $member_id, $row)
 	$lessons = string_to_lessons($row['lessons']);
 
 	foreach ($lessons as $lesson_id => $value)
-		add_registration_detail($link, $registration_id, $lesson_id);
+		add_registration_detail_from_pr($link, $registration_id,
+						$lesson_id);
 }
 
 function commit_pre_registration($pre_registration_id)
@@ -313,7 +314,7 @@ function commit_pre_registration($pre_registration_id)
 	$row = mysqli_fetch_assoc($result);
 
 	$member_id = get_member_id_or_add($link, $row);
-	add_registration($link, $member_id, $row);
+	add_registration_from_pr($link, $member_id, $row);
 	delete_entity('pre_registration', $pre_registration_id);
 	display_entity('member', $member_id);
 

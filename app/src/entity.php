@@ -126,7 +126,7 @@ function form_add_entity($table, $id)
 /*
  * Add of entity
  */
-function add_entity_goody($link, $data)
+function add_goody($link, $data)
 {
 	$query = 'INSERT INTO goody VALUES ("", "' . $data['name'] . '", "' .
 		 $data['description'] . '", "' . $data['price'] . '", "' .
@@ -140,7 +140,7 @@ function add_entity_goody($link, $data)
 	display_entity('goody', $goody_id);
 }
 
-function add_entity_lesson($link, $data)
+function add_lesson($link, $data)
 {
 	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
 		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
@@ -155,7 +155,7 @@ function add_entity_lesson($link, $data)
 	display_entity('lesson', $lesson_id);
 }
 
-function add_entity_member($link, $data)
+function add_member($link, $data)
 {
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
@@ -175,7 +175,7 @@ function add_entity_member($link, $data)
 	display_entity('member', $member_id);
 }
 
-function add_entity_order($link, $data)
+function add_order($link, $data)
 {
 	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
 		 '", NOW())';
@@ -188,7 +188,7 @@ function add_entity_order($link, $data)
 	display_entity('order', $order_id);
 }
 
-function add_entity_order_content($link, $data)
+function add_order_content($link, $data)
 {
 	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
 
@@ -202,7 +202,7 @@ function add_entity_order_content($link, $data)
 	display_entity('order', $data['order_id']);
 }
 
-function add_entity_payment($link, $table, $data)
+function add_payment($link, $table, $data)
 {
 	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", "' .
 		 $data[$table . '_id'] . '", "' . $data['amount'] . '", "' .
@@ -215,7 +215,7 @@ function add_entity_payment($link, $table, $data)
 	display_entity($table, $data[$table . '_id']);
 }
 
-function add_entity_registration($link, $data)
+function add_registration($link, $data)
 {
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
 		 '", "' . $data['season'] . '", "' . $data['price'] . '", "' .
@@ -232,7 +232,7 @@ function add_entity_registration($link, $data)
 	display_entity('registration', $registration_id);
 }
 
-function add_entity_registration_detail($link, $data)
+function add_registration_detail($link, $data)
 {
 	$query = 'INSERT INTO registration_detail VALUES ("' .
 		 $data['registration_id'] . '", "' . $data['lesson_id'] .
@@ -245,7 +245,7 @@ function add_entity_registration_detail($link, $data)
 	display_entity('registration', $data['registration_id']);
 }
 
-function add_entity_room($link, $data)
+function add_room($link, $data)
 {
 	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
 		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
@@ -259,7 +259,7 @@ function add_entity_room($link, $data)
 	display_entity('room', $room_id);
 }
 
-function add_entity_teacher($link, $data)
+function add_teacher($link, $data)
 {
 	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
@@ -282,37 +282,37 @@ function add_entity($table, $data)
 
 	switch ($table) {
 	case 'goody':
-		add_entity_goody($link, $data);
+		add_goody($link, $data);
 		break;
 	case 'lesson':
-		add_entity_lesson($link, $data);
+		add_lesson($link, $data);
 		break;
 	case 'member':
-		add_entity_member($link, $data);
+		add_member($link, $data);
 		break;
 	case 'order':
-		add_entity_order($link, $data);
+		add_order($link, $data);
 		break;
 	case 'order_content':
-		add_entity_order_content($link, $data);
+		add_order_content($link, $data);
 		break;
 	case 'order_payment':
-		add_entity_payment($link, 'order', $data);
+		add_payment($link, 'order', $data);
 		break;
 	case 'registration':
-		add_entity_registration($link, $data);
+		add_registration($link, $data);
 		break;
 	case 'registration_detail':
-		add_entity_registration_detail($link, $data);
+		add_registration_detail($link, $data);
 		break;
 	case 'registration_payment':
-		add_entity_payment($link, 'registration', $data);
+		add_payment($link, 'registration', $data);
 		break;
 	case 'room':
-		add_entity_room($link, $data);
+		add_room($link, $data);
 		break;
 	case 'teacher':
-		add_entity_teacher($link, $data);
+		add_teacher($link, $data);
 		break;
 	}
 
@@ -402,7 +402,7 @@ function form_modify_entity($table, $id)
 /*
  * Modification of entity
  */
-function modify_entity_goody($link, $goody_id, $data)
+function modify_goody($link, $goody_id, $data)
 {
 	$query = 'UPDATE goody SET name = "' . $data['name'] .
 		 '", description = "' . $data['description'] . '", price = "' .
@@ -416,7 +416,7 @@ function modify_entity_goody($link, $goody_id, $data)
 	display_entity('goody', $goody_id);
 }
 
-function modify_entity_lesson($link, $lesson_id, $data)
+function modify_lesson($link, $lesson_id, $data)
 {
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
 		 '", teacher_id = "' . $data['teacher_id'] . '", day = "' .
@@ -432,7 +432,7 @@ function modify_entity_lesson($link, $lesson_id, $data)
 	display_entity('lesson', $lesson_id);
 }
 
-function modify_entity_member($link, $member_id, $data)
+function modify_member($link, $member_id, $data)
 {
 	$query = 'UPDATE member SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
@@ -453,7 +453,7 @@ function modify_entity_member($link, $member_id, $data)
 	display_entity('member', $member_id);
 }
 
-function modify_entity_payment($link, $table, $id, $data)
+function modify_payment($link, $table, $id, $data)
 {
 	$query = 'UPDATE ' . $table . '_payment SET amount = "' .
 		 $data['amount'] . '", mode = "' . $data['mode'] .
@@ -466,7 +466,7 @@ function modify_entity_payment($link, $table, $id, $data)
 	display_entity($table, $data[$table . '_id']);
 }
 
-function modify_entity_pre_registration($link, $pre_registration_id, $data)
+function modify_pre_registration($link, $pre_registration_id, $data)
 {
 	$lessons_str = lessons_to_string($data);
 
@@ -490,7 +490,7 @@ function modify_entity_pre_registration($link, $pre_registration_id, $data)
 	display_entity('pre_registration', $pre_registration_id);
 }
 
-function modify_entity_registration($link, $registration_id, $data)
+function modify_registration($link, $registration_id, $data)
 {
 	$query = 'UPDATE registration SET season = "' . $data['season'] .
 		 '", price = "' . $data['price'] . '", discount = "' .
@@ -505,7 +505,7 @@ function modify_entity_registration($link, $registration_id, $data)
 	display_entity('registration', $registration_id);
 }
 
-function modify_entity_registration_file($link, $registration_id, $data)
+function modify_registration_file($link, $registration_id, $data)
 {
 	$query = 'UPDATE registration_file SET medical_certificate = "' .
 		 $data['medical_certificate'] . '", insurance = "' .
@@ -519,7 +519,7 @@ function modify_entity_registration_file($link, $registration_id, $data)
 	display_entity('registration', $data['registration_id']);
 }
 
-function modify_entity_room($link, $room_id, $data)
+function modify_room($link, $room_id, $data)
 {
 	$query = 'UPDATE room SET name = "' . $data['name'] . '", address = "' .
 		 $data['address'] . '", postal_code = "' .
@@ -533,7 +533,7 @@ function modify_entity_room($link, $room_id, $data)
 	display_entity('room', $room_id);
 }
 
-function modify_entity_teacher($link, $teacher_id, $data)
+function modify_teacher($link, $teacher_id, $data)
 {
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
@@ -556,34 +556,34 @@ function modify_entity($table, $id, $data)
 
 	switch($table) {
 	case 'goody':
-		modify_entity_goody($link, $id, $data);
+		modify_goody($link, $id, $data);
 		break;
 	case 'lesson':
-		modify_entity_lesson($link, $id, $data);
+		modify_lesson($link, $id, $data);
 		break;
 	case 'member':
-		modify_entity_member($link, $id, $data);
+		modify_member($link, $id, $data);
 		break;
 	case 'order_payment':
-		modify_entity_payment($link, 'order', $id, $data);
+		modify_payment($link, 'order', $id, $data);
 		break;
 	case 'pre_registration':
-		modify_entity_pre_registration($link, $id, $data);
+		modify_pre_registration($link, $id, $data);
 		break;
 	case 'registration':
-		modify_entity_registration($link, $id, $data);
+		modify_registration($link, $id, $data);
 		break;
 	case 'registration_file':
-		modify_entity_registration_file($link, $id, $data);
+		modify_registration_file($link, $id, $data);
 		break;
 	case 'registration_payment':
-		modify_entity_payment($link, 'registration', $id, $data);
+		modify_payment($link, 'registration', $id, $data);
 		break;
 	case 'room':
-		modify_entity_room($link, $id, $data);
+		modify_room($link, $id, $data);
 		break;
 	case 'teacher':
-		modify_entity_teacher($link, $id, $data);
+		modify_teacher($link, $id, $data);
 		break;
 	}
 
