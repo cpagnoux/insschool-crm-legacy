@@ -156,7 +156,7 @@ function select_lesson()
 	mysqli_close($link);
 }
 
-function select_member($member_id)
+function select_member()
 {
 	$link = connect_database();
 

@@ -21,7 +21,6 @@
 
   <?php if (!order_paid($row['order_id']) || order_total($row['order_id']) == 0):?>
     <ul class="action-links">
-      <li><?php link_modify_entity('order', $row['order_id']) ?></li>
       <li><?php link_delete_entity('order', $row['order_id']) ?></li>
     </ul>
   <?php endif ?>

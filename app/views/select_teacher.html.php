@@ -11,6 +11,5 @@
         <option value="<?php echo $row['teacher_id'] ?>"><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
       <?php endif ?>
     <?php endwhile ?>
-
   </select>
 </div>

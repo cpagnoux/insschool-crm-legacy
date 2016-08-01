@@ -1,5 +1,5 @@
 <fieldset>
-  <?php select_member($row['member_id']) ?>
+  <?php select_member() ?>
 </fieldset>
 
 <fieldset>

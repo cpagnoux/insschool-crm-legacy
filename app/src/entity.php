@@ -358,9 +358,6 @@ function form_modify_entity($table, $id)
 		$name = get_name('member', $row['member_id']);
 		require 'views/form_modify_member.html.php';
 		break;
-	case 'order':
-		require 'views/form_modify_order.html.php';
-		break;
 	case 'order_payment':
 		$order_id = $row['order_id'];
 		require 'views/form_modify_order_payment.html.php';
@@ -454,18 +451,6 @@ function modify_entity_member($link, $member_id, $data)
 	}
 
 	display_entity('member', $member_id);
-}
-
-function modify_entity_order($link, $order_id, $data)
-{
-	$query = 'UPDATE `order` SET member_id = "' . $data['member_id'] .
-		 '" WHERE order_id = ' . $order_id;
-	if (!mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	display_entity('order', $order_id);
 }
 
 function modify_entity_payment($link, $table, $id, $data)
@@ -578,9 +563,6 @@ function modify_entity($table, $id, $data)
 		break;
 	case 'member':
 		modify_entity_member($link, $id, $data);
-		break;
-	case 'order':
-		modify_entity_order($link, $id, $data);
 		break;
 	case 'order_payment':
 		modify_entity_payment($link, 'order', $id, $data);

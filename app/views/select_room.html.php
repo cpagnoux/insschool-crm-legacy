@@ -11,6 +11,5 @@
         <option value="<?php echo $row['room_id'] ?>"><?php echo $row['name'] ?></option>
       <?php endif ?>
     <?php endwhile ?>
-
   </select>
 </div>
