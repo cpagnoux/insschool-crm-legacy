@@ -7,8 +7,8 @@ require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
-require_once 'src/libentity.php';
 require_once 'src/entity.php';
+require_once 'src/entity_helper.php';
 
 /*
  * Dynamic table for lessons

@@ -4,11 +4,10 @@
  */
 
 require_once 'src/login.php';
-require_once 'src/util.php';
 
-require_once 'src/libpre-registration.php';
 require_once 'src/table.php';
 require_once 'src/entity.php';
+require_once 'src/pre-registration.php';
 
 session_start();
 

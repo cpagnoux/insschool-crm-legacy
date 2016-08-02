@@ -3,14 +3,14 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'src/libentity.php';
+require_once 'src/entity_helper.php';
 
 require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
-require_once 'src/libpre-registration.php';
 require_once 'src/table.php';
+require_once 'src/pre-registration.php';
 
 /*
  * Display of entity

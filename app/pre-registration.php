@@ -3,7 +3,7 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'src/libpre-registration.php';
+require_once 'src/pre-registration.php';
 
 $action = '';
 

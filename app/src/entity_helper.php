@@ -7,8 +7,8 @@ require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
-require_once 'src/libpre-registration.php';
 require_once 'src/entity.php';
+require_once 'src/pre-registration.php';
 
 /*
  * Helper functions for displaying entities
