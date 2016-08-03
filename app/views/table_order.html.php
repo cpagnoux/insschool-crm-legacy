@@ -11,7 +11,7 @@
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php table_display_options('order') ?>
 
-    <table>
+    <table class="db-table">
       <tr>
         <th>N° de commande</th>
         <th>Adhérent</th>

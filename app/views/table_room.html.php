@@ -11,7 +11,7 @@
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php table_display_options('room') ?>
 
-    <table>
+    <table class="db-table">
       <tr>
         <th>Nom</th>
         <th></th>

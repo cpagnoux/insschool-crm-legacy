@@ -74,6 +74,18 @@ th {
 	color: #ffffff;
 }
 
+.db-table, .db-table th, .db-table td {
+	border: none;
+}
+
+.db-table tr:hover {
+	background-color: #202020;
+}
+
+.db-table th, .db-table td {
+	border-bottom: 1px solid #202020;
+}
+
 html {
 	min-height: 100%;
 	position: relative;
@@ -96,7 +108,7 @@ footer {
 }
 
 fieldset {
-	border-style: none;
+	border: none;
 }
 
 .navigation-bar ul, .pagination ul, .action-links {
