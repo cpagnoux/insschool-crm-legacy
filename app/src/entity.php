@@ -160,11 +160,13 @@ function add_member($link, $data)
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
 		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
-		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
-		 $data['cellphone_father'] . '", "' .
-		 $data['cellphone_mother'] . '", "' . $data['phone'] . '", "' .
-		 $data['email'] . '", "' . $data['means_of_knowledge'] .
-		 '", "' . $data['volunteer'] . '")';
+		 '", "' . $data['city'] . '", "' .
+		 format_phone_number($data['cellphone']) . '", "' .
+		 format_phone_number($data['cellphone_father']) . '", "' .
+		 format_phone_number($data['cellphone_mother']) . '", "' .
+		 format_phone_number($data['phone']) . '", "' . $data['email'] .
+		 '", "' . $data['means_of_knowledge'] . '", "' .
+		 $data['volunteer'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -264,8 +266,10 @@ function add_teacher($link, $data)
 	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
 		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
-		 '", "' . $data['city'] . '", "' . $data['cellphone'] . '", "' .
-		 $data['phone'] . '", "' . $data['email'] . '", "")';
+		 '", "' . $data['city'] . '", "' .
+		 format_phone_number($data['cellphone']) . '", "' .
+		 format_phone_number($data['phone']) . '", "' . $data['email'] .
+		 '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

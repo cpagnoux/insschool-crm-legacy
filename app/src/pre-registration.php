@@ -217,10 +217,12 @@ function save_pre_registration($data, $lessons_str)
 		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
 		 $data['birth_date'] . '", "' . $data['address'] . '", "' .
 		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
-		 $data['cellphone'] . '", "' . $data['cellphone_father'] .
-		 '", "' . $data['cellphone_mother'] . '", "' . $data['phone'] .
-		 '", "' . $data['email'] . '", "' . $lessons_str . '", "' .
-		 $data['means_of_knowledge'] . '", NOW())';
+		 format_phone_number($data['cellphone']) . '", "' .
+		 format_phone_number($data['cellphone_father']) . '", "' .
+		 format_phone_number($data['cellphone_mother']) . '", "' .
+		 format_phone_number($data['phone']) . '", "' . $data['email'] .
+		 '", "' . $lessons_str . '", "' . $data['means_of_knowledge'] .
+		 '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

@@ -21,13 +21,13 @@
 
   <p>
     <span class="attribute-name">Portable :</span>
-    <?php echo $data['cellphone'] ?><br>
+    <?php echo format_phone_number($data['cellphone']) ?><br>
     <span class="attribute-name">Portable père :</span>
-    <?php echo $data['cellphone_father'] ?><br>
+    <?php echo format_phone_number($data['cellphone_father']) ?><br>
     <span class="attribute-name">Portable mère :</span>
-    <?php echo $data['cellphone_mother'] ?><br>
+    <?php echo format_phone_number($data['cellphone_mother']) ?><br>
     <span class="attribute-name">Téléphone fixe :</span>
-    <?php echo $data['phone'] ?><br>
+    <?php echo format_phone_number($data['phone']) ?><br>
     <span class="attribute-name">E-mail :</span>
     <?php echo $data['email'] ?>
   </p>

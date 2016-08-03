@@ -223,9 +223,7 @@ function current_season()
 function date_to_season($date)
 {
 	// date is in 'YYYY-MM-DD' format
-	sscanf($date, '%d', $year);
-	$date = substr($date, 5);
-	sscanf($date, '%d', $month);
+	list($year, $month) = sscanf($date, '%d-%d');
 
 	if ($month >= 6)
 		return $year . '-' . ($year + 1);
@@ -236,13 +234,8 @@ function date_to_season($date)
 function duration($start_time, $end_time)
 {
 	// time is in 'HH:MM:SS' format
-	sscanf($start_time, '%d', $start_hour);
-	$start_time = substr($start_time, 3);
-	sscanf($start_time, '%d', $start_minute);
-
-	sscanf($end_time, '%d', $end_hour);
-	$end_time = substr($end_time, 3);
-	sscanf($end_time, '%d', $end_minute);
+	list($start_hour, $start_minute) = sscanf($start_time, '%d:%d');
+	list($end_hour, $end_minute) = sscanf($end_time, '%d:%d');
 
 	$hour_restraint = 0;
 
@@ -316,22 +309,28 @@ function format_date($date)
 		return 'Inconnue';
 
 	// date is in 'YYYY-MM-DD' format
-	sscanf($date, '%d', $year);
-	$date = substr($date, 5);
-	sscanf($date, '%d', $month);
-	$date = substr($date, 3);
-	sscanf($date, '%d', $day);
+	list($year, $month, $day) = sscanf($date, '%d-%d-%d');
 
 	return sprintf('%02d', $day) . '/' . sprintf('%02d', $month) . '/' .
 	       $year;
 }
 
+function format_phone_number($phone_number)
+{
+	if ($phone_number == '')
+		return '';
+
+	list($part1, $part2, $part3, $part4, $part5) = sscanf($phone_number,
+			'%2c%2c%2c%2c%2c');
+
+	return $part1 . ' ' . $part2 . ' ' . $part3 . ' ' . $part4 . ' ' .
+	       $part5;
+}
+
 function format_time($time)
 {
 	// time is in 'HH:MM:SS' format
-	sscanf($time, '%d', $hour);
-	$time = substr($time, 3);
-	sscanf($time, '%d', $minute);
+	list($hour, $minute) = sscanf($time, '%d:%d');
 
 	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
 }
