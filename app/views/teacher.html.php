@@ -37,6 +37,7 @@
   <p>
     <span class="attribute-name">Absences :</span>
     <?php echo $row['absences'] ?>
+    <?php link_update_absences($row['teacher_id']) ?>
   </p>
 
   <ul class="action-links">

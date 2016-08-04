@@ -34,6 +34,8 @@ else if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'update_absences')
+	$action = 'update_absences';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'remove_lesson')
 	$action = 'remove_lesson';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'toggle_show_participation')
@@ -56,6 +58,9 @@ else if (isset($_GET['table']))
 	$action = 'display_table';
 
 switch ($action) {
+case 'update_absences':
+	update_absences($_GET['teacher_id']);
+	break;
 case 'remove_lesson':
 	remove_lesson($_GET['registration_id'], $_GET['lesson_id']);
 	break;

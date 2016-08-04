@@ -734,4 +734,22 @@ function remove_lesson($registration_id, $lesson_id)
 
 	display_entity('registration', $registration_id);
 }
+
+/*
+ * Function related to teacher
+ */
+function update_absences($teacher_id)
+{
+	$link = connect_database();
+
+	$query = 'UPDATE teacher SET absences = absences + 1 WHERE teacher_id = ' . $teacher_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	display_entity('teacher', $teacher_id);
+}
 ?>

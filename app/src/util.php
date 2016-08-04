@@ -203,6 +203,12 @@ function link_remove_lesson($registration_id, $lesson_id)
 	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+function link_update_absences($teacher_id)
+{
+	echo '<a class="toggle-button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=update_absences&amp;teacher_id=' . $teacher_id . '">+1</a>';
+}
+
 function link_logout()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
