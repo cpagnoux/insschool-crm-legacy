@@ -7,7 +7,7 @@
     <span class="attribute-name">Prénom :</span>
     <?php echo $data['first_name'] ?><br>
     <span class="attribute-name">Date de naissance :</span>
-    <?php echo format_date($data['birth_date']) ?>
+    <?php echo sprintf('%02d', $data['bd_day']) ?>/<?php echo sprintf('%02d', $data['bd_month']) ?>/<?php echo $data['bd_year'] ?>
   </p>
 
   <p>

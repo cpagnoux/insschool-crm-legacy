@@ -3,12 +3,12 @@
  * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
  */
 
-require_once 'src/entity_helper.php';
-
 require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
+require_once 'src/entity_helper.php';
+require_once 'src/form.php';
 require_once 'src/table.php';
 require_once 'src/pre-registration.php';
 
@@ -144,7 +144,8 @@ function add_lesson($link, $data)
 {
 	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
 		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
-		 $data['start_time'] . '", "' . $data['end_time'] . '", "' .
+		 to_time($data['st_hour'], $data['st_minute']) . '", "' .
+		 to_time($data['et_hour'], $data['et_minute']) . '", "' .
 		 $data['room_id'] . '", "' . $data['costume'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -158,10 +159,10 @@ function add_lesson($link, $data)
 function add_member($link, $data)
 {
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
-		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
-		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
-		 '", "' . $data['city'] . '", "' .
-		 format_phone_number($data['cellphone']) . '", "' .
+		 '", "' . $data['last_name'] . '", "' .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) . '", "' . $data['address'] .
+		 '", "' . $data['postal_code'] . '", "' . $data['city'] .
+		 '", "' . format_phone_number($data['cellphone']) . '", "' .
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .
 		 format_phone_number($data['phone']) . '", "' . $data['email'] .
@@ -264,7 +265,8 @@ function add_room($link, $data)
 function add_teacher($link, $data)
 {
 	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
-		 '", "' . $data['last_name'] . '", "' . $data['birth_date'] .
+		 '", "' . $data['last_name'] . '", "' .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
 		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
 		 '", "' . $data['city'] . '", "' .
 		 format_phone_number($data['cellphone']) . '", "' .
@@ -424,10 +426,12 @@ function modify_lesson($link, $lesson_id, $data)
 {
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
 		 '", teacher_id = "' . $data['teacher_id'] . '", day = "' .
-		 $data['day'] . '", start_time = "' . $data['start_time'] .
-		 '", end_time = "' . $data['end_time'] . '", room_id = "' .
-		 $data['room_id'] . '", costume = "' . $data['costume'] .
-		 '" WHERE lesson_id = ' . $lesson_id;
+		 $data['day'] . '", start_time = "' .
+		 to_time($data['st_hour'], $data['st_minute']) .
+		 '", end_time = "' .
+		 to_time($data['et_hour'], $data['et_minute']) .
+		 '", room_id = "' . $data['room_id'] . '", costume = "' .
+		 $data['costume'] . '" WHERE lesson_id = ' . $lesson_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -440,9 +444,10 @@ function modify_member($link, $member_id, $data)
 {
 	$query = 'UPDATE member SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 $data['birth_date'] . '", address = "' . $data['address'] .
-		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
-		 $data['city'] . '", cellphone = "' . $data['cellphone'] .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", address = "' . $data['address'] . '", postal_code = "' .
+		 $data['postal_code'] . '", city = "' . $data['city'] .
+		 '", cellphone = "' . $data['cellphone'] .
 		 '", cellphone_father = "' . $data['cellphone_father'] .
 		 '", cellphone_mother = "' . $data['cellphone_mother'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .
@@ -476,8 +481,8 @@ function modify_pre_registration($link, $pre_registration_id, $data)
 
 	$query = 'UPDATE pre_registration SET first_name = "' .
 		 $data['first_name'] . '", last_name = "' . $data['last_name'] .
-		 '", birth_date = "' . $data['birth_date'] . '", address = "' .
-		 $data['address'] . '", postal_code = "' .
+		 '", birth_date = "' . to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", address = "' . $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
 		 '", cellphone = "' . $data['cellphone'] .
 		 '", cellphone_father = "' . $data['cellphone_father'] .
@@ -541,11 +546,12 @@ function modify_teacher($link, $teacher_id, $data)
 {
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 $data['birth_date'] . '", address = "' . $data['address'] .
-		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
-		 $data['city'] . '", cellphone = "' . $data['cellphone'] .
-		 '", phone = "' . $data['phone'] . '", email = "' .
-		 $data['email'] . '" WHERE teacher_id = ' . $teacher_id;
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", address = "' . $data['address'] . '", postal_code = "' .
+		 $data['postal_code'] . '", city = "' . $data['city'] .
+		 '", cellphone = "' . $data['cellphone'] . '", phone = "' .
+		 $data['phone'] . '", email = "' . $data['email'] .
+		 '" WHERE teacher_id = ' . $teacher_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -599,7 +605,7 @@ function modify_entity($table, $id, $data)
  */
 function delete_entity($table, $id, $first_call)
 {
-	if (isset($first_call) && $first_call) {
+	if ($first_call) {
 		switch ($table) {
 		case 'order_payment':
 			$order_id = get_order_id($id);
@@ -626,7 +632,7 @@ function delete_entity($table, $id, $first_call)
 
 	mysqli_close($link);
 
-	if (isset($first_call) && $first_call) {
+	if ($first_call) {
 		switch ($table) {
 		case 'order_payment':
 			display_entity('order', $order_id);

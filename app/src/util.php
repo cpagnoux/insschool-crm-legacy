@@ -16,34 +16,34 @@ function link_home()
 
 function link_table($table)
 {
-	$message = '';
+	$label = '';
 
 	switch ($table) {
 	case 'goody':
-		$message = 'Goodies';
+		$label = 'Goodies';
 		break;
 	case 'lesson':
-		$message = 'Cours';
+		$label = 'Cours';
 		break;
 	case 'member':
-		$message = 'Adhérents';
+		$label = 'Adhérents';
 		break;
 	case 'order':
-		$message = 'Commandes';
+		$label = 'Commandes';
 		break;
 	case 'pre_registration':
-		$message = 'Pré-inscriptions';
+		$label = 'Pré-inscriptions';
 		break;
 	case 'room':
-		$message = 'Salles';
+		$label = 'Salles';
 		break;
 	case 'teacher':
-		$message = 'Professeurs';
+		$label = 'Professeurs';
 		break;
 	}
 
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">' .
-	     $message . '</a>';
+	     $label . '</a>';
 }
 
 function link_table_previous($table, $page)
@@ -72,11 +72,11 @@ function link_table_page($table, $page)
 		     '&amp;page=' . $page . '">' . $page . '</a>';
 }
 
-function link_entity($table, $id, $message)
+function link_entity($table, $id, $label)
 {
-	if (isset($message))
+	if (isset($label))
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '&amp;id=' . $id . '">' . $message . '</a>';
+		     '&amp;id=' . $id . '">' . $label . '</a>';
 	else
 		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 		     '?table=' . $table . '&amp;id=' . $id . '">+ d\'infos</a>';
@@ -84,54 +84,54 @@ function link_entity($table, $id, $message)
 
 function link_add_entity($table, $id)
 {
-	$message = '';
+	$label = '';
 
 	switch ($table) {
 	case 'goody':
-		$message = 'Nouveau goodies';
+		$label = 'Nouveau goodies';
 		break;
 	case 'lesson':
-		$message = 'Nouveau cours';
+		$label = 'Nouveau cours';
 		break;
 	case 'member':
-		$message = 'Nouvel adhérent';
+		$label = 'Nouvel adhérent';
 		break;
 	case 'order':
-		$message = 'Nouvelle commande';
+		$label = 'Nouvelle commande';
 		break;
 	case 'order_content':
-		$message = 'Ajouter un article';
+		$label = 'Ajouter un article';
 		break;
 	case 'order_payment':
-		$message = 'Nouveau paiement';
+		$label = 'Nouveau paiement';
 		break;
 	case 'registration':
-		$message = 'Nouvelle inscription';
+		$label = 'Nouvelle inscription';
 		break;
 	case 'registration_detail':
-		$message = 'Ajouter un cours';
+		$label = 'Ajouter un cours';
 		break;
 	case 'registration_payment':
-		$message = 'Nouveau paiement';
+		$label = 'Nouveau paiement';
 		break;
 	case 'room':
-		$message = 'Nouvelle salle';
+		$label = 'Nouvelle salle';
 		break;
 	case 'teacher':
-		$message = 'Nouveau professeur';
+		$label = 'Nouveau professeur';
 		break;
 	default:
-		$message = 'Ajouter';
+		$label = 'Ajouter';
 		break;
 	}
 
 	if (isset($id))
 		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 		     '?mode=add&amp;table=' . $table . '&amp;id=' . $id . '">' .
-		     $message . '</a>';
+		     $label . '</a>';
 	else
 		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-		     '?mode=add&amp;table=' . $table . '">' . $message . '</a>';
+		     '?mode=add&amp;table=' . $table . '">' . $label . '</a>';
 }
 
 function link_modify_entity($table, $id)
@@ -320,6 +320,7 @@ function format_phone_number($phone_number)
 	if ($phone_number == '')
 		return '';
 
+	// user input is in '##########' format
 	list($part1, $part2, $part3, $part4, $part5) = sscanf($phone_number,
 			'%2c%2c%2c%2c%2c');
 
@@ -357,6 +358,16 @@ function product_status($stock)
 		return 'En stock';
 
 	return 'Produit épuisé';
+}
+
+function to_date($day, $month, $year)
+{
+	return $year . '-' . $month . '-' . $day;
+}
+
+function to_time($hour, $minute)
+{
+	return $hour . ':' . $minute;
 }
 
 function total_by_product($price, $quantity)

@@ -12,15 +12,9 @@
 <fieldset>
   <?php select_day($row['day']) ?>
 
-  <div class="form-row">
-    <label for="start_time">Heure de début <sup>*</sup> :</label><br>
-    <input id="start_time" type="text" name="start_time" value="<?php echo $row['start_time'] ?>" required="required"> (HH:MM:SS)
-  </div>
+  <?php select_time('Heure de début', 'st', $row['start_time']) ?>
 
-  <div class="form-row">
-    <label for="end_time">Heure de fin <sup>*</sup> :</label><br>
-    <input id="end_time" type="text" name="end_time" value="<?php echo $row['end_time'] ?>" required="required"> (HH:MM:SS)
-  </div>
+  <?php select_time('Heure de fin', 'et', $row['end_time']) ?>
 
   <?php select_room($row['room_id']) ?>
 </fieldset>

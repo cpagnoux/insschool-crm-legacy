@@ -41,6 +41,10 @@ textarea {
 	padding: 5px 10px;
 }
 
+.datetime-select {
+	width: auto;
+}
+
 .quantity-button {
 	border-radius: 100%;
 	line-height: 25px;

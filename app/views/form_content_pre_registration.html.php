@@ -9,10 +9,7 @@
     <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required="required">
   </div>
 
-  <div class="form-row">
-    <label for="birth_date">Date de naissance <sup>*</sup> :</label><br>
-    <input id="birth_date" type="text" name="birth_date" value="<?php echo $row['birth_date'] ?>" required="required"> (AAAA-MM-JJ)
-  </div>
+  <?php select_date('Date de naissance', 'bd', true, $row['birth_date']) ?>
 </fieldset>
 
 <fieldset>
@@ -76,7 +73,7 @@
   <div class="form-row">
 
     <?php if (isset($row)): ?>
-      A connu INS School grâce à : <sup>*</sup><br>
+      A connu INS School grâce à <sup>*</sup> :<br>
     <?php else: ?>
       Comment nous avez-vous connus ? <sup>*</sup><br>
     <?php endif ?>

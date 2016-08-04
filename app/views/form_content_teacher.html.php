@@ -9,10 +9,7 @@
     <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required="required">
   </div>
 
-  <div class="form-row">
-    <label for="birth_date">Date de naissance :</label><br>
-    <input id="birth_date" type="text" name="birth_date" value="<?php echo $row['birth_date'] ?>">
-  </div>
+  <?php select_date('Date de naissance', 'bd', false, $row['birth_date']) ?>
 </fieldset>
 
 <fieldset>

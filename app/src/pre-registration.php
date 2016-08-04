@@ -177,7 +177,7 @@ function lessons_to_string($lessons, $display)
 
 	foreach ($lessons as $lesson_id => $title) {
 		if (is_int($lesson_id) && isset($title)) {
-			if (isset($display) && $display)
+			if ($display)
 				echo '  <li>' . $title . '</li>' . PHP_EOL;
 			$string .= $lesson_id . ';';
 		}
@@ -215,8 +215,9 @@ function save_pre_registration($data, $lessons_str)
 
 	$query = 'INSERT INTO pre_registration VALUES ("", "' .
 		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
-		 $data['birth_date'] . '", "' . $data['address'] . '", "' .
-		 $data['postal_code'] . '", "' . $data['city'] . '", "' .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
+		 '", "' . $data['city'] . '", "' .
 		 format_phone_number($data['cellphone']) . '", "' .
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .

@@ -9,10 +9,7 @@
     <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required="required">
   </div>
 
-  <div class="form-row">
-    <label for="birth_date">Date de naissance <sup>*</sup> :</label><br>
-    <input id="birth_date" type="text" name="birth_date" value="<?php echo $row['birth_date'] ?>" required="required"> (AAAA-MM-JJ)
-  </div>
+  <?php select_date('Date de naissance', 'bd', true, $row['birth_date']) ?>
 </fieldset>
 
 <fieldset>
@@ -61,7 +58,7 @@
 
 <fieldset>
   <div class="form-row">
-    A connu INS School grâce à :<br>
+    A connu INS School grâce à <sup>*</sup> :<br>
     <input id="mok_poster_flyer" type="radio" name="means_of_knowledge" value="POSTER_FLYER" required="required"<?php echo $mok_poster_flyer ?>>
     <label for="mok_poster_flyer">Affiches, Flyers</label><br>
     <input id="mok_internet" type="radio" name="means_of_knowledge" value="INTERNET"<?php echo $mok_internet ?>>
