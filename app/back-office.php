@@ -26,53 +26,86 @@ if (isset($_POST['limit']))
 
 $action = '';
 
-if (!session_valid())
+if (!session_valid()) {
 	$action = 'login';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'logout')
-	$action = 'logout';
-else if (isset($_POST['submit']) && $_GET['mode'] == 'change_password')
-	$action = 'change_password';
-else if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
-	$action = 'modify_entity';
-else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
-	$action = 'add_entity';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'change_password')
-	$action = 'form_change_password';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'update_absences')
-	$action = 'update_absences';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'remove_lesson')
-	$action = 'remove_lesson';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'toggle_show_participation')
-	$action = 'toggle_show_participation';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'empty_cart')
-	$action = 'empty_cart';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'modify_quantity')
-	$action = 'modify_quantity';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'commit')
-	$action = 'commit_pre_registration';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'delete')
-	$action = 'delete_entity';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'modify')
-	$action = 'form_modify_entity';
-else if (isset($_GET['mode']) && $_GET['mode'] == 'add')
-	$action = 'form_add_entity';
-else if (isset($_GET['id']))
+} else if (isset($_POST['submit'])) {
+	switch ($_GET['mode']) {
+	case 'add':
+		$action = 'add_entity';
+		break;
+	case 'modify':
+		$action = 'modify_entity';
+		break;
+	case 'change_password':
+		$action = 'change_password';
+		break;
+	}
+} else if (isset($_GET['mode'] )) {
+	switch ($_GET['mode']) {
+	case 'add':
+		$action = 'form_add_entity';
+		break;
+	case 'modify':
+		$action = 'form_modify_entity';
+		break;
+	case 'delete':
+		$action = 'delete_entity';
+		break;
+	case 'modify_quantity':
+		$action = 'modify_quantity';
+		break;
+	case 'empty_cart':
+		$action = 'empty_cart';
+		break;
+	case 'commit':
+		$action = 'commit_pre_registration';
+		break;
+	case 'toggle_show_participation':
+		$action = 'toggle_show_participation';
+		break;
+	case 'remove_lesson':
+		$action = 'remove_lesson';
+		break;
+	case 'update_absences':
+		$action = 'update_absences';
+		break;
+	case 'change_password':
+		$action = 'form_change_password';
+		break;
+	case 'logout':
+		$action = 'logout';
+		break;
+	}
+} else if (isset($_GET['id'])) {
 	$action = 'display_entity';
-else if (isset($_GET['table']))
+} else if (isset($_GET['table'])) {
 	$action = 'display_table';
+}
 
 switch ($action) {
-case 'update_absences':
-	update_absences($_GET['teacher_id']);
+case 'login':
+	require 'views/login.html.php';
 	break;
-case 'remove_lesson':
-	remove_lesson($_GET['registration_id'], $_GET['lesson_id']);
+case 'display_table':
+	display_table($_GET['table'], $_GET['page']);
 	break;
-case 'toggle_show_participation':
-	toggle_show_participation($_GET['registration_id'], $_GET['lesson_id']);
+case 'display_entity':
+	display_entity($_GET['table'], $_GET['id']);
 	break;
-case 'empty_cart':
-	empty_cart($_GET['order_id']);
+case 'form_add_entity':
+	form_add_entity($_GET['table'], $_GET['id']);
+	break;
+case 'add_entity':
+	add_entity($_GET['table'], $_POST);
+	break;
+case 'form_modify_entity':
+	form_modify_entity($_GET['table'], $_GET['id']);
+	break;
+case 'modify_entity':
+	modify_entity($_GET['table'], $_GET['id'], $_POST);
+	break;
+case 'delete_entity':
+	delete_entity($_GET['table'], $_GET['id'], true);
 	break;
 case 'modify_quantity':
 	if (isset($_GET['quantity']))
@@ -82,44 +115,32 @@ case 'modify_quantity':
 		modify_quantity($_GET['order_id'], $_GET['goody_id'],
 				$_POST['quantity']);
 	break;
+case 'empty_cart':
+	empty_cart($_GET['order_id']);
+	break;
 case 'commit_pre_registration':
-	commit_pre_registration($_GET['id']);
+	commit_pre_registration($_GET['pre_registration_id']);
 	break;
-case 'delete_entity':
-	delete_entity($_GET['table'], $_GET['id'], true);
+case 'toggle_show_participation':
+	toggle_show_participation($_GET['registration_id'], $_GET['lesson_id']);
 	break;
-case 'modify_entity':
-	modify_entity($_GET['table'], $_GET['id'], $_POST);
+case 'remove_lesson':
+	remove_lesson($_GET['registration_id'], $_GET['lesson_id']);
 	break;
-case 'form_modify_entity':
-	form_modify_entity($_GET['table'], $_GET['id']);
-	break;
-case 'add_entity':
-	add_entity($_GET['table'], $_POST);
-	break;
-case 'form_add_entity':
-	form_add_entity($_GET['table'], $_GET['id']);
-	break;
-case 'display_entity':
-	display_entity($_GET['table'], $_GET['id']);
-	break;
-case 'display_table':
-	display_table($_GET['table'], $_GET['page']);
-	break;
-case 'logout':
-	logout();
-	break;
-case 'change_password':
-	change_password($_POST['current_password'], $_POST['new_password'],
-			$_POST['new_password_confirm']);
+case 'update_absences':
+	update_absences($_GET['teacher_id']);
 	break;
 case 'form_change_password':
 	require 'views/header.html.php';
 	require 'views/form_change_password.html.php';
 	require 'views/footer.html.php';
 	break;
-case 'login':
-	require 'views/login.html.php';
+case 'change_password':
+	change_password($_POST['current_password'], $_POST['new_password'],
+			$_POST['new_password_confirm']);
+	break;
+case 'logout':
+	logout();
 	break;
 default:
 	require 'views/header.html.php';

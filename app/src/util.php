@@ -149,13 +149,6 @@ function link_delete_entity($table, $id)
 	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
-function link_commit_pre_registration($pre_registration_id)
-{
-	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=commit&amp;id=' . $pre_registration_id .
-	     '">Valider la pré-inscription</a>';
-}
-
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
 	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
@@ -185,6 +178,13 @@ function link_empty_cart($order_id)
 	     '?mode=empty_cart&amp;order_id=' . $order_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
 	     'Vider le panier</a>';
+}
+
+function link_commit_pre_registration($pre_registration_id)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=commit&amp;pre_registration_id=' . $pre_registration_id .
+	     '">Valider la pré-inscription</a>';
 }
 
 function link_toggle_show_participation($registration_id, $lesson_id)
