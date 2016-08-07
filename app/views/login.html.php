@@ -29,6 +29,10 @@
       <input type="submit" name="submit" value="Se connecter">
     </div>
   </form>
+
+  <?php if ($_SESSION['login-failure']): ?>
+    <p class="error">Nom d'utilisateur ou mot de passe incorrect</p>
+  <?php endif ?>
 </div>
 
 </body>

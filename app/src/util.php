@@ -189,7 +189,7 @@ function link_empty_cart($order_id)
 
 function link_toggle_show_participation($registration_id, $lesson_id)
 {
-	echo '<a class="toggle-button" href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
 	     '">Changer</a>';
@@ -205,8 +205,14 @@ function link_remove_lesson($registration_id, $lesson_id)
 
 function link_update_absences($teacher_id)
 {
-	echo '<a class="toggle-button" href="' . $_SERVER['PHP_SELF'] .
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=update_absences&amp;teacher_id=' . $teacher_id . '">+1</a>';
+}
+
+function link_change_password()
+{
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=change_password">Changer de mot de passe</a>';
 }
 
 function link_logout()

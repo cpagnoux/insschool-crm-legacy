@@ -27,22 +27,30 @@ textarea {
 	font-weight: bold;
 }
 
-.button, .quantity-button, .toggle-button {
+.blank {
+	padding-right: 20px;
+}
+
+.button, .quantity-button {
 	background-color: #808080;
 	color: #ffffff;
 	display: inline-block;
 }
 
-.button:hover, .quantity-button:hover, .toggle-button:hover {
+.button:hover, .quantity-button:hover {
 	background-color: #a0a0a0;
 }
 
-.button, .toggle-button {
+.button {
 	padding: 5px 10px;
 }
 
 .datetime-select {
 	width: auto;
+}
+
+.error {
+	color: #ff0000;
 }
 
 .quantity-button {
@@ -54,10 +62,6 @@ textarea {
 
 .quantity-input {
 	width: 20px;
-}
-
-.toggle-button {
-	margin-left: 20px;
 }
 
 table, th, td {
@@ -138,7 +142,7 @@ fieldset {
 	width: 245px;
 }
 
-.logout {
+.account {
 	background-color: #000000;
 	line-height: 40px;
 	margin-bottom: 20px;

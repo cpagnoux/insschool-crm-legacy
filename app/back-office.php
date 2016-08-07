@@ -30,10 +30,14 @@ if (!session_valid())
 	$action = 'login';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'logout')
 	$action = 'logout';
+else if (isset($_POST['submit']) && $_GET['mode'] == 'change_password')
+	$action = 'change_password';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'modify')
 	$action = 'modify_entity';
 else if (isset($_POST['submit']) && $_GET['mode'] == 'add')
 	$action = 'add_entity';
+else if (isset($_GET['mode']) && $_GET['mode'] == 'change_password')
+	$action = 'form_change_password';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'update_absences')
 	$action = 'update_absences';
 else if (isset($_GET['mode']) && $_GET['mode'] == 'remove_lesson')
@@ -104,6 +108,15 @@ case 'display_table':
 	break;
 case 'logout':
 	logout();
+	break;
+case 'change_password':
+	change_password($_POST['current_password'], $_POST['new_password'],
+			$_POST['new_password_confirm']);
+	break;
+case 'form_change_password':
+	require 'views/header.html.php';
+	require 'views/form_change_password.html.php';
+	require 'views/footer.html.php';
 	break;
 case 'login':
 	require 'views/login.html.php';

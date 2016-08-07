@@ -14,7 +14,9 @@
 <body>
 
 <header>
-  <div class="logout">
+  <div class="account">
+    <?php link_change_password() ?>
+    <span class="blank"></span>
     <?php link_logout() ?>
   </div>
 

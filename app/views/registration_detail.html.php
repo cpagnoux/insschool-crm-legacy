@@ -15,6 +15,7 @@
 
           <td>
             <?php echo eval_boolean($row['show_participation']) ?>
+            <span class="blank"></span>
             <?php link_toggle_show_participation($registration_id, $row['lesson_id']) ?>
           </td>
 
