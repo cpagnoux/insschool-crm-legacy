@@ -316,12 +316,14 @@ function commit_pre_registration($pre_registration_id)
 
 	$row = mysqli_fetch_assoc($result);
 
+	mysqli_free_result($result);
+
 	$member_id = get_member_id_or_add($link, $row);
 	add_registration_from_pr($link, $member_id, $row);
-	delete_entity('pre_registration', $pre_registration_id);
-	display_entity('member', $member_id);
 
-	mysqli_free_result($result);
 	mysqli_close($link);
+
+	delete_entity('pre_registration', $pre_registration_id);
+	redirect('member', $member_id);
 }
 ?>

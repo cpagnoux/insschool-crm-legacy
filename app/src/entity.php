@@ -126,8 +126,10 @@ function form_add_entity($table, $id)
 /*
  * Add of entity
  */
-function add_goody($link, $data)
+function add_goody($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO goody VALUES ("", "' . $data['name'] . '", "' .
 		 $data['description'] . '", "' . $data['price'] . '", "' .
 		 $data['stock'] . '")';
@@ -136,12 +138,16 @@ function add_goody($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$goody_id = get_goody_id_from_name($data['name']);
-	display_entity('goody', $goody_id);
+	redirect('goody', $goody_id);
 }
 
-function add_lesson($link, $data)
+function add_lesson($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
 		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
 		 to_time($data['st_hour'], $data['st_minute']) . '", "' .
@@ -152,12 +158,16 @@ function add_lesson($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$lesson_id = get_lesson_id_from_title($data['title']);
-	display_entity('lesson', $lesson_id);
+	redirect('lesson', $lesson_id);
 }
 
-function add_member($link, $data)
+function add_member($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' .
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) . '", "' . $data['address'] .
@@ -173,13 +183,17 @@ function add_member($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$member_id = get_member_id_from_name($data['first_name'],
 					     $data['last_name']);
-	display_entity('member', $member_id);
+	redirect('member', $member_id);
 }
 
-function add_order($link, $data)
+function add_order($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
 		 '", NOW())';
 	if (!mysqli_query($link, $query)) {
@@ -187,12 +201,16 @@ function add_order($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$order_id = get_order_id_from_info($data['member_id']);
-	display_entity('order', $order_id);
+	redirect('order', $order_id);
 }
 
-function add_order_content($link, $data)
+function add_order_content($data)
 {
+	$link = connect_database();
+
 	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
 
 	$query = 'INSERT INTO order_content VALUES ("' . $data['order_id'] .
@@ -202,11 +220,15 @@ function add_order_content($link, $data)
 		exit;
 	}
 
-	display_entity('order', $data['order_id']);
+	mysqli_close($link);
+
+	redirect('order', $data['order_id']);
 }
 
-function add_payment($link, $table, $data)
+function add_payment($table, $data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", "' .
 		 $data[$table . '_id'] . '", "' . $data['amount'] . '", "' .
 		 $data['mode'] . '", NOW())';
@@ -215,11 +237,15 @@ function add_payment($link, $table, $data)
 		exit;
 	}
 
-	display_entity($table, $data[$table . '_id']);
+	mysqli_close($link);
+
+	redirect($table, $data[$table . '_id']);
 }
 
-function add_registration($link, $data)
+function add_registration($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
 		 '", "' . $data['season'] . '", "' . $data['price'] . '", "' .
 		 $data['discount'] . '", "' . $data['num_payments'] . '")';
@@ -232,11 +258,15 @@ function add_registration($link, $data)
 							 $data['season']);
 	add_registration_file($link, $registration_id);
 
-	display_entity('registration', $registration_id);
+	mysqli_close($link);
+
+	redirect('registration', $registration_id);
 }
 
-function add_registration_detail($link, $data)
+function add_registration_detail($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO registration_detail VALUES ("' .
 		 $data['registration_id'] . '", "' . $data['lesson_id'] .
 		 '", "' . $data['show_participation'] . '")';
@@ -245,11 +275,15 @@ function add_registration_detail($link, $data)
 		exit;
 	}
 
-	display_entity('registration', $data['registration_id']);
+	mysqli_close($link);
+
+	redirect('registration', $data['registration_id']);
 }
 
-function add_room($link, $data)
+function add_room($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
 		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
 		 $data['city'] . '", "")';
@@ -258,12 +292,16 @@ function add_room($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$room_id = get_room_id_from_name($data['name']);
-	display_entity('room', $room_id);
+	redirect('room', $room_id);
 }
 
-function add_teacher($link, $data)
+function add_teacher($data)
 {
+	$link = connect_database();
+
 	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' .
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
@@ -277,52 +315,50 @@ function add_teacher($link, $data)
 		exit;
 	}
 
+	mysqli_close($link);
+
 	$teacher_id = get_teacher_id_from_name($data['first_name'],
 					       $data['last_name']);
-	display_entity('teacher', $teacher_id);
+	redirect('teacher', $teacher_id);
 }
 
 function add_entity($table, $data)
 {
-	$link = connect_database();
-
 	switch ($table) {
 	case 'goody':
-		add_goody($link, $data);
+		add_goody($data);
 		break;
 	case 'lesson':
-		add_lesson($link, $data);
+		add_lesson($data);
 		break;
 	case 'member':
-		add_member($link, $data);
+		add_member($data);
 		break;
 	case 'order':
-		add_order($link, $data);
+		add_order($data);
 		break;
 	case 'order_content':
-		add_order_content($link, $data);
+		add_order_content($data);
 		break;
 	case 'order_payment':
-		add_payment($link, 'order', $data);
+		add_payment('order', $data);
 		break;
 	case 'registration':
-		add_registration($link, $data);
+		add_registration($data);
 		break;
 	case 'registration_detail':
-		add_registration_detail($link, $data);
+		add_registration_detail($data);
 		break;
 	case 'registration_payment':
-		add_payment($link, 'registration', $data);
+		add_payment('registration', $data);
 		break;
 	case 'room':
-		add_room($link, $data);
+		add_room($data);
 		break;
 	case 'teacher':
-		add_teacher($link, $data);
+		add_teacher($data);
 		break;
 	}
-
-	mysqli_close($link);
 }
 
 /*
@@ -408,8 +444,10 @@ function form_modify_entity($table, $id)
 /*
  * Modification of entity
  */
-function modify_goody($link, $goody_id, $data)
+function modify_goody($goody_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE goody SET name = "' . $data['name'] .
 		 '", description = "' . $data['description'] . '", price = "' .
 		 $data['price'] . '", stock = "' . $data['stock'] .
@@ -419,11 +457,15 @@ function modify_goody($link, $goody_id, $data)
 		exit;
 	}
 
-	display_entity('goody', $goody_id);
+	mysqli_close($link);
+
+	redirect('goody', $goody_id);
 }
 
-function modify_lesson($link, $lesson_id, $data)
+function modify_lesson($lesson_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
 		 '", teacher_id = "' . $data['teacher_id'] . '", day = "' .
 		 $data['day'] . '", start_time = "' .
@@ -437,11 +479,15 @@ function modify_lesson($link, $lesson_id, $data)
 		exit;
 	}
 
-	display_entity('lesson', $lesson_id);
+	mysqli_close($link);
+
+	redirect('lesson', $lesson_id);
 }
 
-function modify_member($link, $member_id, $data)
+function modify_member($member_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE member SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
@@ -459,11 +505,15 @@ function modify_member($link, $member_id, $data)
 		exit;
 	}
 
-	display_entity('member', $member_id);
+	mysqli_close($link);
+
+	redirect('member', $member_id);
 }
 
-function modify_payment($link, $table, $id, $data)
+function modify_payment($table, $id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE ' . $table . '_payment SET amount = "' .
 		 $data['amount'] . '", mode = "' . $data['mode'] .
 		 '" WHERE ' . $table . '_payment_id = ' . $id;
@@ -472,12 +522,16 @@ function modify_payment($link, $table, $id, $data)
 		exit;
 	}
 
-	display_entity($table, $data[$table . '_id']);
+	mysqli_close($link);
+
+	redirect($table, $data[$table . '_id']);
 }
 
-function modify_pre_registration($link, $pre_registration_id, $data)
+function modify_pre_registration($pre_registration_id, $data)
 {
 	$lessons_str = lessons_to_string($data);
+
+	$link = connect_database();
 
 	$query = 'UPDATE pre_registration SET first_name = "' .
 		 $data['first_name'] . '", last_name = "' . $data['last_name'] .
@@ -496,11 +550,15 @@ function modify_pre_registration($link, $pre_registration_id, $data)
 		exit;
 	}
 
-	display_entity('pre_registration', $pre_registration_id);
+	mysqli_close($link);
+
+	redirect('pre_registration', $pre_registration_id);
 }
 
-function modify_registration($link, $registration_id, $data)
+function modify_registration($registration_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE registration SET season = "' . $data['season'] .
 		 '", price = "' . $data['price'] . '", discount = "' .
 		 $data['discount'] . '", num_payments = "' .
@@ -511,11 +569,15 @@ function modify_registration($link, $registration_id, $data)
 		exit;
 	}
 
-	display_entity('registration', $registration_id);
+	mysqli_close($link);
+
+	redirect('registration', $registration_id);
 }
 
-function modify_registration_file($link, $registration_id, $data)
+function modify_registration_file($registration_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE registration_file SET medical_certificate = "' .
 		 $data['medical_certificate'] . '", insurance = "' .
 		 $data['insurance'] . '", photo = "' . $data['photo'] .
@@ -525,11 +587,15 @@ function modify_registration_file($link, $registration_id, $data)
 		exit;
 	}
 
-	display_entity('registration', $data['registration_id']);
+	mysqli_close($link);
+
+	redirect('registration', $data['registration_id']);
 }
 
-function modify_room($link, $room_id, $data)
+function modify_room($room_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE room SET name = "' . $data['name'] . '", address = "' .
 		 $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
@@ -539,11 +605,15 @@ function modify_room($link, $room_id, $data)
 		exit;
 	}
 
-	display_entity('room', $room_id);
+	mysqli_close($link);
+
+	redirect('room', $room_id);
 }
 
-function modify_teacher($link, $teacher_id, $data)
+function modify_teacher($teacher_id, $data)
 {
+	$link = connect_database();
+
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
@@ -557,47 +627,45 @@ function modify_teacher($link, $teacher_id, $data)
 		exit;
 	}
 
-	display_entity('teacher', $teacher_id);
+	mysqli_close($link);
+
+	redirect('teacher', $teacher_id);
 }
 
 function modify_entity($table, $id, $data)
 {
-	$link = connect_database();
-
 	switch($table) {
 	case 'goody':
-		modify_goody($link, $id, $data);
+		modify_goody($id, $data);
 		break;
 	case 'lesson':
-		modify_lesson($link, $id, $data);
+		modify_lesson($id, $data);
 		break;
 	case 'member':
-		modify_member($link, $id, $data);
+		modify_member($id, $data);
 		break;
 	case 'order_payment':
-		modify_payment($link, 'order', $id, $data);
+		modify_payment('order', $id, $data);
 		break;
 	case 'pre_registration':
-		modify_pre_registration($link, $id, $data);
+		modify_pre_registration($id, $data);
 		break;
 	case 'registration':
-		modify_registration($link, $id, $data);
+		modify_registration($id, $data);
 		break;
 	case 'registration_file':
-		modify_registration_file($link, $id, $data);
+		modify_registration_file($id, $data);
 		break;
 	case 'registration_payment':
-		modify_payment($link, 'registration', $id, $data);
+		modify_payment('registration', $id, $data);
 		break;
 	case 'room':
-		modify_room($link, $id, $data);
+		modify_room($id, $data);
 		break;
 	case 'teacher':
-		modify_teacher($link, $id, $data);
+		modify_teacher($id, $data);
 		break;
 	}
-
-	mysqli_close($link);
 }
 
 /*
@@ -635,16 +703,16 @@ function delete_entity($table, $id, $first_call)
 	if ($first_call) {
 		switch ($table) {
 		case 'order_payment':
-			display_entity('order', $order_id);
+			redirect('order', $order_id);
 			break;
 		case 'registration':
-			display_entity('member', $member_id);
+			redirect('member', $member_id);
 			break;
 		case 'registration_payment':
-			display_entity('registration', $registration_id);
+			redirect('registration', $registration_id);
 			break;
 		default:
-			display_table($table);
+			redirect($table);
 			break;
 		}
 	}
@@ -678,7 +746,7 @@ function modify_quantity($order_id, $goody_id, $quantity)
 
 	mysqli_close($link);
 
-	display_entity('order', $order_id);
+	redirect('order', $order_id);
 }
 
 function empty_cart($order_id)
@@ -695,7 +763,7 @@ function empty_cart($order_id)
 
 	mysqli_close($link);
 
-	display_entity('order', $order_id);
+	redirect('order', $order_id);
 }
 
 /*
@@ -716,7 +784,7 @@ function toggle_show_participation($registration_id, $lesson_id)
 
 	mysqli_close($link);
 
-	display_entity('registration', $registration_id);
+	redirect('registration', $registration_id);
 }
 
 function remove_lesson($registration_id, $lesson_id)
@@ -732,7 +800,7 @@ function remove_lesson($registration_id, $lesson_id)
 
 	mysqli_close($link);
 
-	display_entity('registration', $registration_id);
+	redirect('registration', $registration_id);
 }
 
 /*
@@ -750,6 +818,6 @@ function update_absences($teacher_id)
 
 	mysqli_close($link);
 
-	display_entity('teacher', $teacher_id);
+	redirect('teacher', $teacher_id);
 }
 ?>

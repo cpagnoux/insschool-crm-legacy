@@ -222,6 +222,19 @@ function link_logout()
 }
 
 /*
+ * Redirects
+ */
+function redirect($table, $id)
+{
+	if (isset($id))
+		header('Location: ' . $_SERVER['PHP_SELF'] . '?table=' .
+		       $table . '&id=' . $id);
+	else
+		header('Location: ' . $_SERVER['PHP_SELF'] . '?table=' .
+		       $table);
+}
+
+/*
  * Miscellaneous functions
  */
 function current_season()
