@@ -224,6 +224,11 @@ function link_logout()
 /*
  * Redirects
  */
+function redirect_home()
+{
+	header('Location: ' . $_SERVER['PHP_SELF']);
+}
+
 function redirect($table, $id)
 {
 	if (isset($id))
@@ -232,6 +237,12 @@ function redirect($table, $id)
 	else
 		header('Location: ' . $_SERVER['PHP_SELF'] . '?table=' .
 		       $table);
+}
+
+function redirect_password_change_success()
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=change_password&status=success');
 }
 
 /*

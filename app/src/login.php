@@ -5,6 +5,7 @@
 
 require_once 'src/connection.php';
 require_once 'src/error.php';
+require_once 'src/util.php';
 
 function verify_login($username, $password)
 {
@@ -55,10 +56,12 @@ function session_valid()
 	unset($_SESSION['login-failure']);
 
 	if (isset($_POST['username']) && isset($_POST['password'])) {
-		if (verify_login($_POST['username'], $_POST['password']))
+		if (verify_login($_POST['username'], $_POST['password'])) {
 			$_SESSION['username'] = $_POST['username'];
-		else
+			redirect_home();
+		} else {
 			$_SESSION['login-failure'] = true;
+		}
 	}
 
 	if (isset($_SESSION['username']))
@@ -100,14 +103,12 @@ function change_password($current_password, $new_password,
 
 	mysqli_close($link);
 
-	require 'views/header.html.php';
-	require 'views/password_change_success.html.php';
-	require 'views/footer.html.php';
+	redirect_password_change_success();
 }
 
 function logout()
 {
 	unset($_SESSION['username']);
-	header('Location: ' . $_SERVER['PHP_SELF']);
+	redirect_home();
 }
 ?>

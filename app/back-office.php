@@ -28,6 +28,8 @@ $action = '';
 
 if (!session_valid()) {
 	$action = 'login';
+} else if (isset($_GET['status']) && $_GET['status'] == 'success') {
+	$action = 'password_change_success';
 } else if (isset($_POST['submit'])) {
 	switch ($_GET['mode']) {
 	case 'add':
@@ -138,6 +140,11 @@ case 'form_change_password':
 case 'change_password':
 	change_password($_POST['current_password'], $_POST['new_password'],
 			$_POST['new_password_confirm']);
+	break;
+case 'password_change_success':
+	require 'views/header.html.php';
+	require 'views/password_change_success.html.php';
+	require 'views/footer.html.php';
 	break;
 case 'logout':
 	logout();
