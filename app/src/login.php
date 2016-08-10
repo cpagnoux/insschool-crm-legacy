@@ -20,8 +20,14 @@ function verify_login($username, $password)
 
 	$valid = false;
 
-	if (mysqli_num_rows($result) == 1)
+	if (mysqli_num_rows($result) == 1) {
+		$row = mysqli_fetch_assoc($result);
+
+		$_SESSION['username'] = $username;
+		$_SESSION['admin'] = $row['admin'];
+
 		$valid = true;
+	}
 
 	mysqli_free_result($result);
 	mysqli_close($link);
@@ -56,12 +62,10 @@ function session_valid()
 	unset($_SESSION['login-failure']);
 
 	if (isset($_POST['username']) && isset($_POST['password'])) {
-		if (verify_login($_POST['username'], $_POST['password'])) {
-			$_SESSION['username'] = $_POST['username'];
+		if (verify_login($_POST['username'], $_POST['password']))
 			redirect_home();
-		} else {
+		else
 			$_SESSION['login-failure'] = true;
-		}
 	}
 
 	if (isset($_SESSION['username']))
@@ -70,10 +74,33 @@ function session_valid()
 	return false;
 }
 
+function verify_password($password)
+{
+	$link = connect_database();
+
+	$query = 'SELECT * FROM user WHERE username = "' .
+		 $_SESSION['username'] . '" AND password = "' .
+		 hash('sha512', $password) . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$valid = false;
+
+	if (mysqli_num_rows($result) == 1)
+		$valid = true;
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $valid;
+}
+
 function change_password($current_password, $new_password,
 			 $new_password_confirm)
 {
-	if (!verify_login($_SESSION['username'], $current_password)) {
+	if (!verify_password($current_password)) {
 		$_SESSION['wrong_password'] = true;
 		require 'views/header.html.php';
 		require 'views/form_change_password.html.php';
@@ -109,6 +136,8 @@ function change_password($current_password, $new_password,
 function logout()
 {
 	unset($_SESSION['username']);
+	unset($_SESSION['admin']);
+
 	redirect_home();
 }
 ?>

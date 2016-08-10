@@ -215,6 +215,9 @@ function select_sorting($table)
 	case 'room':
 		$sorting = $_SESSION['room_sorting'];
 		break;
+	case 'user':
+		$sorting = 'username';
+		break;
 	default:
 		$sorting = $_SESSION['person_sorting'];
 		break;
@@ -266,6 +269,10 @@ function display_table($table, $page)
 		break;
 	case 'teacher':
 		require 'views/table_teacher.html.php';
+		break;
+	case 'user':
+		if ($_SESSION['admin'])
+			require 'views/table_user.html.php';
 		break;
 	}
 

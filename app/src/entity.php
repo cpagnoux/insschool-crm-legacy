@@ -118,6 +118,10 @@ function form_add_entity($table, $id)
 	case 'teacher':
 		require 'views/form_add_teacher.html.php';
 		break;
+	case 'user':
+		if ($_SESSION['admin'])
+			require 'views/form_add_user.html.php';
+		break;
 	}
 
 	require 'views/footer.html.php';
@@ -322,6 +326,27 @@ function add_teacher($data)
 	redirect('teacher', $teacher_id);
 }
 
+function add_user($data)
+{
+	if (!$_SESSION['admin'])
+		return;
+
+	$password = generate_password();
+
+	$link = connect_database();
+
+	$query = 'INSERT INTO user VALUES ("' . $data['username'] . '", "' .
+		 hash('sha512', $password) . '", "' . $data['admin'] . '")';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('user');
+}
+
 function add_entity($table, $data)
 {
 	switch ($table) {
@@ -357,6 +382,9 @@ function add_entity($table, $data)
 		break;
 	case 'teacher':
 		add_teacher($data);
+		break;
+	case 'user':
+		add_user($data);
 		break;
 	}
 }
@@ -810,7 +838,8 @@ function update_absences($teacher_id)
 {
 	$link = connect_database();
 
-	$query = 'UPDATE teacher SET absences = absences + 1 WHERE teacher_id = ' . $teacher_id;
+	$query = 'UPDATE teacher SET absences = absences + 1 ' .
+		 'WHERE teacher_id = ' . $teacher_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -819,5 +848,66 @@ function update_absences($teacher_id)
 	mysqli_close($link);
 
 	redirect('teacher', $teacher_id);
+}
+
+/*
+ * Functions related to user
+ */
+function toggle_admin($username)
+{
+	if (!$_SESSION['admin'] || $username == $_SESSION['username'])
+		return;
+
+	$link = connect_database();
+
+	$query = 'UPDATE user SET admin = NOT admin WHERE username = "' .
+		 $username . '"';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('user');
+}
+
+function reset_password($username)
+{
+	if (!$_SESSION['admin'] || $username == $_SESSION['username'])
+		return;
+
+	$password = generate_password();
+
+	$link = connect_database();
+
+	$query = 'UPDATE user SET password = "' . hash('sha512', $password) .
+		 '" WHERE username = "' . $username .'"';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('user');
+}
+
+function delete_user($username)
+{
+	if (!$_SESSION['admin'] || $username == $_SESSION['username'])
+		return;
+
+	$link = connect_database();
+
+	$query = 'DELETE FROM user WHERE username = "' . $username .'"';
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('user');
 }
 ?>

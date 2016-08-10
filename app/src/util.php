@@ -40,6 +40,9 @@ function link_table($table)
 	case 'teacher':
 		$label = 'Professeurs';
 		break;
+	case 'user':
+		$label = 'Comptes utilisateurs';
+		break;
 	}
 
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">' .
@@ -145,8 +148,7 @@ function link_delete_entity($table, $id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=delete&amp;table=' . $table . '&amp;id=' . $id .
-	     '" onclick="return ' .
-	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
@@ -199,14 +201,35 @@ function link_remove_lesson($registration_id, $lesson_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=remove_lesson&amp;registration_id=' . $registration_id .
-	     '&amp;lesson_id=' . $lesson_id . '" onclick="return ' .
-	     'confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
+	     '&amp;lesson_id=' . $lesson_id .
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_update_absences($teacher_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=update_absences&amp;teacher_id=' . $teacher_id . '">+1</a>';
+}
+
+function link_toggle_admin($username)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=toggle_admin&amp;username=' . $username . '">Changer</a>';
+}
+
+function link_reset_password($username)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=reset_password&amp;username=' . $username .
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
+	     'Réinitialiser le mot de passe</a>';
+}
+
+function link_delete_user($username)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=delete_user&amp;username=' . $username .
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_change_password()
@@ -370,6 +393,23 @@ function format_time($time)
 	list($hour, $minute) = sscanf($time, '%d:%d');
 
 	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
+}
+
+function generate_password($length = 8)
+{
+	$chars = 'abcdefghijklmnopqrstuvwxyz' .
+		 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' .
+		 '0123456789';
+	$num_chars = strlen($chars);
+
+	$password = '';
+
+	for ($i = 0; $i < $length; $i++) {
+		$index = rand(0, $num_chars - 1);
+		$password .= substr($chars, $index, 1);
+	}
+
+	return $password;
 }
 
 function previous_season()

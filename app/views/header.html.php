@@ -34,6 +34,10 @@
       <li><?php link_table('order') ?></li>
       <li><?php link_table('member') ?></li>
       <li><?php link_table('pre_registration') ?></li>
+
+      <?php if ($_SESSION['admin']): ?>
+        <li><?php link_table('user') ?></li>
+      <?php endif ?>
     </ul>
   </nav>
 </header>

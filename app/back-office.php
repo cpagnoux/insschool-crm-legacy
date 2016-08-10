@@ -71,6 +71,15 @@ if (!session_valid()) {
 	case 'update_absences':
 		$action = 'update_absences';
 		break;
+	case 'toggle_admin':
+		$action = 'toggle_admin';
+		break;
+	case 'reset_password':
+		$action = 'reset_password';
+		break;
+	case 'delete_user':
+		$action = 'delete_user';
+		break;
 	case 'change_password':
 		$action = 'form_change_password';
 		break;
@@ -131,6 +140,15 @@ case 'remove_lesson':
 	break;
 case 'update_absences':
 	update_absences($_GET['teacher_id']);
+	break;
+case 'toggle_admin':
+	toggle_admin($_GET['username']);
+	break;
+case 'reset_password':
+	reset_password($_GET['username']);
+	break;
+case 'delete_user':
+	delete_user($_GET['username']);
 	break;
 case 'form_change_password':
 	require 'views/header.html.php';

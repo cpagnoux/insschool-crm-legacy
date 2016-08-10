@@ -1,8 +1,8 @@
 <?php
 // Connection parameters
 define('HOST', 'localhost');
-define('USERNAME', 'root');
-define('PASSWORD', '210713');
+define('USERNAME', 'insschooladmin');
+define('PASSWORD', 'admin');
 define('DATABASE', 'insschool');
 
 // Debug mode
