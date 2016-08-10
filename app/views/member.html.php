@@ -46,6 +46,8 @@
   <p>
     <span class="attribute-name">Bénévole :</span>
     <?php echo eval_boolean($row['volunteer']) ?>
+    <span class="blank"></span>
+    <?php link_toggle_volunteer($row['member_id']) ?>
   </p>
 
   <ul class="action-links">

@@ -699,7 +699,7 @@ function modify_entity($table, $id, $data)
 /*
  * Deletion of entity
  */
-function delete_entity($table, $id, $first_call)
+function delete_entity($table, $id, $first_call = false)
 {
 	if ($first_call) {
 		switch ($table) {
@@ -744,6 +744,25 @@ function delete_entity($table, $id, $first_call)
 			break;
 		}
 	}
+}
+
+/*
+ * Function related to member
+ */
+function toggle_volunteer($member_id)
+{
+	$link = connect_database();
+
+	$query = 'UPDATE member SET volunteer = NOT volunteer ' .
+		 'WHERE member_id = ' . $member_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('member', $member_id);
 }
 
 /*
@@ -832,7 +851,7 @@ function remove_lesson($registration_id, $lesson_id)
 }
 
 /*
- * Function related to teacher
+ * Functions related to teacher
  */
 function update_absences($teacher_id)
 {
@@ -840,6 +859,22 @@ function update_absences($teacher_id)
 
 	$query = 'UPDATE teacher SET absences = absences + 1 ' .
 		 'WHERE teacher_id = ' . $teacher_id;
+	if (!mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	mysqli_close($link);
+
+	redirect('teacher', $teacher_id);
+}
+
+function reset_absences($teacher_id)
+{
+	$link = connect_database();
+
+	$query = 'UPDATE teacher SET absences = 0 WHERE teacher_id = ' .
+		 $teacher_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

@@ -39,6 +39,7 @@
     <?php echo $row['absences'] ?>
     <span class="blank"></span>
     <?php link_update_absences($row['teacher_id']) ?>
+    <?php link_reset_absences($row['teacher_id']) ?>
   </p>
 
   <ul class="action-links">

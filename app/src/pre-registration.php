@@ -171,7 +171,7 @@ function chosen_lessons($lessons_str)
 	return $string;
 }
 
-function lessons_to_string($lessons, $display)
+function lessons_to_string($lessons, $display = false)
 {
 	$string = '';
 

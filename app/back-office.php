@@ -53,6 +53,9 @@ if (!session_valid()) {
 	case 'delete':
 		$action = 'delete_entity';
 		break;
+	case 'toggle_volunteer':
+		$action = 'toggle_volunteer';
+		break;
 	case 'modify_quantity':
 		$action = 'modify_quantity';
 		break;
@@ -70,6 +73,9 @@ if (!session_valid()) {
 		break;
 	case 'update_absences':
 		$action = 'update_absences';
+		break;
+	case 'reset_absences':
+		$action = 'reset_absences';
 		break;
 	case 'toggle_admin':
 		$action = 'toggle_admin';
@@ -118,6 +124,9 @@ case 'modify_entity':
 case 'delete_entity':
 	delete_entity($_GET['table'], $_GET['id'], true);
 	break;
+case 'toggle_volunteer':
+	toggle_volunteer($_GET['member_id']);
+	break;
 case 'modify_quantity':
 	if (isset($_GET['quantity']))
 		modify_quantity($_GET['order_id'], $_GET['goody_id'],
@@ -140,6 +149,9 @@ case 'remove_lesson':
 	break;
 case 'update_absences':
 	update_absences($_GET['teacher_id']);
+	break;
+case 'reset_absences':
+	reset_absences($_GET['teacher_id']);
 	break;
 case 'toggle_admin':
 	toggle_admin($_GET['username']);

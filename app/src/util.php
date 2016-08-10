@@ -151,6 +151,13 @@ function link_delete_entity($table, $id)
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+function link_toggle_volunteer($member_id)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=toggle_volunteer&amp;member_id=' . $member_id .
+	     '">Changer</a>';
+}
+
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
 	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
@@ -209,6 +216,14 @@ function link_update_absences($teacher_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
 	     '?mode=update_absences&amp;teacher_id=' . $teacher_id . '">+1</a>';
+}
+
+function link_reset_absences($teacher_id)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=reset_absences&amp;teacher_id=' . $teacher_id .
+	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
+	     'Réinitialiser</a>';
 }
 
 function link_toggle_admin($username)
