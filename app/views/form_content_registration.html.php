@@ -13,6 +13,20 @@
 
 <fieldset>
   <div class="form-row">
+    Forfait : <sup>*</sup><br>
+
+    <div class="form-row-option">
+      <input id="p_quarterly" type="radio" name="plan" value="QUARTERLY" required="required"<?php echo $p_quarterly ?>>
+      <label for="p_quarterly">Trimestriel</label>
+    </div>
+
+    <div class="form-row-option">
+      <input id="p_annual" type="radio" name="plan" value="ANNUAL"<?php echo $p_annual ?>>
+      <label for="p_annual">Annuel</label>
+    </div>
+  </div>
+
+  <div class="form-row">
     <label for="price">Tarif :</label><br>
     <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
   </div>

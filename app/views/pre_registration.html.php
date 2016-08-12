@@ -44,6 +44,11 @@
   </p>
 
   <p>
+    <span class="attribute-name">Forfait choisi :</span>
+    <?php echo eval_enum($row['plan']) ?>
+  </p>
+
+  <p>
     <span class="attribute-name">A connu INS School grâce à :</span>
     <?php echo eval_enum($row['means_of_knowledge']) ?>
   </p>

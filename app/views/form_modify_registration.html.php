@@ -8,6 +8,6 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">
-    <?php require 'views/form_content_registration.html.php' ?>
+    <?php form_content_registration($row['member_id'], $row) ?>
   </form>
 </div>

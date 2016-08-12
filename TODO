@@ -1,5 +1,4 @@
 TODO:
-- add choice between quarterly and annual plan
 - secure login page
 - security (SQL injection)
 - fix duplicate entry bug for goodies in orders and lessons in registrations

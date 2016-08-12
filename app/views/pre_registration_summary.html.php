@@ -32,8 +32,14 @@
     <?php echo $data['email'] ?>
   </p>
 
-  <p>Vous avez choisi les cours :</p>
+  <p><span class="attribute-name">Vous avez choisi les cours :</span></p>
+
   <ul>
     <?php $lessons_str = lessons_to_string($data, true) ?>
   </ul>
+
+  <p>
+    <span class="attribute-name">Vous avez choisi le forfait :</span>
+    <?php echo eval_enum($data['plan']) ?>
+  </p>
 </div>

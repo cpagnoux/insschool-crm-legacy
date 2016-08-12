@@ -10,12 +10,14 @@
 
   <p>
     <span class="attribute-name">Adhérent :</span>
-    <?php echo link_entity('member', $row['member_id'], get_name('member', $row['member_id'])) ?>
+    <?php echo link_entity('member', $row['member_id'], $name) ?>
   </p>
 
   <p>
     <span class="attribute-name">Formule :</span>
     <?php echo registration_formula($row['registration_id']) ?> cours<br>
+    <span class="attribute-name">Forfait :</span>
+    <?php echo eval_enum($row['plan']) ?><br>
     <span class="attribute-name">Tarif :</span>
     <?php echo $row['price'] ?> €<br>
     <span class="attribute-name">Réduction :</span>
@@ -24,6 +26,11 @@
     <?php echo price_after_discount($row['price'], $row['discount']) ?> €<br>
     <span class="attribute-name">Nombre de paiements :</span>
     <?php echo $row['num_payments'] ?>
+  </p>
+
+  <p>
+    <span class="attribute-name">Date d'inscription :</span>
+    <?php echo format_date($row['date']) ?>
   </p>
 
   <ul class="action-links">

@@ -326,6 +326,14 @@ function duration($start_time, $end_time)
 	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
 }
 
+function eval_boolean($value)
+{
+	if ($value)
+		return 'Oui';
+
+	return 'Non';
+}
+
 function eval_enum($value)
 {
 	$result = '';
@@ -364,17 +372,16 @@ function eval_enum($value)
 	case 'CHECK':
 		$result = 'Chèque';
 		break;
+	// plan
+	case 'QUARTERLY':
+		$result = 'Trimestriel';
+		break;
+	case 'ANNUAL':
+		$result = 'Annuel';
+		break;
 	}
 
 	return $result;
-}
-
-function eval_boolean($value)
-{
-	if ($value)
-		return 'Oui';
-
-	return 'Non';
 }
 
 function format_date($date)
@@ -779,8 +786,8 @@ function order_paid($order_id)
 {
 	if (total_paid('order', $order_id) == order_total($order_id))
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 function order_total($order_id)
@@ -825,8 +832,8 @@ function registration_file_complete($registration_id)
 
 	if ($row['medical_certificate'] && $row['insurance'] && $row['photo'])
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 function registration_formula($registration_id)
@@ -853,8 +860,8 @@ function registration_paid($registration_id)
 	if (total_paid('registration', $registration_id) ==
 	    registration_price($registration_id))
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 function registration_price($registration_id)

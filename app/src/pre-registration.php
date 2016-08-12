@@ -222,8 +222,8 @@ function save_pre_registration($data, $lessons_str)
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .
 		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $lessons_str . '", "' . $data['means_of_knowledge'] .
-		 '", NOW())';
+		 '", "' . $lessons_str . '", "' . $data['plan'] . '",  "' .
+		 $data['means_of_knowledge'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -287,7 +287,8 @@ function add_registration_from_pr($link, $member_id, $row)
 	$season = date_to_season($row['date']);
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
-		 '", "' . $season . '", "", "", "")';
+		 '", "' . $season . '", "' . $row['plan'] .
+		 '", "", "", "", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

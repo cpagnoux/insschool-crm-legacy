@@ -180,8 +180,7 @@ function add_member($data)
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .
 		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $data['means_of_knowledge'] . '", "' .
-		 $data['volunteer'] . '")';
+		 '", "' . $data['means_of_knowledge'] . '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -251,8 +250,9 @@ function add_registration($data)
 	$link = connect_database();
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['season'] . '", "' . $data['price'] . '", "' .
-		 $data['discount'] . '", "' . $data['num_payments'] . '")';
+		 '", "' . $data['season'] . '", "' . $data['plan'] . '", "' .
+		 $data['price'] . '", "' . $data['discount'] . '", "' .
+		 $data['num_payments'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -526,8 +526,8 @@ function modify_member($member_id, $data)
 		 '", cellphone_mother = "' . $data['cellphone_mother'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .
 		 $data['email'] . '", means_of_knowledge = "' .
-		 $data['means_of_knowledge'] . '", volunteer = "' .
-		 $data['volunteer'] . '" WHERE member_id = ' . $member_id;
+		 $data['means_of_knowledge'] . '" WHERE member_id = ' .
+		 $member_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -563,7 +563,8 @@ function modify_pre_registration($pre_registration_id, $data)
 
 	$query = 'UPDATE pre_registration SET first_name = "' .
 		 $data['first_name'] . '", last_name = "' . $data['last_name'] .
-		 '", birth_date = "' . to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", birth_date = "' .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
 		 '", address = "' . $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
 		 '", cellphone = "' . $data['cellphone'] .
@@ -571,7 +572,8 @@ function modify_pre_registration($pre_registration_id, $data)
 		 '", cellphone_mother = "' . $data['cellphone_mother'] .
 		 '", phone = "' . $data['phone'] . '", email = "' .
 		 $data['email'] . '", lessons = "' . $lessons_str .
-		 '", means_of_knowledge = "' . $data['means_of_knowledge'] .
+		 '", plan = "' . $data['plan'] . '", means_of_knowledge = "' .
+		 $data['means_of_knowledge'] .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -587,7 +589,7 @@ function modify_registration($registration_id, $data)
 {
 	$link = connect_database();
 
-	$query = 'UPDATE registration SET season = "' . $data['season'] .
+	$query = 'UPDATE registration SET plan = "' . $data['plan'] .
 		 '", price = "' . $data['price'] . '", discount = "' .
 		 $data['discount'] . '", num_payments = "' .
 		 $data['num_payments'] . '" WHERE registration_id = ' .

@@ -220,12 +220,23 @@ function form_content_member($row)
 function form_content_pre_registration($row)
 {
 	$lessons = array();
+	$p_quarterly = '';
+	$p_annual = '';
 	$mok_poster_flyer = '';
 	$mok_internet = '';
 	$mok_word_of_mouth = '';
 
 	if (isset($row)) {
 		$lessons = string_to_lessons($row['lessons']);
+
+		switch ($row['plan']) {
+		case 'QUARTERLY':
+			$p_quarterly = ' checked="checked"';
+			break;
+		case 'ANNUAL':
+			$p_annual = ' checked="checked"';
+			break;
+		}
 
 		switch ($row['means_of_knowledge']) {
 		case 'POSTER_FLYER':
@@ -242,6 +253,25 @@ function form_content_pre_registration($row)
 	}
 
 	require 'views/form_content_pre_registration.html.php';
+}
+
+function form_content_registration($member_id, $row)
+{
+	$p_quarterly = '';
+	$p_annual = '';
+
+	if (isset($row)) {
+		switch ($row['plan']) {
+		case 'QUARTERLY':
+			$p_quarterly = ' checked="checked"';
+			break;
+		case 'ANNUAL':
+			$p_annual = ' checked="checked"';
+			break;
+		}
+	}
+
+	require 'views/form_content_registration.html.php';
 }
 
 function form_content_registration_file($registration_id, $row)
