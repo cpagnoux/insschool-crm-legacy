@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('teacher') ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('teacher') ?> &gt;
   Nouveau professeur
 </nav>
 

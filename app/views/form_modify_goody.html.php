@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('goody') ?> >
-  <?php link_entity('goody', $row['goody_id'], $name) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('goody') ?> &gt;
+  <?php link_entity('goody', $row['goody_id'], $name) ?> &gt;
   Modifier le goodies
 </nav>
 

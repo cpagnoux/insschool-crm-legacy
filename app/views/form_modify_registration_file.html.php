@@ -1,8 +1,8 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('member') ?> >
-  <?php link_entity('member', $member_id, $name) ?> >
-  <?php link_entity('registration', $row['registration_id'], 'Inscription ' . $season) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('member') ?> &gt;
+  <?php link_entity('member', $member_id, $name) ?> &gt;
+  <?php link_entity('registration', $row['registration_id'], 'Inscription ' . $season) ?> &gt;
   Modifier le dossier
 </nav>
 

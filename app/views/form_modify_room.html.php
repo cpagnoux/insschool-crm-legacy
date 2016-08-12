@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('room') ?> >
-  <?php link_entity('room', $row['room_id'], $name) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('room') ?> &gt;
+  <?php link_entity('room', $row['room_id'], $name) ?> &gt;
   Modifier la salle
 </nav>
 

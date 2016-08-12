@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('room') ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('room') ?> &gt;
   Nouvelle salle
 </nav>
 

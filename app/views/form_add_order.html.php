@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('order') ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('order') ?> &gt;
   Nouvelle commande
 </nav>
 

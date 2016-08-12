@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('pre_registration') ?> >
-  <?php link_entity('pre_registration', $row['pre_registration_id'], $name) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('pre_registration') ?> &gt;
+  <?php link_entity('pre_registration', $row['pre_registration_id'], $name) ?> &gt;
   Modifier la pré-inscription
 </nav>
 

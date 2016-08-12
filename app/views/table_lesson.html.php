@@ -1,5 +1,5 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
+  <?php link_home() ?> &gt;
   Cours
 </nav>
 

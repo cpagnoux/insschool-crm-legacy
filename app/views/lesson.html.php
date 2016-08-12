@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('lesson') ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('lesson') ?> &gt;
   <?php echo $row['title'] ?>
 </nav>
 

@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('teacher') ?> >
-  <?php link_entity('teacher', $row['teacher_id'], $name) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('teacher') ?> &gt;
+  <?php link_entity('teacher', $row['teacher_id'], $name) ?> &gt;
   Modifier le professeur
 </nav>
 

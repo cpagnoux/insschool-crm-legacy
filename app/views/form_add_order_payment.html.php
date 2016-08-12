@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('order') ?> >
-  <?php link_entity('order', $order_id, 'N° ' . $order_id) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('order') ?> &gt;
+  <?php link_entity('order', $order_id, 'N° ' . $order_id) ?> &gt;
   Nouveau paiement
 </nav>
 

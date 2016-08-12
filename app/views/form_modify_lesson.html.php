@@ -1,7 +1,7 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('lesson') ?> >
-  <?php link_entity('lesson', $row['lesson_id'], $title) ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('lesson') ?> &gt;
+  <?php link_entity('lesson', $row['lesson_id'], $title) ?> &gt;
   Modifier le cours
 </nav>
 

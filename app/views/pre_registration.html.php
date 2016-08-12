@@ -1,6 +1,6 @@
 <nav class="breadcrumb">
-  <?php link_home() ?> >
-  <?php link_table('pre_registration') ?> >
+  <?php link_home() ?> &gt;
+  <?php link_table('pre_registration') ?> &gt;
   <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
 </nav>
 

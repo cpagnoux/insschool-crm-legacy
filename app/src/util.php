@@ -53,16 +53,16 @@ function link_table_previous($table, $page)
 {
 	if ($page == 1)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '"><<</a>';
+		     '">&lt;</a>';
 	else
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '&amp;page=' . $page . '"><<</a>';
+		     '&amp;page=' . $page . '">&lt;</a>';
 }
 
 function link_table_next($table, $page)
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	     '&amp;page=' . $page . '">>></a>';
+	     '&amp;page=' . $page . '">&gt;</a>';
 }
 
 function link_table_page($table, $page)
