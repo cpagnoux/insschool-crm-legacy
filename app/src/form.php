@@ -10,6 +10,109 @@ require_once 'src/util.php';
 require_once 'src/pre-registration.php';
 
 /*
+ * Checkboxes for forms
+ */
+function checkbox_lessons($lessons_str)
+{
+	$lessons = array();
+
+	if (isset($lessons_str))
+		$lessons = string_to_lessons($lessons_str);
+
+	display_lessons($lessons);
+}
+
+/*
+ * Radio buttons for forms
+ */
+function radio_insurance($insurance)
+{
+	$true = '';
+	$false = '';
+
+	if (isset($insurance)) {
+		if ($insurance)
+			$true = ' checked="checked"';
+		else
+			$false = ' checked="checked"';
+	}
+
+	require 'views/radio_insurance.html.php';
+}
+
+function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge)
+{
+	$poster_flyer = '';
+	$internet = '';
+	$word_of_mouth = '';
+
+	if (isset($means_of_knowledge)) {
+		switch ($means_of_knowledge) {
+		case 'POSTER_FLYER':
+			$poster_flyer = ' checked="checked"';
+			break;
+		case 'INTERNET':
+			$internet = ' checked="checked"';
+			break;
+		case 'WORD_OF_MOUTH':
+			$word_of_mouth = ' checked="checked"';
+			break;
+		}
+	}
+
+	require 'views/radio_means_of_knowledge.html.php';
+}
+
+function radio_medical_certificate($medical_certificate)
+{
+	$true = '';
+	$false = '';
+
+	if (isset($medical_certificate)) {
+		if ($medical_certificate)
+			$true = ' checked="checked"';
+		else
+			$false = ' checked="checked"';
+	}
+
+	require 'views/radio_medical_certificate.html.php';
+}
+
+function radio_photo($photo)
+{
+	$true = '';
+	$false = '';
+
+	if (isset($photo)) {
+		if ($photo)
+			$true = ' checked="checked"';
+		else
+			$false = ' checked="checked"';
+	}
+
+	require 'views/radio_photo.html.php';
+}
+
+function radio_plan($plan)
+{
+	$quarterly = '';
+	$annual = '';
+
+	if (isset($plan)) {
+		switch ($plan) {
+		case 'QUARTERLY':
+			$quarterly = ' checked="checked"';
+			break;
+		case 'ANNUAL':
+			$annual = ' checked="checked"';
+			break;
+		}
+	}
+
+	require 'views/radio_plan.html.php';
+}
+
+/*
  * Drop-down lists for forms
  */
 function select_date($label, $prefix, $required, $date)
@@ -45,28 +148,28 @@ function select_date($label, $prefix, $required, $date)
 
 function select_day($day)
 {
-	$day_monday = '';
-	$day_tuesday = '';
-	$day_wednesday = '';
-	$day_thursday = '';
-	$day_friday = '';
+	$monday = '';
+	$tuesday = '';
+	$wednesday = '';
+	$thursday = '';
+	$friday = '';
 
 	if (isset($day)) {
 		switch ($day) {
 		case 'MONDAY':
-			$day_monday = ' selected="selected"';
+			$monday = ' selected="selected"';
 			break;
 		case 'TUESDAY':
-			$day_tuesday = ' selected="selected"';
+			$tuesday = ' selected="selected"';
 			break;
 		case 'WEDNESDAY':
-			$day_wednesday = ' selected="selected"';
+			$wednesday = ' selected="selected"';
 			break;
 		case 'THURSDAY':
-			$day_thursday = ' selected="selected"';
+			$thursday = ' selected="selected"';
 			break;
 		case 'FRIDAY':
-			$day_friday = ' selected="selected"';
+			$friday = ' selected="selected"';
 			break;
 		}
 	}
@@ -125,16 +228,16 @@ function select_member()
 
 function select_mode($mode)
 {
-	$mode_cash = '';
-	$mode_check = '';
+	$cash = '';
+	$check = '';
 
 	if (isset($mode)) {
 		switch ($mode) {
 		case 'CASH':
-			$mode_cash = ' selected="selected"';
+			$cash = ' selected="selected"';
 			break;
 		case 'CHECK':
-			$mode_check = ' selected="selected"';
+			$check = ' selected="selected"';
 			break;
 		}
 	}
@@ -181,125 +284,5 @@ function select_time($label, $prefix, $time)
 		list($hour, $minute) = sscanf($time, '%d:%d');
 
 	require 'views/select_time.html.php';
-}
-
-/*
- * Forms' content
- */
-function form_content_member($row)
-{
-	$mok_poster_flyer = '';
-	$mok_internet = '';
-	$mok_word_of_mouth = '';
-	$volunteer_true = '';
-	$volunteer_false = '';
-
-	if (isset($row)) {
-		switch ($row['means_of_knowledge']) {
-		case 'POSTER_FLYER':
-			$mok_poster_flyer = ' checked="checked"';
-			break;
-		case 'INTERNET':
-			$mok_internet = ' checked="checked"';
-			break;
-		case 'WORD_OF_MOUTH':
-			$mok_word_of_mouth =
-					' checked="checked"';
-			break;
-		}
-
-		if ($row['volunteer'])
-			$volunteer_true = ' checked="checked"';
-		else
-			$volunteer_false = ' checked="checked"';
-	}
-
-	require 'views/form_content_member.html.php';
-}
-
-function form_content_pre_registration($row)
-{
-	$lessons = array();
-	$p_quarterly = '';
-	$p_annual = '';
-	$mok_poster_flyer = '';
-	$mok_internet = '';
-	$mok_word_of_mouth = '';
-
-	if (isset($row)) {
-		$lessons = string_to_lessons($row['lessons']);
-
-		switch ($row['plan']) {
-		case 'QUARTERLY':
-			$p_quarterly = ' checked="checked"';
-			break;
-		case 'ANNUAL':
-			$p_annual = ' checked="checked"';
-			break;
-		}
-
-		switch ($row['means_of_knowledge']) {
-		case 'POSTER_FLYER':
-			$mok_poster_flyer = ' checked="checked"';
-			break;
-		case 'INTERNET':
-			$mok_internet = ' checked="checked"';
-			break;
-		case 'WORD_OF_MOUTH':
-			$mok_word_of_mouth =
-					' checked="checked"';
-			break;
-		}
-	}
-
-	require 'views/form_content_pre_registration.html.php';
-}
-
-function form_content_registration($member_id, $row)
-{
-	$p_quarterly = '';
-	$p_annual = '';
-
-	if (isset($row)) {
-		switch ($row['plan']) {
-		case 'QUARTERLY':
-			$p_quarterly = ' checked="checked"';
-			break;
-		case 'ANNUAL':
-			$p_annual = ' checked="checked"';
-			break;
-		}
-	}
-
-	require 'views/form_content_registration.html.php';
-}
-
-function form_content_registration_file($registration_id, $row)
-{
-	$medical_certificate_true = '';
-	$medical_certificate_false = '';
-	$insurance_true = '';
-	$insurance_false = '';
-	$photo_true = '';
-	$photo_false = '';
-
-	if (isset($row)) {
-		if ($row['medical_certificate'])
-			$medical_certificate_true = ' checked="checked"';
-		else
-			$medical_certificate_false = ' checked="checked"';
-
-		if ($row['insurance'])
-			$insurance_true = ' checked="checked"';
-		else
-			$insurance_false = ' checked="checked"';
-
-		if ($row['photo'])
-			$photo_true = ' checked="checked"';
-		else
-			$photo_false = ' checked="checked"';
-	}
-
-	require 'views/form_content_registration_file.html.php';
 }
 ?>

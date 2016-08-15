@@ -11,11 +11,8 @@
 
 <fieldset>
   <?php select_day($row['day']) ?>
-
   <?php select_time('Heure de début', 'st', $row['start_time']) ?>
-
   <?php select_time('Heure de fin', 'et', $row['end_time']) ?>
-
   <?php select_room($row['room_id']) ?>
 </fieldset>
 
