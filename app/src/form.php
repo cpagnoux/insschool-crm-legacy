@@ -78,6 +78,25 @@ function radio_medical_certificate($medical_certificate)
 	require 'views/radio_medical_certificate.html.php';
 }
 
+function radio_mode($mode)
+{
+	$cash = '';
+	$check = '';
+
+	if (isset($mode)) {
+		switch ($mode) {
+		case 'CASH':
+			$cash = ' checked="checked"';
+			break;
+		case 'CHECK':
+			$check = ' checked="checked"';
+			break;
+		}
+	}
+
+	require 'views/radio_mode.html.php';
+}
+
 function radio_photo($photo)
 {
 	$true = '';
@@ -224,25 +243,6 @@ function select_member()
 
 	mysqli_free_result($result);
 	mysqli_close($link);
-}
-
-function select_mode($mode)
-{
-	$cash = '';
-	$check = '';
-
-	if (isset($mode)) {
-		switch ($mode) {
-		case 'CASH':
-			$cash = ' selected="selected"';
-			break;
-		case 'CHECK':
-			$check = ' selected="selected"';
-			break;
-		}
-	}
-
-	require 'views/select_mode.html.php';
 }
 
 function select_room($room_id)

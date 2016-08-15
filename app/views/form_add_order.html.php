@@ -6,6 +6,14 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=order" method="post">
-    <?php require 'views/form_content_order.html.php' ?>
+    <fieldset>
+      <?php select_member() ?>
+    </fieldset>
+
+    <fieldset>
+      <div class="form-row">
+        <input type="submit" name="submit" value="Valider">
+      </div>
+    </fieldset>
   </form>
 </div>

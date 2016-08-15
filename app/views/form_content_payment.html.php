@@ -21,7 +21,7 @@
     <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required="required"> €
   </div>
 
-  <?php select_mode($row['mode']) ?>
+  <?php radio_mode($row['mode']) ?>
 </fieldset>
 
 <fieldset>

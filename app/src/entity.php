@@ -273,7 +273,7 @@ function add_registration_detail($data)
 
 	$query = 'INSERT INTO registration_detail VALUES ("' .
 		 $data['registration_id'] . '", "' . $data['lesson_id'] .
-		 '", "' . $data['show_participation'] . '")';
+		 '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
