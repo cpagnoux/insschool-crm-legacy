@@ -273,7 +273,7 @@ function add_registration_detail($data)
 
 	$query = 'INSERT INTO registration_detail VALUES ("' .
 		 $data['registration_id'] . '", "' . $data['lesson_id'] .
-		 '", "' . $data['show_participation'] . '")';
+		 '", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -444,6 +444,7 @@ function form_modify_entity($table, $id)
 		require 'views/form_modify_registration.html.php';
 		break;
 	case 'registration_file':
+		$registration_id = $row['registration_id'];
 		$member_id = get_member_id($row['registration_id']);
 		$name = get_name('member', $member_id);
 		$season = get_registration_season($row['registration_id']);
@@ -619,7 +620,7 @@ function modify_registration_file($registration_id, $data)
 
 	mysqli_close($link);
 
-	redirect('registration', $data['registration_id']);
+	redirect('registration', $registration_id);
 }
 
 function modify_room($room_id, $data)

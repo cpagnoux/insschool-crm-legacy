@@ -57,15 +57,7 @@
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
-    A connu INS School grâce à <sup>*</sup> :<br>
-    <input id="mok_poster_flyer" type="radio" name="means_of_knowledge" value="POSTER_FLYER" required="required"<?php echo $mok_poster_flyer ?>>
-    <label for="mok_poster_flyer">Affiches, Flyers</label><br>
-    <input id="mok_internet" type="radio" name="means_of_knowledge" value="INTERNET"<?php echo $mok_internet ?>>
-    <label for="mok_internet">Internet</label><br>
-    <input id="mok_word_of_mouth" type="radio" name="means_of_knowledge" value="WORD_OF_MOUTH"<?php echo $mok_word_of_mouth ?>>
-    <label for="mok_word_of_mouth">Bouche-à-oreille</label>
-  </div>
+  <?php radio_means_of_knowledge(false, $row['means_of_knowledge']) ?>
 </fieldset>
 
 <fieldset>

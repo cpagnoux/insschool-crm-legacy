@@ -9,24 +9,24 @@ require_once 'src/util.php';
 
 function table_sorting_goody()
 {
-	$sorting_name = '';
-	$sorting_name_desc = '';
-	$sorting_price = '';
-	$sorting_price_desc = '';
+	$name = '';
+	$name_desc = '';
+	$price = '';
+	$price_desc = '';
 
 	if (isset($_SESSION['goody_sorting'])) {
 		switch ($_SESSION['goody_sorting']) {
 		case 'name':
-			$sorting_name = ' selected="selected"';
+			$name = ' selected="selected"';
 			break;
 		case 'name DESC':
-			$sorting_name_desc = ' selected="selected"';
+			$name_desc = ' selected="selected"';
 			break;
 		case 'price':
-			$sorting_price = ' selected="selected"';
+			$price = ' selected="selected"';
 			break;
 		case 'price DESC':
-			$sorting_price_desc = ' selected="selected"';
+			$price_desc = ' selected="selected"';
 			break;
 		}
 	}
@@ -36,16 +36,16 @@ function table_sorting_goody()
 
 function table_sorting_lesson()
 {
-	$sorting_title = '';
-	$sorting_title_desc = '';
+	$title = '';
+	$title_desc = '';
 
 	if (isset($_SESSION['lesson_sorting'])) {
 		switch ($_SESSION['lesson_sorting']) {
 		case 'title':
-			$sorting_title = ' selected="selected"';
+			$title = ' selected="selected"';
 			break;
 		case 'title DESC':
-			$sorting_title_desc = ' selected="selected"';
+			$title_desc = ' selected="selected"';
 			break;
 		}
 	}
@@ -55,16 +55,16 @@ function table_sorting_lesson()
 
 function table_sorting_order()
 {
-	$sorting_date = '';
-	$sorting_date_desc = '';
+	$date = '';
+	$date_desc = '';
 
 	if (isset($_SESSION['order_sorting'])) {
 		switch ($_SESSION['order_sorting']) {
 		case 'date':
-			$sorting_date = ' selected="selected"';
+			$date = ' selected="selected"';
 			break;
 		case 'date DESC':
-			$sorting_date_desc = ' selected="selected"';
+			$date_desc = ' selected="selected"';
 			break;
 		}
 	}
@@ -74,16 +74,16 @@ function table_sorting_order()
 
 function table_sorting_person()
 {
-	$sorting_name = '';
-	$sorting_name_desc = '';
+	$name = '';
+	$name_desc = '';
 
 	if (isset($_SESSION['person_sorting'])) {
 		switch ($_SESSION['person_sorting']) {
 		case 'last_name, first_name':
-			$sorting_name = ' selected="selected"';
+			$name = ' selected="selected"';
 			break;
 		case 'last_name DESC, first_name DESC':
-			$sorting_name_desc = ' selected="selected"';
+			$name_desc = ' selected="selected"';
 			break;
 		}
 	}
@@ -93,16 +93,16 @@ function table_sorting_person()
 
 function table_sorting_room()
 {
-	$sorting_name = '';
-	$sorting_name_desc = '';
+	$name = '';
+	$name_desc = '';
 
 	if (isset($_SESSION['room_sorting'])) {
 		switch ($_SESSION['room_sorting']) {
 		case 'name':
-			$sorting_name = ' selected="selected"';
+			$name = ' selected="selected"';
 			break;
 		case 'name DESC':
-			$sorting_name_desc = ' selected="selected"';
+			$name_desc = ' selected="selected"';
 			break;
 		}
 	}
@@ -112,20 +112,20 @@ function table_sorting_room()
 
 function table_display_limit()
 {
-	$limit_25 = '';
-	$limit_50 = '';
-	$limit_100 = '';
+	$_25 = '';
+	$_50 = '';
+	$_100 = '';
 
 	if (isset($_SESSION['limit'])) {
 		switch ($_SESSION['limit']) {
 		case 25:
-			$limit_25 = ' selected="selected"';
+			$_25 = ' selected="selected"';
 			break;
 		case 50:
-			$limit_50 = ' selected="selected"';
+			$_50 = ' selected="selected"';
 			break;
 		case 100:
-			$limit_100 = ' selected="selected"';
+			$_100 = ' selected="selected"';
 			break;
 		}
 	}
