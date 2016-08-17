@@ -40,3 +40,5 @@
     <li><?php link_delete_entity('lesson', $row['lesson_id']) ?></li>
   </ul>
 </div>
+
+<?php display_lesson_registrants($link, $row['lesson_id'], current_season()) ?>

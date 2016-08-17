@@ -765,8 +765,8 @@ function lesson_registrant_count($lesson_id, $season)
 
 	$query = 'SELECT COUNT(*) FROM registration_detail ' .
 		 'INNER JOIN registration ' .
-		 'ON registration_detail.registration_id = ' .
-		 'registration.registration_id ' .
+		 'ON registration.registration_id = ' .
+		 'registration_detail.registration_id ' .
 		 'WHERE registration_detail.lesson_id = ' . $lesson_id .
 		 ' AND registration.season = "' . $season . '"';
 	if (!$result = mysqli_query($link, $query)) {
@@ -796,7 +796,7 @@ function order_total($order_id)
 
 	$query = 'SELECT order_content.quantity, goody.price ' .
 		 'FROM order_content INNER JOIN goody ' .
-		 'ON order_content.goody_id = goody.goody_id ' .
+		 'ON goody.goody_id = order_content.goody_id ' .
 		 'WHERE order_content.order_id = ' . $order_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);

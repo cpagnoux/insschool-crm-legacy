@@ -11,6 +11,41 @@ require_once 'src/entity.php';
 /*
  * Helper functions for displaying entities
  */
+function display_entity_payments($link, $table, $id)
+{
+	$query = 'SELECT * FROM ' . $table . '_payment WHERE ' . $table .
+		 '_id = ' . $id . ' ORDER BY date';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	require 'views/entity_payments.html.php';
+
+	mysqli_free_result($result);
+}
+
+function display_lesson_registrants($link, $lesson_id, $season)
+{
+	$query = 'SELECT member.first_name, member.last_name FROM member ' .
+		 'INNER JOIN registration ' .
+		 'ON registration.member_id = member.member_id ' .
+		 'INNER JOIN registration_detail ' .
+		 'ON registration_detail.registration_id = ' .
+		 'registration.registration_id ' .
+		 'WHERE registration_detail.lesson_id = ' . $lesson_id .
+		 ' AND registration.season = "' . $season .
+		 '" ORDER BY member.last_name, member.first_name';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	require 'views/lesson_registrants.html.php';
+
+	mysqli_free_result($result);
+}
+
 function display_member_registrations($link, $member_id)
 {
 	$query = 'SELECT * FROM registration WHERE member_id = ' . $member_id .
@@ -29,9 +64,9 @@ function display_order_content($link, $order_id)
 {
 	$query = 'SELECT order_content.goody_id, order_content.quantity, ' .
 		 'goody.name, goody.price FROM order_content ' .
-		 'INNER JOIN goody ON order_content.goody_id = ' .
-		 'goody.goody_id WHERE order_content.order_id = ' . $order_id .
-		 ' ORDER BY order_content.goody_id';
+		 'INNER JOIN goody ON goody.goody_id = ' .
+		 'order_content.goody_id WHERE order_content.order_id = ' .
+		 $order_id . ' ORDER BY goody.name';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -47,7 +82,7 @@ function display_registration_detail($link, $registration_id)
 	$query = 'SELECT registration_detail.lesson_id, ' .
 		 'registration_detail.show_participation, lesson.title ' .
 		 'FROM registration_detail INNER JOIN lesson ' .
-		 'ON registration_detail.lesson_id = lesson.lesson_id ' .
+		 'ON lesson.lesson_id = registration_detail.lesson_id ' .
 		 'WHERE registration_detail.registration_id = ' .
 		 $registration_id . ' ORDER BY lesson.title';
 	if (!$result = mysqli_query($link, $query)) {
@@ -70,20 +105,6 @@ function display_registration_file($link, $registration_id)
 	}
 
 	require 'views/registration_file.html.php';
-
-	mysqli_free_result($result);
-}
-
-function display_entity_payments($link, $table, $id)
-{
-	$query = 'SELECT * FROM ' . $table . '_payment WHERE ' . $table .
-		 '_id = ' . $id . ' ORDER BY date';
-	if (!$result = mysqli_query($link, $query)) {
-		sql_error($link, $query);
-		exit;
-	}
-
-	require 'views/entity_payments.html.php';
 
 	mysqli_free_result($result);
 }
