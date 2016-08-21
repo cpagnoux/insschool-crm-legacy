@@ -49,7 +49,14 @@ function link_table($table)
 	     $label . '</a>';
 }
 
-function link_table_previous($table, $page)
+function link_reset_filters($table)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=reset_filters&amp;table=' . $table .
+	     '">Réinitialiser les filtres</a>';
+}
+
+function link_previous($table, $page)
 {
 	if ($page == 1)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
@@ -59,13 +66,13 @@ function link_table_previous($table, $page)
 		     '&amp;page=' . $page . '">&lt;</a>';
 }
 
-function link_table_next($table, $page)
+function link_next($table, $page)
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
 	     '&amp;page=' . $page . '">&gt;</a>';
 }
 
-function link_table_page($table, $page)
+function link_page($table, $page)
 {
 	if ($page == 1)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
@@ -883,11 +890,11 @@ function registration_price($registration_id)
 	return price_after_discount($row['price'], $row['discount']);
 }
 
-function row_count($table)
+function row_count($table, $filter = '')
 {
 	$link = connect_database();
 
-	$query = 'SELECT COUNT(*) FROM `' . $table . '`';
+	$query = 'SELECT COUNT(*) FROM `' . $table . '`' . $filter;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

@@ -7,6 +7,75 @@ require_once 'src/connection.php';
 require_once 'src/error.php';
 require_once 'src/util.php';
 
+function table_filter_member()
+{
+	$all = '';
+	$unpaid_registration = '';
+	$volunteer = '';
+
+	if (isset($_SESSION['member_filter'])) {
+		switch ($_SESSION['member_filter']) {
+		case 'all':
+			$all = ' selected="selected"';
+			break;
+		case 'unpaid_registration':
+			$unpaid_registration = ' selected="selected"';
+			break;
+		case 'volunteer':
+			$volunteer = ' selected="selected"';
+			break;
+		}
+	}
+
+	require 'views/table_filter_member.html.php';
+}
+
+function table_filter_order()
+{
+	$link = connect_database();
+
+	$query = 'SELECT member_id, first_name, last_name FROM member ' .
+		 'ORDER BY last_name, first_name';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$all = '';
+	$unpaid = '';
+
+	if (isset($_SESSION['order_filter'])) {
+		switch ($_SESSION['order_filter']) {
+		case 'all':
+			$all = ' selected="selected"';
+			break;
+		case 'unpaid':
+			$unpaid = ' selected="selected"';
+			break;
+		}
+	}
+
+	require 'views/table_filter_order.html.php';
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+}
+
+function reset_filters($table)
+{
+	switch ($table) {
+	case 'member':
+		$_SESSION['member_filter'] = 'all';
+		break;
+	case 'order':
+		$_SESSION['order_filter_by_member'] = '';
+		$_SESSION['order_filter'] = 'all';
+		break;
+	}
+
+	redirect($table);
+}
+
 function table_sorting_goody()
 {
 	$name = '';
@@ -166,9 +235,9 @@ function table_display_options($table)
 	require 'views/table_display_options_close.html.php';
 }
 
-function table_pagination($table, $page)
+function table_pagination($table, $page, $filter = '')
 {
-	$num_rows = row_count($table);
+	$num_rows = row_count($table, $filter);
 
 	if ($num_rows <= $_SESSION['limit'])
 		return;
@@ -179,6 +248,16 @@ function table_pagination($table, $page)
 		$num_pages++;
 
 	require 'views/table_pagination.html.php';
+}
+
+function init_filter()
+{
+	if (!isset($_SESSION['member_filter']))
+		$_SESSION['member_filter'] = 'all';
+	if (!isset($_SESSION['order_filter_by_member']))
+		$_SESSION['order_filter_by_member'] = '';
+	if (!isset($_SESSION['order_filter']))
+		$_SESSION['order_filter'] = 'all';
 }
 
 function init_display_options()
@@ -196,6 +275,84 @@ function init_display_options()
 
 	if (!isset($_SESSION['limit']))
 		$_SESSION['limit'] = 25;
+}
+
+function prepare_filter_member_unpaid_registration()
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_id, member_id FROM registration';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$filter = '';
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if (!registration_paid($row['registration_id'])
+		    && $filter == '')
+			$filter = ' WHERE member_id = ' . $row['member_id'];
+		else if (!registration_paid($row['registration_id']))
+			$filter .= ' OR member_id = ' . $row['member_id'];
+	}
+
+	return $filter;
+}
+
+function prepare_filter_order_unpaid()
+{
+	$link = connect_database();
+
+	$query = 'SELECT order_id FROM `order`';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$filter = '';
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if (!order_paid($row['order_id']) && $filter == '')
+			$filter = 'order_id = ' . $row['order_id'];
+		else if (!order_paid($row['order_id']))
+			$filter .= ' OR order_id = ' . $row['order_id'];
+	}
+
+	return $filter;
+}
+
+function select_filter($table)
+{
+	$filter = '';
+
+	switch ($table) {
+	case 'member':
+		switch ($_SESSION['member_filter']) {
+		case 'unpaid_registration':
+			$filter = prepare_filter_member_unpaid_registration();
+			break;
+		case 'volunteer':
+			$filter = ' WHERE volunteer = 1';
+			break;
+		}
+
+		break;
+	case 'order':
+		if ($_SESSION['order_filter_by_member'] != '')
+			$filter = ' WHERE member_id = ' .
+				  $_SESSION['order_filter_by_member'];
+
+		if ($_SESSION['order_filter'] == 'unpaid' && $filter == '')
+			$filter = ' WHERE ' . prepare_filter_order_unpaid();
+		else if ($_SESSION['order_filter'] == 'unpaid')
+			$filter .= ' AND (' . prepare_filter_order_unpaid() .
+				   ')';
+
+		break;
+	}
+
+	return $filter;
 }
 
 function select_sorting($table)
@@ -228,19 +385,21 @@ function select_sorting($table)
 
 function display_table($table, $page)
 {
+	init_filter();
 	init_display_options();
 
 	if (!isset($page))
 		$page = 1;
 
+	$filter = select_filter($table);
 	$sorting = select_sorting($table);
 
 	$offset = ($page - 1) * $_SESSION['limit'];
 
 	$link = connect_database();
 
-	$query = 'SELECT * FROM `' . $table . '` ORDER BY ' . $sorting .
-		 ' LIMIT ' . $offset . ', ' . $_SESSION['limit'];
+	$query = 'SELECT * FROM `' . $table . '`' . $filter . ' ORDER BY ' .
+		 $sorting . ' LIMIT ' . $offset . ', ' . $_SESSION['limit'];
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

@@ -11,6 +11,12 @@ require_once 'src/pre-registration.php';
 
 session_start();
 
+if (isset($_POST['member_filter']))
+	$_SESSION['member_filter'] = $_POST['member_filter'];
+if (isset($_POST['order_filter_by_member']))
+	$_SESSION['order_filter_by_member'] = $_POST['order_filter_by_member'];
+if (isset($_POST['order_filter']))
+	$_SESSION['order_filter'] = $_POST['order_filter'];
 if (isset($_POST['goody_sorting']))
 	$_SESSION['goody_sorting'] = $_POST['goody_sorting'];
 if (isset($_POST['lesson_sorting']))
@@ -42,8 +48,11 @@ if (!session_valid()) {
 		$action = 'change_password';
 		break;
 	}
-} else if (isset($_GET['mode'] )) {
+} else if (isset($_GET['mode'])) {
 	switch ($_GET['mode']) {
+	case 'reset_filters':
+		$action = 'reset_filters';
+		break;
 	case 'add':
 		$action = 'form_add_entity';
 		break;
@@ -105,6 +114,9 @@ case 'login':
 	break;
 case 'display_table':
 	display_table($_GET['table'], $_GET['page']);
+	break;
+case 'reset_filters':
+	reset_filters($_GET['table']);
 	break;
 case 'display_entity':
 	display_entity($_GET['table'], $_GET['id']);

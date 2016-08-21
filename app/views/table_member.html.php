@@ -9,6 +9,7 @@
   </ul>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
+    <?php table_filter_member() ?>
     <?php table_display_options('member') ?>
 
     <table class="db-table">
@@ -27,7 +28,9 @@
       <?php endwhile ?>
     </table>
 
-    <?php table_pagination($table, $page) ?>
+    <?php table_pagination($table, $page, $filter) ?>
+  <?php elseif (row_count($table) != 0): ?>
+    <?php table_filter_member() ?>
   <?php else: ?>
     <p>Aucun adhérent</p>
   <?php endif ?>

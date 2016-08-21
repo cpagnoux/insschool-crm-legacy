@@ -9,6 +9,7 @@
   </ul>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
+    <?php table_filter_order() ?>
     <?php table_display_options('order') ?>
 
     <table class="db-table">
@@ -29,7 +30,9 @@
       <?php endwhile ?>
     </table>
 
-    <?php table_pagination($table, $page) ?>
+    <?php table_pagination($table, $page, $filter) ?>
+  <?php elseif (row_count($table) != 0): ?>
+    <?php table_filter_order() ?>
   <?php else: ?>
     <p>Aucune commande</p>
   <?php endif ?>
