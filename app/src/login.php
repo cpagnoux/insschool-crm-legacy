@@ -130,7 +130,7 @@ function change_password($current_password, $new_password,
 
 	mysqli_close($link);
 
-	redirect_password_change_success();
+	redirect_after_change_password();
 }
 
 function logout()

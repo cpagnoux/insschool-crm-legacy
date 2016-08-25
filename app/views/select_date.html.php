@@ -6,9 +6,9 @@
 
     <?php for ($i = 1; $i <= 31; $i++): ?>
       <?php if (isset($day) && $i == $day): ?>
-	<option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
       <?php else: ?>
-	<option value="<?php echo $i ?>"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>"><?php echo $i ?></option>
       <?php endif ?>
     <?php endfor ?>
   </select>
@@ -18,9 +18,9 @@
 
     <?php for ($i = 1; $i <= 12; $i++): ?>
       <?php if (isset($month) && $i == $month): ?>
-	<option value="<?php echo $i ?>" selected="selected"><?php echo $months[$i] ?></option>
+        <option value="<?php echo $i ?>" selected="selected"><?php echo $months[$i] ?></option>
       <?php else: ?>
-	<option value="<?php echo $i ?>"><?php echo $months[$i] ?></option>
+        <option value="<?php echo $i ?>"><?php echo $months[$i] ?></option>
       <?php endif ?>
     <?php endfor ?>
   </select>
@@ -30,9 +30,9 @@
 
     <?php for ($i = date('Y') - 6; $i >= date('Y') - 100; $i--): ?>
       <?php if (isset($year) && $i == $year): ?>
-	<option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
       <?php else: ?>
-	<option value="<?php echo $i ?>"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>"><?php echo $i ?></option>
       <?php endif ?>
     <?php endfor ?>
   </select>

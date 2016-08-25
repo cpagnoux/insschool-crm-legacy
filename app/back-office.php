@@ -4,6 +4,8 @@
  */
 
 require_once 'src/login.php';
+require_once 'src/mail.php';
+require_once 'src/util.php';
 
 require_once 'src/table.php';
 require_once 'src/entity.php';
@@ -27,6 +29,7 @@ if (isset($_POST['person_sorting']))
 	$_SESSION['person_sorting'] = $_POST['person_sorting'];
 if (isset($_POST['room_sorting']))
 	$_SESSION['room_sorting'] = $_POST['room_sorting'];
+
 if (isset($_POST['limit']))
 	$_SESSION['limit'] = $_POST['limit'];
 
@@ -34,8 +37,18 @@ $action = '';
 
 if (!session_valid()) {
 	$action = 'login';
-} else if (isset($_GET['status']) && $_GET['status'] == 'success') {
-	$action = 'password_change_success';
+} else if (isset($_GET['status'])) {
+	switch ($_GET['mode']) {
+	case 'send_mail':
+		$action = 'status_send_mail';
+		break;
+	case 'send_ticket':
+		$action = 'status_send_ticket';
+		break;
+	case 'change_password':
+		$action = 'status_change_password';
+		break;
+	}
 } else if (isset($_POST['submit'])) {
 	switch ($_GET['mode']) {
 	case 'add':
@@ -43,6 +56,12 @@ if (!session_valid()) {
 		break;
 	case 'modify':
 		$action = 'modify_entity';
+		break;
+	case 'send_mail':
+		$action = 'send_mail';
+		break;
+	case 'send_ticket':
+		$action = 'send_ticket';
 		break;
 	case 'change_password':
 		$action = 'change_password';
@@ -94,6 +113,12 @@ if (!session_valid()) {
 		break;
 	case 'delete_user':
 		$action = 'delete_user';
+		break;
+	case 'send_mail':
+		$action = 'form_send_mail';
+		break;
+	case 'send_ticket':
+		$action = 'form_send_ticket';
 		break;
 	case 'change_password':
 		$action = 'form_change_password';
@@ -174,6 +199,28 @@ case 'reset_password':
 case 'delete_user':
 	delete_user($_GET['username']);
 	break;
+case 'form_send_mail':
+	form_send_mail($_GET['to']);
+	break;
+case 'send_mail':
+	send_mail($_GET['to']);
+	break;
+case 'status_send_mail':
+	status_send_mail($_GET['to']);
+	break;
+case 'form_send_ticket':
+	require 'views/header.html.php';
+	require 'views/form_send_ticket.html.php';
+	require 'views/footer.html.php';
+	break;
+case 'send_ticket':
+	send_ticket($_POST['topic'], $_POST['message']);
+	break;
+case 'status_send_ticket':
+	require 'views/header.html.php';
+	require 'views/status_send_ticket.html.php';
+	require 'views/footer.html.php';
+	break;
 case 'form_change_password':
 	require 'views/header.html.php';
 	require 'views/form_change_password.html.php';
@@ -183,9 +230,9 @@ case 'change_password':
 	change_password($_POST['current_password'], $_POST['new_password'],
 			$_POST['new_password_confirm']);
 	break;
-case 'password_change_success':
+case 'status_change_password':
 	require 'views/header.html.php';
-	require 'views/password_change_success.html.php';
+	require 'views/status_change_password.html.php';
 	require 'views/footer.html.php';
 	break;
 case 'logout':

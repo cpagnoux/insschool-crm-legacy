@@ -53,6 +53,11 @@ textarea {
 	color: #ff0000;
 }
 
+.message {
+	height: 200px;
+	width: 600px;
+}
+
 .quantity-button {
 	border-radius: 100%;
 	line-height: 25px;
@@ -252,7 +257,7 @@ fieldset {
 	display: inline;
 }
 
-.form-row {
+.form-row, .editor {
 	margin-bottom: 1em;
 	margin-top: 1em;
 }
@@ -260,6 +265,10 @@ fieldset {
 .form-row-option {
 	display: inline-block;
 	padding-right: 20px;
+}
+
+.editor {
+	width: 650px;
 }
 
 .footer-container {

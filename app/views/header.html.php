@@ -10,11 +10,17 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+<?php if ($_GET['mode'] == 'send_mail'): ?>
+  <script src="ckeditor/ckeditor.js"></script>
+<?php endif ?>
+
 </head>
 <body>
 
 <header>
   <div class="account">
+    <?php link_send_ticket() ?>
+    <span class="blank"></span>
     <?php link_change_password() ?>
     <span class="blank"></span>
     <?php link_logout() ?>

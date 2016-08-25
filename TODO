@@ -7,7 +7,10 @@ TODO:
 - call sheet
 - mail functionality
 - support (dev contact)
-- ability to display volunteers
 - ui for ordering rooms
-- ability to restrict orders by member
-- ability to display non-payed orders and members with non-payed registrations
+- add default values for optional parameters of functions
+- add title for support and password change pages
+- resize input fields
+- replace readonly input by hidden ones
+- add mysqli_free_result() before anticipated return when needed
+- implement ability to send attachments with mails

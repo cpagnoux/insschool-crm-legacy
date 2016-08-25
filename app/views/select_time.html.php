@@ -6,9 +6,9 @@
 
     <?php for ($i = 0; $i < 24; $i++): ?>
       <?php if (isset($hour) && $i == $hour): ?>
-	<option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>" selected="selected"><?php echo $i ?></option>
       <?php else: ?>
-	<option value="<?php echo $i ?>"><?php echo $i ?></option>
+        <option value="<?php echo $i ?>"><?php echo $i ?></option>
       <?php endif ?>
     <?php endfor ?>
   </select>
@@ -22,7 +22,7 @@
       <?php if (isset($minute) && $i == $minute): ?>
         <option value="<?php echo $i ?>" selected="selected"><?php echo sprintf('%02d', $i) ?></option>
       <?php else: ?>
-	<option value="<?php echo $i ?>"><?php echo sprintf('%02d', $i) ?></option>
+        <option value="<?php echo $i ?>"><?php echo sprintf('%02d', $i) ?></option>
       <?php endif ?>
     <?php endfor ?>
   </select>

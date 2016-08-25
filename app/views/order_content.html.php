@@ -27,7 +27,7 @@
         <td><?php echo total_by_product($row['price'], $row['quantity']) ?> €</td>
 
         <?php if (!order_paid($order_id)): ?>
-	  <td><?php link_remove_product($order_id, $row['goody_id']) ?></td>
+          <td><?php link_remove_product($order_id, $row['goody_id']) ?></td>
         <?php endif ?>
       </tr>
     <?php endwhile ?>

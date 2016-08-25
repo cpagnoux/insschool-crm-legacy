@@ -4,6 +4,7 @@
  */
 
 require_once 'config/app.config.php';
+
 require_once 'src/error.php';
 
 function connect_database()

@@ -43,6 +43,7 @@
   </p>
 
   <ul class="action-links">
+    <li><?php link_send_mail('teacher', $row['teacher_id']) ?></li>
     <li><?php link_modify_entity('teacher', $row['teacher_id']) ?></li>
     <li><?php link_delete_entity('teacher', $row['teacher_id']) ?></li>
   </ul>

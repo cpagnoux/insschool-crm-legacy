@@ -51,6 +51,7 @@
   </p>
 
   <ul class="action-links">
+    <li><?php link_send_mail('member', $row['member_id']) ?></li>
     <li><?php link_modify_entity('member', $row['member_id']) ?></li>
     <li><?php link_delete_entity('member', $row['member_id']) ?></li>
   </ul>

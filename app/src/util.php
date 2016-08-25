@@ -254,6 +254,60 @@ function link_delete_user($username)
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+function link_send_mail($table, $id)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=send_mail&amp;to=single_recipient&amp;table=' . $table .
+	     '&amp;id=' . $id . '">Envoyer un mail</a>';
+}
+
+function link_send_mail_to_multiple_recipients($table)
+{
+	$label = '';
+
+	switch ($table) {
+	case 'member':
+		switch ($_SESSION['member_filter']) {
+		case 'all':
+			$label = 'Envoyer un mail aux adhérents';
+			break;
+		case 'unpaid_registration':
+			$label = 'Envoyer un mail aux adhérents n\'ayant pas ' .
+				 'payé leur inscription';
+			break;
+		case 'volunteer':
+			$label = 'Envoyer un mail aux bénévoles';
+			break;
+		}
+
+		break;
+	case 'teacher':
+		$label = 'Envoyer un mail aux professeurs';
+		break;
+	default:
+		$label = 'Envoyer un mail';
+		break;
+	}
+
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=send_mail&amp;to=multiple_recipients&amp;table=' . $table .
+	     '">' . $label . '</a>';
+}
+
+function link_send_mail_to_lesson_registrants($lesson_id, $season)
+{
+	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=send_mail&amp;to=lesson_registrants&amp;lesson_id=' .
+	     $lesson_id . '&amp;season=' . $season .
+	     '">Envoyer un mail aux inscrits</a>';
+}
+
+function link_send_ticket()
+{
+	echo '<a href="' . $_SERVER['PHP_SELF'] .
+	     '?mode=send_ticket">Assistance</a>';
+}
+
 function link_change_password()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
@@ -284,7 +338,34 @@ function redirect($table, $id)
 		       $table);
 }
 
-function redirect_password_change_success()
+function redirect_after_send_mail($table, $id, $status)
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=send_mail&to=single_recipient&table=' . $table . '&id=' .
+	       $id . '&status=' . $status);
+}
+
+function redirect_after_send_mail_to_multiple_recipients($table, $status)
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=send_mail&to=multiple_recipients&table=' . $table .
+	       '&status=' . $status);
+}
+
+function redirect_after_send_mail_to_lesson_registrants($lesson_id, $status)
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=send_mail&to=lesson_registrants&lesson_id=' . $lesson_id .
+	       '&status=' . $status);
+}
+
+function redirect_after_send_ticket($status)
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=send_ticket&status=' . $status);
+}
+
+function redirect_after_change_password()
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
 	       '?mode=change_password&status=success');

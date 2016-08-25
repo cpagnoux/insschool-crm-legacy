@@ -6,6 +6,7 @@
 <div class="container">
   <ul class="action-links">
     <li><?php link_add_entity($table) ?></li>
+    <li><?php link_send_mail_to_multiple_recipients($table) ?></li>
   </ul>
 
   <?php if (mysqli_num_rows($result) != 0): ?>

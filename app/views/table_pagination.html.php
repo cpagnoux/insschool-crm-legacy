@@ -5,7 +5,7 @@
 
       <?php for ($i = $page - 5; $i < $page; $i++): ?>
         <?php if ($i > 0): ?>
-	  <li><?php link_page($table, $i) ?></li>
+          <li><?php link_page($table, $i) ?></li>
         <?php endif ?>
       <?php endfor ?>
     <?php endif ?>
@@ -14,8 +14,8 @@
 
     <?php if ($page * $_SESSION['limit'] < $num_rows): ?>
       <?php for ($i = $page + 1; $i <= $page + 5; $i++): ?>
-	<?php if ($i <= $num_pages): ?>
-	  <li><?php link_page($table, $i) ?></li>
+        <?php if ($i <= $num_pages): ?>
+          <li><?php link_page($table, $i) ?></li>
         <?php endif ?>
       <?php endfor ?>
 
