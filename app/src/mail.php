@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2015-2016 Christophe Pagnoux-Vieuxfort for INS School
+ * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
 require_once 'config/app.config.php';

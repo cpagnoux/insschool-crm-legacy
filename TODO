@@ -9,4 +9,4 @@ TODO:
 - ui for ordering rooms
 - add title for support and password change pages
 - resize input fields
-- add mail to user in db + implement mail confirmation on pw change
+- add email to user in db + implement mail confirmation on pw change
