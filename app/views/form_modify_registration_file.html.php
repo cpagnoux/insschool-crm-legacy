@@ -8,12 +8,7 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=registration_file&amp;id=<?php echo $row['registration_id'] ?>" method="post">
-    <fieldset>
-      <div class="form-row">
-        <label for="registration_id">N° d'inscription :</label><br>
-        <input id="registration_id" type="text" name="registration_id" value="<?php echo $registration_id ?>" readonly="readonly">
-      </div>
-    </fieldset>
+    <input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
 
     <fieldset>
       <?php radio_medical_certificate($row['medical_certificate']) ?>

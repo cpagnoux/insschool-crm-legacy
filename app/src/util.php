@@ -82,7 +82,7 @@ function link_page($table, $page)
 		     '&amp;page=' . $page . '">' . $page . '</a>';
 }
 
-function link_entity($table, $id, $label)
+function link_entity($table, $id, $label = null)
 {
 	if (isset($label))
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
@@ -92,7 +92,7 @@ function link_entity($table, $id, $label)
 		     '?table=' . $table . '&amp;id=' . $id . '">+ d\'infos</a>';
 }
 
-function link_add_entity($table, $id)
+function link_add_entity($table, $id = null)
 {
 	$label = '';
 
@@ -328,7 +328,7 @@ function redirect_home()
 	header('Location: ' . $_SERVER['PHP_SELF']);
 }
 
-function redirect($table, $id)
+function redirect($table, $id = null)
 {
 	if (isset($id))
 		header('Location: ' . $_SERVER['PHP_SELF'] . '?table=' .

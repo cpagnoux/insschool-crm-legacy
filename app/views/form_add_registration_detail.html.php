@@ -8,12 +8,7 @@
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=registration_detail" method="post">
-    <fieldset>
-      <div class="form-row">
-        <label for="registration_id">N° d'inscription :</label><br>
-        <input id="registration_id" type="text" name="registration_id" value="<?php echo $registration_id ?>" readonly="readonly">
-      </div>
-    </fieldset>
+    <input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
 
     <fieldset>
       <?php select_lesson() ?>

@@ -1,16 +1,12 @@
 TODO:
-- secure login page
-- security (SQL injection)
+- security (SQL injection, file access, ...)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
-- choose more appropriate types in <input> tags when possible
+- choose more appropriate types in <input> tags when possible of use regexp
 - call sheet
 - mail functionality
-- support (dev contact)
+- implement ability to send attachments with mails
 - ui for ordering rooms
-- add default values for optional parameters of functions
 - add title for support and password change pages
 - resize input fields
-- replace readonly input by hidden ones
-- add mysqli_free_result() before anticipated return when needed
-- implement ability to send attachments with mails
+- add mail to user in db + implement mail confirmation on pw change

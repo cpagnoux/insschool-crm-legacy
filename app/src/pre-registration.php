@@ -261,6 +261,7 @@ function get_member_id_or_add($link, $row)
 	}
 
 	if (mysqli_num_rows($result) == 0) {
+		mysqli_free_result($result);
 		add_member_from_pr($link, $row);
 		return get_member_id_or_add($link, $row);
 	}

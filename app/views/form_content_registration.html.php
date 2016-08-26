@@ -1,9 +1,4 @@
-<fieldset>
-  <div class="form-row">
-    <label for="member_id">N° d'adhérent :</label><br>
-    <input id="member_id" type="text" name="member_id" value="<?php echo $member_id ?>" readonly="readonly">
-  </div>
-</fieldset>
+<input type="hidden" name="member_id" value="<?php echo $member_id ?>">
 
 <?php if (!isset($row)): ?>
   <fieldset>

@@ -297,6 +297,9 @@ function prepare_filter_member_unpaid_registration()
 			$filter .= ' OR member_id = ' . $row['member_id'];
 	}
 
+	mysqli_free_result($result);
+	mysqli_close($link);
+
 	return $filter;
 }
 
@@ -318,6 +321,9 @@ function prepare_filter_order_unpaid()
 		else if (!order_paid($row['order_id']))
 			$filter .= ' OR order_id = ' . $row['order_id'];
 	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
 
 	return $filter;
 }
@@ -383,7 +389,7 @@ function select_sorting($table)
 	return $sorting;
 }
 
-function display_table($table, $page)
+function display_table($table, $page = null)
 {
 	init_filter();
 	init_display_options();

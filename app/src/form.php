@@ -12,7 +12,7 @@ require_once 'src/pre-registration.php';
 /*
  * Checkboxes for forms
  */
-function checkbox_lessons($lessons_str)
+function checkbox_lessons($lessons_str = null)
 {
 	$lessons = array();
 
@@ -25,7 +25,7 @@ function checkbox_lessons($lessons_str)
 /*
  * Radio buttons for forms
  */
-function radio_insurance($insurance)
+function radio_insurance($insurance = null)
 {
 	$true = '';
 	$false = '';
@@ -40,7 +40,7 @@ function radio_insurance($insurance)
 	require 'views/radio_insurance.html.php';
 }
 
-function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge)
+function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge = null)
 {
 	$poster_flyer = '';
 	$internet = '';
@@ -63,7 +63,7 @@ function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge)
 	require 'views/radio_means_of_knowledge.html.php';
 }
 
-function radio_medical_certificate($medical_certificate)
+function radio_medical_certificate($medical_certificate = null)
 {
 	$true = '';
 	$false = '';
@@ -78,7 +78,7 @@ function radio_medical_certificate($medical_certificate)
 	require 'views/radio_medical_certificate.html.php';
 }
 
-function radio_mode($mode)
+function radio_mode($mode = null)
 {
 	$cash = '';
 	$check = '';
@@ -97,7 +97,7 @@ function radio_mode($mode)
 	require 'views/radio_mode.html.php';
 }
 
-function radio_photo($photo)
+function radio_photo($photo = null)
 {
 	$true = '';
 	$false = '';
@@ -112,7 +112,7 @@ function radio_photo($photo)
 	require 'views/radio_photo.html.php';
 }
 
-function radio_plan($plan)
+function radio_plan($plan = null)
 {
 	$quarterly = '';
 	$annual = '';
@@ -134,7 +134,7 @@ function radio_plan($plan)
 /*
  * Drop-down lists for forms
  */
-function select_date($label, $prefix, $required, $date)
+function select_date($label, $prefix, $required, $date = null)
 {
 	$months = array(
 		1 => 'Janvier',
@@ -165,7 +165,7 @@ function select_date($label, $prefix, $required, $date)
 	require 'views/select_date.html.php';
 }
 
-function select_day($day)
+function select_day($day = null)
 {
 	$monday = '';
 	$tuesday = '';
@@ -278,7 +278,7 @@ function select_teacher($teacher_id)
 	mysqli_close($link);
 }
 
-function select_time($label, $prefix, $time)
+function select_time($label, $prefix, $time = null)
 {
 	if (isset($time))
 		list($hour, $minute) = sscanf($time, '%d:%d');
