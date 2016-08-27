@@ -38,7 +38,7 @@ $action = '';
 if (!session_valid()) {
 	$action = 'login';
 } else if (isset($_GET['status'])) {
-	switch ($_GET['mode']) {
+	switch ($_GET['action']) {
 	case 'reset_password':
 		$action = 'status_reset_password';
 		break;
@@ -53,7 +53,7 @@ if (!session_valid()) {
 		break;
 	}
 } else if (isset($_POST['submit'])) {
-	switch ($_GET['mode']) {
+	switch ($_GET['action']) {
 	case 'add':
 		$action = 'add_entity';
 		break;
@@ -70,8 +70,8 @@ if (!session_valid()) {
 		$action = 'change_password';
 		break;
 	}
-} else if (isset($_GET['mode'])) {
-	switch ($_GET['mode']) {
+} else if (isset($_GET['action'])) {
+	switch ($_GET['action']) {
 	case 'reset_filters':
 		$action = 'reset_filters';
 		break;

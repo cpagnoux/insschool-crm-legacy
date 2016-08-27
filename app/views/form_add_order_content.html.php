@@ -6,7 +6,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=order_content" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=order_content" method="post">
     <input type="hidden" name="order_id" value="<?php echo $order_id ?>">
 
     <fieldset>

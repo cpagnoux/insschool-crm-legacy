@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=change_password" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=change_password" method="post">
     <fieldset>
       <div class="form-row">
         <label for="current_password">Mot de passe actuel :</label><br>

@@ -6,7 +6,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=goody&amp;id=<?php echo $row['goody_id'] ?>" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=goody&amp;id=<?php echo $row['goody_id'] ?>" method="post">
     <?php require 'views/form_content_goody.html.php' ?>
   </form>
 </div>

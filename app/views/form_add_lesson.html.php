@@ -5,7 +5,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=lesson" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=lesson" method="post">
     <?php require 'views/form_content_lesson.html.php' ?>
   </form>
 </div>

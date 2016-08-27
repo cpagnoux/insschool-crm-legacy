@@ -6,7 +6,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=send_mail&amp;to=single_recipient" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_mail&amp;to=single_recipient" method="post">
     <input type="hidden" name="table" value="<?php echo $_GET['table'] ?>">
     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
     <?php require 'views/form_content_send_mail.html.php' ?>

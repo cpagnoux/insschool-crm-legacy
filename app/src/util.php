@@ -52,7 +52,7 @@ function link_table($table)
 function link_reset_filters($table)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=reset_filters&amp;table=' . $table .
+	     '?action=reset_filters&amp;table=' . $table .
 	     '">Réinitialiser les filtres</a>';
 }
 
@@ -137,38 +137,38 @@ function link_add_entity($table, $id = null)
 
 	if (isset($id))
 		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-		     '?mode=add&amp;table=' . $table . '&amp;id=' . $id . '">' .
-		     $label . '</a>';
+		     '?action=add&amp;table=' . $table . '&amp;id=' . $id .
+		     '">' . $label . '</a>';
 	else
 		echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-		     '?mode=add&amp;table=' . $table . '">' . $label . '</a>';
+		     '?action=add&amp;table=' . $table . '">' . $label . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify&amp;table=' . $table . '&amp;id=' . $id .
+	     '?action=modify&amp;table=' . $table . '&amp;id=' . $id .
 	     '">Modifier</a>';
 }
 
 function link_delete_entity($table, $id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=delete&amp;table=' . $table . '&amp;id=' . $id .
+	     '?action=delete&amp;table=' . $table . '&amp;id=' . $id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_toggle_volunteer($member_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=toggle_volunteer&amp;member_id=' . $member_id .
+	     '?action=toggle_volunteer&amp;member_id=' . $member_id .
 	     '">Changer</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
 	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '?action=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
 	     '">-</a>';
 }
@@ -176,7 +176,7 @@ function link_quantity_minus($order_id, $goody_id, $quantity)
 function link_quantity_plus($order_id, $goody_id, $quantity)
 {
 	echo '<a class="quantity-button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '?action=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
 	     '">+</a>';
 }
@@ -184,14 +184,14 @@ function link_quantity_plus($order_id, $goody_id, $quantity)
 function link_remove_product($order_id, $goody_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=modify_quantity&amp;order_id=' . $order_id .
+	     '?action=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
 }
 
 function link_empty_cart($order_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=empty_cart&amp;order_id=' . $order_id .
+	     '?action=empty_cart&amp;order_id=' . $order_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
 	     'Vider le panier</a>';
 }
@@ -199,14 +199,14 @@ function link_empty_cart($order_id)
 function link_commit_pre_registration($pre_registration_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=commit&amp;pre_registration_id=' . $pre_registration_id .
+	     '?action=commit&amp;pre_registration_id=' . $pre_registration_id .
 	     '">Valider la pré-inscription</a>';
 }
 
 function link_toggle_show_participation($registration_id, $lesson_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=toggle_show_participation&amp;registration_id=' .
+	     '?action=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
 	     '">Changer</a>';
 }
@@ -214,7 +214,7 @@ function link_toggle_show_participation($registration_id, $lesson_id)
 function link_remove_lesson($registration_id, $lesson_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=remove_lesson&amp;registration_id=' . $registration_id .
+	     '?action=remove_lesson&amp;registration_id=' . $registration_id .
 	     '&amp;lesson_id=' . $lesson_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
@@ -222,13 +222,14 @@ function link_remove_lesson($registration_id, $lesson_id)
 function link_update_absences($teacher_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=update_absences&amp;teacher_id=' . $teacher_id . '">+1</a>';
+	     '?action=update_absences&amp;teacher_id=' . $teacher_id .
+	     '">+1</a>';
 }
 
 function link_reset_absences($teacher_id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=reset_absences&amp;teacher_id=' . $teacher_id .
+	     '?action=reset_absences&amp;teacher_id=' . $teacher_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
 	     'Réinitialiser</a>';
 }
@@ -236,13 +237,13 @@ function link_reset_absences($teacher_id)
 function link_toggle_admin($username)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=toggle_admin&amp;username=' . $username . '">Changer</a>';
+	     '?action=toggle_admin&amp;username=' . $username . '">Changer</a>';
 }
 
 function link_reset_password($username)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=reset_password&amp;username=' . $username .
+	     '?action=reset_password&amp;username=' . $username .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
 	     'Réinitialiser le mot de passe</a>';
 }
@@ -250,14 +251,14 @@ function link_reset_password($username)
 function link_delete_user($username)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=delete_user&amp;username=' . $username .
+	     '?action=delete_user&amp;username=' . $username .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_send_mail($table, $id)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=send_mail&amp;to=single_recipient&amp;table=' . $table .
+	     '?action=send_mail&amp;to=single_recipient&amp;table=' . $table .
 	     '&amp;id=' . $id . '">Envoyer un mail</a>';
 }
 
@@ -290,14 +291,14 @@ function link_send_mail_to_multiple_recipients($table)
 	}
 
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=send_mail&amp;to=multiple_recipients&amp;table=' . $table .
-	     '">' . $label . '</a>';
+	     '?action=send_mail&amp;to=multiple_recipients&amp;table=' .
+	     $table . '">' . $label . '</a>';
 }
 
 function link_send_mail_to_lesson_registrants($lesson_id, $season)
 {
 	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=send_mail&amp;to=lesson_registrants&amp;lesson_id=' .
+	     '?action=send_mail&amp;to=lesson_registrants&amp;lesson_id=' .
 	     $lesson_id . '&amp;season=' . $season .
 	     '">Envoyer un mail aux inscrits</a>';
 }
@@ -305,19 +306,19 @@ function link_send_mail_to_lesson_registrants($lesson_id, $season)
 function link_send_ticket()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=send_ticket">Assistance</a>';
+	     '?action=send_ticket">Assistance</a>';
 }
 
 function link_change_password()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=change_password">Changer de mot de passe</a>';
+	     '?action=change_password">Changer de mot de passe</a>';
 }
 
 function link_logout()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
-	     '?mode=logout">Se déconnecter</a>';
+	     '?action=logout">Se déconnecter</a>';
 }
 
 /*
@@ -341,40 +342,40 @@ function redirect($table, $id = null)
 function redirect_after_reset_password()
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=reset_password&status=success');
+	       '?action=reset_password&status=success');
 }
 
 function redirect_after_send_mail($table, $id, $status)
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=send_mail&to=single_recipient&table=' . $table . '&id=' .
-	       $id . '&status=' . $status);
+	       '?action=send_mail&to=single_recipient&table=' . $table .
+	       '&id=' . $id . '&status=' . $status);
 }
 
 function redirect_after_send_mail_to_multiple_recipients($table, $status)
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=send_mail&to=multiple_recipients&table=' . $table .
+	       '?action=send_mail&to=multiple_recipients&table=' . $table .
 	       '&status=' . $status);
 }
 
 function redirect_after_send_mail_to_lesson_registrants($lesson_id, $status)
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=send_mail&to=lesson_registrants&lesson_id=' . $lesson_id .
-	       '&status=' . $status);
+	       '?action=send_mail&to=lesson_registrants&lesson_id=' .
+	       $lesson_id . '&status=' . $status);
 }
 
 function redirect_after_send_ticket($status)
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=send_ticket&status=' . $status);
+	       '?action=send_ticket&status=' . $status);
 }
 
 function redirect_after_change_password()
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .
-	       '?mode=change_password&status=success');
+	       '?action=change_password&status=success');
 }
 
 /*

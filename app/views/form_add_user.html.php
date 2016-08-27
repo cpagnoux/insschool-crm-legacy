@@ -5,7 +5,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=user" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=user" method="post">
     <fieldset>
       <div class="form-row">
         <label for="username">Nom d'utilisateur : <sup>*</sup></label><br>

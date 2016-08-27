@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=send_ticket" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_ticket" method="post">
     <fieldset>
       <?php require 'views/select_subject.html.php' ?>
 

@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-<?php if ($_GET['mode'] == 'send_mail'): ?>
+<?php if ($_GET['action'] == 'send_mail'): ?>
   <script src="ckeditor/ckeditor.js"></script>
 <?php endif ?>
 

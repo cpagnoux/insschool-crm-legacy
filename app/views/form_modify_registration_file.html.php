@@ -7,7 +7,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=modify&amp;table=registration_file&amp;id=<?php echo $row['registration_id'] ?>" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=registration_file&amp;id=<?php echo $row['registration_id'] ?>" method="post">
     <input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
 
     <fieldset>

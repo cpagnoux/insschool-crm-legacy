@@ -5,7 +5,7 @@
 </nav>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?mode=add&amp;table=order" method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=order" method="post">
     <fieldset>
       <?php select_member() ?>
     </fieldset>
