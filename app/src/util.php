@@ -338,6 +338,12 @@ function redirect($table, $id = null)
 		       $table);
 }
 
+function redirect_after_reset_password()
+{
+	header('Location: ' . $_SERVER['PHP_SELF'] .
+	       '?mode=reset_password&status=success');
+}
+
 function redirect_after_send_mail($table, $id, $status)
 {
 	header('Location: ' . $_SERVER['PHP_SELF'] .

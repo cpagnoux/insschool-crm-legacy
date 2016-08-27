@@ -39,6 +39,9 @@ if (!session_valid()) {
 	$action = 'login';
 } else if (isset($_GET['status'])) {
 	switch ($_GET['mode']) {
+	case 'reset_password':
+		$action = 'status_reset_password';
+		break;
 	case 'send_mail':
 		$action = 'status_send_mail';
 		break;
@@ -195,6 +198,12 @@ case 'toggle_admin':
 	break;
 case 'reset_password':
 	reset_password($_GET['username']);
+	break;
+case 'status_reset_password':
+	require 'views/header.html.php';
+	require 'views/status_reset_password.html.php';
+	require 'views/footer.html.php';
+	unset($_SESSION['new_password']);
 	break;
 case 'delete_user':
 	delete_user($_GET['username']);

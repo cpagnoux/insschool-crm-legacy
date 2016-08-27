@@ -1,12 +1,13 @@
 TODO:
-- security (SQL injection, file access, ...)
+- security (SQL injection, file access, $_SERVER['PHP_SELF'], ...)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
 - choose more appropriate types in <input> tags when possible of use regexp
 - call sheet
-- mail functionality
+- mail functionality -> make it work
 - implement ability to send attachments with mails
+- add email to user in db + implement mail confirmation on pw change ?
 - ui for ordering rooms
 - add title for support and password change pages
 - resize input fields
-- add email to user in db + implement mail confirmation on pw change
+- store followed quarters by members in db in case of quarterly plan

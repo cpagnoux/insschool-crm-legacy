@@ -928,7 +928,9 @@ function reset_password($username)
 
 	mysqli_close($link);
 
-	redirect('user');
+	$_SESSION['new_password'] = $password;
+
+	redirect_after_reset_password();
 }
 
 function delete_user($username)
