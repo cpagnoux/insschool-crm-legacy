@@ -1,0 +1,66 @@
+input {
+	background-color: #404040;
+	border: none;
+	box-sizing: border-box;
+	padding: 10px 20px;
+	width: 100%;
+}
+
+input[type=submit] {
+	background-color: #808080;
+	color: #ffffff;
+	display: inline-block;
+	padding: 10px 20px;
+}
+
+input[type=submit]:hover {
+	background-color: #a0a0a0;
+}
+
+.error {
+	color: #ff0000;
+}
+
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	background-attachment: fixed;
+	background-color: #000000;
+	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
+	color: #808080;
+}
+
+.container {
+	background-color: rgba(0, 0, 0, 0.8);
+	margin: auto;
+	margin-top: 40px;
+	padding: 20px;
+	width: 300px;
+}
+
+.container img {
+	display: block;
+	margin: auto;
+	width: 161px;
+}
+
+.form-row {
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.footer-container {
+	height: 100px;
+	margin-top: 40px;
+}
+
+footer {
+	bottom: 0;
+	height: 100px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}

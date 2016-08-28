@@ -1,7 +1,7 @@
 
 <div class="footer-container">
   <footer>
-    <p>&copy; 2016 Christophe Pagnoux-Vieuxfort pour INS School</p>
+    <p>&copy; 2016 Christophe Pagnoux-Vieuxfort</p>
   </footer>
 </div>
 

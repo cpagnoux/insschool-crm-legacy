@@ -1,9 +1,9 @@
-a {
+a, .dropdown-toggle {
 	color: #e0e0e0;
 	text-decoration: none;
 }
 
-a:hover {
+a:hover, .dropdown-toggle:hover {
 	color: #ffffff;
 }
 
@@ -11,16 +11,34 @@ h1, h2 {
 	color: #ffffff;
 }
 
-h2 {
+h2, .uppercase {
 	text-transform: uppercase;
 }
 
-select {
-	width: 245px;
+input, select, textarea {
+	background-color: #404040;
+	border: none;
+	box-sizing: border-box;
+	padding: 10px 20px;
+	width: 500px;
 }
 
-textarea {
-	width: 230px;
+input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
+	width: auto;
+}
+
+input[type=submit], .button, .quantity-button {
+	background-color: #808080;
+	color: #ffffff;
+	display: inline-block;
+}
+
+input[type=submit]:hover, .button:hover, .quantity-button:hover {
+	background-color: #a0a0a0;
+}
+
+input[type=submit], .button {
+	padding: 10px 20px;
 }
 
 .attribute-name {
@@ -31,31 +49,8 @@ textarea {
 	padding-right: 20px;
 }
 
-.button, .quantity-button {
-	background-color: #808080;
-	color: #ffffff;
-	display: inline-block;
-}
-
-.button:hover, .quantity-button:hover {
-	background-color: #a0a0a0;
-}
-
-.button {
-	padding: 5px 10px;
-}
-
-.datetime-select {
-	width: auto;
-}
-
 .dropdown-toggle {
-	color: #e0e0e0;
 	cursor: pointer;
-}
-
-.dropdown-toggle:hover {
-	color: #ffffff;
 }
 
 .error {
@@ -69,13 +64,13 @@ textarea {
 
 .quantity-button {
 	border-radius: 100%;
-	line-height: 25px;
+	line-height: 30px;
 	text-align: center;
-	width: 25px;
+	width: 30px;
 }
 
 .quantity-input {
-	width: 20px;
+	width: 60px;
 }
 
 table, th, td {
@@ -87,8 +82,7 @@ table {
 }
 
 th, td {
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 10px 20px;
 }
 
 th {
@@ -115,52 +109,16 @@ html {
 
 body {
 	background-attachment: fixed;
-	background-color: #000000;
-	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
+	background-color: #404040;
 	color: #808080;
 }
 
-footer {
+header {
 	background-color: #000000;
-	bottom: 0;
-	height: 100px;
-	position: absolute;
-	text-align: center;
-	width: 100%;
-}
-
-fieldset {
-	border: none;
-}
-
-.navigation-bar ul, .pagination ul, .action-links {
-	margin: 0;
-	padding: 0;
-}
-
-.login-container {
-	background-color: #000000;
-	margin: auto;
-	margin-top: 40px;
-	padding: 20px;
-	width: 245px;
-}
-
-.login-container img {
-	display: block;
-	margin: auto;
-	width: 161px;
-}
-
-.login-container input[type=submit] {
-	width: 245px;
 }
 
 .utility-bar {
-	background-color: #000000;
 	line-height: 40px;
-	margin-bottom: 20px;
-	opacity: 0.8;
 	padding-right: 20px;
 	position: relative;
 	text-align: right;
@@ -174,7 +132,7 @@ fieldset {
 }
 
 .dropdown-content {
-	background-color: #404040;
+	background-color: #808080;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	display: none;
 	position: absolute;
@@ -183,35 +141,37 @@ fieldset {
 }
 
 .dropdown-content a {
+	color: #ffffff;
 	display: block;
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
 .dropdown-content a:hover {
-	background-color: #606060;
-	color: #e0e0e0;
+	background-color: #a0a0a0;
 }
 
 .show {
 	display: block;
 }
 
+.navigation-bar ul, .pagination ul, .action-links {
+	margin: 0;
+	padding: 0;
+}
+
 .navigation-bar {
-	background-color: #000000;
 	height: 85px;
 	line-height: 85px;
 	margin: auto;
 	margin-bottom: 40px;
-	opacity: 0.8;
 	position: relative;
 	text-transform: uppercase;
-	width: 95%;
+	width: 1100px;
 	z-index: 0;
 }
 
 .navigation-bar img {
-	border-right: 1px solid #202020;
 	float: left;
 }
 
@@ -220,7 +180,6 @@ fieldset {
 }
 
 .navigation-bar li a {
-	border-right: 1px solid #202020;
 	color: #ffffff;
 	display: inline-block;
 	float: left;
@@ -264,8 +223,13 @@ fieldset {
 	padding-right: 20px;
 }
 
+.filter select, .display-option select {
+	width: auto;
+}
+
 .pagination {
 	margin-top: 20px;
+	text-align: center;
 }
 
 .pagination ul {
@@ -300,6 +264,10 @@ fieldset {
 	display: inline;
 }
 
+fieldset {
+	border: none;
+}
+
 .form-row, .editor {
 	margin-bottom: 1em;
 	margin-top: 1em;
@@ -319,15 +287,11 @@ fieldset {
 	margin-top: 40px;
 }
 
-.pre-registration-header {
+footer {
 	background-color: #000000;
-	line-height: 85px;
-	margin-bottom: 40px;
-	margin-left: 40px;
-	margin-right: 40px;
-	opacity: 0.8;
-}
-
-.pre-registration-header img {
-	float: left;
+	bottom: 0;
+	height: 100px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
 }

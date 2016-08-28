@@ -8,7 +8,7 @@
 <title>Pré-inscription - INS SCHOOL</title>
 
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/pre-registration.css">
 
 </head>
 <body>

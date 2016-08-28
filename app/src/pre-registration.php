@@ -26,7 +26,8 @@ function display_rooms($link)
 	echo '  <tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		echo '    <th><b>' . $row['name'] . '</b></th>' . PHP_EOL;
+		echo '    <th class="uppercase">' . $row['name'] . '</th>' .
+		     PHP_EOL;
 		$num_rooms++;
 	}
 
@@ -42,7 +43,8 @@ function display_day($day, $count)
 	echo '  <tr>' . PHP_EOL;
 
 	for ($i = 0; $i < $count; $i++)
-		echo '    <th><b>' . eval_enum($day) . '</b></th>' . PHP_EOL;
+		echo '    <th class="uppercase">' . eval_enum($day) . '</th>' .
+		     PHP_EOL;
 
 	echo '  </tr>' . PHP_EOL;
 }

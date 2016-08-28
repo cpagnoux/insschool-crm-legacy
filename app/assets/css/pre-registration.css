@@ -1,0 +1,121 @@
+a {
+	color: #e0e0e0;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #ffffff;
+}
+
+h1, h2 {
+	color: #ffffff;
+}
+
+h2, .uppercase {
+	text-transform: uppercase;
+}
+
+input, select {
+	background-color: #404040;
+	border: none;
+	box-sizing: border-box;
+	padding: 10px 20px;
+	width: 500px;
+}
+
+input[type=checkbox], input[type=radio], input[type=submit], select {
+	width: auto;
+}
+
+input[type=submit] {
+	background-color: #808080;
+	color: #ffffff;
+	display: inline-block;
+}
+
+input[type=submit]:hover {
+	background-color: #a0a0a0;
+}
+
+.attribute-name {
+	font-weight: bold;
+}
+
+table, th, td {
+	border: 1px solid #202020;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+th, td {
+	padding: 10px 20px;
+}
+
+th {
+	background-color: #404040;
+	color: #ffffff;
+}
+
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	background-attachment: fixed;
+	background-color: #000000;
+	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
+	color: #808080;
+}
+
+header {
+	background-color: #000000;
+	line-height: 85px;
+	margin: auto;
+	margin-bottom: 40px;
+	margin-top: 100px;
+	opacity: 0.8;
+	width: 90%;
+}
+
+header img {
+	float: left;
+}
+
+.container {
+	background-color: #000000;
+	margin: auto;
+	margin-bottom: 20px;
+	padding: 20px;
+	width: 1000px;
+}
+
+fieldset {
+	border: none;
+}
+
+.form-row {
+	margin-bottom: 1em;
+	margin-top: 1em;
+}
+
+.form-row-option {
+	display: inline-block;
+	padding-right: 20px;
+}
+
+.footer-container {
+	height: 100px;
+	margin-top: 40px;
+}
+
+footer {
+	background-color: #000000;
+	bottom: 0;
+	height: 100px;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}

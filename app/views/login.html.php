@@ -8,12 +8,12 @@
 <title>Bienvenue sur l'espace de gestion INS School</title>
 
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/login.css">
 
 </head>
 <body>
 
-<div class="login-container">
+<div class="container">
   <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
 
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
@@ -33,6 +33,12 @@
   <?php if ($_SESSION['login-failure']): ?>
     <p class="error">Nom d'utilisateur ou mot de passe incorrect</p>
   <?php endif ?>
+</div>
+
+<div class="footer-container">
+  <footer>
+    <p>&copy; 2016 Christophe Pagnoux-Vieuxfort</p>
+  </footer>
 </div>
 
 </body>
