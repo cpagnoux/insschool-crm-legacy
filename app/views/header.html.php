@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+<script src="assets/js/dropdown.js"></script>
+
 <?php if ($_GET['action'] == 'send_mail'): ?>
   <script src="ckeditor/ckeditor.js"></script>
 <?php endif ?>
@@ -18,12 +20,18 @@
 <body>
 
 <header>
-  <div class="account">
+  <div class="utility-bar">
     <?php link_send_ticket() ?>
     <span class="blank"></span>
-    <?php link_change_password() ?>
-    <span class="blank"></span>
-    <?php link_logout() ?>
+
+    <div class="dropdown">
+      <span class="dropdown-toggle" onclick="show_content()">Mon compte &#9662;</span>
+
+      <div class="dropdown-content" id="dropdown">
+        <?php link_change_password() ?>
+        <?php link_logout() ?>
+      </div>
+    </div>
   </div>
 
   <nav class="navigation-bar">

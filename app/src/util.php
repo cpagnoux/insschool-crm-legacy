@@ -318,7 +318,7 @@ function link_change_password()
 function link_logout()
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] .
-	     '?action=logout">Se déconnecter</a>';
+	     '?action=logout">Déconnexion</a>';
 }
 
 /*

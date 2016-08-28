@@ -49,6 +49,15 @@ textarea {
 	width: auto;
 }
 
+.dropdown-toggle {
+	color: #e0e0e0;
+	cursor: pointer;
+}
+
+.dropdown-toggle:hover {
+	color: #ffffff;
+}
+
 .error {
 	color: #ff0000;
 }
@@ -147,13 +156,45 @@ fieldset {
 	width: 245px;
 }
 
-.account {
+.utility-bar {
 	background-color: #000000;
 	line-height: 40px;
 	margin-bottom: 20px;
 	opacity: 0.8;
 	padding-right: 20px;
+	position: relative;
 	text-align: right;
+	z-index: 1;
+}
+
+.dropdown {
+	display: inline-block;
+	float: right;
+	position: relative;
+}
+
+.dropdown-content {
+	background-color: #404040;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 250px;
+}
+
+.dropdown-content a {
+	display: block;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.dropdown-content a:hover {
+	background-color: #606060;
+	color: #e0e0e0;
+}
+
+.show {
+	display: block;
 }
 
 .navigation-bar {
@@ -163,8 +204,10 @@ fieldset {
 	margin: auto;
 	margin-bottom: 40px;
 	opacity: 0.8;
+	position: relative;
 	text-transform: uppercase;
 	width: 95%;
+	z-index: 0;
 }
 
 .navigation-bar img {
