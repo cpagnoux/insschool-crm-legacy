@@ -21,11 +21,11 @@
           <td><?php echo $row['username'] ?></td>
 
           <td>
-            <?php echo eval_boolean($row['admin']) ?>
-
             <?php if ($row['username'] != $_SESSION['username']): ?>
               <span class="blank"></span>
-              <?php link_toggle_admin($row['username']) ?>
+              <?php link_toggle_admin($row['username'], $row['admin']) ?>
+            <?php else: ?>
+              <?php echo eval_boolean($row['admin']) ?>
             <?php endif ?>
           </td>
 

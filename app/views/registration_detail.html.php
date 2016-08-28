@@ -14,9 +14,7 @@
           <td><?php echo link_entity('lesson', $row['lesson_id'], $row['title']) ?></td>
 
           <td>
-            <?php echo eval_boolean($row['show_participation']) ?>
-            <span class="blank"></span>
-            <?php link_toggle_show_participation($registration_id, $row['lesson_id']) ?>
+            <?php link_toggle_show_participation($registration_id, $row['lesson_id'], $row['show_participation']) ?>
           </td>
 
           <td><?php link_remove_lesson($registration_id, $row['lesson_id']) ?></td>

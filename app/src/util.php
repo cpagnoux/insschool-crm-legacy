@@ -158,11 +158,19 @@ function link_delete_entity($table, $id)
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
-function link_toggle_volunteer($member_id)
+function link_toggle_volunteer($member_id, $volunteer)
 {
-	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	$state = '';
+	$label = 'Non';
+
+	if ($volunteer) {
+		$state = ' true';
+		$label = 'Oui';
+	}
+
+	echo '<a class="button' . $state . '" href="' . $_SERVER['PHP_SELF'] .
 	     '?action=toggle_volunteer&amp;member_id=' . $member_id .
-	     '">Changer</a>';
+	     '">' . $label . '</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
@@ -203,12 +211,21 @@ function link_commit_pre_registration($pre_registration_id)
 	     '">Valider la pré-inscription</a>';
 }
 
-function link_toggle_show_participation($registration_id, $lesson_id)
+function link_toggle_show_participation($registration_id, $lesson_id,
+					$participant)
 {
-	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
+	$state = '';
+	$label = 'Non';
+
+	if ($participant) {
+		$state = ' true';
+		$label = 'Oui';
+	}
+
+	echo '<a class="button' . $state . '" href="' . $_SERVER['PHP_SELF'] .
 	     '?action=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
-	     '">Changer</a>';
+	     '">' . $label . '</a>';
 }
 
 function link_remove_lesson($registration_id, $lesson_id)
@@ -234,10 +251,19 @@ function link_reset_absences($teacher_id)
 	     'Réinitialiser</a>';
 }
 
-function link_toggle_admin($username)
+function link_toggle_admin($username, $admin)
 {
-	echo '<a class="button" href="' . $_SERVER['PHP_SELF'] .
-	     '?action=toggle_admin&amp;username=' . $username . '">Changer</a>';
+	$state = '';
+	$label = 'Non';
+
+	if ($admin) {
+		$state = ' true';
+		$label = 'Oui';
+	}
+
+	echo '<a class="button' . $state . '" href="' . $_SERVER['PHP_SELF'] .
+	     '?action=toggle_admin&amp;username=' . $username . '">' . $label .
+	     '</a>';
 }
 
 function link_reset_password($username)
