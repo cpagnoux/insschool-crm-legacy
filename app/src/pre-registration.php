@@ -249,7 +249,7 @@ function add_member_from_pr($link, $row)
 		 '", "' . $row['city'] . '", "' . $row['cellphone'] . '", "' .
 		 $row['cellphone_father'] . '", "' . $row['cellphone_mother'] .
 		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "' .
-		 $row['means_of_knowledge'] . '", "")';
+		 $row['means_of_knowledge'] . '", "", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

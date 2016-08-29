@@ -180,7 +180,7 @@ function add_member($data)
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .
 		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $data['means_of_knowledge'] . '", "")';
+		 '", "' . $data['means_of_knowledge'] . '", "", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

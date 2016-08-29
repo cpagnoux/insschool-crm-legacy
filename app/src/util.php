@@ -534,7 +534,7 @@ function followed_quarters_to_string($followed_quarters)
 
 function format_date($date)
 {
-	if ($date == '0000-00-00')
+	if ($date == '0000-00-00' || $date == '0000-00-00 00:00:00')
 		return 'Inconnue';
 
 	// date is in 'YYYY-MM-DD' format

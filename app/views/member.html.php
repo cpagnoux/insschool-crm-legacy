@@ -48,6 +48,11 @@
     <?php link_toggle_volunteer($row['member_id'], $row['volunteer']) ?>
   </p>
 
+  <p>
+    <span class="attribute-name">Membre depuis le :</span>
+    <?php echo format_date($row['creation_date']) ?>
+  </p>
+
   <ul class="action-links">
     <li><?php link_send_mail('member', $row['member_id']) ?></li>
     <li><?php link_modify_entity('member', $row['member_id']) ?></li>
