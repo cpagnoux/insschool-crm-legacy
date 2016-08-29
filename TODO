@@ -9,4 +9,3 @@ TODO:
 - add email to user in db + implement mail confirmation on pw change ?
 - ui for ordering rooms
 - add title for support and password change pages
-- store followed quarters by members in db in case of quarterly plan

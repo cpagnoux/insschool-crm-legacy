@@ -8,6 +8,7 @@
 
 <fieldset>
   <?php radio_plan($row['plan']) ?>
+  <?php checkbox_followed_quarters($row['plan'], $row['followed_quarters']) ?>
 
   <div class="form-row">
     <label for="price">Tarif :</label><br>

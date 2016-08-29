@@ -290,15 +290,21 @@ function prepare_filter_member_unpaid_registration()
 	$filter = '';
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		if (!registration_paid($row['registration_id'])
-		    && $filter == '')
-			$filter = ' WHERE member_id = ' . $row['member_id'];
-		else if (!registration_paid($row['registration_id']))
-			$filter .= ' OR member_id = ' . $row['member_id'];
+		if (!registration_paid($row['registration_id'])) {
+			if ($filter == '')
+				$filter = ' WHERE ';
+			else
+				$filter .= ' OR ';
+
+			$filter .= 'member_id = ' . $row['member_id'];
+		}
 	}
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	if ($filter == '')
+		return ' WHERE 0';
 
 	return $filter;
 }
@@ -316,14 +322,19 @@ function prepare_filter_order_unpaid()
 	$filter = '';
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		if (!order_paid($row['order_id']) && $filter == '')
-			$filter = 'order_id = ' . $row['order_id'];
-		else if (!order_paid($row['order_id']))
-			$filter .= ' OR order_id = ' . $row['order_id'];
+		if (!order_paid($row['order_id'])) {
+			if ($filter != '')
+				$filter .= ' OR ';
+
+			$filter .= 'order_id = ' . $row['order_id'];
+		}
 	}
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	if ($filter == '')
+		return '0';
 
 	return $filter;
 }
@@ -349,11 +360,14 @@ function select_filter($table)
 			$filter = ' WHERE member_id = ' .
 				  $_SESSION['order_filter_by_member'];
 
-		if ($_SESSION['order_filter'] == 'unpaid' && $filter == '')
-			$filter = ' WHERE ' . prepare_filter_order_unpaid();
-		else if ($_SESSION['order_filter'] == 'unpaid')
-			$filter .= ' AND (' . prepare_filter_order_unpaid() .
-				   ')';
+		if ($_SESSION['order_filter'] == 'unpaid') {
+			if ($filter == '')
+				$filter = ' WHERE ' .
+					  prepare_filter_order_unpaid();
+			else
+				$filter .= ' AND (' .
+					   prepare_filter_order_unpaid() . ')';
+		}
 
 		break;
 	}

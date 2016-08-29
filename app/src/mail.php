@@ -86,10 +86,12 @@ function send_mail_to_multiple_recipients($table, $subject, $message)
 	$to = '';
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['email'] != '' && $to == '')
-			$to = $row['email'];
-		else if ($row['email'] != '')
-			$to .= ', ' . $row['email'];
+		if ($row['email'] != '') {
+			if ($to != '')
+				$to .= ', ';
+
+			$to .= $row['email'];
+		}
 	}
 
 	mysqli_free_result($result);
@@ -129,10 +131,12 @@ function send_mail_to_lesson_registrants($lesson_id, $season, $subject,
 	$to = '';
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		if ($row['email'] != '' && $to == '')
-			$to = $row['email'];
-		else if ($row['email'] != '')
-			$to .= ', ' . $row['email'];
+		if ($row['email'] != '') {
+			if ($to != '')
+				$to .= ', ';
+
+			$to .= $row['email'];
+		}
 	}
 
 	mysqli_free_result($result);

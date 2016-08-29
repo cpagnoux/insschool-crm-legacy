@@ -179,9 +179,13 @@ function lessons_to_string($lessons, $display = false)
 
 	foreach ($lessons as $lesson_id => $title) {
 		if (is_int($lesson_id) && isset($title)) {
+			if ($string != '')
+				$string .= ',';
+
+			$string .= $lesson_id;
+
 			if ($display)
 				echo '  <li>' . $title . '</li>' . PHP_EOL;
-			$string .= $lesson_id . ';';
 		}
 	}
 
@@ -291,7 +295,7 @@ function add_registration_from_pr($link, $member_id, $row)
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
 		 '", "' . $season . '", "' . $row['plan'] .
-		 '", "", "", "", NOW())';
+		 '", "", "", "", "", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

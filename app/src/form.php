@@ -12,6 +12,28 @@ require_once 'src/pre-registration.php';
 /*
  * Checkboxes for forms
  */
+function checkbox_followed_quarters($plan = null, $followed_quarters_str = null)
+{
+	$state = '';
+	$_1 = '';
+	$_2 = '';
+	$_3 = '';
+
+	if (isset($plan) && $plan == 'QUARTERLY')
+		$state = ' show';
+
+	if (isset($followed_quarters_str)) {
+		if (strpos($followed_quarters_str, '1') !== false)
+			$_1 = ' checked="checked"';
+		if (strpos($followed_quarters_str, '2') !== false)
+			$_2 = ' checked="checked"';
+		if (strpos($followed_quarters_str, '3') !== false)
+			$_3 = ' checked="checked"';
+	}
+
+	require 'views/checkbox_followed_quarters.html.php';
+}
+
 function checkbox_lessons($lessons_str = null)
 {
 	$lessons = array();

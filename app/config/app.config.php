@@ -11,4 +11,7 @@ define('DEBUG', 1);
 // Mail
 define('EMAIL', 'bounty63700@hotmail.fr');
 define('DEV_EMAIL', 'christophe.pagnouxv@gmail.com');
+
+// Misc
+define('WEBSITE_URL', 'http://www.insschool.fr/');
 ?>

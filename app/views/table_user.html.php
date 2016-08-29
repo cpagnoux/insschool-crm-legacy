@@ -22,7 +22,6 @@
 
           <td>
             <?php if ($row['username'] != $_SESSION['username']): ?>
-              <span class="blank"></span>
               <?php link_toggle_admin($row['username'], $row['admin']) ?>
             <?php else: ?>
               <?php echo eval_boolean($row['admin']) ?>

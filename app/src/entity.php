@@ -247,12 +247,18 @@ function add_payment($table, $data)
 
 function add_registration($data)
 {
+	$followed_quarters_str = '';
+
+	if ($data['plan'] == 'QUARTERLY')
+		$followed_quarters_str = followed_quarters_to_string($data);
+
 	$link = connect_database();
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
 		 '", "' . $data['season'] . '", "' . $data['plan'] . '", "' .
-		 $data['price'] . '", "' . $data['discount'] . '", "' .
-		 $data['num_payments'] . '", NOW())';
+		 $followed_quarters_str . '", "' . $data['price'] . '", "' .
+		 $data['discount'] . '", "' . $data['num_payments'] .
+		 '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -588,9 +594,15 @@ function modify_pre_registration($pre_registration_id, $data)
 
 function modify_registration($registration_id, $data)
 {
+	$followed_quarters_str = '';
+
+	if ($data['plan'] == 'QUARTERLY')
+		$followed_quarters_str = followed_quarters_to_string($data);
+
 	$link = connect_database();
 
 	$query = 'UPDATE registration SET plan = "' . $data['plan'] .
+		 '", followed_quarters = "' . $followed_quarters_str .
 		 '", price = "' . $data['price'] . '", discount = "' .
 		 $data['discount'] . '", num_payments = "' .
 		 $data['num_payments'] . '" WHERE registration_id = ' .

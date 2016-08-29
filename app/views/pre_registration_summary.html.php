@@ -42,4 +42,6 @@
     <span class="attribute-name">Vous avez choisi le forfait :</span>
     <?php echo eval_enum($data['plan']) ?>
   </p>
+
+  <p><?php link_website() ?></p>
 </div>

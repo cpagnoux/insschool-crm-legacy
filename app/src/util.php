@@ -347,6 +347,12 @@ function link_logout()
 	     '?action=logout">Déconnexion</a>';
 }
 
+function link_website()
+{
+	echo '<a href="' . WEBSITE_URL .
+	     '">Retour vers le site d\'INS School</a>';
+}
+
 /*
  * Redirects
  */
@@ -503,6 +509,27 @@ function eval_enum($value)
 	}
 
 	return $result;
+}
+
+function followed_quarters($followed_quarters_str)
+{
+	return str_replace(',', ', ', $followed_quarters_str);
+}
+
+function followed_quarters_to_string($followed_quarters)
+{
+	$string = '';
+
+	for ($i = 1; $i <= 3; $i++) {
+		if (isset($followed_quarters['followed_quarters_' . $i])) {
+			if ($string != '')
+				$string .= ',';
+
+			$string .= $i;
+		}
+	}
+
+	return $string;
 }
 
 function format_date($date)

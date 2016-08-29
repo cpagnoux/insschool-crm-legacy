@@ -1,9 +1,20 @@
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	background-attachment: fixed;
+	background-color: #404040;
+	color: #808080;
+}
+
 a, .dropdown-toggle {
 	color: #e0e0e0;
 	text-decoration: none;
 }
 
-a:hover, .dropdown-toggle:hover {
+a:hover, .dropdown-toggle:hover, .dropdown-toggle.highlight {
 	color: #ffffff;
 }
 
@@ -46,7 +57,16 @@ input[type=submit], .button {
 }
 
 .blank {
-	padding-right: 20px;
+	display: inline-block;
+	width: 20px;
+}
+
+.button.true {
+	background-color: #008000;
+}
+
+.button.true:hover {
+	background-color: #00a000;
 }
 
 .dropdown-toggle {
@@ -71,14 +91,6 @@ input[type=submit], .button {
 
 .quantity-input {
 	width: 60px;
-}
-
-.true {
-	background-color: #008000;
-}
-
-.true:hover {
-	background-color: #00a000;
 }
 
 table, th, td {
@@ -110,17 +122,6 @@ th {
 	border-bottom: 1px solid #202020;
 }
 
-html {
-	min-height: 100%;
-	position: relative;
-}
-
-body {
-	background-attachment: fixed;
-	background-color: #404040;
-	color: #808080;
-}
-
 header {
 	background-color: #000000;
 }
@@ -133,13 +134,18 @@ header {
 	z-index: 1;
 }
 
+.dropdown-menu, .navbar ul, .pagination ul, .action-links {
+	margin: 0;
+	padding: 0;
+}
+
 .dropdown {
 	display: inline-block;
 	float: right;
 	position: relative;
 }
 
-.dropdown-content {
+.dropdown-menu {
 	background-color: #808080;
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	display: none;
@@ -148,27 +154,26 @@ header {
 	width: 250px;
 }
 
-.dropdown-content a {
+.dropdown-menu li {
+	display: block;
+}
+
+.dropdown-menu a {
 	color: #ffffff;
 	display: block;
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
-.dropdown-content a:hover {
+.dropdown-menu a:hover {
 	background-color: #a0a0a0;
 }
 
-.show {
+.dropdown-menu.show {
 	display: block;
 }
 
-.navigation-bar ul, .pagination ul, .action-links {
-	margin: 0;
-	padding: 0;
-}
-
-.navigation-bar {
+.navbar {
 	height: 85px;
 	line-height: 85px;
 	margin: auto;
@@ -179,15 +184,15 @@ header {
 	z-index: 0;
 }
 
-.navigation-bar img {
+.navbar img {
 	float: left;
 }
 
-.navigation-bar li {
+.navbar li {
 	display: inline;
 }
 
-.navigation-bar li a {
+.navbar li a {
 	color: #ffffff;
 	display: inline-block;
 	float: left;
@@ -195,7 +200,7 @@ header {
 	padding-right: 10px;
 }
 
-.navigation-bar li a:hover {
+.navbar li a:hover {
 	background-color: #202020;
 }
 
@@ -288,6 +293,14 @@ fieldset {
 
 .editor {
 	width: 650px;
+}
+
+.hidden {
+	display: none;
+}
+
+.hidden.show {
+	display: block;
 }
 
 .footer-container {

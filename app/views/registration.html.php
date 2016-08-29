@@ -18,6 +18,12 @@
     <?php echo registration_formula($row['registration_id']) ?> cours<br>
     <span class="attribute-name">Forfait :</span>
     <?php echo eval_enum($row['plan']) ?><br>
+
+    <?php if ($row['plan'] == 'QUARTERLY'): ?>
+      <span class="attribute-name">Trimestre(s) suivi(s) :</span>
+      <?php echo followed_quarters($row['followed_quarters']) ?><br>
+    <?php endif ?>
+
     <span class="attribute-name">Tarif :</span>
     <?php echo $row['price'] ?> €<br>
     <span class="attribute-name">Réduction :</span>

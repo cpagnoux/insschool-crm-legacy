@@ -10,10 +10,10 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-<script src="assets/js/dropdown.js"></script>
+<script src="assets/js/main.js"></script>
 
 <?php if ($_GET['action'] == 'send_mail'): ?>
-  <script src="ckeditor/ckeditor.js"></script>
+  <script src="vendor/ckeditor/ckeditor.js"></script>
 <?php endif ?>
 
 </head>
@@ -25,16 +25,16 @@
     <span class="blank"></span>
 
     <div class="dropdown">
-      <span class="dropdown-toggle" onclick="show_content()">Mon compte &#9662;</span>
+      <span class="dropdown-toggle" id="dropdown-toggle" onclick="showMenu()">Mon compte &#9662;</span>
 
-      <div class="dropdown-content" id="dropdown">
-        <?php link_change_password() ?>
-        <?php link_logout() ?>
-      </div>
+      <ul class="dropdown-menu" id="dropdown-menu">
+        <li><?php link_change_password() ?></li>
+        <li><?php link_logout() ?></li>
+      </ul>
     </div>
   </div>
 
-  <nav class="navigation-bar">
+  <nav class="navbar">
     <a href="<?php echo $_SERVER['PHP_SELF'] ?>">
       <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
     </a>
