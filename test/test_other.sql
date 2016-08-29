@@ -82,8 +82,8 @@ INSERT INTO `registration_payment` VALUES ('', 1, 130.00, 'CHECK', '2011-09-15')
 	('', 2, 100.00, 'CHECK', '2013-03-01'),
 	('', 3, 10.00, 'CASH', '2013-09-15');
 
-INSERT INTO `room` VALUES ('', 'Salle du Temps', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 1),
-	('', 'Salle Afrika Bambaataa', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand', 2);
+INSERT INTO `room` VALUES ('', 'Salle du Temps', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand'),
+	('', 'Salle Afrika Bambaataa', '29 Rue Jules Verne', '63100', 'Clermont-Ferrand');
 
 INSERT INTO `teacher` VALUES ('', 'François', 'Khamny', '', '', '', '', '', '', '', ''),
 	('', 'Djamel', 'Dahak', '', '', '', '', '', '', '', ''),

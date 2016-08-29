@@ -296,7 +296,7 @@ function add_room($data)
 
 	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
 		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
-		 $data['city'] . '", "")';
+		 $data['city'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
