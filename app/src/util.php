@@ -60,16 +60,16 @@ function link_previous($table, $page)
 {
 	if ($page == 1)
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '">&lt;</a>';
+		     '">&laquo;</a>';
 	else
 		echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-		     '&amp;page=' . $page . '">&lt;</a>';
+		     '&amp;page=' . $page . '">&laquo;</a>';
 }
 
 function link_next($table, $page)
 {
 	echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table .
-	     '&amp;page=' . $page . '">&gt;</a>';
+	     '&amp;page=' . $page . '">&raquo;</a>';
 }
 
 function link_page($table, $page)
