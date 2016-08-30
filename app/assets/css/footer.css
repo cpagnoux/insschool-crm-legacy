@@ -1,0 +1,19 @@
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	margin-bottom: 140px;
+}
+
+footer {
+	bottom: 0;
+	height: 100px;
+	position: absolute;
+	width: 100%;
+}
+
+.footer-container {
+	text-align: center;
+}

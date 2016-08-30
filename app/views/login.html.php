@@ -9,6 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
 
 </head>
 <body>
@@ -34,12 +35,3 @@
     <p class="error">Nom d'utilisateur ou mot de passe incorrect</p>
   <?php endif ?>
 </div>
-
-<div class="footer-container">
-  <footer>
-    <p>&copy; 2016 Christophe Pagnoux-Vieuxfort</p>
-  </footer>
-</div>
-
-</body>
-</html>

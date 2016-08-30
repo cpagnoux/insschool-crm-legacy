@@ -1,9 +1,9 @@
 
-<div class="footer-container">
-  <footer>
+<footer>
+  <div class="footer-container">
     <p>&copy; 2016 Christophe Pagnoux-Vieuxfort</p>
-  </footer>
-</div>
+  </div>
+</footer>
 
 </body>
 </html>

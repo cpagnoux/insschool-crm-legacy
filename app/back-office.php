@@ -139,6 +139,7 @@ if (!session_valid()) {
 switch ($action) {
 case 'login':
 	require 'views/login.html.php';
+	require 'views/footer.html.php';
 	break;
 case 'display_table':
 	display_table($_GET['table'], $_GET['page']);

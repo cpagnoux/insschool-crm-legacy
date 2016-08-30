@@ -1,3 +1,11 @@
+body {
+	background-attachment: fixed;
+	background-color: #000000;
+	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
+	background-position: center top;
+	color: #808080;
+}
+
 input {
 	background-color: #404040;
 	border: none;
@@ -21,18 +29,6 @@ input[type=submit]:hover {
 	color: #ff0000;
 }
 
-html {
-	min-height: 100%;
-	position: relative;
-}
-
-body {
-	background-attachment: fixed;
-	background-color: #000000;
-	background-image: url("http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg");
-	color: #808080;
-}
-
 .container {
 	background-color: rgba(0, 0, 0, 0.8);
 	margin: auto;
@@ -50,17 +46,4 @@ body {
 .form-row {
 	margin-bottom: 1em;
 	margin-top: 1em;
-}
-
-.footer-container {
-	height: 100px;
-	margin-top: 40px;
-}
-
-footer {
-	bottom: 0;
-	height: 100px;
-	position: absolute;
-	text-align: center;
-	width: 100%;
 }

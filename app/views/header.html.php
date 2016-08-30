@@ -8,7 +8,8 @@
 <title>Espace de gestion INS School</title>
 
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
 
 <script src="assets/js/main.js"></script>
 
