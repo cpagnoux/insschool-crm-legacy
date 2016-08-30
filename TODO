@@ -1,5 +1,5 @@
 TODO:
-- security (SQL injection, file access, html encode)
+- security (file access, html encode)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
 - choose more appropriate types in <input> tags when possible or use regexp
@@ -10,6 +10,7 @@ TODO:
 - ui for ordering rooms in schedule
 - refactor isolating controllers
 - split main controller into multiple light controllers
+- refactor design using persistent navbar and menu
 - change way required fields are identified
 - make lessons wich start at the same hour on the same row in schedule
   (currently they have to have the same exact time slot)

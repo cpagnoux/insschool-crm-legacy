@@ -19,4 +19,24 @@ function connect_database()
 
 	return $link;
 }
+
+/*
+ * Security
+ */
+function escape_strings($array)
+{
+	if (!isset($array))
+		return;
+
+	$link = connect_database();
+
+	foreach($array as &$value) {
+		$value = trim($value);
+		$value = mysqli_real_escape_string($link, $value);
+	}
+
+	mysqli_close($link);
+
+	return $array;
+}
 ?>

@@ -5,7 +5,12 @@
 
 set_include_path(__DIR__);
 
+require_once 'src/connection.php';
+
 require_once 'src/pre-registration.php';
+
+$_GET = escape_strings($_GET);
+$_POST = escape_strings($_POST);
 
 $action = '';
 

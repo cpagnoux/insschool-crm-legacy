@@ -5,6 +5,7 @@
 
 set_include_path(__DIR__);
 
+require_once 'src/connection.php';
 require_once 'src/login.php';
 require_once 'src/mail.php';
 require_once 'src/util.php';
@@ -12,6 +13,9 @@ require_once 'src/util.php';
 require_once 'src/table.php';
 require_once 'src/entity.php';
 require_once 'src/pre-registration.php';
+
+$_GET = escape_strings($_GET);
+$_POST = escape_strings($_POST);
 
 session_start();
 

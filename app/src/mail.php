@@ -58,7 +58,7 @@ function send_mail_to_single_recipient($table, $id, $subject, $message,
 	}
 
 	$headers = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: ' . EMAIL;
 
 	$success = mail($row['email'], $subject, $message, $headers);
@@ -98,7 +98,7 @@ function send_mail_to_multiple_recipients($table, $subject, $message)
 	mysqli_close($link);
 
 	$headers = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: ' . EMAIL;
 
 	$success = mail($to, $subject, $message, $headers);
@@ -143,7 +143,7 @@ function send_mail_to_lesson_registrants($lesson_id, $season, $subject,
 	mysqli_close($link);
 
 	$headers = 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 	$headers .= 'From: ' . EMAIL;
 
 	$success = mail($to, $subject, $message, $headers);
