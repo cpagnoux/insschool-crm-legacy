@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('teacher') ?> &gt;
-  <?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?>
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('teacher') ?></li>
+  <li><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></li>
+</ol>
 
 <div class="container">
   <h2><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></h2>

@@ -1,7 +1,7 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  Adhérents
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Adhérents</li>
+</ol>
 
 <div class="container">
   <ul class="action-links">

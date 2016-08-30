@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('member') ?> &gt;
-  <?php link_entity('member', $member_id, $name) ?> &gt;
-  Nouvelle inscription
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('member') ?></li>
+  <li><?php link_entity('member', $member_id, $name) ?></li>
+  <li>Nouvelle inscription</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=registration" method="post">

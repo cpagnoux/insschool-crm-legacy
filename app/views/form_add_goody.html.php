@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('goody') ?> &gt;
-  Nouveau goodies
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('goody') ?></li>
+  <li>Nouveau goodies</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=goody" method="post">

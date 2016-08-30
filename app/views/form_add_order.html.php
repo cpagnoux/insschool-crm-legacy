@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('order') ?> &gt;
-  Nouvelle commande
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('order') ?></li>
+  <li>Nouvelle commande</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=order" method="post">

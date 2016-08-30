@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('lesson') ?> &gt;
-  <?php link_entity('lesson', $row['lesson_id'], $title) ?> &gt;
-  Modifier le cours
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('lesson') ?></li>
+  <li><?php link_entity('lesson', $row['lesson_id'], $title) ?></li>
+  <li>Modifier le cours</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=lesson&amp;id=<?php echo $row['lesson_id'] ?>" method="post">

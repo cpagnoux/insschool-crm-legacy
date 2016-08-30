@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('lesson') ?> &gt;
-  <?php link_entity('lesson', $_GET['lesson_id'], get_lesson_title($_GET['lesson_id'])) ?> &gt;
-  Envoyer un mail aux inscrits
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('lesson') ?></li>
+  <li><?php link_entity('lesson', $_GET['lesson_id'], get_lesson_title($_GET['lesson_id'])) ?></li>
+  <li>Envoyer un mail aux inscrits</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_mail&amp;to=lesson_registrants" method="post">

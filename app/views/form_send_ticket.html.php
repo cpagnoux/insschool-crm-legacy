@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Assistance</li>
+</ol>
+
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_ticket" method="post">
     <fieldset>

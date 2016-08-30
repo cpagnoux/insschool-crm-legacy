@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('member') ?> &gt;
-  <?php link_entity('member', $row['member_id'], $name) ?> &gt;
-  Inscription <?php echo $row['season'] ?>
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('member') ?></li>
+  <li><?php link_entity('member', $row['member_id'], $name) ?></li>
+  <li>Inscription <?php echo $row['season'] ?></li>
+</ol>
 
 <div class="container">
   <h2>Inscription <?php echo $row['season'] ?></h2>

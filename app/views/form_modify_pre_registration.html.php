@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('pre_registration') ?> &gt;
-  <?php link_entity('pre_registration', $row['pre_registration_id'], $name) ?> &gt;
-  Modifier la pré-inscription
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('pre_registration') ?></li>
+  <li><?php link_entity('pre_registration', $row['pre_registration_id'], $name) ?></li>
+  <li>Modifier la pré-inscription</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=pre_registration&amp;id=<?php echo $row['pre_registration_id'] ?>" method="post">

@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('room') ?> &gt;
-  <?php echo $row['name'] ?>
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('room') ?></li>
+  <li><?php echo $row['name'] ?></li>
+</ol>
 
 <div class="container">
   <h2><?php echo $row['name'] ?></h2>

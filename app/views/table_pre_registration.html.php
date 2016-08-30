@@ -1,7 +1,7 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  Pré-inscriptions
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Pré-inscriptions</li>
+</ol>
 
 <div class="container">
   <?php if (mysqli_num_rows($result) != 0): ?>

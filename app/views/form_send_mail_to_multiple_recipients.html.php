@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table($_GET['table']) ?> &gt;
-  Envoyer un mail
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table($_GET['table']) ?></li>
+  <li>Envoyer un mail</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_mail&amp;to=multiple_recipients" method="post">

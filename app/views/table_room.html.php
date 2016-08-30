@@ -1,7 +1,7 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  Salles
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Salles</li>
+</ol>
 
 <div class="container">
   <ul class="action-links">

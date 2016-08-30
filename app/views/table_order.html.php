@@ -1,7 +1,7 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  Commandes
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Commandes</li>
+</ol>
 
 <div class="container">
   <ul class="action-links">

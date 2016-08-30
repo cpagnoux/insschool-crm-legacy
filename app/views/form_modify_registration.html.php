@@ -1,10 +1,10 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('member') ?> &gt;
-  <?php link_entity('member', $row['member_id'], $name) ?> &gt;
-  <?php link_entity('registration', $row['registration_id'], 'Inscription ' . $season) ?> &gt;
-  Modifier l'inscription
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('member') ?></li>
+  <li><?php link_entity('member', $row['member_id'], $name) ?></li>
+  <li><?php link_entity('registration', $row['registration_id'], 'Inscription ' . $season) ?></li>
+  <li>Modifier l'inscription</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">

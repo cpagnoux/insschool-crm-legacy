@@ -1,8 +1,8 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('order') ?> &gt;
-  N° <?php echo $row['order_id'] ?>
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('order') ?></li>
+  <li>N° <?php echo $row['order_id'] ?></li>
+</ol>
 
 <div class="container">
   <h2>Commande n° <?php echo $row['order_id'] ?></h2>

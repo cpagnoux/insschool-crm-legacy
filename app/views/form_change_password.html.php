@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Changer de mot de passe</li>
+</ol>
+
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=change_password" method="post">
     <fieldset>

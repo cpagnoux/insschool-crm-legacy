@@ -1,7 +1,7 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  Comptes utilisateurs
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li>Comptes utilisateurs</li>
+</ol>
 
 <div class="container">
   <p>Mot de passe réinitialisé avec succès !</p>

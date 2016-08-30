@@ -1,9 +1,9 @@
-<nav class="breadcrumb">
-  <?php link_home() ?> &gt;
-  <?php link_table('room') ?> &gt;
-  <?php link_entity('room', $row['room_id'], $name) ?> &gt;
-  Modifier la salle
-</nav>
+<ol class="breadcrumb">
+  <li><?php link_home() ?></li>
+  <li><?php link_table('room') ?></li>
+  <li><?php link_entity('room', $row['room_id'], $name) ?></li>
+  <li>Modifier la salle</li>
+</ol>
 
 <div class="container">
   <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=room&amp;id=<?php echo $row['room_id'] ?>" method="post">

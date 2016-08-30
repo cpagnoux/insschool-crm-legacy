@@ -130,6 +130,9 @@ function link_add_entity($table, $id = null)
 	case 'teacher':
 		$label = 'Nouveau professeur';
 		break;
+	case 'user':
+		$label = 'Nouvel utilisateur';
+		break;
 	default:
 		$label = 'Ajouter';
 		break;
