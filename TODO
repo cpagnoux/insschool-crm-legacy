@@ -1,5 +1,5 @@
 TODO:
-- security (SQL injection, file access, $_SERVER['PHP_SELF'], ...)
+- security (SQL injection, file access, html encode)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
 - choose more appropriate types in <input> tags when possible or use regexp
@@ -9,4 +9,4 @@ TODO:
 - add email to user in db + implement mail confirmation on pw change ?
 - ui for ordering rooms in schedule
 - refactor isolating controllers
-- split main controller in multiple light controllers
+- split main controller into multiple light controllers

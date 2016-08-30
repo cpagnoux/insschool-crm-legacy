@@ -5,7 +5,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=add&amp;table=goody" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=goody" method="post">
     <?php require 'views/form_content_goody.html.php' ?>
   </form>
 </div>

@@ -5,7 +5,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=send_mail&amp;to=multiple_recipients" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=send_mail&amp;to=multiple_recipients" method="post">
     <input type="hidden" name="table" value="<?php echo $_GET['table'] ?>">
     <?php require 'views/form_content_send_mail.html.php' ?>
   </form>

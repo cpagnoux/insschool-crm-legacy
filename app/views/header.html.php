@@ -36,7 +36,7 @@
   </div>
 
   <nav class="navbar">
-    <a href="<?php echo $_SERVER['PHP_SELF'] ?>">
+    <a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>">
       <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
     </a>
 

@@ -1,5 +1,5 @@
 <div class="filters">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?table=order" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?table=order" method="post">
     <div class="filter">
       <label for="order_filter_by_member">Adhérent(s) :</label>
 

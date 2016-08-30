@@ -6,7 +6,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['PHP_SELF'] ?>?action=modify&amp;table=order_payment&amp;id=<?php echo $row['order_payment_id'] ?>" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=modify&amp;table=order_payment&amp;id=<?php echo $row['order_payment_id'] ?>" method="post">
     <?php require 'views/form_content_payment.html.php' ?>
   </form>
 </div>
