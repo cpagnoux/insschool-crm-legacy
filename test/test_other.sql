@@ -21,7 +21,7 @@ INSERT INTO `lesson` VALUES ('', 'Ragga Dancehall Débutant', 9, 'MONDAY', '18:3
 	('', 'New School Avancé', 1, 'TUESDAY', '20:40', '21:55', 1, ''),
 	('', 'Atelier Enfant', 2, 'TUESDAY', '18:30', '19:30', 2, ''),
 	('', 'Kizomba', 8, 'TUESDAY', '19:35', '20:35', 2, ''),
-	('', 'New School Int. (20h40 - 21h40)', 1, 'TUESDAY', '20:40', '21:55', 2, ''),
+	('', 'New School Int.', 1, 'TUESDAY', '20:40', '21:40', 2, ''),
 	('', 'Break enfants 8-11 ans', 7, 'WEDNESDAY', '14:00', '14:55', 1, ''),
 	('', 'Break Débutant', 7, 'WEDNESDAY', '15:00', '15:55', 1, ''),
 	('', 'Break Intermédiaire', 7, 'WEDNESDAY', '16:00', '17:00', 1, ''),
@@ -32,18 +32,18 @@ INSERT INTO `lesson` VALUES ('', 'Ragga Dancehall Débutant', 9, 'MONDAY', '18:3
 	('', 'Découverte 6-7 ans', 1, 'WEDNESDAY', '14:00', '14:55', 2, ''),
 	('', 'Découverte 8-9 ans', 1, 'WEDNESDAY', '15:00', '15:55', 2, ''),
 	('', 'Découverte 10-11 ans', 1, 'WEDNESDAY', '16:00', '17:00', 2, ''),
-	('', 'Break Avan. (17h25 - 18h40)', 7, 'WEDNESDAY', '17:25', '18:25', 2, ''),
-	('', 'Session Libre Break', 0, 'WEDNESDAY', '18:30', '19:30', 2, ''),
+	('', 'Break Avan.', 7, 'WEDNESDAY', '17:25', '18:40', 2, ''),
+	('', 'Session Libre Break', 0, 'WEDNESDAY', '18:40', '19:30', 2, ''),
 	('', 'Session Libre', 0, 'WEDNESDAY', '20:55', '21:55', 2, ''),
 	('', 'House Débutant', 1, 'THURSDAY', '18:30', '19:30', 1, ''),
 	('', 'House Avancé', 1, 'THURSDAY', '19:35', '20:50', 1, ''),
 	('', 'House Coaching', 1, 'THURSDAY', '20:55', '21:55', 1, ''),
-	('', 'Pilates-Stretching (19h - 20h)', 3, 'THURSDAY', '19:35', '20:50', 2, ''),
-	('', 'Soul Step (20h05 - 21h05)', 2, 'THURSDAY', '20:55', '21:55', 2, ''),
+	('', 'Pilates-Stretching', 3, 'THURSDAY', '19:00', '20:00', 2, ''),
+	('', 'Soul Step', 2, 'THURSDAY', '20:05', '21:05', 2, ''),
 	('', 'Session Libre Debout', 0, 'FRIDAY', '18:30', '19:30', 1, ''),
 	('', 'Popping Avancé', 2, 'FRIDAY', '19:35', '20:50', 1, ''),
-	('', 'Popping Coaching', 2, 'FRIDAY', '20:50', '21:50', 1, ''),
-	('', 'Break \'\'Top Rock\'\'', 4, 'FRIDAY', '18:30', '19:30', 2, '');
+	('', 'Popping Coaching', 2, 'FRIDAY', '20:55', '21:55', 1, ''),
+	('', 'Break Top Rock', 4, 'FRIDAY', '18:30', '19:30', 2, '');
 
 INSERT INTO `order` VALUES ('', 1, '2016-05-01');
 

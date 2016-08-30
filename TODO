@@ -10,3 +10,6 @@ TODO:
 - ui for ordering rooms in schedule
 - refactor isolating controllers
 - split main controller into multiple light controllers
+- change way required fields are identified
+- make lessons wich start at the same hour on the same row in schedule
+  (currently they have to have the same exact time slot)
