@@ -3,6 +3,8 @@
  * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
+set_include_path(__DIR__);
+
 require_once 'src/login.php';
 require_once 'src/mail.php';
 require_once 'src/util.php';

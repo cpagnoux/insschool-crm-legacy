@@ -3,6 +3,8 @@
  * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
+set_include_path(__DIR__);
+
 require_once 'src/pre-registration.php';
 
 $action = '';
