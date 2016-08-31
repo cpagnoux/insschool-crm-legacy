@@ -18,15 +18,15 @@
   <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
 
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
-    <div class="form-row">
+    <div class="form-group">
       <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required autofocus>
     </div>
 
-    <div class="form-row">
+    <div class="form-group">
       <input id="password" type="password" name="password" placeholder="Mot de passe" required>
     </div>
 
-    <div class="form-row">
+    <div class="form-group">
       <input type="submit" name="submit" value="Se connecter">
     </div>
   </form>

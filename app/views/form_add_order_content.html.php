@@ -12,15 +12,15 @@
     <fieldset>
       <?php select_goody() ?>
 
-      <div class="form-row">
-        <label for="quantity">Quantité</label><br>
+      <div class="form-group">
+        <label for="quantity">Quantité</label>
         <input id="quantity" type="text" name="quantity" required>
         <span></span>
       </div>
     </fieldset>
 
     <fieldset>
-      <div class="form-row">
+      <div class="form-group">
         <input type="submit" name="submit" value="Valider">
       </div>
     </fieldset>

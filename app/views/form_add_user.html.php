@@ -7,21 +7,21 @@
 <div class="container">
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=user" method="post">
     <fieldset>
-      <div class="form-row">
-        <label for="username">Nom d'utilisateur</label><br>
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
         <input id="username" type="text" name="username" required>
         <span></span>
       </div>
 
-      <div class="form-row">
+      <div class="form-group">
         Administrateur<br>
 
-        <div class="form-row-option">
+        <div class="form-group-option">
           <input id="admin_true" type="radio" name="admin" value="1" required>
           <label for="admin_true">Oui</label>
         </div>
 
-        <div class="form-row-option">
+        <div class="form-group-option">
           <input id="admin_false" type="radio" name="admin" value="0">
           <label for="admin_false">Non</label>
         </div>
@@ -29,7 +29,7 @@
     </fieldset>
 
     <fieldset>
-      <div class="form-row">
+      <div class="form-group">
         <input type="submit" name="submit" value="Valider">
       </div>
     </fieldset>

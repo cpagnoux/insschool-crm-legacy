@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="room_id">Salle</label><br>
+<div class="form-group">
+  <label for="room_id">Salle</label>
 
   <select id="room_id" name="room_id" required>
     <option value="">Sélectionner</option>

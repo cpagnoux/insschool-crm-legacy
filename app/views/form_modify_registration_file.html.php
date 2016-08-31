@@ -17,7 +17,7 @@
     </fieldset>
 
     <fieldset>
-      <div class="form-row">
+      <div class="form-group">
         <input type="submit" name="submit" value="Valider">
       </div>
     </fieldset>

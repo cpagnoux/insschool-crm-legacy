@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="<?php echo $prefix ?>_hour"><?php echo $label ?></label><br>
+<div class="form-group">
+  <label for="<?php echo $prefix ?>_hour"><?php echo $label ?></label>
 
   <select class="datetime-select" id="<?php echo $prefix ?>_hour" name="<?php echo $prefix ?>_hour" required>
     <option value="">Heures</option>

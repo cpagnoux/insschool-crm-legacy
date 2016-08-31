@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="member_id">Adhérent</label><br>
+<div class="form-group">
+  <label for="member_id">Adhérent</label>
 
   <select id="member_id" name="member_id" required>
     <option value="">Sélectionner</option>

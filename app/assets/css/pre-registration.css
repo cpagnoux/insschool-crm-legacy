@@ -102,12 +102,20 @@ fieldset {
 	border: none;
 }
 
-.form-row {
+.form-group {
 	margin-bottom: 1em;
 	margin-top: 1em;
 }
 
-.form-row-option {
+.form-group label {
+	display: block;
+}
+
+.form-group-option {
 	display: inline-block;
 	padding-right: 20px;
+}
+
+.form-group-option label {
+	display: inline;
 }

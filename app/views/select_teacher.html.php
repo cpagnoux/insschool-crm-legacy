@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="teacher_id">Professeur</label><br>
+<div class="form-group">
+  <label for="teacher_id">Professeur</label>
 
   <select id="teacher_id" name="teacher_id" required>
     <option value="">Sélectionner</option>

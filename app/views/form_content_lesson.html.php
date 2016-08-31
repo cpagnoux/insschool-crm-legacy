@@ -1,6 +1,6 @@
 <fieldset>
-  <div class="form-row">
-    <label for="title">Intitulé</label><br>
+  <div class="form-group">
+    <label for="title">Intitulé</label>
     <input id="title" type="text" name="title" value="<?php echo $row['title'] ?>" required>
     <span></span>
   </div>
@@ -18,15 +18,15 @@
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
-    <label for="costume">Costume</label><br>
+  <div class="form-group">
+    <label for="costume">Costume</label>
     <textarea id="costume" name="costume"><?php echo $row['costume'] ?></textarea>
     <span></span>
   </div>
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
+  <div class="form-group">
     <input type="submit" name="submit" value="Valider">
   </div>
 </fieldset>

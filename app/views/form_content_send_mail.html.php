@@ -1,6 +1,6 @@
 <fieldset>
-  <div class="form-row">
-    <label for="subject">Objet</label><br>
+  <div class="form-group">
+    <label for="subject">Objet</label>
     <input id="subject" type="text" name="subject" required>
     <span></span>
   </div>
@@ -12,7 +12,7 @@
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
+  <div class="form-group">
     <input type="submit" name="submit" value="Envoyer">
   </div>
 </fieldset>

@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="goody_id">Article</label><br>
+<div class="form-group">
+  <label for="goody_id">Article</label>
 
   <select id="goody_id" name="goody_id" required>
     <option value="">Sélectionner</option>

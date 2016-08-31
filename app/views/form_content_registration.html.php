@@ -10,27 +10,27 @@
   <?php radio_plan($row['plan']) ?>
   <?php checkbox_followed_quarters($row['plan'], $row['followed_quarters']) ?>
 
-  <div class="form-row">
-    <label for="price">Tarif</label><br>
+  <div class="form-group">
+    <label for="price">Tarif</label>
     <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
     <span></span>
   </div>
 
-  <div class="form-row">
-    <label for="discount">Réduction</label><br>
+  <div class="form-group">
+    <label for="discount">Réduction</label>
     <input id="discount" type="text" name="discount" value="<?php echo $row['discount'] ?>"> %
     <span></span>
   </div>
 
-  <div class="form-row">
-    <label for="num_payments">Nombre de paiements</label><br>
+  <div class="form-group">
+    <label for="num_payments">Nombre de paiements</label>
     <input id="num_payments" type="text" name="num_payments" value="<?php $row['num_payments'] ?>">
     <span></span>
   </div>
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
+  <div class="form-group">
     <input type="submit" name="submit" value="Valider">
   </div>
 </fieldset>

@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="day">Jour</label><br>
+<div class="form-group">
+  <label for="day">Jour</label>
 
   <select id="day" name="day" required>
     <option value="">Sélectionner</option>

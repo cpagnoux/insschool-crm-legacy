@@ -8,8 +8,8 @@
 <?php endswitch ?>
 
 <fieldset>
-  <div class="form-row">
-    <label for="amount">Montant</label><br>
+  <div class="form-group">
+    <label for="amount">Montant</label>
     <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required> €
     <span></span>
   </div>
@@ -18,7 +18,7 @@
 </fieldset>
 
 <fieldset>
-  <div class="form-row">
+  <div class="form-group">
     <input type="submit" name="submit" value="Valider">
   </div>
 </fieldset>

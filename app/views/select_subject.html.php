@@ -1,5 +1,5 @@
-<div class="form-row">
-  <label for="topic">Quel problème rencontrez-vous ?</label><br>
+<div class="form-group">
+  <label for="topic">Quel problème rencontrez-vous ?</label>
 
   <select id="topic" name="topic" required>
     <option value="">Sélectionner</option>
