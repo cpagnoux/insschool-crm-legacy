@@ -10,7 +10,7 @@
 <fieldset>
   <div class="form-row">
     <label for="amount">Montant <sup>*</sup> :</label><br>
-    <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required="required"> €
+    <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required> €
   </div>
 
   <?php radio_mode($row['mode']) ?>

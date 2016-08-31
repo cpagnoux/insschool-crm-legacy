@@ -1,12 +1,12 @@
 <fieldset>
   <div class="form-row">
     <label for="last_name">Nom <sup>*</sup> :</label><br>
-    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required="required">
+    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required>
   </div>
 
   <div class="form-row">
     <label for="first_name">Prénom <sup>*</sup> :</label><br>
-    <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required="required">
+    <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required>
   </div>
 
   <?php select_date('Date de naissance', 'bd', false, $row['birth_date']) ?>

@@ -2,7 +2,7 @@
   Certificat médical <sup>*</sup> :<br>
 
   <div class="form-row-option">
-    <input id="medical_certificate_true" type="radio" name="medical_certificate" value="1" required="required"<?php echo $true ?>>
+    <input id="medical_certificate_true" type="radio" name="medical_certificate" value="1" required<?php echo $true ?>>
     <label for="medical_certificate_true">Oui</label>
   </div>
 

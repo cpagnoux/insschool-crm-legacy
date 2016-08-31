@@ -24,11 +24,11 @@ function checkbox_followed_quarters($plan = null, $followed_quarters_str = null)
 
 	if (isset($followed_quarters_str)) {
 		if (strpos($followed_quarters_str, '1') !== false)
-			$_1 = ' checked="checked"';
+			$_1 = ' checked';
 		if (strpos($followed_quarters_str, '2') !== false)
-			$_2 = ' checked="checked"';
+			$_2 = ' checked';
 		if (strpos($followed_quarters_str, '3') !== false)
-			$_3 = ' checked="checked"';
+			$_3 = ' checked';
 	}
 
 	require 'views/checkbox_followed_quarters.html.php';
@@ -54,9 +54,9 @@ function radio_insurance($insurance = null)
 
 	if (isset($insurance)) {
 		if ($insurance)
-			$true = ' checked="checked"';
+			$true = ' checked';
 		else
-			$false = ' checked="checked"';
+			$false = ' checked';
 	}
 
 	require 'views/radio_insurance.html.php';
@@ -71,13 +71,13 @@ function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge = 
 	if (isset($means_of_knowledge)) {
 		switch ($means_of_knowledge) {
 		case 'POSTER_FLYER':
-			$poster_flyer = ' checked="checked"';
+			$poster_flyer = ' checked';
 			break;
 		case 'INTERNET':
-			$internet = ' checked="checked"';
+			$internet = ' checked';
 			break;
 		case 'WORD_OF_MOUTH':
-			$word_of_mouth = ' checked="checked"';
+			$word_of_mouth = ' checked';
 			break;
 		}
 	}
@@ -92,9 +92,9 @@ function radio_medical_certificate($medical_certificate = null)
 
 	if (isset($medical_certificate)) {
 		if ($medical_certificate)
-			$true = ' checked="checked"';
+			$true = ' checked';
 		else
-			$false = ' checked="checked"';
+			$false = ' checked';
 	}
 
 	require 'views/radio_medical_certificate.html.php';
@@ -108,10 +108,10 @@ function radio_mode($mode = null)
 	if (isset($mode)) {
 		switch ($mode) {
 		case 'CASH':
-			$cash = ' checked="checked"';
+			$cash = ' checked';
 			break;
 		case 'CHECK':
-			$check = ' checked="checked"';
+			$check = ' checked';
 			break;
 		}
 	}
@@ -126,9 +126,9 @@ function radio_photo($photo = null)
 
 	if (isset($photo)) {
 		if ($photo)
-			$true = ' checked="checked"';
+			$true = ' checked';
 		else
-			$false = ' checked="checked"';
+			$false = ' checked';
 	}
 
 	require 'views/radio_photo.html.php';
@@ -142,10 +142,10 @@ function radio_plan($plan = null)
 	if (isset($plan)) {
 		switch ($plan) {
 		case 'QUARTERLY':
-			$quarterly = ' checked="checked"';
+			$quarterly = ' checked';
 			break;
 		case 'ANNUAL':
-			$annual = ' checked="checked"';
+			$annual = ' checked';
 			break;
 		}
 	}
@@ -178,7 +178,7 @@ function select_date($label, $prefix, $required, $date = null)
 
 	if ($required) {
 		$required_mark = ' <sup>*</sup>';
-		$required_attribute = ' required="required"';
+		$required_attribute = ' required';
 	}
 
 	if (isset($date))

@@ -1,7 +1,7 @@
 <div class="form-row">
   <label for="member_id">Adhérent <sup>*</sup> :</label><br>
 
-  <select id="member_id" name="member_id" required="required">
+  <select id="member_id" name="member_id" required>
     <option value="">Sélectionner</option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>

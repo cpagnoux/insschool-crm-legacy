@@ -19,11 +19,11 @@
 
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
     <div class="form-row">
-      <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required="required" autofocus="autofocus">
+      <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required autofocus>
     </div>
 
     <div class="form-row">
-      <input id="password" type="password" name="password" placeholder="Mot de passe" required="required">
+      <input id="password" type="password" name="password" placeholder="Mot de passe" required>
     </div>
 
     <div class="form-row">

@@ -2,7 +2,7 @@
   Forfait <sup>*</sup> :<br>
 
   <div class="form-row-option">
-    <input id="quarterly" type="radio" name="plan" value="QUARTERLY" required="required"<?php echo $quarterly ?> onclick="showContent()">
+    <input id="quarterly" type="radio" name="plan" value="QUARTERLY" required<?php echo $quarterly ?> onclick="showContent()">
     <label for="quarterly" onclick="showContent()">Trimestriel</label>
   </div>
 

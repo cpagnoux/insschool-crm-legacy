@@ -1,12 +1,12 @@
 <fieldset>
   <div class="form-row">
     <label for="last_name">Nom <sup>*</sup> :</label><br>
-    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required="required">
+    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required>
   </div>
 
   <div class="form-row">
     <label for="first_name">Prénom <sup>*</sup> :</label><br>
-    <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required="required">
+    <input id="first_name" type="text" name="first_name" value="<?php echo $row['first_name'] ?>" required>
   </div>
 
   <?php select_date('Date de naissance', 'bd', true, $row['birth_date']) ?>
@@ -15,17 +15,17 @@
 <fieldset>
   <div class="form-row">
     <label for="address">Adresse <sup>*</sup> :</label><br>
-    <input id="address" type="text" name="address" value="<?php echo $row['address'] ?>" required="required">
+    <input id="address" type="text" name="address" value="<?php echo $row['address'] ?>" required>
   </div>
 
   <div class="form-row">
     <label for="postal_code">Code postal <sup>*</sup> :</label><br>
-    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" required="required">
+    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" required>
   </div>
 
   <div class="form-row">
     <label for="city">Ville <sup>*</sup> :</label><br>
-    <input id="city" type="text" name="city" value="<?php echo $row['city'] ?>" required="required">
+    <input id="city" type="text" name="city" value="<?php echo $row['city'] ?>" required>
   </div>
 </fieldset>
 

@@ -1,7 +1,7 @@
 <fieldset>
   <div class="form-row">
     <label for="name">Désignation <sup>*</sup> :</label><br>
-    <input id="name" type="text" name="name" value="<?php echo $row['name'] ?>" required="required">
+    <input id="name" type="text" name="name" value="<?php echo $row['name'] ?>" required>
   </div>
 </fieldset>
 

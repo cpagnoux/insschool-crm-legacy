@@ -2,7 +2,7 @@
   Assurance <sup>*</sup> :<br>
 
   <div class="form-row-option">
-    <input id="insurance_true" type="radio" name="insurance" value="1" required="required"<?php echo $true ?>>
+    <input id="insurance_true" type="radio" name="insurance" value="1" required<?php echo $true ?>>
     <label for="insurance_true">Oui</label>
   </div>
 

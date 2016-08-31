@@ -1,7 +1,7 @@
 <div class="form-row">
   <label for="lesson_id">Cours <sup>*</sup> :</label><br>
 
-  <select id="lesson_id" name="lesson_id" required="required">
+  <select id="lesson_id" name="lesson_id" required>
     <option value="">Sélectionner</option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>

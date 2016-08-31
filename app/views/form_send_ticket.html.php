@@ -10,7 +10,7 @@
 
       <div class="form-row">
         <label for="message">Veuillez décrire le problème que vous rencontrez :</label><br>
-        <textarea class="message" id="message" name="message" required="required"></textarea>
+        <textarea class="message" id="message" name="message" required></textarea>
       </div>
     </fieldset>
 

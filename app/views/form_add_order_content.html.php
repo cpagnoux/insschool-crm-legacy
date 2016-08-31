@@ -14,7 +14,7 @@
 
       <div class="form-row">
         <label for="quantity">Quantité <sup>*</sup> :</label><br>
-        <input id="quantity" type="text" name="quantity" required="required">
+        <input id="quantity" type="text" name="quantity" required>
       </div>
     </fieldset>
 

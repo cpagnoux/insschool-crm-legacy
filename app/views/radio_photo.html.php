@@ -2,7 +2,7 @@
   Photo <sup>*</sup> :<br>
 
   <div class="form-row-option">
-    <input id="photo_true" type="radio" name="photo" value="1" required="required"<?php echo $true ?>>
+    <input id="photo_true" type="radio" name="photo" value="1" required<?php echo $true ?>>
     <label for="photo_true">Oui</label>
   </div>
 

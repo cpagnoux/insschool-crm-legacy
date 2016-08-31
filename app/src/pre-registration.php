@@ -204,7 +204,7 @@ function string_to_lessons($string)
 
 	while (strlen($string) > 0) {
 		sscanf($string, '%d', $id);
-		$lessons[$id] = ' checked="checked"';
+		$lessons[$id] = ' checked';
 		$string = substr($string, strlen($id) + 1);
 	}
 

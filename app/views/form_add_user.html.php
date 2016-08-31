@@ -9,14 +9,14 @@
     <fieldset>
       <div class="form-row">
         <label for="username">Nom d'utilisateur : <sup>*</sup></label><br>
-        <input id="username" type="text" name="username" required="required">
+        <input id="username" type="text" name="username" required>
       </div>
 
       <div class="form-row">
         Administrateur : <sup>*</sup><br>
 
         <div class="form-row-option">
-          <input id="admin_true" type="radio" name="admin" value="1" required="required">
+          <input id="admin_true" type="radio" name="admin" value="1" required>
           <label for="admin_true">Oui</label>
         </div>
 

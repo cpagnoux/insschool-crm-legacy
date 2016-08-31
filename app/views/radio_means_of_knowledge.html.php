@@ -6,7 +6,7 @@
   <?php endif ?>
 
   <div class="form-row-option">
-    <input id="poster_flyer" type="radio" name="means_of_knowledge" value="POSTER_FLYER" required="required"<?php echo $poster_flyer ?>>
+    <input id="poster_flyer" type="radio" name="means_of_knowledge" value="POSTER_FLYER" required<?php echo $poster_flyer ?>>
     <label for="poster_flyer">Affiches, Flyers</label>
   </div>
 
