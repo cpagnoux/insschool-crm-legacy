@@ -267,7 +267,7 @@ header {
 	display: inline;
 }
 
-.pagination li a, .pagination li .active {
+.pagination li a, .pagination li .active, .pagination li .disabled {
 	color: #ffffff;
 	display: inline-block;
 	float: left;

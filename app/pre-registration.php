@@ -9,9 +9,6 @@ require_once 'src/connection.php';
 
 require_once 'src/pre-registration.php';
 
-$_GET = escape_strings($_GET);
-$_POST = escape_strings($_POST);
-
 $action = '';
 
 if (isset($_POST['submit']))
@@ -22,6 +19,7 @@ require 'views/header_pre_registration.html.php';
 switch ($action) {
 case 'submit':
 	$lessons_str = display_pre_registration_summary($_POST);
+	$_POST = escape_strings($_POST);
 	save_pre_registration($_POST, $lessons_str);
 	break;
 default:
