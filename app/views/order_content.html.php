@@ -12,6 +12,8 @@
     </tr>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <?php $row = html_encode_strings($row) ?>
+
       <tr>
         <td><?php echo link_entity('goody', $row['goody_id'], $row['name']) ?></td>
         <td><?php echo $row['price'] ?> €</td>

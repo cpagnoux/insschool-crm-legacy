@@ -59,11 +59,11 @@ function link_reset_filters($table)
 function link_previous($table, $page)
 {
 	if ($page == 1)
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-		     '">&laquo;</a>';
+		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
+		     $table . '">&laquo;</a>';
 	else
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-		     '&amp;page=' . $page . '">&laquo;</a>';
+		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
+		     $table . '&amp;page=' . $page . '">&laquo;</a>';
 }
 
 function link_next($table, $page)
@@ -75,18 +75,18 @@ function link_next($table, $page)
 function link_page($table, $page)
 {
 	if ($page == 1)
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-		     '">' . $page . '</a>';
+		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
+		     $table . '">' . $page . '</a>';
 	else
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-		     '&amp;page=' . $page . '">' . $page . '</a>';
+		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
+		     $table . '&amp;page=' . $page . '">' . $page . '</a>';
 }
 
 function link_entity($table, $id, $label = null)
 {
 	if (isset($label))
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-		     '&amp;id=' . $id . '">' . $label . '</a>';
+		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
+		     $table . '&amp;id=' . $id . '">' . $label . '</a>';
 	else
 		echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
 		     '?table=' . $table . '&amp;id=' . $id . '">+ d\'infos</a>';
@@ -171,7 +171,8 @@ function link_toggle_volunteer($member_id, $volunteer)
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' . $_SERVER['SCRIPT_NAME'] .
+	echo '<a class="button' . $state . '" href="' .
+	     $_SERVER['SCRIPT_NAME'] .
 	     '?action=toggle_volunteer&amp;member_id=' . $member_id .
 	     '">' . $label . '</a>';
 }
@@ -225,7 +226,8 @@ function link_toggle_show_participation($registration_id, $lesson_id,
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' . $_SERVER['SCRIPT_NAME'] .
+	echo '<a class="button' . $state . '" href="' .
+	     $_SERVER['SCRIPT_NAME'] .
 	     '?action=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
 	     '">' . $label . '</a>';
@@ -264,8 +266,9 @@ function link_toggle_admin($username, $admin)
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=toggle_admin&amp;username=' . $username . '">' . $label .
+	echo '<a class="button' . $state . '" href="' .
+	     $_SERVER['SCRIPT_NAME'] . '?action=toggle_admin&amp;username=' .
+	     $username . '">' . $label .
 	     '</a>';
 }
 
@@ -411,6 +414,20 @@ function redirect_after_change_password()
 {
 	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
 	       '?action=change_password&status=success');
+}
+
+/*
+ * Security
+ */
+function html_encode_strings($array)
+{
+	if (!isset($array))
+		return;
+
+	foreach($array as &$value)
+		$value = htmlspecialchars($value);
+
+	return $array;
 }
 
 /*
@@ -645,6 +662,8 @@ function get_entity_name($table, $id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
+	$row = html_encode_strings($row);
+
 	return $row['name'];
 }
 
@@ -698,6 +717,8 @@ function get_lesson_title($lesson_id)
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	$row = html_encode_strings($row);
 
 	return $row['title'];
 }
@@ -755,6 +776,8 @@ function get_name($table, $id)
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	$row = html_encode_strings($row);
 
 	return $row['first_name'] . ' ' . $row['last_name'];
 }
@@ -869,6 +892,8 @@ function get_registration_season($registration_id)
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	$row = html_encode_strings($row);
 
 	return $row['season'];
 }

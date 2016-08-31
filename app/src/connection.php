@@ -23,7 +23,7 @@ function connect_database()
 /*
  * Security
  */
-function escape_strings($array)
+function sql_escape_strings($array)
 {
 	if (!isset($array))
 		return;

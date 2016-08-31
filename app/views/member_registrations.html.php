@@ -9,6 +9,8 @@
       </tr>
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <?php $row = html_encode_strings($row) ?>
+
         <tr>
           <td><?php echo $row['season'] ?></td>
           <td><?php link_entity('registration', $row['registration_id']) ?></td>

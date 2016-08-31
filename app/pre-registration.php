@@ -6,6 +6,7 @@
 set_include_path(__DIR__);
 
 require_once 'src/connection.php';
+require_once 'src/util.php';
 
 require_once 'src/pre-registration.php';
 
@@ -18,8 +19,9 @@ require 'views/header_pre_registration.html.php';
 
 switch ($action) {
 case 'submit':
-	$lessons_str = display_pre_registration_summary($_POST);
-	$_POST = escape_strings($_POST);
+	$data = html_encode_strings($_POST);
+	$lessons_str = display_pre_registration_summary($data);
+	$_POST = sql_escape_strings($_POST);
 	save_pre_registration($_POST, $lessons_str);
 	break;
 default:

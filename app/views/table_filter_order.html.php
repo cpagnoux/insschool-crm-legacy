@@ -7,6 +7,8 @@
         <option value="">Tous</option>
 
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
+          <?php $row = html_encode_strings($row) ?>
+
           <?php if ($row['member_id'] == $_SESSION['order_filter_by_member']): ?>
             <option value="<?php echo $row['member_id'] ?>" selected="selected"><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
           <?php else: ?>

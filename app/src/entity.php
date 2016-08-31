@@ -30,6 +30,8 @@ function display_entity($table, $id)
 
 	mysqli_free_result($result);
 
+	$row = html_encode_strings($row);
+
 	require 'views/header.html.php';
 
 	switch ($table) {
@@ -418,6 +420,8 @@ function form_modify_entity($table, $id)
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+
+	$row = html_encode_strings($row);
 
 	require 'views/header.html.php';
 

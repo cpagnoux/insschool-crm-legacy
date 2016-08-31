@@ -21,6 +21,8 @@
       </tr>
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <?php $row = html_encode_strings($row) ?>
+
         <tr>
           <td><?php echo $row['last_name'] ?></td>
           <td><?php echo $row['first_name'] ?></td>

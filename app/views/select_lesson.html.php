@@ -5,6 +5,7 @@
     <option value="">Sélectionner</option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <?php $row = html_encode_strings($row) ?>
       <option value="<?php echo $row['lesson_id'] ?>"><?php echo $row['title'] ?></option>
     <?php endwhile ?>
   </select>

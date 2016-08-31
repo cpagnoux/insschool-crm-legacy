@@ -26,8 +26,11 @@ function display_rooms($link)
 	echo '  <tr>' . PHP_EOL;
 
 	while ($row = mysqli_fetch_assoc($result)) {
+		$row = html_encode_strings($row);
+
 		echo '    <th class="uppercase">' . $row['name'] . '</th>' .
 		     PHP_EOL;
+
 		$num_rooms++;
 	}
 
@@ -120,13 +123,16 @@ function display_lessons_by_day($link, $day, $lessons)
 	}
 
 	$row = mysqli_fetch_assoc($result);
+	$row = html_encode_strings($row);
 
 	foreach ($time_slots as $time_slot) {
 		echo '  <tr>' . PHP_EOL;
 
 		foreach ($rooms as $room) {
-			if (display_lesson($row, $time_slot, $room, $lessons))
+			if (display_lesson($row, $time_slot, $room, $lessons)) {
 				$row = mysqli_fetch_assoc($result);
+				$row = html_encode_strings($row);
+			}
 		}
 
 		echo '  </tr>' . PHP_EOL;

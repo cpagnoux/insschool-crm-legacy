@@ -18,6 +18,8 @@
       </tr>
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
+        <?php $row = html_encode_strings($row) ?>
+
         <tr>
           <td><?php echo $row['name'] ?></td>
           <td><?php link_entity('room', $row['room_id']) ?></td>

@@ -1,5 +1,5 @@
 TODO:
-- security (file access, html encode)
+- security (file access)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
 - choose more appropriate types in <input> tags when possible or use regexp
