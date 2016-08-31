@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="member_id">Adhérent <sup>*</sup> :</label><br>
+  <label for="member_id">Adhérent</label><br>
 
   <select id="member_id" name="member_id" required>
     <option value="">Sélectionner</option>
@@ -9,4 +9,6 @@
       <option value="<?php echo $row['member_id'] ?>"><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
     <?php endwhile ?>
   </select>
+
+  <span></span>
 </div>

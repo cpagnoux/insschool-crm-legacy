@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="<?php echo $prefix ?>_day"><?php echo $label ?><?php echo $required_mark ?> :</label><br>
+  <label for="<?php echo $prefix ?>_day"><?php echo $label ?></label><br>
 
   <select class="datetime-select" id="<?php echo $prefix ?>_day" name="<?php echo $prefix ?>_day"<?php echo $required_attribute ?>>
     <option value="">Jour</option>
@@ -36,4 +36,6 @@
       <?php endif ?>
     <?php endfor ?>
   </select>
+
+  <span></span>
 </div>

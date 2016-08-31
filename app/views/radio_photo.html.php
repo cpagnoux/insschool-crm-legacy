@@ -1,5 +1,5 @@
 <div class="form-row">
-  Photo <sup>*</sup> :<br>
+  Photo<br>
 
   <div class="form-row-option">
     <input id="photo_true" type="radio" name="photo" value="1" required<?php echo $true ?>>

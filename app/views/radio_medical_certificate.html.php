@@ -1,5 +1,5 @@
 <div class="form-row">
-  Certificat médical <sup>*</sup> :<br>
+  Certificat médical<br>
 
   <div class="form-row-option">
     <input id="medical_certificate_true" type="radio" name="medical_certificate" value="1" required<?php echo $true ?>>

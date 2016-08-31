@@ -1,7 +1,8 @@
 <fieldset>
   <div class="form-row">
-    <label for="subject">Objet :</label><br>
+    <label for="subject">Objet</label><br>
     <input id="subject" type="text" name="subject" required>
+    <span></span>
   </div>
 
   <div class="editor">

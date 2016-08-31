@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="teacher_id">Professeur <sup>*</sup> :</label><br>
+  <label for="teacher_id">Professeur</label><br>
 
   <select id="teacher_id" name="teacher_id" required>
     <option value="">Sélectionner</option>
@@ -14,4 +14,6 @@
       <?php endif ?>
     <?php endwhile ?>
   </select>
+
+  <span></span>
 </div>

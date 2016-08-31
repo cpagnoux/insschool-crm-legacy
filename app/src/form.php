@@ -173,13 +173,10 @@ function select_date($label, $prefix, $required, $date = null)
 		12 => 'Décembre'
 	);
 
-	$required_mark = '';
 	$required_attribute = '';
 
-	if ($required) {
-		$required_mark = ' <sup>*</sup>';
+	if ($required)
 		$required_attribute = ' required';
-	}
 
 	if (isset($date))
 		list($year, $month, $day) = sscanf($date, '%d-%d-%d');

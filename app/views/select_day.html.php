@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="day">Jour <sup>*</sup> :</label><br>
+  <label for="day">Jour</label><br>
 
   <select id="day" name="day" required>
     <option value="">Sélectionner</option>
@@ -9,4 +9,6 @@
     <option value="THURSDAY"<?php echo $thursday ?>>Jeudi</option>
     <option value="FRIDAY"<?php echo $friday ?>>Vendredi</option>
   </select>
+
+  <span></span>
 </div>

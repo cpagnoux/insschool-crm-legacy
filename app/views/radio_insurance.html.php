@@ -1,5 +1,5 @@
 <div class="form-row">
-  Assurance <sup>*</sup> :<br>
+  Assurance<br>
 
   <div class="form-row-option">
     <input id="insurance_true" type="radio" name="insurance" value="1" required<?php echo $true ?>>

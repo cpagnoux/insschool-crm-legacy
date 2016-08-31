@@ -1,7 +1,8 @@
 <fieldset>
   <div class="form-row">
-    <label for="title">Intitulé <sup>*</sup> :</label><br>
+    <label for="title">Intitulé</label><br>
     <input id="title" type="text" name="title" value="<?php echo $row['title'] ?>" required>
+    <span></span>
   </div>
 </fieldset>
 
@@ -18,8 +19,9 @@
 
 <fieldset>
   <div class="form-row">
-    <label for="costume">Costume :</label><br>
+    <label for="costume">Costume</label><br>
     <textarea id="costume" name="costume"><?php echo $row['costume'] ?></textarea>
+    <span></span>
   </div>
 </fieldset>
 

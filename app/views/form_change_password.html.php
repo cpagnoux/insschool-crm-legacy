@@ -7,8 +7,9 @@
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=change_password" method="post">
     <fieldset>
       <div class="form-row">
-        <label for="current_password">Mot de passe actuel :</label><br>
+        <label for="current_password">Mot de passe actuel</label><br>
         <input id="current_password" type="password" name="current_password" value="<?php echo $current_password ?>" required>
+        <span></span>
 
         <?php if ($_SESSION['wrong_password']): ?>
           <span class="error">Mot de passe incorrect</span>
@@ -18,13 +19,15 @@
 
     <fieldset>
       <div class="form-row">
-        <label for="new_password">Nouveau mot de passe :</label><br>
+        <label for="new_password">Nouveau mot de passe</label><br>
         <input id="new_password" type="password" name="new_password" value="<?php echo $new_password ?>" required>
+        <span></span>
       </div>
 
       <div class="form-row">
-        <label for="new_password_confirm">Confirmez le nouveau mot de passe :</label><br>
+        <label for="new_password_confirm">Confirmez le nouveau mot de passe</label><br>
         <input id="new_password_confirm" type="password" name="new_password_confirm" value="<?php echo $new_password_confirm ?>" required>
+        <span></span>
 
         <?php if ($_SESSION['passwords_differ']): ?>
           <span class="error">Les mots de passe sont différents</span>

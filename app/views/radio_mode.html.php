@@ -1,5 +1,5 @@
 <div class="form-row">
-  Mode de paiement <sup>*</sup> :<br>
+  Mode de paiement<br>
 
   <div class="form-row-option">
     <input id="cash" type="radio" name="mode" value="CASH" required<?php echo $cash ?>>

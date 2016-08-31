@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="room_id">Salle <sup>*</sup> :</label><br>
+  <label for="room_id">Salle</label><br>
 
   <select id="room_id" name="room_id" required>
     <option value="">Sélectionner</option>
@@ -14,4 +14,6 @@
       <?php endif ?>
     <?php endwhile ?>
   </select>
+
+  <span></span>
 </div>

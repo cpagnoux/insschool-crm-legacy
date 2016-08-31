@@ -13,8 +13,9 @@
       <?php select_goody() ?>
 
       <div class="form-row">
-        <label for="quantity">Quantité <sup>*</sup> :</label><br>
+        <label for="quantity">Quantité</label><br>
         <input id="quantity" type="text" name="quantity" required>
+        <span></span>
       </div>
     </fieldset>
 

@@ -1,5 +1,5 @@
 <div class="form-row hidden<?php echo $state ?>" id="hidden-content">
-  Trimestre(s) suivi(s) :<br>
+  Trimestre(s) suivi(s)<br>
 
   <div class="form-row-option">
     <input id="1" type="checkbox" name="followed_quarters_1"<?php echo $_1 ?>>

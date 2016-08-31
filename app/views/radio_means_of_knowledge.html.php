@@ -1,8 +1,8 @@
 <div class="form-row">
   <?php if ($pre_registration_form && !isset($means_of_knowledge)): ?>
-    Comment nous avez-vous connus ? <sup>*</sup><br>
+    Comment nous avez-vous connus ?<br>
   <?php else: ?>
-    A connu INS School grâce à <sup>*</sup> :<br>
+    A connu INS School grâce à<br>
   <?php endif ?>
 
   <div class="form-row-option">

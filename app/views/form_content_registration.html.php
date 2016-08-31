@@ -11,18 +11,21 @@
   <?php checkbox_followed_quarters($row['plan'], $row['followed_quarters']) ?>
 
   <div class="form-row">
-    <label for="price">Tarif :</label><br>
+    <label for="price">Tarif</label><br>
     <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
+    <span></span>
   </div>
 
   <div class="form-row">
-    <label for="discount">Réduction :</label><br>
+    <label for="discount">Réduction</label><br>
     <input id="discount" type="text" name="discount" value="<?php echo $row['discount'] ?>"> %
+    <span></span>
   </div>
 
   <div class="form-row">
-    <label for="num_payments">Nombre de paiements :</label><br>
+    <label for="num_payments">Nombre de paiements</label><br>
     <input id="num_payments" type="text" name="num_payments" value="<?php $row['num_payments'] ?>">
+    <span></span>
   </div>
 </fieldset>
 

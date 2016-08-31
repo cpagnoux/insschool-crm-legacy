@@ -46,6 +46,11 @@ input[type=submit], .button {
 	padding: 10px 20px;
 }
 
+input:not([required]) + span::after, select:not([required]) + span::after, textarea:not([required]) + span::after {
+	content: " (facultatif)";
+	display: block;
+}
+
 .attribute-name {
 	font-weight: bold;
 }
@@ -69,6 +74,7 @@ input[type=submit], .button {
 
 .error {
 	color: #ff0000;
+	display: block;
 }
 
 .message {

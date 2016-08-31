@@ -1,5 +1,5 @@
 <div class="form-row">
-  <label for="lesson_id">Cours <sup>*</sup> :</label><br>
+  <label for="lesson_id">Cours</label><br>
 
   <select id="lesson_id" name="lesson_id" required>
     <option value="">Sélectionner</option>
@@ -9,4 +9,6 @@
       <option value="<?php echo $row['lesson_id'] ?>"><?php echo $row['title'] ?></option>
     <?php endwhile ?>
   </select>
+
+  <span></span>
 </div>

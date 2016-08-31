@@ -1,5 +1,5 @@
 <div class="form-row">
-  Forfait <sup>*</sup> :<br>
+  Forfait<br>
 
   <div class="form-row-option">
     <input id="quarterly" type="radio" name="plan" value="QUARTERLY" required<?php echo $quarterly ?> onclick="showContent()">

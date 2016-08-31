@@ -11,5 +11,4 @@ TODO:
 - refactor isolating controllers
 - split main controller into multiple light controllers
 - refactor design using persistent navbar and menu
-- change way required fields are identified
 - Add ability to display simple schedule
