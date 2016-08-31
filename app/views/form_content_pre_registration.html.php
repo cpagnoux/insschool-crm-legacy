@@ -1,7 +1,7 @@
 <fieldset>
   <div class="form-group">
     <label for="last_name">Nom</label>
-    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required>
+    <input id="last_name" type="text" name="last_name" value="<?php echo $row['last_name'] ?>" required autofocus>
     <span></span>
   </div>
 

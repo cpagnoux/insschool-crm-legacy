@@ -10,7 +10,7 @@
 <fieldset>
   <div class="form-group">
     <label for="amount">Montant</label>
-    <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required> €
+    <input id="amount" type="text" name="amount" value="<?php echo $row['amount'] ?>" required autofocus> €
     <span></span>
   </div>
 

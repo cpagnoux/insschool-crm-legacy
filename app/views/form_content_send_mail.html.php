@@ -1,7 +1,7 @@
 <fieldset>
   <div class="form-group">
     <label for="subject">Objet</label>
-    <input id="subject" type="text" name="subject" required>
+    <input id="subject" type="text" name="subject" required autofocus>
     <span></span>
   </div>
 

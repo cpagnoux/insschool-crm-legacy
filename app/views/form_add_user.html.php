@@ -9,7 +9,7 @@
     <fieldset>
       <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
-        <input id="username" type="text" name="username" required>
+        <input id="username" type="text" name="username" required autofocus>
         <span></span>
       </div>
 

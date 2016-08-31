@@ -8,7 +8,7 @@
     <fieldset>
       <div class="form-group">
         <label for="current_password">Mot de passe actuel</label>
-        <input id="current_password" type="password" name="current_password" value="<?php echo $current_password ?>" required>
+        <input id="current_password" type="password" name="current_password" value="<?php echo $current_password ?>" required autofocus>
         <span></span>
 
         <?php if ($_SESSION['wrong_password']): ?>
