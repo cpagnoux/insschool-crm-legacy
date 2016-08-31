@@ -104,6 +104,10 @@ th {
 	color: #ffffff;
 }
 
+.centered {
+	text-align: center;
+}
+
 .db-table, .db-table th, .db-table td {
 	border: none;
 }

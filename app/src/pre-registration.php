@@ -52,23 +52,23 @@ function display_day($day, $count)
 	echo '  </tr>' . PHP_EOL;
 }
 
-function get_time_slots($link, $day)
+function get_start_times($link, $day)
 {
-	$query = 'SELECT DISTINCT start_time, end_time FROM lesson ' .
-		 'WHERE day = "' . $day . '" ORDER BY start_time, end_time';
+	$query = 'SELECT DISTINCT start_time FROM lesson WHERE day = "' . $day .
+		 '" ORDER BY start_time';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
 	}
 
-	$time_slots = array();
+	$start_times = array();
 
 	while ($row = mysqli_fetch_assoc($result))
-		$time_slots[] = $row['start_time'] . ' - ' . $row['end_time'];
+		$start_times[] = $row['start_time'];
 
 	mysqli_free_result($result);
 
-	return $time_slots;
+	return $start_times;
 }
 
 function get_rooms($link)
@@ -89,11 +89,10 @@ function get_rooms($link)
 	return $rooms;
 }
 
-function display_lesson($row, $time_slot, $room, $lessons)
+function display_lesson($row, $start_time, $room, $lessons)
 {
-	if ($row['start_time'] . ' - ' . $row['end_time'] != $time_slot ||
-	    $row['room_id'] != $room) {
-		echo '    <td>---</td>' . PHP_EOL;
+	if ($row['start_time'] != $start_time || $row['room_id'] != $room) {
+		echo '    <td class="centered">---</td>' . PHP_EOL;
 		return false;
 	}
 
@@ -111,7 +110,7 @@ function display_lesson($row, $time_slot, $room, $lessons)
 
 function display_lessons_by_day($link, $day, $lessons)
 {
-	$time_slots = get_time_slots($link, $day);
+	$start_times = get_start_times($link, $day);
 	$rooms = get_rooms($link);
 
 	$query = 'SELECT lesson_id, title, start_time, end_time, room_id ' .
@@ -125,11 +124,12 @@ function display_lessons_by_day($link, $day, $lessons)
 	$row = mysqli_fetch_assoc($result);
 	$row = html_encode_strings($row);
 
-	foreach ($time_slots as $time_slot) {
+	foreach ($start_times as $start_time) {
 		echo '  <tr>' . PHP_EOL;
 
 		foreach ($rooms as $room) {
-			if (display_lesson($row, $time_slot, $room, $lessons)) {
+			if (display_lesson($row, $start_time, $room,
+					   $lessons)) {
 				$row = mysqli_fetch_assoc($result);
 				$row = html_encode_strings($row);
 			}

@@ -66,6 +66,10 @@ th {
 	color: #ffffff;
 }
 
+.centered {
+	text-align: center;
+}
+
 header, .container, .footer-container {
 	margin: auto;
 	width: 1024px;
