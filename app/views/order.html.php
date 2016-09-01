@@ -5,7 +5,7 @@
 </ol>
 
 <div class="container">
-  <h2>Commande n° <?php echo $row['order_id'] ?></h2>
+  <h1>Commande n° <?php echo $row['order_id'] ?></h1>
 
   <p>
     <span class="attribute-name">Adhérent :</span>

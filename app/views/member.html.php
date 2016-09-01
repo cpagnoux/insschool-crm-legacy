@@ -5,7 +5,7 @@
 </ol>
 
 <div class="container">
-  <h2>Information adhérent</h2>
+  <h1>Information adhérent</h1>
 
   <p>
     <span class="attribute-name">Nom :</span>

@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Cours choisis</h2>
+  <h1>Cours choisis</h1>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
     <table>

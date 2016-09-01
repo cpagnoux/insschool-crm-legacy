@@ -5,7 +5,7 @@
 </ol>
 
 <div class="container">
-  <h2><?php echo $row['name'] ?></h2>
+  <h1><?php echo $row['name'] ?></h1>
 
   <p>
     <span class="attribute-name">Description :</span><br>

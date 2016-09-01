@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Dossier</h2>
+  <h1>Dossier</h1>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php $row = mysqli_fetch_assoc($result) ?>

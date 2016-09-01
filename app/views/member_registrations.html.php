@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Inscriptions</h2>
+  <h1>Inscriptions</h1>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
     <table>

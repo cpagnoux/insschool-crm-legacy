@@ -6,7 +6,7 @@
 </ol>
 
 <div class="container">
-  <h2>Inscription <?php echo $row['season'] ?></h2>
+  <h1>Inscription <?php echo $row['season'] ?></h1>
 
   <p>
     <span class="attribute-name">Adhérent :</span>
