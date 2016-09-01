@@ -10,6 +10,8 @@ require_once 'src/util.php';
 function table_filter_member()
 {
 	$all = '';
+	$incomplete_registration = '';
+	$incomplete_registration_file = '';
 	$unpaid_registration = '';
 	$volunteer = '';
 
@@ -17,6 +19,12 @@ function table_filter_member()
 		switch ($_SESSION['member_filter']) {
 		case 'all':
 			$all = ' selected';
+			break;
+		case 'incomplete_registration':
+			$incomplete_registration = ' selected';
+			break;
+		case 'incomplete_registration_file':
+			$incomplete_registration_file = ' selected';
 			break;
 		case 'unpaid_registration':
 			$unpaid_registration = ' selected';
@@ -277,7 +285,7 @@ function init_display_options()
 		$_SESSION['limit'] = 25;
 }
 
-function prepare_filter_member_unpaid_registration()
+function prepare_filter_member($function)
 {
 	$link = connect_database();
 
@@ -290,7 +298,7 @@ function prepare_filter_member_unpaid_registration()
 	$filter = '';
 
 	while ($row = mysqli_fetch_assoc($result)) {
-		if (!registration_paid($row['registration_id'])) {
+		if (!$function($row['registration_id'])) {
 			if ($filter == '')
 				$filter = ' WHERE ';
 			else
@@ -346,8 +354,15 @@ function select_filter($table)
 	switch ($table) {
 	case 'member':
 		switch ($_SESSION['member_filter']) {
+		case 'incomplete_registration':
+			$filter = prepare_filter_member(registration_complete);
+			break;
+		case 'incomplete_registration_file':
+			$filter = prepare_filter_member(
+					registration_file_complete);
+			break;
 		case 'unpaid_registration':
-			$filter = prepare_filter_member_unpaid_registration();
+			$filter = prepare_filter_member(registration_paid);
 			break;
 		case 'volunteer':
 			$filter = ' WHERE volunteer = 1';

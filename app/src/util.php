@@ -179,18 +179,18 @@ function link_toggle_volunteer($member_id, $volunteer)
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
-	echo '<a class="quantity-button" href="' . $_SERVER['SCRIPT_NAME'] .
+	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
 	     '?action=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	     '">-</a>';
+	     '"><span class="entypo entypo-minus-sign"></span></a>';
 }
 
 function link_quantity_plus($order_id, $goody_id, $quantity)
 {
-	echo '<a class="quantity-button" href="' . $_SERVER['SCRIPT_NAME'] .
+	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
 	     '?action=modify_quantity&amp;order_id=' . $order_id .
 	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	     '">+</a>';
+	     '"><span class="entypo entypo-plus-sign"></span></a>';
 }
 
 function link_remove_product($order_id, $goody_id)
@@ -300,19 +300,7 @@ function link_send_mail_to_multiple_recipients($table)
 
 	switch ($table) {
 	case 'member':
-		switch ($_SESSION['member_filter']) {
-		case 'all':
-			$label = 'Envoyer un mail aux adhérents';
-			break;
-		case 'unpaid_registration':
-			$label = 'Envoyer un mail aux adhérents n\'ayant pas ' .
-				 'payé leur inscription';
-			break;
-		case 'volunteer':
-			$label = 'Envoyer un mail aux bénévoles';
-			break;
-		}
-
+		$label = 'Envoyer un mail aux adhérents sélectionnés';
 		break;
 	case 'teacher':
 		$label = 'Envoyer un mail aux professeurs';
@@ -507,12 +495,26 @@ function duration($start_time, $end_time)
 	return sprintf('%02d', $hour) . 'h' . sprintf('%02d', $minute);
 }
 
-function eval_boolean($value)
+function eval_boolean($value, $mode = 'yes/no')
 {
-	if ($value)
-		return 'Oui';
+	$true = '';
+	$false = '';
 
-	return 'Non';
+	switch ($mode) {
+	case 'yes/no':
+		$true = 'Oui';
+		$false = 'Non';
+		break;
+	case 'ok/nonok':
+		$true = '<span class="entypo entypo-ok"></span>';
+		$false = '<span class="entypo entypo-remove"></span>';
+		break;
+	}
+
+	if ($value)
+		return $true;
+
+	return $false;
 }
 
 function eval_enum($value)
@@ -994,10 +996,7 @@ function lesson_registrant_count($lesson_id, $season)
 
 function order_paid($order_id)
 {
-	if (total_paid('order', $order_id) == order_total($order_id))
-		return true;
-
-	return false;
+	return (total_paid('order', $order_id) == order_total($order_id));
 }
 
 function order_total($order_id)
@@ -1024,6 +1023,25 @@ function order_total($order_id)
 	return sprintf('%.2f', $total);
 }
 
+function registration_complete($registration_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT price FROM registration WHERE registration_id = ' .
+		 $registration_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return ($row['price'] != 0);
+}
+
 function registration_file_complete($registration_id)
 {
 	$link = connect_database();
@@ -1040,10 +1058,8 @@ function registration_file_complete($registration_id)
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	if ($row['medical_certificate'] && $row['insurance'] && $row['photo'])
-		return true;
-
-	return false;
+	return ($row['medical_certificate'] && $row['insurance'] &&
+		$row['photo']);
 }
 
 function registration_formula($registration_id)
@@ -1065,13 +1081,17 @@ function registration_formula($registration_id)
 	return $row[0];
 }
 
+function registration_ok($registration_id)
+{
+	return (registration_complete($registration_id) &&
+		registration_file_complete($registration_id) &&
+		registration_paid($registration_id));
+}
+
 function registration_paid($registration_id)
 {
-	if (total_paid('registration', $registration_id) ==
-	    registration_price($registration_id))
-		return true;
-
-	return false;
+	return (total_paid('registration', $registration_id) ==
+		registration_price($registration_id));
 }
 
 function registration_price($registration_id)

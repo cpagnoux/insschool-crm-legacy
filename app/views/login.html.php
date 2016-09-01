@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/login.css">
 <link rel="stylesheet" type="text/css" href="assets/css/footer.css">
+<link rel="stylesheet" type="text/css" href="assets/fonts/entypo_regular_macroman/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="assets/css/entypo.css">
 
 </head>
 <body>
@@ -32,6 +34,6 @@
   </form>
 
   <?php if ($_SESSION['login-failure']): ?>
-    <p class="error">Nom d'utilisateur ou mot de passe incorrect</p>
+    <p class="error"><span class="entypo entypo-alert"></span> Nom d'utilisateur ou mot de passe incorrect</p>
   <?php endif ?>
 </div>

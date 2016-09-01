@@ -1,0 +1,25 @@
+.entypo {
+	display: inline-block;
+	font-family: 'entyporegular';
+	font-size: 2em;
+}
+
+.entypo-ok::before {
+	content: 'W';
+}
+
+.entypo-remove::before {
+	content: 'X';
+}
+
+.entypo-minus-sign::before {
+	content: 'Y';
+}
+
+.entypo-plus-sign::before {
+	content: 'Z';
+}
+
+.entypo-alert::before {
+	content: 'c';
+}

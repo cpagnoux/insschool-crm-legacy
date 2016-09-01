@@ -12,7 +12,7 @@
         <span></span>
 
         <?php if ($_SESSION['wrong_password']): ?>
-          <span class="error">Mot de passe incorrect</span>
+          <span class="error"><span class="entypo entypo-alert"></span> Mot de passe incorrect</span>
         <?php endif ?>
       </div>
     </fieldset>
@@ -30,7 +30,7 @@
         <span></span>
 
         <?php if ($_SESSION['passwords_differ']): ?>
-          <span class="error">Les mots de passe sont différents</span>
+          <span class="error"><span class="entypo entypo-alert"></span> Les mots de passe sont différents</span>
         <?php endif ?>
       </div>
     </fieldset>

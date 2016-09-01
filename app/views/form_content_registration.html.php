@@ -18,7 +18,7 @@
 
   <div class="form-group">
     <label for="discount">Réduction</label>
-    <input id="discount" type="number" name="discount" value="<?php echo $row['discount'] ?>" min="1" max="100"> %
+    <input id="discount" type="number" name="discount" value="<?php echo $row['discount'] ?>" min="0" max="100"> %
     <span></span>
   </div>
 

@@ -55,7 +55,7 @@ input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
 	box-shadow: none;
 }
 
-input[type=submit], .button, .quantity-button {
+input[type=submit], .button {
 	background-color: #404040;
 	border: none;
 	border-radius: 2px;
@@ -63,12 +63,12 @@ input[type=submit], .button, .quantity-button {
 	display: inline-block;
 }
 
-input[type=submit]:hover, .button:hover, .quantity-button:hover {
+input[type=submit]:hover, .button:hover {
 	background-color: #606060;
 	color: #ffffff;
 }
 
-input[type=submit]:focus, .button:focus, .quantity-button:focus {
+input[type=submit]:focus, .button:focus {
 	background-color: #404040;
 }
 
@@ -82,7 +82,7 @@ input + span, select + span, textarea + span {
 }
 
 input:not([required]) + span::before, select:not([required]) + span::before, textarea:not([required]) + span::before {
-	content: "(facultatif) ";
+	content: '(facultatif) ';
 }
 
 .attribute-name {
@@ -122,13 +122,6 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 .message {
 	height: 200px;
 	width: 600px;
-}
-
-.quantity-button {
-	border-radius: 100%;
-	line-height: 30px;
-	text-align: center;
-	width: 30px;
 }
 
 .quantity-input {
@@ -278,7 +271,7 @@ header {
 }
 
 .breadcrumb li::before {
-	content: "> ";
+	content: '> ';
 }
 
 .breadcrumb li:first-child::before {
@@ -411,3 +404,11 @@ fieldset {
 footer {
 	background-color: #000000;
 }
+
+.entypo-ok {
+	color: #00ff00;
+}
+
+.entypo-remove {
+	color: #ff0000;
+:

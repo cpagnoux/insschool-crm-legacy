@@ -5,6 +5,7 @@
     <table>
       <tr>
         <th>Saison</th>
+        <th>Statut</th>
         <th></th>
       </tr>
 
@@ -13,6 +14,7 @@
 
         <tr>
           <td><?php echo $row['season'] ?></td>
+          <td><?php echo eval_boolean(registration_ok($row['registration_id']), 'ok/nonok') ?></td>
           <td><?php link_entity('registration', $row['registration_id']) ?></td>
         </tr>
       <?php endwhile ?>

@@ -10,6 +10,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="assets/css/main.css">
 <link rel="stylesheet" type="text/css" href="assets/css/footer.css">
+<link rel="stylesheet" type="text/css" href="assets/fonts/entypo_regular_macroman/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="assets/css/entypo.css">
 
 <script src="assets/js/main.js"></script>
 
