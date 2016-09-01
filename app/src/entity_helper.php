@@ -27,8 +27,8 @@ function display_entity_payments($link, $table, $id)
 
 function display_lesson_registrants($link, $lesson_id, $season)
 {
-	$query = 'SELECT member.first_name, member.last_name FROM member ' .
-		 'INNER JOIN registration ' .
+	$query = 'SELECT member.member_id, member.first_name, ' .
+		 'member.last_name FROM member INNER JOIN registration ' .
 		 'ON registration.member_id = member.member_id ' .
 		 'INNER JOIN registration_detail ' .
 		 'ON registration_detail.registration_id = ' .

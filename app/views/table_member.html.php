@@ -13,7 +13,7 @@
     <?php table_filter_member() ?>
     <?php table_display_options('member') ?>
 
-    <table class="db-table">
+    <table>
       <tr>
         <th>Nom</th>
         <th>Prénom</th>

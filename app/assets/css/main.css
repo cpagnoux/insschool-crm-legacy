@@ -16,7 +16,7 @@ h1, h2 {
 	color: #ffffff;
 }
 
-h2, .uppercase {
+h2 {
 	text-transform: uppercase;
 }
 
@@ -106,6 +106,10 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 	background-color: #008000;
 }
 
+.centered {
+	text-align: center;
+}
+
 .dropdown-toggle {
 	cursor: pointer;
 }
@@ -131,15 +135,20 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 	width: 60px;
 }
 
-table, th, td {
-	border: 2px solid #404040;
+.uppercase {
+	text-transform: uppercase;
 }
 
 table {
 	border-collapse: collapse;
 }
 
+tr:hover {
+	background-color: #202020;
+}
+
 th, td {
+	border-bottom: 2px solid #404040;
 	padding: 10px 20px;
 }
 
@@ -148,19 +157,21 @@ th {
 	color: #ffffff;
 }
 
-.centered {
-	text-align: center;
+tr:last-child td {
+	border-bottom: none;
 }
 
-.db-table, .db-table th, .db-table td {
+.schedule tr:hover {
+	background-color: #000000;
+}
+
+.schedule th, .schedule td {
 	border: none;
+	border-left: 2px solid #404040;
+	border-right: 2px solid #404040;
 }
 
-.db-table tr:hover {
-	background-color: #202020;
-}
-
-.db-table th, .db-table td {
+.schedule tr:last-child td {
 	border-bottom: 2px solid #404040;
 }
 

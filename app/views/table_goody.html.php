@@ -11,7 +11,7 @@
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php table_display_options('goody') ?>
 
-    <table class="db-table">
+    <table>
       <tr>
         <th>Désignation</th>
         <th>Prix</th>

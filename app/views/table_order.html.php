@@ -12,7 +12,7 @@
     <?php table_filter_order() ?>
     <?php table_display_options('order') ?>
 
-    <table class="db-table">
+    <table>
       <tr>
         <th>N° de commande</th>
         <th>Adhérent</th>

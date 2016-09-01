@@ -92,7 +92,7 @@ function get_rooms($link)
 function display_lesson($row, $start_time, $room, $lessons)
 {
 	if ($row['start_time'] != $start_time || $row['room_id'] != $room) {
-		echo '    <td class="centered">---</td>' . PHP_EOL;
+		echo '    <td class="centered">-</td>' . PHP_EOL;
 		return false;
 	}
 
@@ -145,7 +145,7 @@ function display_lessons($lessons)
 {
 	$link = connect_database();
 
-	echo '<table>' . PHP_EOL;
+	echo '<table class="schedule">' . PHP_EOL;
 
 	$num_rooms = display_rooms($link);
 	$days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY');

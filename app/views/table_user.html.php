@@ -9,7 +9,7 @@
   </ul>
 
   <?php if (mysqli_num_rows($result) != 0): ?>
-    <table class="db-table">
+    <table>
       <tr>
         <th>Nom d'utilisateur</th>
         <th>Administrateur</th>

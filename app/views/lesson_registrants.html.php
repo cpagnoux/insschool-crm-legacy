@@ -6,6 +6,7 @@
       <tr>
         <th>Nom</th>
         <th>Prénom</th>
+        <th></th>
       </tr>
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
@@ -14,6 +15,7 @@
         <tr>
           <td><?php echo $row['last_name'] ?></td>
           <td><?php echo $row['first_name'] ?></td>
+          <td><?php echo link_entity('member', $row['member_id']) ?></td>
         </tr>
       <?php endwhile ?>
     </table>

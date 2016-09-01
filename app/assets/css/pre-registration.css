@@ -19,7 +19,7 @@ h1, h2 {
 	color: #ffffff;
 }
 
-h2, .uppercase {
+h2 {
 	text-transform: uppercase;
 }
 
@@ -73,8 +73,12 @@ input:not([required]) + span::before, select:not([required]) + span::before {
 	font-weight: bold;
 }
 
-table, th, td {
-	border: 2px solid #404040;
+.centered {
+	text-align: center;
+}
+
+.uppercase {
+	text-transform: uppercase;
 }
 
 table {
@@ -82,6 +86,8 @@ table {
 }
 
 th, td {
+	border-left: 2px solid #404040;
+	border-right: 2px solid #404040;
 	padding: 10px 20px;
 }
 
@@ -90,8 +96,8 @@ th {
 	color: #ffffff;
 }
 
-.centered {
-	text-align: center;
+tr:last-child td {
+	border-bottom: 2px solid #404040;
 }
 
 header, .container, .footer-container {

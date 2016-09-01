@@ -7,7 +7,7 @@
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php table_display_options('pre_registration') ?>
 
-    <table class="db-table">
+    <table>
       <tr>
         <th>Nom</th>
         <th>Prénom</th>

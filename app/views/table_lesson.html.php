@@ -11,7 +11,7 @@
   <?php if (mysqli_num_rows($result) != 0): ?>
     <?php table_display_options('lesson') ?>
 
-    <table class="db-table">
+    <table>
       <tr>
         <th>Intitulé</th>
         <th></th>
