@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <label for="postal_code">Code postal</label>
-    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" required>
+    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" <?php regexp_postal_code() ?> required>
     <span></span>
   </div>
 
@@ -37,31 +37,31 @@
 <fieldset>
   <div class="form-group">
     <label for="cellphone">Portable</label>
-    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>">
+    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="cellphone_father">Portable père</label>
-    <input id="cellphone_father" type="text" name="cellphone_father" value="<?php echo $row['cellphone_father'] ?>">
+    <input id="cellphone_father" type="text" name="cellphone_father" value="<?php echo $row['cellphone_father'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="cellphone_mother">Portable mère</label>
-    <input id="cellphone_mother" type="text" name="cellphone_mother" value="<?php echo $row['cellphone_mother'] ?>">
+    <input id="cellphone_mother" type="text" name="cellphone_mother" value="<?php echo $row['cellphone_mother'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="phone">Fixe</label>
-    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>">
+    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="email">Email</label>
-    <input id="email" type="email" name="email" value="<?php echo $row['email'] ?>">
+    <input id="email" type="email" name="email" value="<?php echo $row['email'] ?>" <?php regexp_email() ?>>
     <span></span>
   </div>
 </fieldset>

@@ -14,7 +14,7 @@
 
       <div class="form-group">
         <label for="quantity">Quantité</label>
-        <input id="quantity" type="text" name="quantity" required>
+        <input id="quantity" type="number" name="quantity" min="1" required>
         <span></span>
       </div>
     </fieldset>

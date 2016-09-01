@@ -21,11 +21,16 @@ h2, .uppercase {
 }
 
 input, select, textarea {
-	background-color: #404040;
-	border: none;
+	background-color: #000000;
+	border: 2px solid #404040;
 	box-sizing: border-box;
+	color: #808080;
 	padding: 10px 20px;
 	width: 500px;
+}
+
+input:focus, select:focus, textarea:focus {
+	border: 2px solid #606060;
 }
 
 input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
@@ -34,6 +39,7 @@ input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
 
 input[type=submit], .button, .quantity-button {
 	background-color: #808080;
+	border: none;
 	color: #ffffff;
 	display: inline-block;
 }
@@ -46,9 +52,13 @@ input[type=submit], .button {
 	padding: 10px 20px;
 }
 
-input:not([required]) + span::after, select:not([required]) + span::after, textarea:not([required]) + span::after {
-	content: " (facultatif)";
+input + span, select + span, textarea + span {
 	display: block;
+	width: 500px;
+}
+
+input:not([required]) + span::before, select:not([required]) + span::before, textarea:not([required]) + span::before {
+	content: "(facultatif) ";
 }
 
 .attribute-name {

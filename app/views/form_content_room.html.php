@@ -15,7 +15,7 @@
 
   <div class="form-group">
     <label for="postal_code">Code postal</label>
-    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>">
+    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" <?php regexp_postal_code() ?>>
     <span></span>
   </div>
 

@@ -417,6 +417,40 @@ function redirect_after_change_password()
 }
 
 /*
+ * Regexp
+ */
+function regexp_decimal($integer_part = 2, $fractional_part = 2)
+{
+	echo 'pattern="([0-9]{1,' . $integer_part . '}\.[0-9]{1,' .
+	     $fractional_part . '}|[0-9]{1,' . $integer_part . '})"';
+}
+
+function regexp_email()
+{
+	echo 'pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"';
+}
+
+function regexp_password()
+{
+	echo 'pattern=".{6,}"';
+}
+
+function regexp_phone_number()
+{
+	echo 'pattern="0[1-9][0-9]{8}"';
+}
+
+function regexp_postal_code()
+{
+	echo 'pattern="[0-9]{5}"';
+}
+
+function regexp_username()
+{
+	echo 'pattern="[a-zA-Z0-9_-]{4,24}"';
+}
+
+/*
  * Security
  */
 function html_encode_strings($array)

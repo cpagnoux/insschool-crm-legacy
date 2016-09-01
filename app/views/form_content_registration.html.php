@@ -12,19 +12,19 @@
 
   <div class="form-group">
     <label for="price">Tarif</label>
-    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
+    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>" <?php regexp_decimal(3) ?>> €
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="discount">Réduction</label>
-    <input id="discount" type="text" name="discount" value="<?php echo $row['discount'] ?>"> %
+    <input id="discount" type="number" name="discount" value="<?php echo $row['discount'] ?>" min="1" max="100"> %
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="num_payments">Nombre de paiements</label>
-    <input id="num_payments" type="text" name="num_payments" value="<?php $row['num_payments'] ?>">
+    <input id="num_payments" type="number" name="num_payments" value="<?php $row['num_payments'] ?>" min="1" max="9">
     <span></span>
   </div>
 </fieldset>

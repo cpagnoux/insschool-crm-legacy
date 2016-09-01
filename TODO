@@ -2,7 +2,6 @@ TODO:
 - security (file access)
 - fix duplicate entry bug for goodies in orders and lessons in registrations
 - table search bar
-- choose more appropriate types in <input> tags when possible or use regexp
 - call sheet
 - mail functionality -> make it work
 - implement ability to send attachments with mails
@@ -12,3 +11,5 @@ TODO:
 - split main controller into multiple light controllers
 - refactor design using persistent navbar and menu
 - Add ability to display simple schedule
+- fix bug that occur when modifying entities which have phone numbers
+- add ability to see registrations with price not set in home page

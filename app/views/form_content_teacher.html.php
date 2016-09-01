@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <label for="postal_code">Code postal</label>
-    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>">
+    <input id="postal_code" type="text" name="postal_code" value="<?php echo $row['postal_code'] ?>" <?php regexp_postal_code() ?>>
     <span></span>
   </div>
 
@@ -37,19 +37,19 @@
 <fieldset>
   <div class="form-group">
     <label for="cellphone">Portable</label>
-    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>">
+    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="phone">Fixe</label>
-    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>">
+    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="email">Email</label>
-    <input id="email" type="email" name="email" value="<?php echo $row['email'] ?>">
+    <input id="email" type="email" name="email" value="<?php echo $row['email'] ?>" <?php regexp_email() ?>>
     <span></span>
   </div>
 </fieldset>

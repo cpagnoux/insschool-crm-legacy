@@ -17,13 +17,13 @@
 <fieldset>
   <div class="form-group">
     <label for="price">Prix</label>
-    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>"> €
+    <input id="price" type="text" name="price" value="<?php echo $row['price'] ?>" <?php regexp_decimal() ?>> €
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="stock">Stock</label>
-    <input id="stock" type="text" name="stock" value="<?php echo $row['stock'] ?>">
+    <input id="stock" type="number" name="stock" value="<?php echo $row['stock'] ?>" min="1">
     <span></span>
   </div>
 </fieldset>
