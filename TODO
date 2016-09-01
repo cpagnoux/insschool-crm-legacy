@@ -12,4 +12,3 @@ TODO:
 - refactor design using persistent navbar and menu
 - Add ability to display simple schedule
 - fix bug that occur when modifying entities which have phone numbers
-- add ability to see registrations with price not set in home page

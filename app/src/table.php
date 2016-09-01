@@ -460,4 +460,57 @@ function display_table($table, $page = null)
 	mysqli_free_result($result);
 	mysqli_close($link);
 }
+
+function display_incomplete_registrations()
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration.registration_id, registration.season, ' .
+		 'member.first_name, member.last_name FROM registration ' .
+		 'INNER JOIN member ' .
+		 'ON member.member_id = registration.member_id ' .
+		 'WHERE registration.price = 0 ' .
+		 'ORDER BY member.last_name, member.first_name, ' .
+		 'registration.season DESC';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	require 'views/incomplete_registrations.html.php';
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+}
+
+function display_popular_lessons()
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_detail.lesson_id, lesson.title ' .
+		 'FROM registration_detail INNER JOIN registration ' .
+		 'ON registration.registration_id = ' .
+		 'registration_detail.registration_id INNER JOIN lesson ' .
+		 'ON lesson.lesson_id = registration_detail.lesson_id ' .
+		 'WHERE season = "' . current_season() . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		$row = html_encode_strings($row);
+		$num_registrants = lesson_registrant_count($row['lesson_id'],
+							   current_season());
+		$titles[$row['lesson_id']] = $row['title'];
+		$registrant_counts[$row['lesson_id']] = $num_registrants;
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	arsort($registrant_counts);
+
+	require 'views/popular_lessons.html.php';
+}
 ?>

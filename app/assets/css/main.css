@@ -229,7 +229,7 @@ header {
 	display: block;
 }
 
-.navbar, .breadcrumb, .container, .footer-container {
+.navbar, .breadcrumb, .container, .super-container, .footer-container {
 	margin: auto;
 	width: 1280px;
 }
@@ -384,6 +384,28 @@ fieldset {
 
 .hidden.show {
 	display: block;
+}
+
+.super-container {
+	margin-top: 100px;
+}
+
+.tiny-container {
+	background-color: #000000;
+	height: 250px;
+	overflow: scroll;
+	padding: 20px;
+	width: 500px;
+}
+
+.tiny-container:first-child {
+	float: left;
+	margin-left: 50px;
+}
+
+.tiny-container:last-child {
+	float: right;
+	margin-right: 50px;
 }
 
 footer {

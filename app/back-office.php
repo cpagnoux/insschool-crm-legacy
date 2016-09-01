@@ -256,6 +256,7 @@ case 'logout':
 	break;
 default:
 	require 'views/header.html.php';
+	require 'views/home.html.php';
 	require 'views/footer.html.php';
 	break;
 }
