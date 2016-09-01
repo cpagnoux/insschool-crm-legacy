@@ -352,7 +352,9 @@ function add_user($data)
 
 	mysqli_close($link);
 
-	redirect('user');
+	$_SESSION['new_password'] = $password;
+
+	redirect_after_add_user();
 }
 
 function add_entity($table, $data)

@@ -26,6 +26,9 @@ if (!session_valid()) {
 	$action = 'login';
 } else if (isset($_GET['status'])) {
 	switch ($_GET['action']) {
+	case 'add_user':
+		$action = 'status_add_user';
+		break;
 	case 'reset_password':
 		$action = 'status_reset_password';
 		break;
@@ -180,6 +183,12 @@ case 'update_absences':
 	break;
 case 'reset_absences':
 	reset_absences($_GET['teacher_id']);
+	break;
+case 'status_add_user':
+	require 'views/header.html.php';
+	require 'views/status_add_user.html.php';
+	require 'views/footer.html.php';
+	unset($_SESSION['new_password']);
 	break;
 case 'toggle_admin':
 	toggle_admin($_GET['username']);

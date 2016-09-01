@@ -365,6 +365,12 @@ function redirect($table, $id = null)
 		       $table);
 }
 
+function redirect_after_add_user()
+{
+	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
+	       '?action=add_user&status=success');
+}
+
 function redirect_after_reset_password()
 {
 	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
