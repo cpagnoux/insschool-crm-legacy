@@ -3,7 +3,7 @@
  * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
-set_include_path(__DIR__);
+set_include_path(__DIR__ . '/..');
 
 require_once 'src/connection.php';
 require_once 'src/session.php';

@@ -115,7 +115,7 @@ function display_lessons_by_day($link, $day, $lessons)
 
 	$query = 'SELECT lesson_id, title, start_time, end_time, room_id ' .
 		 'FROM lesson WHERE day = "' . $day .
-		 '" ORDER BY start_time, end_time, room_id';
+		 '" ORDER BY start_time, room_id';
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

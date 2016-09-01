@@ -1,8 +1,3 @@
-INSERT INTO `order_content` VALUES (1, 1, 1),
-	(1, 2, 1),
-	(1, 3, 1),
-	(1, 5, 1);
-
 INSERT INTO `goody` VALUES ('', 'DVD INS Show 2015', '', 12.00, 500),
 	('', 'T-shirt INS School Homme Vert XL', 'Modèle : homme ; Couleur : vert ; Taille : XL', 12.00, 0),
 	('', 'T-shirt INS School Femme Bleu S', 'Modèle : femme ; Couleur : bleu ; Taille : S', 12.00, 0),
@@ -45,6 +40,11 @@ INSERT INTO `lesson` VALUES ('', 'Atelier Ados', 1, 'MONDAY', '18:30', '19:30', 
 	('', 'Kizomba Int.', 8, 'FRIDAY', '20:40', '21:40', 2, '');
 
 INSERT INTO `order` VALUES ('', 1, '2016-05-01');
+
+INSERT INTO `order_content` VALUES (1, 1, 1),
+	(1, 2, 1),
+	(1, 3, 1),
+	(1, 5, 1);
 
 INSERT INTO `order_payment` VALUES ('', 1, 46.00, 'CHECK', '2016-05-15');
 
