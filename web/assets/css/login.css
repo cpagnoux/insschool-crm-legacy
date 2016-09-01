@@ -59,17 +59,15 @@ input[type=submit]:focus {
 
 .container {
 	margin: auto;
+	margin-top: 100px;
 	width: 300px;
-}
-
-.container img {
-	display: block;
-	margin: auto;
-	margin-bottom: 40px;
-	width: 161px;
 }
 
 .form-group {
 	margin-bottom: 1em;
 	margin-top: 1em;
+}
+
+.footer-container {
+	color: #000000;
 }

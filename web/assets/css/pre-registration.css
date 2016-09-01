@@ -111,6 +111,7 @@ header {
 	margin-bottom: 40px;
 	margin-top: 100px;
 	opacity: 0.8;
+	padding: 0 20px;
 }
 
 header img {
@@ -143,4 +144,8 @@ fieldset {
 
 .form-group-option label {
 	display: inline;
+}
+
+.footer-container {
+	color: #000000;
 }

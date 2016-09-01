@@ -17,8 +17,6 @@
 <body>
 
 <div class="container">
-  <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
-
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
     <div class="form-group">
       <input id="username" type="text" name="username" placeholder="Nom d'utilisateur" required autofocus>
