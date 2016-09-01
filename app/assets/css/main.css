@@ -1,15 +1,15 @@
 body {
-	background-color: #ffffff;
+	background-color: #808080;
 	color: #808080;
 }
 
-a, .dropdown-toggle {
-	color: #e0e0e0;
+a {
+	color: #ffffff;
 	text-decoration: none;
 }
 
-a:hover, .dropdown-toggle:hover, .dropdown-toggle.highlight {
-	color: #ffffff;
+a:hover {
+	color: #c0c0c0;
 }
 
 h1, h2 {
@@ -23,6 +23,7 @@ h2, .uppercase {
 input, select, textarea {
 	background-color: #000000;
 	border: 2px solid #404040;
+	border-radius: 2px;
 	box-sizing: border-box;
 	color: #808080;
 	padding: 10px 20px;
@@ -30,22 +31,45 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-	border: 2px solid #606060;
+	box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-input-placeholder {
+	color: #606060;
+}
+
+::-moz-placeholder {
+	color: #606060;
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: #606060;
 }
 
 input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
 	width: auto;
 }
 
+input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
+	box-shadow: none;
+}
+
 input[type=submit], .button, .quantity-button {
-	background-color: #808080;
+	background-color: #404040;
 	border: none;
+	border-radius: 2px;
 	color: #ffffff;
 	display: inline-block;
 }
 
 input[type=submit]:hover, .button:hover, .quantity-button:hover {
-	background-color: #a0a0a0;
+	background-color: #606060;
+	color: #ffffff;
+}
+
+input[type=submit]:focus, .button:focus, .quantity-button:focus {
+	background-color: #404040;
 }
 
 input[type=submit], .button {
@@ -78,6 +102,10 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 	background-color: #00a000;
 }
 
+.button.true:focus {
+	background-color: #008000;
+}
+
 .dropdown-toggle {
 	cursor: pointer;
 }
@@ -104,7 +132,7 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 }
 
 table, th, td {
-	border: 1px solid #202020;
+	border: 2px solid #404040;
 }
 
 table {
@@ -133,7 +161,7 @@ th {
 }
 
 .db-table th, .db-table td {
-	border-bottom: 1px solid #202020;
+	border-bottom: 2px solid #404040;
 }
 
 header {
@@ -160,8 +188,9 @@ header {
 }
 
 .dropdown-menu {
-	background-color: #808080;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	background-color: #404040;
+	border-radius: 2px;
+	box-shadow: 0 8px 8px 8px rgba(255, 255, 255, 0.2);
 	display: none;
 	position: absolute;
 	right: 0;
@@ -173,6 +202,7 @@ header {
 }
 
 .dropdown-menu li a {
+	border-radius: 2px;
 	color: #ffffff;
 	display: block;
 	padding-left: 20px;
@@ -180,7 +210,8 @@ header {
 }
 
 .dropdown-menu li a:hover {
-	background-color: #a0a0a0;
+	background-color: #606060;
+	color: #ffffff;
 }
 
 .dropdown-menu.show {
@@ -210,18 +241,23 @@ header {
 }
 
 .navbar li a {
-	color: #ffffff;
 	display: inline-block;
 	float: left;
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-.navbar li a:hover {
-	background-color: #202020;
+.utility-bar a, .dropdown-toggle, .navbar li a {
+	color: #c0c0c0;
 }
 
+.utility-bar a:hover, .dropdown-toggle:hover, .dropdown-toggle.highlight, .navbar li a:hover {
+	color: #ffffff;
+}
+
+
 .breadcrumb {
+	color: #c0c0c0;
 	margin-bottom: 20px;
 	padding-left: 20px;
 }
@@ -236,14 +272,6 @@ header {
 
 .breadcrumb li:first-child::before {
 	content: none;
-}
-
-.breadcrumb li a {
-	color: #000000;
-}
-
-.breadcrumb li a:hover {
-	color: #202020;
 }
 
 .container {
@@ -288,6 +316,7 @@ header {
 }
 
 .pagination li a, .pagination li .active, .pagination li .disabled {
+	border-radius: 2px;
 	color: #ffffff;
 	display: inline-block;
 	float: left;
@@ -296,6 +325,7 @@ header {
 
 .pagination li a:hover {
 	background-color: #202020;
+	color: #ffffff;
 }
 
 .pagination li .active {

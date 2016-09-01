@@ -9,8 +9,7 @@
       <?php require 'views/select_subject.html.php' ?>
 
       <div class="form-group">
-        <label for="message">Veuillez décrire le problème que vous rencontrez</label>
-        <textarea class="message" id="message" name="message" required></textarea>
+        <textarea class="message" name="message" placeholder="Veuillez décrire le problème que vous rencontrez" required></textarea>
         <span></span>
       </div>
     </fieldset>
