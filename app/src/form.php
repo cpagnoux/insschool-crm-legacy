@@ -195,19 +195,19 @@ function select_day($day = null)
 	if (isset($day)) {
 		switch ($day) {
 		case 'MONDAY':
-			$monday = ' selected="selected"';
+			$monday = ' selected';
 			break;
 		case 'TUESDAY':
-			$tuesday = ' selected="selected"';
+			$tuesday = ' selected';
 			break;
 		case 'WEDNESDAY':
-			$wednesday = ' selected="selected"';
+			$wednesday = ' selected';
 			break;
 		case 'THURSDAY':
-			$thursday = ' selected="selected"';
+			$thursday = ' selected';
 			break;
 		case 'FRIDAY':
-			$friday = ' selected="selected"';
+			$friday = ' selected';
 			break;
 		}
 	}
