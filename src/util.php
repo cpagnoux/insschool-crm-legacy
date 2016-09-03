@@ -668,6 +668,18 @@ function product_status($stock)
 	return 'Produit épuisé';
 }
 
+function reverse_format_phone_number($phone_number)
+{
+	if ($phone_number == '')
+		return '';
+
+	// stored data is in '## ## ## ## ##' format
+	list($part1, $part2, $part3, $part4, $part5) = sscanf($phone_number,
+			'%2c %2c %2c %2c %2c');
+
+	return $part1 . $part2 . $part3 . $part4 . $part5;
+}
+
 function to_date($day, $month, $year)
 {
 	return $year . '-' . $month . '-' . $day;

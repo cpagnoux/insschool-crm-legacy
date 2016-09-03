@@ -37,13 +37,13 @@
 <fieldset>
   <div class="form-group">
     <label for="cellphone">Portable</label>
-    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>" <?php regexp_phone_number() ?>>
+    <input id="cellphone" type="text" name="cellphone" value="<?php echo reverse_format_phone_number($row['cellphone']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="phone">Fixe</label>
-    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>" <?php regexp_phone_number() ?>>
+    <input id="phone" type="text" name="phone" value="<?php echo reverse_format_phone_number($row['phone']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 

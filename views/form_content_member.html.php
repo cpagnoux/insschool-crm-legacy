@@ -37,25 +37,25 @@
 <fieldset>
   <div class="form-group">
     <label for="cellphone">Portable</label>
-    <input id="cellphone" type="text" name="cellphone" value="<?php echo $row['cellphone'] ?>" <?php regexp_phone_number() ?>>
+    <input id="cellphone" type="text" name="cellphone" value="<?php echo reverse_format_phone_number($row['cellphone']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="cellphone_father">Portable père</label>
-    <input id="cellphone_father" type="text" name="cellphone_father" value="<?php echo $row['cellphone_father'] ?>" <?php regexp_phone_number() ?>>
+    <input id="cellphone_father" type="text" name="cellphone_father" value="<?php echo reverse_format_phone_number($row['cellphone_father']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="cellphone_mother">Portable mère</label>
-    <input id="cellphone_mother" type="text" name="cellphone_mother" value="<?php echo $row['cellphone_mother'] ?>" <?php regexp_phone_number() ?>>
+    <input id="cellphone_mother" type="text" name="cellphone_mother" value="<?php echo reverse_format_phone_number($row['cellphone_mother']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 
   <div class="form-group">
     <label for="phone">Fixe</label>
-    <input id="phone" type="text" name="phone" value="<?php echo $row['phone'] ?>" <?php regexp_phone_number() ?>>
+    <input id="phone" type="text" name="phone" value="<?php echo reverse_format_phone_number($row['phone']) ?>" <?php regexp_phone_number() ?>>
     <span></span>
   </div>
 

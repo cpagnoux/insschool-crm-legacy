@@ -10,4 +10,3 @@ TODO:
 - split main controller into multiple light controllers
 - refactor design using persistent navbar and menu
 - Add ability to display simple schedule
-- fix bug that occur when modifying entities which have phone numbers

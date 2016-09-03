@@ -176,7 +176,8 @@ function add_member($data)
 
 	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
 		 '", "' . $data['last_name'] . '", "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) . '", "' . $data['address'] .
+		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
+		 '", "' . $data['address'] .
 		 '", "' . $data['postal_code'] . '", "' . $data['city'] .
 		 '", "' . format_phone_number($data['cellphone']) . '", "' .
 		 format_phone_number($data['cellphone_father']) . '", "' .
@@ -534,11 +535,13 @@ function modify_member($member_id, $data)
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
 		 '", address = "' . $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . $data['cellphone'] .
-		 '", cellphone_father = "' . $data['cellphone_father'] .
-		 '", cellphone_mother = "' . $data['cellphone_mother'] .
-		 '", phone = "' . $data['phone'] . '", email = "' .
-		 $data['email'] . '", means_of_knowledge = "' .
+		 '", cellphone = "' . format_phone_number($data['cellphone']) .
+		 '", cellphone_father = "' .
+		 format_phone_number($data['cellphone_father']) .
+		 '", cellphone_mother = "' .
+		 format_phone_number($data['cellphone_mother']) .
+		 '", phone = "' . format_phone_number($data['phone']) .
+		 '", email = "' . $data['email'] . '", means_of_knowledge = "' .
 		 $data['means_of_knowledge'] . '" WHERE member_id = ' .
 		 $member_id;
 	if (!mysqli_query($link, $query)) {
@@ -580,13 +583,15 @@ function modify_pre_registration($pre_registration_id, $data)
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
 		 '", address = "' . $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . $data['cellphone'] .
-		 '", cellphone_father = "' . $data['cellphone_father'] .
-		 '", cellphone_mother = "' . $data['cellphone_mother'] .
-		 '", phone = "' . $data['phone'] . '", email = "' .
-		 $data['email'] . '", lessons = "' . $lessons_str .
-		 '", plan = "' . $data['plan'] . '", means_of_knowledge = "' .
-		 $data['means_of_knowledge'] .
+		 '", cellphone = "' . format_phone_number($data['cellphone']) .
+		 '", cellphone_father = "' .
+		 format_phone_number($data['cellphone_father']) .
+		 '", cellphone_mother = "' .
+		 format_phone_number($data['cellphone_mother']) .
+		 '", phone = "' . format_phone_number($data['phone']) .
+		 '", email = "' . $data['email'] . '", lessons = "' .
+		 $lessons_str . '", plan = "' . $data['plan'] .
+		 '", means_of_knowledge = "' . $data['means_of_knowledge'] .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -668,9 +673,10 @@ function modify_teacher($teacher_id, $data)
 		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
 		 '", address = "' . $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . $data['cellphone'] . '", phone = "' .
-		 $data['phone'] . '", email = "' . $data['email'] .
-		 '" WHERE teacher_id = ' . $teacher_id;
+		 '", cellphone = "' . format_phone_number($data['cellphone']) .
+		 '", phone = "' . format_phone_number($data['phone']) .
+		 '", email = "' . $data['email'] . '" WHERE teacher_id = ' .
+		 $teacher_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
