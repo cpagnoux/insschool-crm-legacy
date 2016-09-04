@@ -29,5 +29,5 @@ default:
 	break;
 }
 
-require 'views/footer.html.php';
+require 'views/footer_pre_registration.html.php';
 ?>

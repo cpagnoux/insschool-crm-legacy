@@ -174,7 +174,7 @@ header {
 
 .utility-bar {
 	line-height: 40px;
-	padding-right: 20px;
+	padding: 0 20px;
 	position: relative;
 	text-align: right;
 	z-index: 1;
@@ -209,8 +209,7 @@ header {
 	border-radius: 2px;
 	color: #ffffff;
 	display: block;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 0 20px;
 }
 
 .dropdown-menu li a:hover {
@@ -223,6 +222,7 @@ header {
 }
 
 .navbar, .breadcrumb, .container, .super-container, .footer-container {
+	box-sizing: border-box;
 	margin: auto;
 	width: 1280px;
 }
@@ -247,8 +247,7 @@ header {
 .navbar li a {
 	display: inline-block;
 	float: left;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding: 0 10px;
 }
 
 .utility-bar a, .dropdown-toggle, .navbar li a {
@@ -263,7 +262,7 @@ header {
 .breadcrumb {
 	color: #c0c0c0;
 	margin-bottom: 20px;
-	padding-left: 20px;
+	padding: 0 20px;
 }
 
 .breadcrumb li {
