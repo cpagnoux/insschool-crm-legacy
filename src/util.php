@@ -276,12 +276,15 @@ function link_delete_user($username)
 
 function link_send_mail($table, $id)
 {
+	/*
 	echo '<a class="button" href="send_mail.php?table=' . $table .
 	     '&amp;id=' . $id . '">Envoyer un mail</a>';
+	 */
 }
 
 function link_send_mail_to_multiple_recipients($table)
 {
+	/*
 	$label = '';
 
 	switch ($table) {
@@ -298,13 +301,16 @@ function link_send_mail_to_multiple_recipients($table)
 
 	echo '<a class="button" href="send_mail.php?to=multiple_recipients' .
 	     '&amp;table=' . $table . '">' . $label . '</a>';
+	 */
 }
 
 function link_send_mail_to_lesson_registrants($lesson_id, $season)
 {
+	/*
 	echo '<a class="button" href="send_mail.php?to=lesson_registrants' .
 	     '&amp;lesson_id=' . $lesson_id . '&amp;season=' . $season .
 	     '">Envoyer un mail aux inscrits</a>';
+	 */
 }
 
 function link_send_ticket()
