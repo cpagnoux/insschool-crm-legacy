@@ -9,7 +9,7 @@ define('DATABASE', 'insschool');
 define('DEBUG', 1);
 
 // Mail
-define('EMAIL', 'bounty63700@hotmail.fr');
+define('EMAIL', 'user@example.com');
 define('DEV_EMAIL', 'christophe.pagnouxv@gmail.com');
 
 // Misc

@@ -11,7 +11,7 @@ require_once 'src/error.php';
  */
 function link_home()
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '">Accueil</a>';
+	echo '<a href="index.php">Accueil</a>';
 }
 
 function link_table($table)
@@ -45,51 +45,48 @@ function link_table($table)
 		break;
 	}
 
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table . '">' .
-	     $label . '</a>';
+	echo '<a href="overview.php?table=' . $table . '">' . $label . '</a>';
 }
 
 function link_reset_filters($table)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=reset_filters&amp;table=' . $table .
-	     '">Réinitialiser les filtres</a>';
+	echo '<a class="button" href="overview.php?action=reset_filters&amp;' .
+	     'table=' . $table . '">Réinitialiser les filtres</a>';
 }
 
 function link_previous($table, $page)
 {
 	if ($page == 1)
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		     $table . '">&laquo;</a>';
+		echo '<a href="overview.php?table=' . $table . '">&laquo;</a>';
 	else
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		     $table . '&amp;page=' . $page . '">&laquo;</a>';
+		echo '<a href="overview.php?table=' . $table . '&amp;page=' .
+		     $page . '">&laquo;</a>';
 }
 
 function link_next($table, $page)
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' . $table .
-	     '&amp;page=' . $page . '">&raquo;</a>';
+	echo '<a href="overview.php?table=' . $table . '&amp;page=' . $page .
+	     '">&raquo;</a>';
 }
 
 function link_page($table, $page)
 {
 	if ($page == 1)
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		     $table . '">' . $page . '</a>';
+		echo '<a href="overview.php?table=' . $table . '">' . $page .
+		     '</a>';
 	else
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		     $table . '&amp;page=' . $page . '">' . $page . '</a>';
+		echo '<a href="overview.php?table=' . $table . '&amp;page=' .
+		     $page . '">' . $page . '</a>';
 }
 
 function link_entity($table, $id, $label = null)
 {
 	if (isset($label))
-		echo '<a href="' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		     $table . '&amp;id=' . $id . '">' . $label . '</a>';
+		echo '<a href="entity.php?table=' . $table . '&amp;id=' . $id .
+		     '">' . $label . '</a>';
 	else
-		echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-		     '?table=' . $table . '&amp;id=' . $id . '">+ d\'infos</a>';
+		echo '<a class="button" href="entity.php?table=' . $table .
+		     '&amp;id=' . $id . '">+ d\'infos</a>';
 }
 
 function link_add_entity($table, $id = null)
@@ -139,25 +136,24 @@ function link_add_entity($table, $id = null)
 	}
 
 	if (isset($id))
-		echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-		     '?action=add&amp;table=' . $table . '&amp;id=' . $id .
-		     '">' . $label . '</a>';
+		echo '<a class="button" href="entity.php?action=add&amp;' .
+		     'table=' . $table . '&amp;id=' . $id . '">' . $label .
+		     '</a>';
 	else
-		echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-		     '?action=add&amp;table=' . $table . '">' . $label . '</a>';
+		echo '<a class="button" href="entity.php?action=add&amp;' .
+		     'table=' . $table . '">' . $label . '</a>';
 }
 
 function link_modify_entity($table, $id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=modify&amp;table=' . $table . '&amp;id=' . $id .
-	     '">Modifier</a>';
+	echo '<a class="button" href="entity.php?action=modify&amp;table=' .
+	     $table . '&amp;id=' . $id . '">Modifier</a>';
 }
 
 function link_delete_entity($table, $id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=delete&amp;table=' . $table . '&amp;id=' . $id .
+	echo '<a class="button" href="entity.php?action=delete&amp;table=' .
+	     $table . '&amp;id=' . $id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
@@ -171,47 +167,43 @@ function link_toggle_volunteer($member_id, $volunteer)
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' .
-	     $_SERVER['SCRIPT_NAME'] .
-	     '?action=toggle_volunteer&amp;member_id=' . $member_id .
-	     '">' . $label . '</a>';
+	echo '<a class="button' . $state .
+	     '" href="entity.php?action=toggle_volunteer&amp;member_id=' .
+	     $member_id . '">' . $label . '</a>';
 }
 
 function link_quantity_minus($order_id, $goody_id, $quantity)
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=modify_quantity&amp;order_id=' . $order_id .
-	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	     '"><span class="entypo entypo-minus-sign"></span></a>';
+	echo '<a href="entity.php?action=modify_quantity&amp;order_id=' .
+	     $order_id . '&amp;goody_id=' . $goody_id . '&amp;quantity=' .
+	     $quantity . '"><span class="entypo entypo-minus-sign"></span></a>';
 }
 
 function link_quantity_plus($order_id, $goody_id, $quantity)
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=modify_quantity&amp;order_id=' . $order_id .
-	     '&amp;goody_id=' . $goody_id . '&amp;quantity=' . $quantity .
-	     '"><span class="entypo entypo-plus-sign"></span></a>';
+	echo '<a href="entity.php?action=modify_quantity&amp;order_id=' .
+	     $order_id . '&amp;goody_id=' . $goody_id . '&amp;quantity=' .
+	     $quantity . '"><span class="entypo entypo-plus-sign"></span></a>';
 }
 
 function link_remove_product($order_id, $goody_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=modify_quantity&amp;order_id=' . $order_id .
-	     '&amp;goody_id=' . $goody_id . '&amp;quantity=0">Supprimer</a>';
+	echo '<a class="button" href="entity.php?action=modify_quantity&amp;' .
+	     'order_id=' . $order_id . '&amp;goody_id=' . $goody_id .
+	     '&amp;quantity=0">Supprimer</a>';
 }
 
 function link_empty_cart($order_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=empty_cart&amp;order_id=' . $order_id .
-	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
-	     'Vider le panier</a>';
+	echo '<a class="button" href="entity.php?action=empty_cart&amp;' .
+	     'order_id=' . $order_id . '" onclick="return confirm(' .
+	     '\'Êtes-vous sûr(e) ?\')">Vider le panier</a>';
 }
 
 function link_commit_pre_registration($pre_registration_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=commit&amp;pre_registration_id=' . $pre_registration_id .
+	echo '<a class="button" href="entity.php?action=commit&amp;' .
+	     'pre_registration_id=' . $pre_registration_id .
 	     '">Valider la pré-inscription</a>';
 }
 
@@ -226,34 +218,31 @@ function link_toggle_show_participation($registration_id, $lesson_id,
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' .
-	     $_SERVER['SCRIPT_NAME'] .
-	     '?action=toggle_show_participation&amp;registration_id=' .
+	echo '<a class="button' . $state . '" href="entity.php?' .
+	     'action=toggle_show_participation&amp;registration_id=' .
 	     $registration_id . '&amp;lesson_id=' . $lesson_id .
 	     '">' . $label . '</a>';
 }
 
 function link_remove_lesson($registration_id, $lesson_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=remove_lesson&amp;registration_id=' . $registration_id .
-	     '&amp;lesson_id=' . $lesson_id .
+	echo '<a class="button" href="entity.php?action=remove_lesson&amp;' .
+	     'registration_id=' . $registration_id . '&amp;lesson_id=' .
+	     $lesson_id .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_update_absences($teacher_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=update_absences&amp;teacher_id=' . $teacher_id .
-	     '">+1</a>';
+	echo '<a class="button" href="entity.php?action=update_absences&amp;' .
+	     'teacher_id=' . $teacher_id . '">+1</a>';
 }
 
 function link_reset_absences($teacher_id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=reset_absences&amp;teacher_id=' . $teacher_id .
-	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
-	     'Réinitialiser</a>';
+	echo '<a class="button" href="entity.php?action=reset_absences&amp;' .
+	     'teacher_id=' . $teacher_id . '" onclick="return confirm(' .
+	     '\'Êtes-vous sûr(e) ?\')">Réinitialiser</a>';
 }
 
 function link_toggle_admin($username, $admin)
@@ -266,31 +255,28 @@ function link_toggle_admin($username, $admin)
 		$label = 'Oui';
 	}
 
-	echo '<a class="button' . $state . '" href="' .
-	     $_SERVER['SCRIPT_NAME'] . '?action=toggle_admin&amp;username=' .
-	     $username . '">' . $label .
+	echo '<a class="button' . $state . '" href="entity.php?' .
+	     'action=toggle_admin&amp;username=' . $username . '">' . $label .
 	     '</a>';
 }
 
 function link_reset_password($username)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=reset_password&amp;username=' . $username .
-	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">' .
-	     'Réinitialiser le mot de passe</a>';
+	echo '<a class="button" href="entity.php?action=reset_password&amp;' .
+	     'username=' . $username . '" onclick="return confirm(' .
+	     '\'Êtes-vous sûr(e) ?\')">Réinitialiser le mot de passe</a>';
 }
 
 function link_delete_user($username)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=delete_user&amp;username=' . $username .
+	echo '<a class="button" href="entity.php?action=delete_user&amp;' .
+	     'username=' . $username .
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
 function link_send_mail($table, $id)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=send_mail&amp;to=single_recipient&amp;table=' . $table .
+	echo '<a class="button" href="send_mail.php?table=' . $table .
 	     '&amp;id=' . $id . '">Envoyer un mail</a>';
 }
 
@@ -310,35 +296,30 @@ function link_send_mail_to_multiple_recipients($table)
 		break;
 	}
 
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=send_mail&amp;to=multiple_recipients&amp;table=' .
-	     $table . '">' . $label . '</a>';
+	echo '<a class="button" href="send_mail.php?to=multiple_recipients' .
+	     '&amp;table=' . $table . '">' . $label . '</a>';
 }
 
 function link_send_mail_to_lesson_registrants($lesson_id, $season)
 {
-	echo '<a class="button" href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=send_mail&amp;to=lesson_registrants&amp;lesson_id=' .
-	     $lesson_id . '&amp;season=' . $season .
+	echo '<a class="button" href="send_mail.php?to=lesson_registrants' .
+	     '&amp;lesson_id=' . $lesson_id . '&amp;season=' . $season .
 	     '">Envoyer un mail aux inscrits</a>';
 }
 
 function link_send_ticket()
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=send_ticket">Assistance</a>';
+	echo '<a href="send_ticket.php">Assistance</a>';
 }
 
 function link_change_password()
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=change_password">Changer de mot de passe</a>';
+	echo '<a href="change_password.php">Changer de mot de passe</a>';
 }
 
 function link_logout()
 {
-	echo '<a href="' . $_SERVER['SCRIPT_NAME'] .
-	     '?action=logout">Déconnexion</a>';
+	echo '<a href="index.php?action=logout">Déconnexion</a>';
 }
 
 function link_website()
@@ -350,64 +331,60 @@ function link_website()
 /*
  * Redirects
  */
+function redirect_login()
+{
+	header('Location: login.php');
+}
+
 function redirect_home()
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME']);
+	header('Location: index.php');
 }
 
 function redirect($table, $id = null)
 {
 	if (isset($id))
-		header('Location: ' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		       $table . '&id=' . $id);
+		header('Location: entity.php?table=' . $table . '&id=' . $id);
 	else
-		header('Location: ' . $_SERVER['SCRIPT_NAME'] . '?table=' .
-		       $table);
+		header('Location: overview.php?table=' . $table);
 }
 
 function redirect_after_add_user()
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=add_user&status=success');
+	header('Location: entity.php?action=add_user&status=success');
 }
 
 function redirect_after_reset_password()
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=reset_password&status=success');
+	header('Location: entity.php?action=reset_password&status=success');
 }
 
 function redirect_after_send_mail($table, $id, $status)
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=send_mail&to=single_recipient&table=' . $table .
-	       '&id=' . $id . '&status=' . $status);
+	header('Location: send_mail.php?table=' . $table . '&id=' . $id .
+	       '&status=' . $status);
 }
 
 function redirect_after_send_mail_to_multiple_recipients($table, $status)
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=send_mail&to=multiple_recipients&table=' . $table .
-	       '&status=' . $status);
+	header('Location: send_mail.php?to=multiple_recipients&table=' .
+	       $table . '&status=' . $status);
 }
 
 function redirect_after_send_mail_to_lesson_registrants($lesson_id, $status)
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=send_mail&to=lesson_registrants&lesson_id=' .
+	header('Location: send_mail.php?to=lesson_registrants&lesson_id=' .
 	       $lesson_id . '&status=' . $status);
 }
 
 function redirect_after_send_ticket($status)
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=send_ticket&status=' . $status);
+	header('Location: send_ticket.php?status=' . $status);
 }
 
 function redirect_after_change_password()
 {
-	header('Location: ' . $_SERVER['SCRIPT_NAME'] .
-	       '?action=change_password&status=success');
+	header('Location: change_password.php?status=success');
 }
 
 /*

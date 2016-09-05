@@ -7,6 +7,5 @@ TODO:
 - add email to user in db + implement mail confirmation on pw change ?
 - ui for ordering rooms in schedule
 - refactor isolating controllers
-- split main controller into multiple light controllers
 - refactor design using persistent navbar and menu
 - Add ability to display simple schedule

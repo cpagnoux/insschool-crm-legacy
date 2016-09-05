@@ -8,8 +8,8 @@ require_once 'config/app.config.php';
 function sql_connect_error()
 {
 	if (DEBUG == 1)
-		echo '<p>Echec de la connexion : ' . mysqli_connect_error() .
-		     '</p>' . PHP_EOL;
+		echo '<p><b>Echec de la connexion :</b> ' .
+		     mysqli_connect_error() . '</p>' . PHP_EOL;
 	else
 		echo '<p>Une erreur est survenue !</p>' . PHP_EOL;
 }
@@ -17,7 +17,7 @@ function sql_connect_error()
 function sql_error($link, $query)
 {
 	if (DEBUG == 1) {
-		echo '<p>Erreur SQL : ' . mysqli_error($link) . '<br>' .
+		echo '<p><b>Erreur SQL :</b> ' . mysqli_error($link) . '<br>' .
 		     PHP_EOL;
 		echo $query . '</p>' . PHP_EOL;
 	} else {

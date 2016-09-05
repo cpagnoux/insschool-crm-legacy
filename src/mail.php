@@ -16,16 +16,16 @@ function form_send_mail($to)
 	require 'views/header.html.php';
 
 	switch ($to) {
-	case 'single_recipient':
-		send_mail_to_single_recipient($_GET['table'], $_GET['id'], '',
-					      '', true);
-		require 'views/form_send_mail.html.php';
-		break;
 	case 'multiple_recipients':
 		require 'views/form_send_mail_to_multiple_recipients.html.php';
 		break;
 	case 'lesson_registrants':
 		require 'views/form_send_mail_to_lesson_registrants.html.php';
+		break;
+	default:
+		send_mail_to_single_recipient($_GET['table'], $_GET['id'], '',
+					      '', true);
+		require 'views/form_send_mail.html.php';
 		break;
 	}
 
@@ -159,10 +159,6 @@ function send_mail_to_lesson_registrants($lesson_id, $season, $subject,
 function send_mail($to)
 {
 	switch ($to) {
-	case 'single_recipient':
-		send_mail_to_single_recipient($_POST['table'], $_POST['id'],
-				$_POST['subject'], $_POST['message']);
-		break;
 	case 'multiple_recipients':
 		send_mail_to_multiple_recipients($_POST['table'],
 				$_POST['subject'], $_POST['message']);
@@ -172,6 +168,10 @@ function send_mail($to)
 				$_POST['season'], $_POST['subject'],
 				$_POST['message']);
 		break;
+	default:
+		send_mail_to_single_recipient($_POST['table'], $_POST['id'],
+				$_POST['subject'], $_POST['message']);
+		break;
 	}
 }
 
@@ -180,15 +180,15 @@ function status_send_mail($to)
 	require 'views/header.html.php';
 
 	switch ($to) {
-	case 'single_recipient':
-		require 'views/status_send_mail.html.php';
-		break;
 	case 'multiple_recipients':
 		require 'views/' .
 			'status_send_mail_to_multiple_recipients.html.php';
 		break;
 	case 'lesson_registrants':
 		require 'views/status_send_mail_to_lesson_registrants.html.php';
+		break;
+	default:
+		require 'views/status_send_mail.html.php';
 		break;
 	}
 

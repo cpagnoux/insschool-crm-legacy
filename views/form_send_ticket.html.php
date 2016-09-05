@@ -4,7 +4,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=send_ticket" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
     <fieldset>
       <?php require 'views/select_subject.html.php' ?>
 

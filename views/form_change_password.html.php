@@ -4,7 +4,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=change_password" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
     <fieldset>
       <div class="form-group">
         <label for="current_password">Mot de passe actuel</label>

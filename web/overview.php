@@ -26,13 +26,11 @@ if (isset($_GET['action']))
 	$action = $_GET['action'];
 
 switch ($action) {
-case 'logout':
-	logout();
+case 'reset_filters':
+	reset_filters($_GET['table']);
 	break;
 default:
-	require 'views/header.html.php';
-	require 'views/home.html.php';
-	require 'views/footer.html.php';
+	display_table($_GET['table'], $_GET['page']);
 	break;
 }
 ?>

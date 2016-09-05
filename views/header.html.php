@@ -15,8 +15,8 @@
 
 <script src="assets/js/main.js"></script>
 
-<?php if ($_GET['action'] == 'send_mail'): ?>
-  <script src="vendor/ckeditor/ckeditor.js"></script>
+<?php if (strpos($_SERVER['SCRIPT_NAME'], 'send_mail.php') !== false): ?>
+  <script src="ckeditor/ckeditor.js"></script>
 <?php endif ?>
 
 </head>
@@ -38,7 +38,7 @@
   </div>
 
   <nav class="navbar">
-    <a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>">
+    <a href="index.php">
       <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
     </a>
 

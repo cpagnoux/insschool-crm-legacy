@@ -6,7 +6,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=send_mail&amp;to=lesson_registrants" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?to=lesson_registrants" method="post">
     <input type="hidden" name="lesson_id" value="<?php echo $_GET['lesson_id'] ?>">
     <input type="hidden" name="season" value="<?php echo $_GET['season'] ?>">
     <?php require 'views/form_content_send_mail.html.php' ?>
