@@ -1,11 +1,21 @@
 TODO:
-- fix duplicate entry bug for goodies in orders and lessons in registrations
-- table search bar
-- call sheet
-- mail functionality -> make it work
-- implement ability to send attachments with mails
-- add email to user in db + implement mail confirmation on pw change ?
-- ui for ordering rooms in schedule
-- refactor isolating controllers
-- refactor design using persistent navbar and menu
+- Fix duplicate entry bug for goodies in orders and lessons in registrations
+- Table search bar
+- Call sheet
+- Mail functionality -> make it work
+- Implement ability to send attachments with mails
+- Add email to user in db + implement mail confirmation on pw change ?
+- UI for ordering rooms in schedule
+- Refactor isolating controllers
+- Refactor design using persistent navbar and menu
 - Add ability to display simple schedule
+- ! Add mailto links for mails
+- Implement SMS functionality
+- Rework member section to distinguish members and non-members
+- Make volunteer per season
+- ! Add possibility to become a member without following a lesson
+- ! Implement notifications for pre-registrations
+- Add internships to model
+- Add ability to keep lessons when they are not proposed anymore
+- ! Make pre-registrations unique
+- Add ability to edit and print factures
