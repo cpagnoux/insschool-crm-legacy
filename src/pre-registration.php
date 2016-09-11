@@ -214,6 +214,29 @@ function string_to_lessons($string)
 /*
  * Submission of pre-registration
  */
+function check_pre_registration($data)
+{
+	$link = connect_database();
+
+	$query = 'SELECT * FROM pre_registration WHERE first_name = "' .
+		 $_POST['first_name'] . '" AND last_name = "' .
+		 $_POST['last_name'] . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	if (mysqli_num_rows($result) == 0) {
+		$lessons_str = display_pre_registration_summary($data);
+		save_pre_registration($link, $_POST, $lessons_str);
+	} else {
+		require 'views/error_pre_registration.html.php';
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+}
+
 function display_pre_registration_summary($data)
 {
 	require 'views/pre_registration_summary.html.php';
@@ -221,14 +244,12 @@ function display_pre_registration_summary($data)
 	return $lessons_str;
 }
 
-function save_pre_registration($data, $lessons_str)
+function save_pre_registration($link, $data, $lessons_str)
 {
 	if (!$data['with_lessons']) {
 		$lessons_str = '';
 		$data['plan'] = '';
 	}
-
-	$link = connect_database();
 
 	$query = 'INSERT INTO pre_registration VALUES ("", "' .
 		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
@@ -246,8 +267,6 @@ function save_pre_registration($data, $lessons_str)
 		sql_error($link, $query);
 		exit;
 	}
-
-	mysqli_close($link);
 }
 
 /*

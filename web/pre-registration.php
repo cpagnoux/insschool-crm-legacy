@@ -20,9 +20,8 @@ require 'views/header_pre_registration.html.php';
 switch ($action) {
 case 'submit':
 	$data = html_encode_strings($_POST);
-	$lessons_str = display_pre_registration_summary($data);
 	$_POST = sql_escape_strings($_POST);
-	save_pre_registration($_POST, $lessons_str);
+	check_pre_registration($data);
 	break;
 default:
 	require 'views/form_add_pre_registration.html.php';
