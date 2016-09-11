@@ -229,6 +229,7 @@ function check_pre_registration($data)
 	if (mysqli_num_rows($result) == 0) {
 		$lessons_str = display_pre_registration_summary($data);
 		save_pre_registration($link, $_POST, $lessons_str);
+		notify_pre_registration($data, $lessons_str);
 	} else {
 		require 'views/error_pre_registration.html.php';
 	}
@@ -269,6 +270,30 @@ function save_pre_registration($link, $data, $lessons_str)
 		sql_error($link, $query);
 		exit;
 	}
+}
+
+function notify_pre_registration($data, $lessons_str)
+{
+	$subject = 'Pré-inscription : ' . $data['first_name'] . ' ' .
+		   $data['last_name'];
+
+	$message = 'Nom : ' . $data['last_name'] . "\r\n";
+	$message .= 'Prénom : ' . $data['first_name'] . "\r\n";
+	$message .= "\r\n";
+	$message .= 'Portable : ' . $data['cellphone'] . "\r\n";
+	$message .= 'E-mail : ' . $data['email'] . "\r\n";
+	$message .= "\r\n";
+	$message .= 'Cours choisi(s) : ' . chosen_lessons($lessons_str) .
+		    "\r\n";
+	$message .= "\r\n";
+	$message .= 'Date et heure de la pré-inscription : ' .
+		    format_datetime($data['date']);
+
+	$message = wordwrap($message, 70, "\r\n");
+
+	$headers = 'From: ' . EMAIL;
+
+	mail(EMAIL, $subject, $message, $headers);
 }
 
 /*

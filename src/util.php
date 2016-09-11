@@ -589,6 +589,20 @@ function format_date($date)
 	       $year;
 }
 
+function format_datetime($datetime)
+{
+	if ($date == '0000-00-00 00:00:00')
+		return 'Inconnue';
+
+	// datetime is in 'YYYY-MM-DD HH:MM:SS' format
+	list($year, $month, $day, $hour, $minute) =
+			sscanf($datetime, '%d-%d-%d %d:%d');
+
+	return sprintf('%02d', $day) . '/' . sprintf('%02d', $month) . '/' .
+	       $year . ', ' . sprintf('%02d', $hour) . 'h' .
+	       sprintf('%02d', $minute);
+}
+
 function format_phone_number($phone_number)
 {
 	if ($phone_number == '')

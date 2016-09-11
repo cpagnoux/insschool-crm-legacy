@@ -57,7 +57,7 @@
 
   <p>
     <span class="attribute-name">Date de pré-inscription :</span>
-    <?php echo format_date($row['date']) ?>
+    <?php echo format_datetime($row['date']) ?>
   </p>
 
   <ul class="action-links">
