@@ -66,22 +66,28 @@
   </div>
 </fieldset>
 
-<h2>Cours suivi(s)</h2>
-
 <fieldset>
-  <?php checkbox_lessons($row['lessons']) ?>
+  <?php radio_with_lessons($row['with_lessons']) ?>
 </fieldset>
 
-<?php if (!isset($row)): ?>
-  <p>
-    * Attention : Lors des cours à INS School, merci d'utiliser des chaussures propres dans les salles de danse (non utilisées à l'extérieur) et une tenue confortable.<br>
-    * INS School se réserve le droit de modifier les horaires du planning à tout moment.
-  </p>
-<?php endif ?>
+<div class="hidden" id="hidden-content">
+  <h2>Cours suivi(s)</h2>
 
-<fieldset>
-  <?php radio_plan($row['plan']) ?>
-</fieldset>
+  <fieldset>
+    <?php checkbox_lessons($row['lessons']) ?>
+  </fieldset>
+
+  <?php if (!isset($row)): ?>
+    <p>
+      * Attention : Lors des cours à INS School, merci d'utiliser des chaussures propres dans les salles de danse (non utilisées à l'extérieur) et une tenue confortable.<br>
+      * INS School se réserve le droit de modifier les horaires du planning à tout moment.
+    </p>
+  <?php endif ?>
+
+  <fieldset>
+    <?php radio_plan($row['plan']) ?>
+  </fieldset>
+</div>
 
 <fieldset>
   <?php radio_means_of_knowledge(true, $row['means_of_knowledge']) ?>

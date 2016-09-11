@@ -171,6 +171,14 @@ fieldset {
 	display: inline;
 }
 
+.hidden {
+	display: none;
+}
+
+.hidden.show {
+	display: block;
+}
+
 .footer-container {
 	background-color: #000000;
 	height: 100px;

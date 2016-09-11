@@ -153,6 +153,21 @@ function radio_plan($plan = null)
 	require 'views/radio_plan.html.php';
 }
 
+function radio_with_lessons($with_lessons = null)
+{
+	$true = '';
+	$false = '';
+
+	if (isset($with_lessons)) {
+		if ($with_lessons)
+			$true = ' checked';
+		else
+			$false = ' checked';
+	}
+
+	require 'views/radio_with_lessons.html.php';
+}
+
 /*
  * Drop-down lists for forms
  */

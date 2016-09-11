@@ -11,6 +11,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/pre-registration.css">
 <link rel="stylesheet" type="text/css" href="assets/css/footer.css">
 
+<script src="assets/js/main.js"></script>
+
 </head>
 <body>
 
