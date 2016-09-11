@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 11, 2016 at 04:38 PM
+-- Generation Time: Sep 11, 2016 at 07:18 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.10
 
@@ -43,11 +43,11 @@ CREATE TABLE `goody` (
 CREATE TABLE `lesson` (
   `lesson_id` tinyint(3) UNSIGNED NOT NULL,
   `title` varchar(50) NOT NULL,
-  `teacher_id` tinyint(3) UNSIGNED NOT NULL,
+  `teacher_id` tinyint(3) UNSIGNED DEFAULT NULL,
   `day` enum('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY') NOT NULL,
-  `start_time` time NOT NULL,
-  `end_time` time NOT NULL,
-  `room_id` tinyint(3) UNSIGNED NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `room_id` tinyint(3) UNSIGNED DEFAULT NULL,
   `costume` tinytext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
