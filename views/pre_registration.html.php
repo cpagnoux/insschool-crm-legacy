@@ -38,15 +38,17 @@
     <?php echo $row['email'] ?>
   </p>
 
-  <p>
-    <span class="attribute-name">Cours choisi(s) :</span>
-    <?php echo chosen_lessons($row['lessons']) ?>
-  </p>
+  <?php if ($row['with_lessons']): ?>
+    <p>
+      <span class="attribute-name">Cours choisi(s) :</span>
+      <?php echo chosen_lessons($row['lessons']) ?>
+    </p>
 
-  <p>
-    <span class="attribute-name">Forfait choisi :</span>
-    <?php echo eval_enum($row['plan']) ?>
-  </p>
+    <p>
+      <span class="attribute-name">Forfait choisi :</span>
+      <?php echo eval_enum($row['plan']) ?>
+    </p>
+  <?php endif ?>
 
   <p>
     <span class="attribute-name">A connu INS School grâce à :</span>

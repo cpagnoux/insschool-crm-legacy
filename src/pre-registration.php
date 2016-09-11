@@ -239,6 +239,8 @@ function check_pre_registration($data)
 
 function display_pre_registration_summary($data)
 {
+	$lessons_str = '';
+
 	require 'views/pre_registration_summary.html.php';
 
 	return $lessons_str;

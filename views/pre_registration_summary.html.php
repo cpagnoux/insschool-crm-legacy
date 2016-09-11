@@ -32,16 +32,18 @@
     <?php echo $data['email'] ?>
   </p>
 
-  <p><span class="attribute-name">Vous avez choisi les cours :</span></p>
+  <?php if ($data['with_lessons']): ?>
+    <p><span class="attribute-name">Vous avez choisi les cours :</span></p>
 
-  <ul>
-    <?php $lessons_str = lessons_to_string($data, true) ?>
-  </ul>
+    <ul>
+      <?php $lessons_str = lessons_to_string($data, true) ?>
+    </ul>
 
-  <p>
-    <span class="attribute-name">Vous avez choisi le forfait :</span>
-    <?php echo eval_enum($data['plan']) ?>
-  </p>
+    <p>
+      <span class="attribute-name">Vous avez choisi le forfait :</span>
+      <?php echo eval_enum($data['plan']) ?>
+    </p>
+  <?php endif ?>
 
   <p><?php link_website() ?></p>
 </div>
