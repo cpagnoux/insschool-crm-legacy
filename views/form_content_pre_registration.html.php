@@ -67,10 +67,10 @@
 </fieldset>
 
 <fieldset>
-  <?php radio_with_lessons($row['with_lessons']) ?>
+  <?php $state = radio_with_lessons($row['with_lessons']) ?>
 </fieldset>
 
-<div class="hidden" id="hidden-content">
+<div class="hidden<?php echo $state ?>" id="lessons">
   <h2>Cours suivi(s)</h2>
 
   <fieldset>

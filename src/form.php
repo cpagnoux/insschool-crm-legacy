@@ -157,15 +157,20 @@ function radio_with_lessons($with_lessons = null)
 {
 	$true = '';
 	$false = '';
+	$state = '';
 
 	if (isset($with_lessons)) {
-		if ($with_lessons)
+		if ($with_lessons) {
 			$true = ' checked';
-		else
+			$state = ' show';
+		} else {
 			$false = ' checked';
+		}
 	}
 
 	require 'views/radio_with_lessons.html.php';
+
+	return $state;
 }
 
 /*

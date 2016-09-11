@@ -223,6 +223,11 @@ function display_pre_registration_summary($data)
 
 function save_pre_registration($data, $lessons_str)
 {
+	if (!$data['with_lessons']) {
+		$lessons_str = '';
+		$data['plan'] = '';
+	}
+
 	$link = connect_database();
 
 	$query = 'INSERT INTO pre_registration VALUES ("", "' .
@@ -234,7 +239,8 @@ function save_pre_registration($data, $lessons_str)
 		 format_phone_number($data['cellphone_father']) . '", "' .
 		 format_phone_number($data['cellphone_mother']) . '", "' .
 		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $lessons_str . '", "' . $data['plan'] . '",  "' .
+		 '", "' . $data['with_lessons'] . '", "' . $lessons_str .
+		 '", "' . $data['plan'] . '",  "' .
 		 $data['means_of_knowledge'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);

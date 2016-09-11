@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 11, 2016 at 04:33 PM
+-- Generation Time: Sep 11, 2016 at 04:38 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.10
 
@@ -132,6 +132,7 @@ CREATE TABLE `pre_registration` (
   `cellphone_mother` char(14) DEFAULT NULL,
   `phone` char(14) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `with_lessons` tinyint(1) NOT NULL,
   `lessons` tinytext NOT NULL,
   `plan` enum('QUARTERLY','ANNUAL') NOT NULL,
   `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH') NOT NULL,

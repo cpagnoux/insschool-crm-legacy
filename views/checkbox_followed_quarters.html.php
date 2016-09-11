@@ -1,4 +1,4 @@
-<div class="form-group hidden<?php echo $state ?>" id="hidden-content">
+<div class="form-group hidden<?php echo $state ?>" id="followed_quarters">
   Trimestre(s) suivi(s)<br>
 
   <div class="form-group-option">

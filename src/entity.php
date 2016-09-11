@@ -573,7 +573,13 @@ function modify_payment($table, $id, $data)
 
 function modify_pre_registration($pre_registration_id, $data)
 {
-	$lessons_str = lessons_to_string($data);
+	$lessons_str = '';
+
+	if ($data['with_lessons'])
+		$lessons_str = lessons_to_string($data);
+
+	if (!$data['with_lessons'])
+		$data['plan'] = '';
 
 	$link = connect_database();
 
@@ -589,9 +595,10 @@ function modify_pre_registration($pre_registration_id, $data)
 		 '", cellphone_mother = "' .
 		 format_phone_number($data['cellphone_mother']) .
 		 '", phone = "' . format_phone_number($data['phone']) .
-		 '", email = "' . $data['email'] . '", lessons = "' .
-		 $lessons_str . '", plan = "' . $data['plan'] .
-		 '", means_of_knowledge = "' . $data['means_of_knowledge'] .
+		 '", email = "' . $data['email'] . '", with_lessons = "' .
+		 $data['with_lessons'] . '", lessons = "' . $lessons_str .
+		 '", plan = "' . $data['plan'] . '", means_of_knowledge = "' .
+		 $data['means_of_knowledge'] .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
