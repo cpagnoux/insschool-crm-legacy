@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 06, 2016 at 02:58 PM
+-- Generation Time: Sep 11, 2016 at 04:33 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.10
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `goody` (
   `goody_id` smallint(5) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` text,
+  `description` tinytext,
   `price` decimal(4,2) DEFAULT NULL,
   `stock` smallint(5) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -132,7 +132,7 @@ CREATE TABLE `pre_registration` (
   `cellphone_mother` char(14) DEFAULT NULL,
   `phone` char(14) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `lessons` text NOT NULL,
+  `lessons` tinytext NOT NULL,
   `plan` enum('QUARTERLY','ANNUAL') NOT NULL,
   `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH') NOT NULL,
   `date` datetime NOT NULL
