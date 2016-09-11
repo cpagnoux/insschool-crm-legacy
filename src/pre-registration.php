@@ -287,7 +287,7 @@ function notify_pre_registration($data, $lessons_str)
 		    "\r\n";
 	$message .= "\r\n";
 	$message .= 'Date et heure de la pré-inscription : ' .
-		    format_datetime($data['date']);
+		    date('d/m/Y, H\hi');
 
 	$message = wordwrap($message, 70, "\r\n");
 
