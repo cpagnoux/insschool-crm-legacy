@@ -77,10 +77,6 @@ input:not([required]) + span::before, select:not([required]) + span::before {
 	text-align: center;
 }
 
-.uppercase {
-	text-transform: uppercase;
-}
-
 table {
 	border-collapse: collapse;
 }
@@ -98,6 +94,35 @@ th {
 
 tr:last-child td {
 	border-bottom: 2px solid #404040;
+}
+
+.room, .MONDAY, .TUESDAY, .WEDNESDAY, .THURSDAY, .FRIDAY {
+	text-transform: uppercase;
+}
+
+.room {
+	background-color: #000000;
+	border-top: 2px solid #404040;
+}
+
+.MONDAY {
+	background-color: #0b7597;
+}
+
+.TUESDAY {
+	background-color: #094e85;
+}
+
+.WEDNESDAY {
+	background-color: #50436b;
+}
+
+.THURSDAY {
+	background-color: #9f3f6c;
+}
+
+.FRIDAY {
+	background-color: #9c4c49;
 }
 
 header, .container, .footer-container {

@@ -1,5 +1,8 @@
 body {
-	background-color: #808080;
+	background-attachment: fixed;
+	background-color: #000000;
+	background-image: url('http://www.insschool.fr/wp-content/uploads/2015/09/affiche-15-16-site-RVB-fusionne%CC%811.jpg');
+	background-position: center top;
 	color: #808080;
 }
 
@@ -128,10 +131,6 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
 	width: 60px;
 }
 
-.uppercase {
-	text-transform: uppercase;
-}
-
 table {
 	border-collapse: collapse;
 }
@@ -166,6 +165,35 @@ tr:last-child td {
 
 .schedule tr:last-child td {
 	border-bottom: 2px solid #404040;
+}
+
+.room, .MONDAY, .TUESDAY, .WEDNESDAY, .THURSDAY, .FRIDAY {
+	text-transform: uppercase;
+}
+
+.schedule .room {
+	background-color: #000000;
+	border-top: 2px solid #404040;
+}
+
+.MONDAY {
+	background-color: #0b7597;
+}
+
+.TUESDAY {
+	background-color: #094e85;
+}
+
+.WEDNESDAY {
+	background-color: #50436b;
+}
+
+.THURSDAY {
+	background-color: #9f3f6c;
+}
+
+.FRIDAY {
+	background-color: #9c4c49;
 }
 
 header {
