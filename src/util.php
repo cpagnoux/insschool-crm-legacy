@@ -6,6 +6,8 @@
 require_once 'src/connection.php';
 require_once 'src/error.php';
 
+require_once 'src/table.php';
+
 /*
  * Hyperlinks
  */
@@ -274,17 +276,15 @@ function link_delete_user($username)
 	     '" onclick="return confirm(\'Êtes-vous sûr(e) ?\')">Supprimer</a>';
 }
 
+/*
 function link_send_mail($table, $id)
 {
-	/*
 	echo '<a class="button" href="send_mail.php?table=' . $table .
 	     '&amp;id=' . $id . '">Envoyer un mail</a>';
-	 */
 }
 
 function link_send_mail_to_multiple_recipients($table)
 {
-	/*
 	$label = '';
 
 	switch ($table) {
@@ -301,16 +301,80 @@ function link_send_mail_to_multiple_recipients($table)
 
 	echo '<a class="button" href="send_mail.php?to=multiple_recipients' .
 	     '&amp;table=' . $table . '">' . $label . '</a>';
-	 */
 }
 
 function link_send_mail_to_lesson_registrants($lesson_id, $season)
 {
-	/*
 	echo '<a class="button" href="send_mail.php?to=lesson_registrants' .
 	     '&amp;lesson_id=' . $lesson_id . '&amp;season=' . $season .
 	     '">Envoyer un mail aux inscrits</a>';
-	 */
+}
+ */
+
+function link_send_mail($table, $id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT email FROM `' . $table . '` WHERE ' . $table .
+		 '_id = ' . $id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	$to = htmlspecialchars(urlencode($row['email']));
+
+	echo '<a class="button" href="mailto:' . $to . '">Envoyer un mail</a>';
+}
+
+function link_send_mail_to_multiple_recipients($table)
+{
+	$filter = select_filter($table);
+
+	$link = connect_database();
+
+	$query = 'SELECT email FROM `' . $table . '`' . $filter;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$to = '';
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if ($row['email'] != '') {
+			if ($to != '')
+				$to .= ',';
+
+			$to .= $row['email'];
+		}
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	$to = htmlspecialchars(urlencode($to));
+
+	$label = '';
+
+	switch ($table) {
+	case 'member':
+		$label = 'Envoyer un mail aux adhérents sélectionnés';
+		break;
+	case 'teacher':
+		$label = 'Envoyer un mail aux professeurs';
+		break;
+	default:
+		$label = 'Envoyer un mail';
+		break;
+	}
+
+	echo '<a class="button" href="mailto:' . $to . '">' . $label . '</a>';
 }
 
 function link_send_ticket()

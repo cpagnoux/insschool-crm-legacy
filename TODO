@@ -13,8 +13,11 @@ TODO:
 - Implement SMS functionality
 - Rework member section to distinguish members and non-members
 - Make volunteer per season
-- ! Implement notifications for pre-registrations
 - Add internships to model
-- Add ability to keep lessons when they are not proposed anymore
-- Add ability to edit and print factures
+- ! Add ability to edit and print factures
 - Add photos for members and goodies
+- Make day field in lesson table nullable, as well as plan field in registration
+  and pre_registration tables
+- ! Add comment field in registration (for justifying price, etc)
+- ! Add ability to filter members whose registration is complete and valid
+- Make cellphone and email required in pre-registration form
