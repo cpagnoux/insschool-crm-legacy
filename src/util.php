@@ -329,7 +329,8 @@ function link_send_mail($table, $id)
 
 	$to = htmlspecialchars(urlencode($row['email']));
 
-	echo '<a class="button" href="mailto:' . $to . '">Envoyer un mail</a>';
+	echo '<a class="button" href="mailto:' . $to .
+	     '" target="_blank">Envoyer un mail</a>';
 }
 
 function link_send_mail_to_multiple_recipients($table)
@@ -374,7 +375,44 @@ function link_send_mail_to_multiple_recipients($table)
 		break;
 	}
 
-	echo '<a class="button" href="mailto:' . $to . '">' . $label . '</a>';
+	echo '<a class="button" href="mailto:' . $to . '" target="_blank">' .
+	     $label . '</a>';
+}
+
+function link_send_mail_to_lesson_registrants($lesson_id, $season)
+{
+	$link = connect_database();
+
+	$query = 'SELECT member.email FROM member INNER JOIN registration ' .
+		 'ON registration.member_id = member.member_id ' .
+		 'INNER JOIN registration_detail ' .
+		 'ON registration_detail.registration_id = ' .
+		 'registration.registration_id ' .
+		 'WHERE registration_detail.lesson_id = ' . $lesson_id .
+		 ' AND registration.season = "' . $season . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$to = '';
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if ($row['email'] != '') {
+			if ($to != '')
+				$to .= ',';
+
+			$to .= $row['email'];
+		}
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	$to = htmlspecialchars(urlencode($to));
+
+	echo '<a class="button" href="mailto:' . $to .
+	     '" target="_blank">Envoyer un mail aux inscrits</a>';
 }
 
 function link_send_ticket()

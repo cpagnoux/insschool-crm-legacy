@@ -524,7 +524,8 @@ function display_popular_lessons()
 	mysqli_free_result($result);
 	mysqli_close($link);
 
-	arsort($registrant_counts);
+	if (isset($registrant_counts))
+		arsort($registrant_counts);
 
 	require 'views/popular_lessons.html.php';
 }

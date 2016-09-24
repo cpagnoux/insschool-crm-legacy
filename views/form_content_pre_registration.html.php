@@ -99,7 +99,7 @@
       <li>1 certificat médical</li>
       <li>2 photos d'identité</li>
       <li>1 attestation d'assurance</li>
-      <li>1 enveloppe timbrée (au nom et addresse de l'adhérent ou des parents pour les mineurs)</li>
+      <li>1 enveloppe timbrée (au nom et adresse de l'adhérent ou des parents pour les mineurs)</li>
       <li>Le règlement du forfait (possibilité de payer en trois fois sans frais)</li>
     </ul>
   <p>Le règlement intérieur doit être signé et retourné lors de l'inscription.</p>
