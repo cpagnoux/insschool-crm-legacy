@@ -40,6 +40,7 @@
   </p>
 
   <ul class="action-links">
+    <li><?php link_generate_bill() ?></li>
     <li><?php link_modify_entity('registration', $row['registration_id']) ?></li>
     <li><?php link_delete_entity('registration', $row['registration_id']) ?></li>
   </ul>

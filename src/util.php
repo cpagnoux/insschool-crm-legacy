@@ -415,6 +415,12 @@ function link_send_mail_to_lesson_registrants($lesson_id, $season)
 	     '" target="_blank">Envoyer un mail aux inscrits</a>';
 }
 
+function link_generate_bill()
+{
+	echo '<a class="button" href="bill.php" target="_blank">' .
+	     'Éditer une facture</a>';
+}
+
 function link_send_ticket()
 {
 	echo '<a href="send_ticket.php">Assistance</a>';
