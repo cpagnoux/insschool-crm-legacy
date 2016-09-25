@@ -31,6 +31,8 @@ function get_member_data($member_id)
 
 function get_registration_detail($registration_id)
 {
+	$season = get_registration_season($registration_id);
+
 	$link = connect_database();
 
 	$query = 'SELECT lesson.title FROM lesson ' .
@@ -41,6 +43,13 @@ function get_registration_detail($registration_id)
 		sql_error($link, $query);
 		exit;
 	}
+
+	$data[] = array(
+		'description' => 'SAISON ' . $season,
+		'quantity' => '',
+		'price' => '',
+		'total' => ''
+	);
 
 	while ($row = mysqli_fetch_assoc($result)) {
 		$data[] = array(
@@ -68,8 +77,10 @@ function generate_bill($registration_id)
 	$total = registration_price($registration_id);
 	$total_paid = total_paid('registration', $registration_id);
 
-	foreach ($member_data as &$value)
+	foreach ($member_data as &$value) {
+		$value = strtoupper($value);
 		$value = utf8_decode($value);
+	}
 
 	foreach ($registration_detail as &$row) {
 		foreach ($row as &$value)
