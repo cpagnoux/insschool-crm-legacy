@@ -9,8 +9,8 @@ class Bill extends FPDF
 {
 	function Header()
 	{
-		$this->Image('http://www.insschool.fr/wp-content/uploads/' .
-			     '2012/08/logo-site-noir1.jpg');
+		$this->Image(get_include_path() .
+			     '/web/assets/img/logo-white.jpg', null, null, 50);
 		$this->Ln(5);
 
 		$this->SetFont('Arial', 'B', 10);
@@ -98,6 +98,7 @@ class Bill extends FPDF
 
 		$to_be_paid = sprintf('%.2f', $total_ttc - $total_paid);
 
+		$this->SetY(230);
 		$this->SetFont('Arial', 'B', 10);
 		$this->Cell(20, 5, '% TVA', 1, 0, 'C', true);
 		$this->Cell(20, 5, 'Base', 1, 0, 'C', true);
