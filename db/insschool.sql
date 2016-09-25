@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 11, 2016 at 07:18 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.10
+-- Generation Time: Sep 25, 2016 at 06:44 PM
+-- Server version: 10.1.17-MariaDB
+-- PHP Version: 7.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,7 +44,7 @@ CREATE TABLE `lesson` (
   `lesson_id` tinyint(3) UNSIGNED NOT NULL,
   `title` varchar(50) NOT NULL,
   `teacher_id` tinyint(3) UNSIGNED DEFAULT NULL,
-  `day` enum('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY') NOT NULL,
+  `day` enum('MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY') DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `room_id` tinyint(3) UNSIGNED DEFAULT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE `pre_registration` (
   `email` varchar(100) DEFAULT NULL,
   `with_lessons` tinyint(1) NOT NULL,
   `lessons` tinytext NOT NULL,
-  `plan` enum('QUARTERLY','ANNUAL') NOT NULL,
+  `plan` enum('QUARTERLY','ANNUAL') DEFAULT NULL,
   `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH') NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -149,11 +149,12 @@ CREATE TABLE `registration` (
   `registration_id` smallint(5) UNSIGNED NOT NULL,
   `member_id` smallint(5) UNSIGNED NOT NULL,
   `season` char(9) NOT NULL,
-  `plan` enum('QUARTERLY','ANNUAL') NOT NULL,
+  `plan` enum('QUARTERLY','ANNUAL') DEFAULT NULL,
   `followed_quarters` set('1','2','3') DEFAULT NULL,
   `price` decimal(5,2) DEFAULT NULL,
   `discount` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `num_payments` tinyint(3) UNSIGNED DEFAULT NULL,
+  `comment` tinytext,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

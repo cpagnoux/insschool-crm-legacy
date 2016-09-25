@@ -353,7 +353,7 @@ function add_registration_from_pr($link, $member_id, $row)
 
 	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
 		 '", "' . $season . '", "' . $row['plan'] .
-		 '", "", "", "", "", NOW())';
+		 '", "", "", "", "", "", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

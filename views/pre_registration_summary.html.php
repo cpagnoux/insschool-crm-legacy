@@ -45,5 +45,8 @@
     </p>
   <?php endif ?>
 
-  <p><?php link_website() ?></p>
+  <p>
+    <?php link_website() ?><br>
+    <?php link_pre_registration_form() ?>
+  </p>
 </div>

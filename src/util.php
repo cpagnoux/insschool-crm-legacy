@@ -442,6 +442,12 @@ function link_website()
 	     '">Retour vers le site d\'INS School</a>';
 }
 
+function link_pre_registration_form()
+{
+	echo '<a href="pre-registration.php">' .
+	     'Retour vers la page de pré-inscription</a>';
+}
+
 /*
  * Redirects
  */

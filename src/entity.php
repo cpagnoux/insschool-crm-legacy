@@ -260,8 +260,8 @@ function add_registration($data)
 	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
 		 '", "' . $data['season'] . '", "' . $data['plan'] . '", "' .
 		 $followed_quarters_str . '", "' . $data['price'] . '", "' .
-		 $data['discount'] . '", "' . $data['num_payments'] .
-		 '", NOW())';
+		 $data['discount'] . '", "' . $data['num_payments'] . '", "' .
+		 $data['comment'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -623,8 +623,8 @@ function modify_registration($registration_id, $data)
 		 '", followed_quarters = "' . $followed_quarters_str .
 		 '", price = "' . $data['price'] . '", discount = "' .
 		 $data['discount'] . '", num_payments = "' .
-		 $data['num_payments'] . '" WHERE registration_id = ' .
-		 $registration_id;
+		 $data['num_payments'] . '", comment = "' . $data['comment'] .
+		 '" WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

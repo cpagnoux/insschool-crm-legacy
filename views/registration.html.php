@@ -35,6 +35,11 @@
   </p>
 
   <p>
+    <span class="attribute-name">Commentaire :</span><br>
+    <?php echo $row['comment'] ?>
+  </p>
+
+  <p>
     <span class="attribute-name">Date d'inscription :</span>
     <?php echo format_date($row['date']) ?>
   </p>
