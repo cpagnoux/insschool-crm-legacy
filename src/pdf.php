@@ -3,6 +3,8 @@
  * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
+require_once 'config/app.config.php';
+
 require_once 'vendor/fpdf181/fpdf.php';
 
 require_once 'src/bill.php';
@@ -58,6 +60,9 @@ function get_registration_detail($registration_id)
 function generate_bill($registration_id)
 {
 	$member_id = get_member_id($registration_id);
+	$bill_num = 'FCI' . sprintf('%05d', $registration_id);
+	$date = date('d/m/Y');
+	$member_code = 'CL' . sprintf('%05d', $member_id);
 	$member_data = get_member_data($member_id);
 	$registration_detail = get_registration_detail($registration_id);
 	$total = registration_price($registration_id);
@@ -75,11 +80,10 @@ function generate_bill($registration_id)
 	$bill->AliasNbPages();
 	$bill->AddPage();
 	$bill->SetFillColor(192);
-	$bill->PrintBillInfo('FCI' . $registration_id, date('d/m/Y'),
-			     'CL' . $member_id);
+	$bill->PrintBillInfo($bill_num, $date, $member_code);
 	$bill->PrintMemberInfo($member_data);
 	$bill->PrintBillDetail($registration_detail);
-	$bill->PrintBillTotal($total, 0, $total_paid);
+	$bill->PrintBillTotal($total, TVA, $total_paid);
 	$bill->Output();
 }
 ?>

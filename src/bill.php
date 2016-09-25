@@ -32,7 +32,7 @@ class Bill extends FPDF
 		$this->Cell(0, 5, $this->PageNo() . '/{nb}', 0, 0, 'R');
 	}
 
-	function PrintBillInfo($bill_num, $date, $member_id)
+	function PrintBillInfo($bill_num, $date, $member_code)
 	{
 		$this->SetXY(100, 10);
 		$this->SetFont('Arial', 'B', 12);
@@ -46,7 +46,7 @@ class Bill extends FPDF
 		$this->SetFont('Arial', '', 10);
 		$this->Cell(30, 5, $bill_num, 1, 0, 'C');
 		$this->Cell(30, 5, $date, 1, 0, 'C');
-		$this->Cell(30, 5, $member_id, 1, 0, 'C');
+		$this->Cell(30, 5, $member_code, 1, 0, 'C');
 		$this->Ln(10);
 	}
 
