@@ -10,7 +10,7 @@ class Bill extends FPDF
 	function Header()
 	{
 		$this->Image('http://www.insschool.fr/wp-content/uploads/' .
-			'2012/08/logo-site-noir1.jpg');
+			     '2012/08/logo-site-noir1.jpg');
 		$this->Ln(5);
 
 		$this->SetFont('Arial', 'B', 10);
@@ -54,16 +54,16 @@ class Bill extends FPDF
 	{
 		$this->SetX(100);
 		$this->SetFont('Arial', 'B', 10);
-		$this->Cell(90, 5, $data['last_name'] . ' ' .
+		$this->Cell(90, 10, $data['last_name'] . ' ' .
 				   $data['first_name'], 'LRT', 2);
 		$this->SetFont('Arial', '', 10);
-		$this->Cell(90, 5, $data['address'], 'LR', 2);
-		$this->Cell(90, 5, $data['postal_code'] . ' ' . $data['city'],
+		$this->Cell(90, 10, $data['address'], 'LR', 2);
+		$this->Cell(90, 10, $data['postal_code'] . ' ' . $data['city'],
 			    'LRB');
 		$this->Ln();
 	}
 
-	function PrintBillContent($data)
+	function PrintBillDetail($data)
 	{
 		$this->SetY(80);
 		$this->SetFont('Arial', 'B', 10);
@@ -73,15 +73,31 @@ class Bill extends FPDF
 		$this->Cell(30, 5, 'Total HT', 1, 1, 'C');
 
 		$this->SetFont('Arial', '', 10);
-		$this->Cell(100, 10, $data['description'], 1);
-		$this->Cell(30, 10, $data['quantity'], 1, 0, 'R');
-		$this->Cell(30, 10, $data['price'], 1, 0, 'R');
-		$this->Cell(30, 10, $data['total'], 1, 1, 'R');
+
+		foreach ($data as $row) {
+			$this->Cell(100, 10, $row['description'], 1);
+			$this->Cell(30, 10, $row['quantity'], 1, 0, 'R');
+			$this->Cell(30, 10, $row['price'], 1, 0, 'R');
+			$this->Cell(30, 10, $row['total'], 1, 1, 'R');
+		}
+
 		$this->Ln(10);
 	}
 
-	function PrintBillDetail($total, $total_paid)
+	function PrintBillTotal($total, $tva, $total_paid)
 	{
+		$tva_shown = $tva;
+		$tva_amount = sprintf('%.2f', $total * $tva / 100);
+		$total_ttc = sprintf('%.2f', $total + $tva_amount);
+
+		if ($tva == 0) {
+			$tva_shown = utf8_decode('Exonéré');
+			$tva_amount = '';
+			$total_ttc = $total;
+		}
+
+		$to_be_paid = sprintf('%.2f', $total_ttc - $total_paid);
+
 		$this->SetFont('Arial', 'B', 10);
 		$this->Cell(20, 5, '% TVA', 1, 0, 'C', true);
 		$this->Cell(20, 5, 'Base', 1, 0, 'C', true);
@@ -93,19 +109,19 @@ class Bill extends FPDF
 			    true);
 
 		$this->SetFont('Arial', '', 10);
-		$this->Cell(20, 5, utf8_decode('Exonéré'), 1, 0, 'R');
+		$this->Cell(20, 5, $tva_shown, 1, 0, 'R');
 		$this->Cell(20, 5, $total, 1, 0, 'R');
-		$this->Cell(30, 5, '', 1, 0, 'R');
+		$this->Cell(30, 5, $tva_amount, 1, 0, 'R');
 		$this->Cell(30, 5, $total, 1, 0, 'R');
-		$this->Cell(30, 5, '', 1, 0, 'R');
-		$this->Cell(30, 5, $total, 1, 0, 'R');
+		$this->Cell(30, 5, $tva_amount, 1, 0, 'R');
+		$this->Cell(30, 5, $total_ttc, 1, 0, 'R');
 		$this->Cell(30, 5, $total_paid, 1, 2, 'R');
-		$this->SetFont('Arial', 'B', 10);
 
+		$this->SetFont('Arial', 'B', 10);
 		$this->Cell(30, 5, utf8_decode('Net à payer'), 1, 2, 'C', true);
 
 		$this->SetFont('Arial', '', 10);
-		$this->Cell(30, 5, $total - $total_paid, 1, 0, 'R');
+		$this->Cell(30, 5, $to_be_paid, 1, 0, 'R');
 	}
 }
 ?>

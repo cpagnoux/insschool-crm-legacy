@@ -9,12 +9,10 @@ TODO:
 - Refactor isolating controllers
 - Refactor design using persistent navbar and menu
 - Add ability to display simple schedule
-- ! Add mailto links for mails
 - Implement SMS functionality
 - Rework member section to distinguish members and non-members
 - Make volunteer per season
 - Add internships to model
-- ! Add ability to edit and print factures
 - Add photos for members and goodies
 - Make day field in lesson table nullable, as well as plan field in registration
   and pre_registration tables
@@ -23,3 +21,4 @@ TODO:
 - Make cellphone and email required in pre-registration form
 - Add comment field and cashing date for payments
 - Add ability to send bill by mail
+- Add stamped envelope to registration_file in db
