@@ -10,6 +10,7 @@ require_once 'src/util.php';
 function table_filter_member()
 {
 	$all = '';
+	$valid_registration = '';
 	$incomplete_registration = '';
 	$incomplete_registration_file = '';
 	$unpaid_registration = '';
@@ -19,6 +20,9 @@ function table_filter_member()
 		switch ($_SESSION['member_filter']) {
 		case 'all':
 			$all = ' selected';
+			break;
+		case 'valid_registration':
+			$valid_registration = ' selected';
 			break;
 		case 'incomplete_registration':
 			$incomplete_registration = ' selected';
@@ -354,6 +358,9 @@ function select_filter($table)
 	switch ($table) {
 	case 'member':
 		switch ($_SESSION['member_filter']) {
+		case 'valid_registration':
+			$filter = prepare_filter_member(registration_ok);
+			break;
 		case 'incomplete_registration':
 			$filter = prepare_filter_member(registration_complete);
 			break;
