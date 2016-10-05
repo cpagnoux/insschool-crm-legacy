@@ -37,7 +37,7 @@ input:focus, select:focus {
 	box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
 }
 
-input[type=checkbox], input[type=radio], input[type=submit], select {
+input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
 	width: auto;
 }
 

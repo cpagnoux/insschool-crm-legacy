@@ -62,29 +62,6 @@ function radio_insurance($insurance = null)
 	require 'views/radio_insurance.html.php';
 }
 
-function radio_means_of_knowledge($pre_registration_form, $means_of_knowledge = null)
-{
-	$poster_flyer = '';
-	$internet = '';
-	$word_of_mouth = '';
-
-	if (isset($means_of_knowledge)) {
-		switch ($means_of_knowledge) {
-		case 'POSTER_FLYER':
-			$poster_flyer = ' checked';
-			break;
-		case 'INTERNET':
-			$internet = ' checked';
-			break;
-		case 'WORD_OF_MOUTH':
-			$word_of_mouth = ' checked';
-			break;
-		}
-	}
-
-	require 'views/radio_means_of_knowledge.html.php';
-}
-
 function radio_medical_certificate($medical_certificate = null)
 {
 	$true = '';
@@ -265,6 +242,33 @@ function select_lesson()
 
 	mysqli_free_result($result);
 	mysqli_close($link);
+}
+
+function select_means_of_knowledge($pre_registration_form, $means_of_knowledge = null)
+{
+	$poster_flyer = '';
+	$internet = '';
+	$word_of_mouth = '';
+	$advertising_panel = '';
+
+	if (isset($means_of_knowledge)) {
+		switch ($means_of_knowledge) {
+		case 'POSTER_FLYER':
+			$poster_flyer = ' selected';
+			break;
+		case 'INTERNET':
+			$internet = ' selected';
+			break;
+		case 'WORD_OF_MOUTH':
+			$word_of_mouth = ' selected';
+			break;
+		case 'ADVERTISING_PANEL':
+			$advertising_panel = ' selected';
+			break;
+		}
+	}
+
+	require 'views/select_means_of_knowledge.html.php';
 }
 
 function select_member()

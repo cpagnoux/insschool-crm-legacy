@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 25, 2016 at 06:44 PM
+-- Generation Time: Oct 05, 2016 at 10:04 PM
 -- Server version: 10.1.17-MariaDB
 -- PHP Version: 7.0.11
 
@@ -70,7 +70,7 @@ CREATE TABLE `member` (
   `cellphone_mother` char(14) DEFAULT NULL,
   `phone` char(14) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH') DEFAULT NULL,
+  `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH','ADVERTISING_PANEL') NOT NULL,
   `volunteer` tinyint(1) NOT NULL DEFAULT '0',
   `creation_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -135,7 +135,7 @@ CREATE TABLE `pre_registration` (
   `with_lessons` tinyint(1) NOT NULL,
   `lessons` tinytext NOT NULL,
   `plan` enum('QUARTERLY','ANNUAL') DEFAULT NULL,
-  `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH') NOT NULL,
+  `means_of_knowledge` enum('POSTER_FLYER','INTERNET','WORD_OF_MOUTH','ADVERTISING_PANEL') NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

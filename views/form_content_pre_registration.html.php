@@ -90,7 +90,7 @@
 </div>
 
 <fieldset>
-  <?php radio_means_of_knowledge(true, $row['means_of_knowledge']) ?>
+  <?php select_means_of_knowledge(true, $row['means_of_knowledge']) ?>
 </fieldset>
 
 <?php if (!isset($row)): ?>

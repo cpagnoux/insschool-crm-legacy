@@ -651,6 +651,9 @@ function eval_enum($value)
 	case 'WORD_OF_MOUTH':
 		$result = 'Bouche-à-oreille';
 		break;
+	case 'ADVERTISING_PANEL':
+		$result = 'Panneau publicitaire';
+		break;
 	// mode
 	case 'CASH':
 		$result = 'Espèces';

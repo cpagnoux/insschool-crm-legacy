@@ -67,7 +67,7 @@
 </fieldset>
 
 <fieldset>
-  <?php radio_means_of_knowledge(false, $row['means_of_knowledge']) ?>
+  <?php select_means_of_knowledge(false, $row['means_of_knowledge']) ?>
 </fieldset>
 
 <fieldset>
