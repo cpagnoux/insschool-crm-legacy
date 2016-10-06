@@ -13,6 +13,8 @@ echo 'Creating database...' . PHP_EOL;
 exec($command . '-e "CREATE DATABASE ' . DATABASE . '"');
 echo 'Creating tables...' . PHP_EOL;
 exec($command . DATABASE . ' < ../db/insschool.sql');
+echo 'Inserting data...' . PHP_EOL;
+exec($command . DATABASE . ' < ../db/data.sql');
 echo 'Inserting sample member data...' . PHP_EOL;
 exec($command . DATABASE . ' < test_member.sql');
 echo 'Inserting other sample data...' . PHP_EOL;
