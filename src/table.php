@@ -289,6 +289,59 @@ function init_display_options()
 		$_SESSION['limit'] = 25;
 }
 
+function check_registrations($link, $member_id)
+{
+	$query = 'SELECT registration_id FROM registration WHERE member_id = ' .
+		 $member_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if (!registration_ok($row['registration_id'])) {
+			mysqli_free_result($result);
+			return false;
+		}
+	}
+
+	mysqli_free_result($result);
+
+	return true;
+}
+
+function prepare_filter_member_ok()
+{
+	$link = connect_database();
+
+	$query = 'SELECT member_id FROM registration';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$filter = '';
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if (check_registrations($link, $row['member_id'])) {
+			if ($filter == '')
+				$filter = ' WHERE ';
+			else
+				$filter .= ' OR ';
+
+			$filter .= 'member_id = ' . $row['member_id'];
+		}
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	if ($filter == '')
+		return ' WHERE 0';
+
+	return $filter;
+}
+
 function prepare_filter_member($function)
 {
 	$link = connect_database();
@@ -359,7 +412,7 @@ function select_filter($table)
 	case 'member':
 		switch ($_SESSION['member_filter']) {
 		case 'valid_registration':
-			$filter = prepare_filter_member(registration_ok);
+			$filter = prepare_filter_member_ok();
 			break;
 		case 'incomplete_registration':
 			$filter = prepare_filter_member(registration_complete);
