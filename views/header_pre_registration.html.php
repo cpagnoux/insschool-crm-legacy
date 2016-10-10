@@ -7,11 +7,11 @@
 
 <title>Pré-inscription - INS SCHOOL</title>
 
-<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/pre-registration.css">
-<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/pre-registration.css">
+<link rel="stylesheet" type="text/css" href="css/footer.css">
 
-<script src="assets/js/main.js"></script>
+<script src="js/main.js"></script>
 
 </head>
 <body>

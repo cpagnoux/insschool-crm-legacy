@@ -7,13 +7,13 @@
 
 <title>Espace de gestion INS School</title>
 
-<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/main.css">
-<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
-<link rel="stylesheet" type="text/css" href="assets/fonts/entypo_regular_macroman/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="assets/css/entypo.css">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/footer.css">
+<link rel="stylesheet" type="text/css" href="fonts/entypo_regular_macroman/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/entypo.css">
 
-<script src="assets/js/main.js"></script>
+<script src="js/main.js"></script>
 
 <?php if (strpos($_SERVER['SCRIPT_NAME'], 'send_mail.php') !== false): ?>
   <script src="ckeditor/ckeditor.js"></script>

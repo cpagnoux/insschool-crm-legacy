@@ -7,11 +7,11 @@
 
 <title>Bienvenue sur l'espace de gestion INS School</title>
 
-<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="assets/css/login.css">
-<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
-<link rel="stylesheet" type="text/css" href="assets/fonts/entypo_regular_macroman/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="assets/css/entypo.css">
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="css/footer.css">
+<link rel="stylesheet" type="text/css" href="fonts/entypo_regular_macroman/stylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/entypo.css">
 
 </head>
 <body>
