@@ -4,6 +4,7 @@
  */
 
 set_include_path(__DIR__ . '/..');
+define('PUBLIC_PATH', __DIR__);
 
 require_once 'src/connection.php';
 require_once 'src/session.php';

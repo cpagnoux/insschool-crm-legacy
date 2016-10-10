@@ -9,8 +9,8 @@ class Bill extends FPDF
 {
 	function Header()
 	{
-		$this->Image(get_include_path() .
-			     '/web/assets/img/logo-white.jpg', null, null, 50);
+		$this->Image(PUBLIC_PATH . '/img/logo-white.jpg', null, null,
+			     50);
 		$this->Ln(5);
 
 		$this->SetFont('Arial', 'B', 10);
