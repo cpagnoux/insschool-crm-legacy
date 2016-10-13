@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2016 at 10:04 PM
--- Server version: 10.1.17-MariaDB
+-- Generation Time: Oct 13, 2016 at 07:53 PM
+-- Server version: 10.1.18-MariaDB
 -- PHP Version: 7.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -180,7 +180,8 @@ CREATE TABLE `registration_file` (
   `registration_id` smallint(5) UNSIGNED NOT NULL,
   `medical_certificate` tinyint(1) NOT NULL DEFAULT '0',
   `insurance` tinyint(1) NOT NULL DEFAULT '0',
-  `photo` tinyint(1) NOT NULL DEFAULT '0'
+  `photo` tinyint(1) NOT NULL DEFAULT '0',
+  `stamped_envelope` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

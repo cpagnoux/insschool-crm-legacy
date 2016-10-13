@@ -4,7 +4,6 @@ TODO:
 - Call sheet
 - Mail functionality -> make it work
 - Implement ability to send attachments with mails
-- Add email to user in db + implement mail confirmation on pw change ?
 - UI for ordering rooms in schedule
 - Refactor isolating controllers
 - Refactor design using persistent navbar and menu
