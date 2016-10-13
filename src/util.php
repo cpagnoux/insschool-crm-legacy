@@ -1191,7 +1191,7 @@ function registration_file_complete($registration_id)
 	mysqli_close($link);
 
 	return ($row['medical_certificate'] && $row['insurance'] &&
-		$row['photo']);
+		$row['photo'] && $row['stamped_envelope']);
 }
 
 function registration_formula($registration_id)

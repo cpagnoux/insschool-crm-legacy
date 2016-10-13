@@ -14,6 +14,7 @@
       <?php radio_medical_certificate($row['medical_certificate']) ?>
       <?php radio_insurance($row['insurance']) ?>
       <?php radio_photo($row['photo']) ?>
+      <?php radio_stamped_envelope($row['stamped_envelope']) ?>
     </fieldset>
 
     <fieldset>

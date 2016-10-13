@@ -115,7 +115,7 @@ function display_registration_file($link, $registration_id)
 function add_registration_file($link, $registration_id)
 {
 	$query = 'INSERT INTO registration_file VALUES (' . $registration_id .
-		 ', "", "", "")';
+		 ', "", "", "", "")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

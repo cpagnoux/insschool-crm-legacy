@@ -17,5 +17,4 @@ TODO:
 - Make cellphone and email required in pre-registration form
 - ! Add comment field and cashing date for payments
 - Add ability to send bill by mail
-- ! Add stamped envelope to registration_file in db
 - Display all last names uppercase

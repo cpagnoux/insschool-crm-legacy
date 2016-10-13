@@ -642,6 +642,7 @@ function modify_registration_file($registration_id, $data)
 	$query = 'UPDATE registration_file SET medical_certificate = "' .
 		 $data['medical_certificate'] . '", insurance = "' .
 		 $data['insurance'] . '", photo = "' . $data['photo'] .
+		 '", stamped_envelope = "' . $data['stamped_envelope'] .
 		 '" WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);

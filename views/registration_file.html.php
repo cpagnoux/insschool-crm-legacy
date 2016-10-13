@@ -10,7 +10,9 @@
       <span class="attribute-name">Assurance :</span>
       <?php echo eval_boolean($row['insurance']) ?><br>
       <span class="attribute-name">Photo :</span>
-      <?php echo eval_boolean($row['photo']) ?>
+      <?php echo eval_boolean($row['photo']) ?><br>
+      <span class="attribute-name">Enveloppe timbrée :</span>
+      <?php echo eval_boolean($row['stamped_envelope']) ?>
     </p>
 
     <p>

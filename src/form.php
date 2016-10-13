@@ -130,6 +130,21 @@ function radio_plan($plan = null)
 	require 'views/radio_plan.html.php';
 }
 
+function radio_stamped_envelope($stamped_envelope = null)
+{
+	$true = '';
+	$false = '';
+
+	if (isset($stamped_envelope)) {
+		if ($stamped_envelope)
+			$true = ' checked';
+		else
+			$false = ' checked';
+	}
+
+	require 'views/radio_stamped_envelope.html.php';
+}
+
 function radio_with_lessons($with_lessons = null)
 {
 	$true = '';
