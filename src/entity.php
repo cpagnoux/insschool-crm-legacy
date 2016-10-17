@@ -313,7 +313,7 @@ function add_registration_detail($data)
 {
 	$link = connect_database();
 
-	$query = 'INSERT INTO registration_detail (registration_id, ' .
+$query = 'INSERT INTO registration_detail (registration_id, ' .
 		 'lesson_id) VALUES (' . $data['registration_id'] . ', ' .
 		 $data['lesson_id'] . ')';
 	if (!mysqli_query($link, $query)) {
@@ -534,12 +534,17 @@ function form_modify_entity($table, $id)
  */
 function modify_goody($goody_id, $data)
 {
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['stock'] == '')
+		$data['stock'] = 0;
+
 	$link = connect_database();
 
 	$query = 'UPDATE goody SET name = "' . $data['name'] .
-		 '", description = "' . $data['description'] . '", price = "' .
-		 $data['price'] . '", stock = "' . $data['stock'] .
-		 '" WHERE goody_id = ' . $goody_id;
+		 '", description = "' . $data['description'] . '", price = ' .
+		 $data['price'] . ', stock = ' . $data['stock'] .
+		 ' WHERE goody_id = ' . $goody_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -552,16 +557,22 @@ function modify_goody($goody_id, $data)
 
 function modify_lesson($lesson_id, $data)
 {
+	if ($data['teacher_id'] == '')
+		$data['teacher_id'] = 'NULL';
+	if ($data['room_id'] == '')
+		$data['room_id'] = 'NULL';
+
+	$start_time = to_time($data['st_hour'], $data['st_minute']);
+	$end_time = to_time($data['et_hour'], $data['et_minute']);
+
 	$link = connect_database();
 
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
-		 '", teacher_id = "' . $data['teacher_id'] . '", day = "' .
-		 $data['day'] . '", start_time = "' .
-		 to_time($data['st_hour'], $data['st_minute']) .
-		 '", end_time = "' .
-		 to_time($data['et_hour'], $data['et_minute']) .
-		 '", room_id = "' . $data['room_id'] . '", costume = "' .
-		 $data['costume'] . '" WHERE lesson_id = ' . $lesson_id;
+		 '", teacher_id = ' . $data['teacher_id'] . ', day = "' .
+		 $data['day'] . '", start_time = "' . $start_time .
+		 '", end_time = "' . $end_time . '", room_id = ' .
+		 $data['room_id'] . ', costume = "' . $data['costume'] .
+		 '" WHERE lesson_id = ' . $lesson_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -574,22 +585,24 @@ function modify_lesson($lesson_id, $data)
 
 function modify_member($member_id, $data)
 {
+	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
+
 	$link = connect_database();
 
 	$query = 'UPDATE member SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", address = "' . $data['address'] . '", postal_code = "' .
-		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . format_phone_number($data['cellphone']) .
-		 '", cellphone_father = "' .
-		 format_phone_number($data['cellphone_father']) .
-		 '", cellphone_mother = "' .
-		 format_phone_number($data['cellphone_mother']) .
-		 '", phone = "' . format_phone_number($data['phone']) .
-		 '", email = "' . $data['email'] . '", means_of_knowledge = "' .
-		 $data['means_of_knowledge'] . '" WHERE member_id = ' .
-		 $member_id;
+		 $birth_date . '", address = "' . $data['address'] .
+		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
+		 $data['city'] . '", cellphone = "' . $cellphone .
+		 '", cellphone_father = "' . $cellphone_father .
+		 '", cellphone_mother = "' . $cellphone_mother .
+		 '", phone = "' . $phone . '", email = "' . $data['email'] .
+		 '", means_of_knowledge = "' . $data['means_of_knowledge'] .
+		 '" WHERE member_id = ' . $member_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -604,8 +617,8 @@ function modify_payment($table, $id, $data)
 {
 	$link = connect_database();
 
-	$query = 'UPDATE ' . $table . '_payment SET amount = "' .
-		 $data['amount'] . '", mode = "' . $data['mode'] .
+	$query = 'UPDATE ' . $table . '_payment SET amount = ' .
+		 $data['amount'] . ', mode = "' . $data['mode'] .
 		 '" WHERE ' . $table . '_payment_id = ' . $id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -625,26 +638,32 @@ function modify_pre_registration($pre_registration_id, $data)
 		$lessons_str = lessons_to_string($data);
 
 	if (!$data['with_lessons'])
-		$data['plan'] = '';
+		$data['plan'] = 'NULL';
+	else if ($data['plan'] == '')
+		$data['plan'] = 'NULL';
+	else
+		$data['plan'] = '"' . $data['plan'] . '"';
+
+	$birth_date = to_date($data['bd_day'], $data['bd_month'],
+			      $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
 
 	$link = connect_database();
 
 	$query = 'UPDATE pre_registration SET first_name = "' .
 		 $data['first_name'] . '", last_name = "' . $data['last_name'] .
-		 '", birth_date = "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", address = "' . $data['address'] . '", postal_code = "' .
+		 '", birth_date = "' . $birth_date . '", address = "' .
+		 $data['address'] . '", postal_code = "' .
 		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . format_phone_number($data['cellphone']) .
-		 '", cellphone_father = "' .
-		 format_phone_number($data['cellphone_father']) .
-		 '", cellphone_mother = "' .
-		 format_phone_number($data['cellphone_mother']) .
-		 '", phone = "' . format_phone_number($data['phone']) .
-		 '", email = "' . $data['email'] . '", with_lessons = "' .
-		 $data['with_lessons'] . '", lessons = "' . $lessons_str .
-		 '", plan = "' . $data['plan'] . '", means_of_knowledge = "' .
-		 $data['means_of_knowledge'] .
+		 '", cellphone = "' . $cellphone . '", cellphone_father = "' .
+		 $cellphone_father . '", cellphone_mother = "' .
+		 $cellphone_mother . '", phone = "' . $phone . '", email = "' .
+		 $data['email'] . '", with_lessons = ' . $data['with_lessons'] .
+		 ', lessons = "' . $lessons_str . '", plan = ' . $data['plan'] .
+		 ', means_of_knowledge = "' . $data['means_of_knowledge'] .
 		 '" WHERE pre_registration_id = ' . $pre_registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -658,6 +677,17 @@ function modify_pre_registration($pre_registration_id, $data)
 
 function modify_registration($registration_id, $data)
 {
+	if ($data['plan'] == '')
+		$data['plan'] = 'NULL';
+	else
+		$data['plan'] = '"' . $data['plan'] . '"';
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['discount'] == '')
+		$data['discount'] = 0;
+	if ($data['num_payments'] == '')
+		$data['num_payments'] = 'NULL';
+
 	$followed_quarters_str = '';
 
 	if ($data['plan'] == 'QUARTERLY')
@@ -665,11 +695,11 @@ function modify_registration($registration_id, $data)
 
 	$link = connect_database();
 
-	$query = 'UPDATE registration SET plan = "' . $data['plan'] .
-		 '", followed_quarters = "' . $followed_quarters_str .
-		 '", price = "' . $data['price'] . '", discount = "' .
-		 $data['discount'] . '", num_payments = "' .
-		 $data['num_payments'] . '", comment = "' . $data['comment'] .
+	$query = 'UPDATE registration SET plan = ' . $data['plan'] .
+		 ', followed_quarters = "' . $followed_quarters_str .
+		 '", price = ' . $data['price'] . ', discount = ' .
+		 $data['discount'] . ', num_payments = ' .
+		 $data['num_payments'] . ', comment = "' . $data['comment'] .
 		 '" WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -685,11 +715,11 @@ function modify_registration_file($registration_id, $data)
 {
 	$link = connect_database();
 
-	$query = 'UPDATE registration_file SET medical_certificate = "' .
-		 $data['medical_certificate'] . '", insurance = "' .
-		 $data['insurance'] . '", photo = "' . $data['photo'] .
-		 '", stamped_envelope = "' . $data['stamped_envelope'] .
-		 '" WHERE registration_id = ' . $registration_id;
+	$query = 'UPDATE registration_file SET medical_certificate = ' .
+		 $data['medical_certificate'] . ', insurance = ' .
+		 $data['insurance'] . ', photo = ' . $data['photo'] .
+		 ', stamped_envelope = ' . $data['stamped_envelope'] .
+		 ' WHERE registration_id = ' . $registration_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -720,17 +750,23 @@ function modify_room($room_id, $data)
 
 function modify_teacher($teacher_id, $data)
 {
+	if ($data['bd_day'] == '' || $data['bd_month'] == '' || $data['bd_year'] == '')
+		$birth_date = 'NULL';
+	else
+		$birth_date = '"' . to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) . '"';
+
+	$cellphone = format_phone_number($data['cellphone']);
+	$phone = format_phone_number($data['phone']);
+
 	$link = connect_database();
 
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
 		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", address = "' . $data['address'] . '", postal_code = "' .
-		 $data['postal_code'] . '", city = "' . $data['city'] .
-		 '", cellphone = "' . format_phone_number($data['cellphone']) .
-		 '", phone = "' . format_phone_number($data['phone']) .
-		 '", email = "' . $data['email'] . '" WHERE teacher_id = ' .
-		 $teacher_id;
+		 $birth_date . '", address = "' . $data['address'] .
+		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
+		 $data['city'] . '", cellphone = "' . $cellphone .
+		 '", phone = "' . $phone . '", email = "' . $data['email'] .
+		 '" WHERE teacher_id = ' . $teacher_id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
