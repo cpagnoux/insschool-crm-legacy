@@ -134,11 +134,16 @@ function form_add_entity($table, $id)
  */
 function add_goody($data)
 {
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['stock'] == '')
+		$data['stock'] = 0;
+
 	$link = connect_database();
 
-	$query = 'INSERT INTO goody VALUES ("", "' . $data['name'] . '", "' .
-		 $data['description'] . '", "' . $data['price'] . '", "' .
-		 $data['stock'] . '")';
+	$query = 'INSERT INTO goody (name, description, price, stock) ' .
+		 'VALUES ("' . $data['name'] . '", "' . $data['description'] .
+		 '", ' . $data['price'] . ', ' . $data['stock'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -152,13 +157,21 @@ function add_goody($data)
 
 function add_lesson($data)
 {
+	if ($data['teacher_id'] == '')
+		$data['teacher_id'] = 'NULL';
+	if ($data['room_id'] == '')
+		$data['room_id'] = 'NULL';
+
+	$start_time = to_time($data['st_hour'], $data['st_minute']);
+	$end_time = to_time($data['et_hour'], $data['et_minute']);
+
 	$link = connect_database();
 
-	$query = 'INSERT INTO lesson VALUES ("", "' . $data['title'] . '", "' .
-		 $data['teacher_id'] . '", "' . $data['day'] . '", "' .
-		 to_time($data['st_hour'], $data['st_minute']) . '", "' .
-		 to_time($data['et_hour'], $data['et_minute']) . '", "' .
-		 $data['room_id'] . '", "' . $data['costume'] . '")';
+	$query = 'INSERT INTO lesson (title, teacher_id, day, start_time, ' .
+		 'end_time, room_id, costume) VALUES ("' . $data['title'] .
+		 '", ' . $data['teacher_id'] . ', "' . $data['day'] . '", "' .
+		 $start_time . '", "' . $end_time . '", ' . $data['room_id'] .
+		 ', "' . $data['costume'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -172,18 +185,24 @@ function add_lesson($data)
 
 function add_member($data)
 {
+	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
+
 	$link = connect_database();
 
-	$query = 'INSERT INTO member VALUES ("", "' . $data['first_name'] .
-		 '", "' . $data['last_name'] . '", "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", "' . $data['address'] .
-		 '", "' . $data['postal_code'] . '", "' . $data['city'] .
-		 '", "' . format_phone_number($data['cellphone']) . '", "' .
-		 format_phone_number($data['cellphone_father']) . '", "' .
-		 format_phone_number($data['cellphone_mother']) . '", "' .
-		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $data['means_of_knowledge'] . '", "", NOW())';
+	$query = 'INSERT INTO member (first_name, last_name, birth_date, ' .
+		 'address, postal_code, city, cellphone, cellphone_father, ' .
+		 'cellphone_mother, phone, email, means_of_knowledge, ' .
+		 'creation_date) VALUES ("' . $data['first_name'] . '", "' .
+		 $data['last_name'] . '", "' . $birth_date . '", "' .
+		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
+		 $data['city'] . '", "' . $cellphone . '", "' .
+		 $cellphone_father . '", "' . $cellphone_mother . '", "' .
+		 $phone . '", "' . $data['email'] . '", "' .
+		 $data['means_of_knowledge'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -200,8 +219,8 @@ function add_order($data)
 {
 	$link = connect_database();
 
-	$query = 'INSERT INTO `order` VALUES ("", "' . $data['member_id'] .
-		 '", NOW())';
+	$query = 'INSERT INTO `order` (member_id, date) VALUES (' .
+		 $data['member_id'] . ', NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -219,8 +238,9 @@ function add_order_content($data)
 
 	update_goody_stock($link, $data['goody_id'], - $data['quantity']);
 
-	$query = 'INSERT INTO order_content VALUES ("' . $data['order_id'] .
-		 '", "' . $data['goody_id'] . '", "' . $data['quantity'] . '")';
+	$query = 'INSERT INTO order_content (order_id, goody_id, quantity) ' .
+		 'VALUES (' . $data['order_id'] . ', ' . $data['goody_id'] .
+		 ', ' . $data['quantity'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -235,9 +255,9 @@ function add_payment($table, $data)
 {
 	$link = connect_database();
 
-	$query = 'INSERT INTO ' . $table . '_payment VALUES ("", "' .
-		 $data[$table . '_id'] . '", "' . $data['amount'] . '", "' .
-		 $data['mode'] . '", NOW())';
+	$query = 'INSERT INTO ' . $table . '_payment (' . $table . '_id, ' .
+		 'amount, mode, date) VALUES (' . $data[$table . '_id'] . ', ' .
+		 $data['amount'] . ', "' . $data['mode'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -250,17 +270,30 @@ function add_payment($table, $data)
 
 function add_registration($data)
 {
+	if ($data['plan'] == '')
+		$data['plan'] = 'NULL';
+	else // FIXME: should not be required
+		$data['plan'] = '"' . $data['plan'] . '"';
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['discount'] == '')
+		$data['discount'] = 0;
+	if ($data['num_payments'] == '')
+		$data['num_payments'] = 'NULL';
+
 	$followed_quarters_str = '';
 
-	if ($data['plan'] == 'QUARTERLY')
+	if ($data['plan'] == '"QUARTERLY"')
 		$followed_quarters_str = followed_quarters_to_string($data);
 
 	$link = connect_database();
 
-	$query = 'INSERT INTO registration VALUES ("", "' . $data['member_id'] .
-		 '", "' . $data['season'] . '", "' . $data['plan'] . '", "' .
-		 $followed_quarters_str . '", "' . $data['price'] . '", "' .
-		 $data['discount'] . '", "' . $data['num_payments'] . '", "' .
+	$query = 'INSERT INTO registration (member_id, season, plan, ' .
+		 'followed_quarters, price, discount, num_payments, comment, ' .
+		 'date) VALUES (' . $data['member_id'] . ', "' .
+		 $data['season'] . '", ' . $data['plan'] . ', "' .
+		 $followed_quarters_str . '", ' . $data['price'] . ', ' .
+		 $data['discount'] . ', ' . $data['num_payments'] . ', "' .
 		 $data['comment'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -280,9 +313,9 @@ function add_registration_detail($data)
 {
 	$link = connect_database();
 
-	$query = 'INSERT INTO registration_detail VALUES ("' .
-		 $data['registration_id'] . '", "' . $data['lesson_id'] .
-		 '", "")';
+	$query = 'INSERT INTO registration_detail (registration_id, ' .
+		 'lesson_id) VALUES (' . $data['registration_id'] . ', ' .
+		 $data['lesson_id'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -297,9 +330,9 @@ function add_room($data)
 {
 	$link = connect_database();
 
-	$query = 'INSERT INTO room VALUES ("", "' . $data['name'] . '", "' .
-		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
-		 $data['city'] . '")';
+	$query = 'INSERT INTO room (name, address, postal_code, city) ' .
+		 'VALUES ("' . $data['name'] . '", "' . $data['address'] .
+		 '", "' . $data['postal_code'] . '", "' . $data['city'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -313,16 +346,25 @@ function add_room($data)
 
 function add_teacher($data)
 {
+	if ($data['bd_day'] == '' || $data['bd_month'] == '' ||
+	    $data['bd_year'] == '')
+		$birth_date = 'NULL';
+	else
+		$birth_date = '"' . to_date($data['bd_day'], $data['bd_month'],
+					    $data['bd_year']) . '"';
+
+	$cellphone = format_phone_number($data['cellphone']);
+	$phone = format_phone_number($data['phone']);
+
 	$link = connect_database();
 
-	$query = 'INSERT INTO teacher VALUES ("", "' . $data['first_name'] .
-		 '", "' . $data['last_name'] . '", "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
-		 '", "' . $data['city'] . '", "' .
-		 format_phone_number($data['cellphone']) . '", "' .
-		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "")';
+	$query = 'INSERT INTO teacher (first_name, last_name, birth_date, ' .
+		 'address, postal_code, city, cellphone, phone, email) ' .
+		 'VALUES ("' . $data['first_name'] . '", "' .
+		 $data['last_name'] . '", ' . $birth_date . ', "' .
+		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
+		 $data['city'] . '", "' . $cellphone . '", "' . $phone .
+		 '", "' . $data['email'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -340,12 +382,16 @@ function add_user($data)
 	if (!$_SESSION['admin'])
 		return;
 
+	if ($data['admin'] == '')
+		$data['admin'] = 0;
+
 	$password = generate_password();
 
 	$link = connect_database();
 
-	$query = 'INSERT INTO user VALUES ("' . $data['username'] . '", "' .
-		 hash('sha512', $password) . '", "' . $data['admin'] . '")';
+	$query = 'INSERT INTO user (username, password, admin) VALUES ("' .
+		 $data['username'] . '", "' . hash('sha512', $password) .
+		 '", ' . $data['admin'] . ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

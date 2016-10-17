@@ -251,21 +251,32 @@ function save_pre_registration($link, $data, $lessons_str)
 {
 	if (!$data['with_lessons']) {
 		$lessons_str = '';
-		$data['plan'] = '';
+		$data['plan'] = 'NULL';
+	} else if ($data['plan'] == '') {
+		$data['plan'] = 'NULL';
+	} else {
+		$data['plan'] = '"' . $data['plan'] . '"';
 	}
 
-	$query = 'INSERT INTO pre_registration VALUES ("", "' .
-		 $data['first_name'] . '", "' . $data['last_name'] . '", "' .
-		 to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) .
-		 '", "' . $data['address'] . '", "' . $data['postal_code'] .
-		 '", "' . $data['city'] . '", "' .
-		 format_phone_number($data['cellphone']) . '", "' .
-		 format_phone_number($data['cellphone_father']) . '", "' .
-		 format_phone_number($data['cellphone_mother']) . '", "' .
-		 format_phone_number($data['phone']) . '", "' . $data['email'] .
-		 '", "' . $data['with_lessons'] . '", "' . $lessons_str .
-		 '", "' . $data['plan'] . '",  "' .
-		 $data['means_of_knowledge'] . '", NOW())';
+	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
+
+	$query = 'INSERT INTO pre_registration (first_name, last_name, ' .
+		 'birth_date, address, postal_code, city, cellphone, ' .
+		 'cellphone_father, cellphone_mother, phone, email, ' .
+		 'with_lessons, lessons, plan, means_of_knowledge, date) ' .
+		 'VALUES ("' . $data['first_name'] . '", "' .
+		 $data['last_name'] . '", "' . $birth_date . '", "' .
+		 $data['address'] . '", "' . $data['postal_code'] . '", "' .
+		 $data['city'] . '", "' . $cellphone . '", "' .
+		 $cellphone_father . '", "' . $cellphone_mother . '", "' .
+		 $phone . '", "' . $data['email'] . '", ' .
+		 $data['with_lessons'] . ', "' . $lessons_str . '", ' .
+		 $data['plan'] . ',  "' . $data['means_of_knowledge'] .
+		 '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -301,13 +312,16 @@ function notify_pre_registration($data, $lessons_str)
  */
 function add_member_from_pr($link, $row)
 {
-	$query = 'INSERT INTO member VALUES ("", "' . $row['first_name'] .
-		 '", "' . $row['last_name'] . '", "' . $row['birth_date'] .
-		 '", "' . $row['address'] . '", "' . $row['postal_code'] .
-		 '", "' . $row['city'] . '", "' . $row['cellphone'] . '", "' .
+	$query = 'INSERT INTO member (first_name, last_name, birth_date, ' .
+		 'address, postal_code, city, cellphone, cellphone_father, ' .
+		 'cellphone_mother, phone, email, means_of_knowledge, ' .
+		 'creation_date) VALUES ("' . $row['first_name'] . '", "' .
+		 $row['last_name'] . '", "' . $row['birth_date'] . '", "' .
+		 $row['address'] . '", "' . $row['postal_code'] . '", "' .
+		 $row['city'] . '", "' . $row['cellphone'] . '", "' .
 		 $row['cellphone_father'] . '", "' . $row['cellphone_mother'] .
 		 '", "' . $row['phone'] . '", "' . $row['email'] . '", "' .
-		 $row['means_of_knowledge'] . '", "", NOW())';
+		 $row['means_of_knowledge'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -339,8 +353,9 @@ function get_member_id_or_add($link, $row)
 
 function add_registration_detail_from_pr($link, $registration_id, $lesson_id)
 {
-	$query = 'INSERT INTO registration_detail VALUES ("' .
-		 $registration_id . '", "' . $lesson_id . '", "")';
+	$query = 'INSERT INTO registration_detail (registration_id, ' .
+		 'lesson_id) VALUES (' . $registration_id . ', ' . $lesson_id .
+		 ')';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -349,11 +364,16 @@ function add_registration_detail_from_pr($link, $registration_id, $lesson_id)
 
 function add_registration_from_pr($link, $member_id, $row)
 {
+	if ($row['plan'] == '')
+		$row['plan'] = 'NULL';
+	else
+		$row['plan'] = '"' . $row['plan'] . '"';
+
 	$season = date_to_season($row['date']);
 
-	$query = 'INSERT INTO registration VALUES ("", "' . $member_id .
-		 '", "' . $season . '", "' . $row['plan'] .
-		 '", "", "", "", "", "", NOW())';
+	$query = 'INSERT INTO registration (member_id, season, plan, date) ' .
+		 'VALUES (' . $member_id . ', "' . $season . '", ' .
+		 $row['plan'] . ', NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
