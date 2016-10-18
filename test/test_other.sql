@@ -23,10 +23,10 @@ INSERT INTO `registration_detail` (`registration_id`, `lesson_id`) VALUES (1, 4)
 	(4, 5),
 	(4, 25);
 
-INSERT INTO `registration_file` (`registration_id`, `medical_certificate`, `insurance`, `photo`) VALUES (1, 1, 1, 1),
-	(2, 1, 1, 1),
-	(3, 1, 1, 1),
-	(4, 0, 1, 0);
+INSERT INTO `registration_file` (`registration_id`, `medical_certificate`, `insurance`, `photo`, `stamped_envelope`) VALUES (1, 1, 1, 1, 1),
+	(2, 1, 1, 1, 1),
+	(3, 1, 1, 1, 1),
+	(4, 0, 1, 0, 0);
 
 INSERT INTO `registration_payment` (`registration_id`, `amount`, `mode`, `date`) VALUES (1, 130.00, 'CHECK', '2011-09-15'),
 	(1, 130.00, 'CHECK', '2011-12-01'),
