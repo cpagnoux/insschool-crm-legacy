@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="<?php echo $prefix ?>_hour"><?php echo $label ?></label>
 
-  <select class="datetime-select" id="<?php echo $prefix ?>_hour" name="<?php echo $prefix ?>_hour" required>
+  <select class="datetime-select" id="<?php echo $prefix ?>_hour" name="<?php echo $prefix ?>_hour">
     <option value="">Heures</option>
 
     <?php for ($i = 0; $i < 24; $i++): ?>
@@ -15,7 +15,7 @@
 
   h
 
-  <select class="datetime-select" name="<?php echo $prefix ?>_minute" required>
+  <select class="datetime-select" name="<?php echo $prefix ?>_minute">
     <option value="">Minutes</option>
 
     <?php for ($i = 0; $i < 60; $i += 5): ?>

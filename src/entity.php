@@ -159,18 +159,31 @@ function add_lesson($data)
 {
 	if ($data['teacher_id'] == '')
 		$data['teacher_id'] = 'NULL';
+	if ($data['day'] == '')
+		$data['day'] = 'NULL';
+	else
+		$data['day'] = '"' . $data['day'] . '"';
 	if ($data['room_id'] == '')
 		$data['room_id'] = 'NULL';
 
-	$start_time = to_time($data['st_hour'], $data['st_minute']);
-	$end_time = to_time($data['et_hour'], $data['et_minute']);
+	if ($data['st_hour'] == '' || $data['st_minute'] == '')
+		$start_time = 'NULL';
+	else
+		$start_time = '"' . to_time($data['st_hour'],
+					    $data['st_minute']) . '"';
+
+	if ($data['et_hour'] == '' || $data['et_minute'] == '')
+		$end_time = 'NULL';
+	else
+		$end_time = '"' . to_time($data['et_hour'],
+					  $data['et_minute']) . '"';
 
 	$link = connect_database();
 
 	$query = 'INSERT INTO lesson (title, teacher_id, day, start_time, ' .
 		 'end_time, room_id, costume) VALUES ("' . $data['title'] .
-		 '", ' . $data['teacher_id'] . ', "' . $data['day'] . '", "' .
-		 $start_time . '", "' . $end_time . '", ' . $data['room_id'] .
+		 '", ' . $data['teacher_id'] . ', ' . $data['day'] . ', ' .
+		 $start_time . ', ' . $end_time . ', ' . $data['room_id'] .
 		 ', "' . $data['costume'] . '")';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
@@ -894,8 +907,8 @@ function modify_quantity($order_id, $goody_id, $quantity)
 			 $order_id . ' AND goody_id = ' . $goody_id;
 		$quantity = 0;
 	} else {
-		$query = 'UPDATE order_content SET quantity = "' . $quantity .
-			 '" WHERE order_id = ' . $order_id .
+		$query = 'UPDATE order_content SET quantity = ' . $quantity .
+			 ' WHERE order_id = ' . $order_id .
 			 ' AND goody_id = ' . $goody_id;
 	}
 

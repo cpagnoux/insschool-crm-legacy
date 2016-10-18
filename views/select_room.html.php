@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="room_id">Salle</label>
 
-  <select id="room_id" name="room_id" required>
+  <select id="room_id" name="room_id">
     <option value="">Sélectionner</option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>

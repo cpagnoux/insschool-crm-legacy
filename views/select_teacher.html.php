@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="teacher_id">Professeur</label>
 
-  <select id="teacher_id" name="teacher_id" required>
+  <select id="teacher_id" name="teacher_id">
     <option value="">Sélectionner</option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>

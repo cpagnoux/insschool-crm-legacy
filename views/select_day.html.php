@@ -1,7 +1,7 @@
 <div class="form-group">
   <label for="day">Jour</label>
 
-  <select id="day" name="day" required>
+  <select id="day" name="day">
     <option value="">Sélectionner</option>
     <option value="MONDAY"<?php echo $monday ?>>Lundi</option>
     <option value="TUESDAY"<?php echo $tuesday ?>>Mardi</option>

@@ -9,7 +9,10 @@
 
   <p>
     <span class="attribute-name">Professeur :</span>
-    <?php echo link_entity('teacher', $row['teacher_id'], get_name('teacher', $row['teacher_id'])) ?><br>
+
+    <?php if ($row['teacher_id'] != NULL): ?>
+      <?php echo link_entity('teacher', $row['teacher_id'], get_name('teacher', $row['teacher_id'])) ?>
+    <?php endif ?>
   </p>
 
   <p>
@@ -22,7 +25,10 @@
     <span class="attribute-name">Durée :</span>
     <?php echo duration($row['start_time'], $row['end_time']) ?><br>
     <span class="attribute-name">Salle :</span>
-    <?php echo link_entity('room', $row['room_id'], get_entity_name('room', $row['room_id'])) ?>
+
+    <?php if ($row['room_id'] != NULL): ?>
+      <?php echo link_entity('room', $row['room_id'], get_entity_name('room', $row['room_id'])) ?>
+    <?php endif ?>
   </p>
 
   <p>
