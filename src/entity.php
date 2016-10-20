@@ -134,10 +134,7 @@ function form_add_entity($table, $id)
  */
 function add_goody($data)
 {
-	if ($data['price'] == '')
-		$data['price'] = 'NULL';
-	if ($data['stock'] == '')
-		$data['stock'] = 0;
+	prepare_data_goody($data);
 
 	$link = connect_database();
 
@@ -157,26 +154,7 @@ function add_goody($data)
 
 function add_lesson($data)
 {
-	if ($data['teacher_id'] == '')
-		$data['teacher_id'] = 'NULL';
-	if ($data['day'] == '')
-		$data['day'] = 'NULL';
-	else
-		$data['day'] = '"' . $data['day'] . '"';
-	if ($data['room_id'] == '')
-		$data['room_id'] = 'NULL';
-
-	if ($data['st_hour'] == '' || $data['st_minute'] == '')
-		$start_time = 'NULL';
-	else
-		$start_time = '"' . to_time($data['st_hour'],
-					    $data['st_minute']) . '"';
-
-	if ($data['et_hour'] == '' || $data['et_minute'] == '')
-		$end_time = 'NULL';
-	else
-		$end_time = '"' . to_time($data['et_hour'],
-					  $data['et_minute']) . '"';
+	list($start_time, $end_time) = prepare_data_lesson($data);
 
 	$link = connect_database();
 
@@ -198,11 +176,8 @@ function add_lesson($data)
 
 function add_member($data)
 {
-	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
-	$cellphone = format_phone_number($data['cellphone']);
-	$cellphone_father = format_phone_number($data['cellphone_father']);
-	$cellphone_mother = format_phone_number($data['cellphone_mother']);
-	$phone = format_phone_number($data['phone']);
+	list($birth_date, $cellphone, $cellphone_father, $cellphone_mother,
+	     $phone) = prepare_data_member($data);
 
 	$link = connect_database();
 
@@ -283,21 +258,7 @@ function add_payment($table, $data)
 
 function add_registration($data)
 {
-	if ($data['plan'] == '')
-		$data['plan'] = 'NULL';
-	else // FIXME: should not be required
-		$data['plan'] = '"' . $data['plan'] . '"';
-	if ($data['price'] == '')
-		$data['price'] = 'NULL';
-	if ($data['discount'] == '')
-		$data['discount'] = 0;
-	if ($data['num_payments'] == '')
-		$data['num_payments'] = 'NULL';
-
-	$followed_quarters_str = '';
-
-	if ($data['plan'] == '"QUARTERLY"')
-		$followed_quarters_str = followed_quarters_to_string($data);
+	$followed_quarters_str = prepare_data_registration($data);
 
 	$link = connect_database();
 
@@ -326,7 +287,7 @@ function add_registration_detail($data)
 {
 	$link = connect_database();
 
-$query = 'INSERT INTO registration_detail (registration_id, ' .
+	$query = 'INSERT INTO registration_detail (registration_id, ' .
 		 'lesson_id) VALUES (' . $data['registration_id'] . ', ' .
 		 $data['lesson_id'] . ')';
 	if (!mysqli_query($link, $query)) {
@@ -359,15 +320,7 @@ function add_room($data)
 
 function add_teacher($data)
 {
-	if ($data['bd_day'] == '' || $data['bd_month'] == '' ||
-	    $data['bd_year'] == '')
-		$birth_date = 'NULL';
-	else
-		$birth_date = '"' . to_date($data['bd_day'], $data['bd_month'],
-					    $data['bd_year']) . '"';
-
-	$cellphone = format_phone_number($data['cellphone']);
-	$phone = format_phone_number($data['phone']);
+	list($birth_date, $cellphone, $phone) = prepare_date_teacher($data);
 
 	$link = connect_database();
 
@@ -395,8 +348,7 @@ function add_user($data)
 	if (!$_SESSION['admin'])
 		return;
 
-	if ($data['admin'] == '')
-		$data['admin'] = 0;
+	prepare_data_user($data);
 
 	$password = generate_password();
 
@@ -547,10 +499,7 @@ function form_modify_entity($table, $id)
  */
 function modify_goody($goody_id, $data)
 {
-	if ($data['price'] == '')
-		$data['price'] = 'NULL';
-	if ($data['stock'] == '')
-		$data['stock'] = 0;
+	prepare_data_goody($data);
 
 	$link = connect_database();
 
@@ -570,13 +519,7 @@ function modify_goody($goody_id, $data)
 
 function modify_lesson($lesson_id, $data)
 {
-	if ($data['teacher_id'] == '')
-		$data['teacher_id'] = 'NULL';
-	if ($data['room_id'] == '')
-		$data['room_id'] = 'NULL';
-
-	$start_time = to_time($data['st_hour'], $data['st_minute']);
-	$end_time = to_time($data['et_hour'], $data['et_minute']);
+	prepare_data_lesson($data);
 
 	$link = connect_database();
 
@@ -598,11 +541,7 @@ function modify_lesson($lesson_id, $data)
 
 function modify_member($member_id, $data)
 {
-	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
-	$cellphone = format_phone_number($data['cellphone']);
-	$cellphone_father = format_phone_number($data['cellphone_father']);
-	$cellphone_mother = format_phone_number($data['cellphone_mother']);
-	$phone = format_phone_number($data['phone']);
+	prepare_data_member($data);
 
 	$link = connect_database();
 
@@ -645,24 +584,8 @@ function modify_payment($table, $id, $data)
 
 function modify_pre_registration($pre_registration_id, $data)
 {
-	$lessons_str = '';
-
-	if ($data['with_lessons'])
-		$lessons_str = lessons_to_string($data);
-
-	if (!$data['with_lessons'])
-		$data['plan'] = 'NULL';
-	else if ($data['plan'] == '')
-		$data['plan'] = 'NULL';
-	else
-		$data['plan'] = '"' . $data['plan'] . '"';
-
-	$birth_date = to_date($data['bd_day'], $data['bd_month'],
-			      $data['bd_year']);
-	$cellphone = format_phone_number($data['cellphone']);
-	$cellphone_father = format_phone_number($data['cellphone_father']);
-	$cellphone_mother = format_phone_number($data['cellphone_mother']);
-	$phone = format_phone_number($data['phone']);
+	list($lessons_str, $birth_date, $cellphone, $cellphone_father,
+	     $cellphone_mother, $phone) = prepare_data_pre_registration($data);
 
 	$link = connect_database();
 
@@ -690,21 +613,7 @@ function modify_pre_registration($pre_registration_id, $data)
 
 function modify_registration($registration_id, $data)
 {
-	if ($data['plan'] == '')
-		$data['plan'] = 'NULL';
-	else
-		$data['plan'] = '"' . $data['plan'] . '"';
-	if ($data['price'] == '')
-		$data['price'] = 'NULL';
-	if ($data['discount'] == '')
-		$data['discount'] = 0;
-	if ($data['num_payments'] == '')
-		$data['num_payments'] = 'NULL';
-
-	$followed_quarters_str = '';
-
-	if ($data['plan'] == 'QUARTERLY')
-		$followed_quarters_str = followed_quarters_to_string($data);
+	$followed_quarters_str = prepare_data_registration($data);
 
 	$link = connect_database();
 
@@ -763,13 +672,7 @@ function modify_room($room_id, $data)
 
 function modify_teacher($teacher_id, $data)
 {
-	if ($data['bd_day'] == '' || $data['bd_month'] == '' || $data['bd_year'] == '')
-		$birth_date = 'NULL';
-	else
-		$birth_date = '"' . to_date($data['bd_day'], $data['bd_month'], $data['bd_year']) . '"';
-
-	$cellphone = format_phone_number($data['cellphone']);
-	$phone = format_phone_number($data['phone']);
+	list($birth_date, $cellphone, $phone) = prepare_data_teacher($data);
 
 	$link = connect_database();
 

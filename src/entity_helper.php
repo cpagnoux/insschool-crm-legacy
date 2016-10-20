@@ -110,6 +110,123 @@ function display_registration_file($link, $registration_id)
 }
 
 /*
+ * Helper functions for adding and modifying entities
+ */
+function prepare_data_goody(&$data)
+{
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['stock'] == '')
+		$data['stock'] = 0;
+}
+
+function prepare_data_lesson(&$data)
+{
+	if ($data['teacher_id'] == '')
+		$data['teacher_id'] = 'NULL';
+	if ($data['day'] == '')
+		$data['day'] = 'NULL';
+	else
+		$data['day'] = '"' . $data['day'] . '"';
+	if ($data['room_id'] == '')
+		$data['room_id'] = 'NULL';
+
+	if ($data['st_hour'] == '' || $data['st_minute'] == '')
+		$start_time = 'NULL';
+	else
+		$start_time = '"' . to_time($data['st_hour'],
+					    $data['st_minute']) . '"';
+
+	if ($data['et_hour'] == '' || $data['et_minute'] == '')
+		$end_time = 'NULL';
+	else
+		$end_time = '"' . to_time($data['et_hour'],
+					  $data['et_minute']) . '"';
+
+	return array($start_time, $end_time);
+}
+
+function prepare_data_member($data)
+{
+	$birth_date = to_date($data['bd_day'], $data['bd_month'],
+			      $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
+
+	return array($birth_date, $cellphone, $cellphone_father,
+		     $cellphone_mother, $phone);
+}
+
+function prepare_data_pre_registration(&$data)
+{
+	$lessons_str = '';
+
+	if ($data['with_lessons'])
+		$lessons_str = lessons_to_string($data);
+
+	if (!$data['with_lessons'])
+		$data['plan'] = 'NULL';
+	else if ($data['plan'] == '')
+		$data['plan'] = 'NULL';
+	else
+		$data['plan'] = '"' . $data['plan'] . '"';
+
+	$birth_date = to_date($data['bd_day'], $data['bd_month'],
+			      $data['bd_year']);
+	$cellphone = format_phone_number($data['cellphone']);
+	$cellphone_father = format_phone_number($data['cellphone_father']);
+	$cellphone_mother = format_phone_number($data['cellphone_mother']);
+	$phone = format_phone_number($data['phone']);
+
+	return array($lessons_str, $birth_date, $cellphone, $cellphone_father,
+		     $cellphone_mother, $phone);
+}
+
+function prepare_data_registration(&$data)
+{
+	if ($data['plan'] == '')
+		$data['plan'] = 'NULL';
+	else // FIXME: should not be required
+		$data['plan'] = '"' . $data['plan'] . '"';
+	if ($data['price'] == '')
+		$data['price'] = 'NULL';
+	if ($data['discount'] == '')
+		$data['discount'] = 0;
+	if ($data['num_payments'] == '')
+		$data['num_payments'] = 'NULL';
+
+	$followed_quarters_str = '';
+
+	if ($data['plan'] == '"QUARTERLY"')
+		$followed_quarters_str = followed_quarters_to_string($data);
+
+	return $followed_quarters_str;
+}
+
+function prepare_data_teacher($data)
+{
+	if ($data['bd_day'] == '' || $data['bd_month'] == '' ||
+	    $data['bd_year'] == '')
+		$birth_date = 'NULL';
+	else
+		$birth_date = '"' . to_date($data['bd_day'], $data['bd_month'],
+					    $data['bd_year']) . '"';
+
+	$cellphone = format_phone_number($data['cellphone']);
+	$phone = format_phone_number($data['phone']);
+
+	return array($birth_date, $cellphone, $phone);
+}
+
+function prepare_date_user(&$data)
+{
+	if ($data['admin'] == '')
+		$data['admin'] = 0;
+}
+
+/*
  * Helper function for adding registrations
  */
 function add_registration_file($link, $registration_id)
