@@ -24,7 +24,7 @@
 
   <div class="form-group">
     <label for="num_payments">Nombre de paiements</label>
-    <input id="num_payments" type="number" name="num_payments" value="<?php $row['num_payments'] ?>" min="1" max="9">
+    <input id="num_payments" type="number" name="num_payments" value="<?php echo $row['num_payments'] ?>" min="1" max="9">
     <span></span>
   </div>
 </fieldset>

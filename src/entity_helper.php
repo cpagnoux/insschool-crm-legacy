@@ -161,11 +161,6 @@ function prepare_data_member($data)
 
 function prepare_data_pre_registration(&$data)
 {
-	$lessons_str = '';
-
-	if ($data['with_lessons'])
-		$lessons_str = lessons_to_string($data);
-
 	if (!$data['with_lessons'])
 		$data['plan'] = 'NULL';
 	else if ($data['plan'] == '')
@@ -180,7 +175,7 @@ function prepare_data_pre_registration(&$data)
 	$cellphone_mother = format_phone_number($data['cellphone_mother']);
 	$phone = format_phone_number($data['phone']);
 
-	return array($lessons_str, $birth_date, $cellphone, $cellphone_father,
+	return array($birth_date, $cellphone, $cellphone_father,
 		     $cellphone_mother, $phone);
 }
 
@@ -188,7 +183,7 @@ function prepare_data_registration(&$data)
 {
 	if ($data['plan'] == '')
 		$data['plan'] = 'NULL';
-	else // FIXME: should not be required
+	else
 		$data['plan'] = '"' . $data['plan'] . '"';
 	if ($data['price'] == '')
 		$data['price'] = 'NULL';
@@ -220,7 +215,7 @@ function prepare_data_teacher($data)
 	return array($birth_date, $cellphone, $phone);
 }
 
-function prepare_date_user(&$data)
+function prepare_data_user(&$data)
 {
 	if ($data['admin'] == '')
 		$data['admin'] = 0;

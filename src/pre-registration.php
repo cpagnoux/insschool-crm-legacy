@@ -249,20 +249,11 @@ function display_pre_registration_summary($data)
 
 function save_pre_registration($link, $data, $lessons_str)
 {
-	if (!$data['with_lessons']) {
-		$lessons_str = '';
-		$data['plan'] = 'NULL';
-	} else if ($data['plan'] == '') {
-		$data['plan'] = 'NULL';
-	} else {
-		$data['plan'] = '"' . $data['plan'] . '"';
-	}
+	list($birth_date, $cellphone, $cellphone_father, $cellphone_mother,
+	     $phone) = prepare_data_pre_registration($data);
 
-	$birth_date = to_date($data['bd_day'], $data['bd_month'], $data['bd_year']);
-	$cellphone = format_phone_number($data['cellphone']);
-	$cellphone_father = format_phone_number($data['cellphone_father']);
-	$cellphone_mother = format_phone_number($data['cellphone_mother']);
-	$phone = format_phone_number($data['phone']);
+	if (!$data['with_lessons'])
+		$lessons_str = '';
 
 	$query = 'INSERT INTO pre_registration (first_name, last_name, ' .
 		 'birth_date, address, postal_code, city, cellphone, ' .

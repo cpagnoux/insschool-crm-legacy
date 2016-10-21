@@ -320,7 +320,7 @@ function add_room($data)
 
 function add_teacher($data)
 {
-	list($birth_date, $cellphone, $phone) = prepare_date_teacher($data);
+	list($birth_date, $cellphone, $phone) = prepare_data_teacher($data);
 
 	$link = connect_database();
 
@@ -519,14 +519,14 @@ function modify_goody($goody_id, $data)
 
 function modify_lesson($lesson_id, $data)
 {
-	prepare_data_lesson($data);
+	list($start_time, $end_time) = prepare_data_lesson($data);
 
 	$link = connect_database();
 
 	$query = 'UPDATE lesson SET title =  "' . $data['title'] .
-		 '", teacher_id = ' . $data['teacher_id'] . ', day = "' .
-		 $data['day'] . '", start_time = "' . $start_time .
-		 '", end_time = "' . $end_time . '", room_id = ' .
+		 '", teacher_id = ' . $data['teacher_id'] . ', day = ' .
+		 $data['day'] . ', start_time = ' . $start_time .
+		 ', end_time = ' . $end_time . ', room_id = ' .
 		 $data['room_id'] . ', costume = "' . $data['costume'] .
 		 '" WHERE lesson_id = ' . $lesson_id;
 	if (!mysqli_query($link, $query)) {
@@ -541,7 +541,8 @@ function modify_lesson($lesson_id, $data)
 
 function modify_member($member_id, $data)
 {
-	prepare_data_member($data);
+	list($birth_date, $cellphone, $cellphone_father, $cellphone_mother,
+	     $phone) = prepare_data_member($data);
 
 	$link = connect_database();
 
@@ -584,8 +585,13 @@ function modify_payment($table, $id, $data)
 
 function modify_pre_registration($pre_registration_id, $data)
 {
-	list($lessons_str, $birth_date, $cellphone, $cellphone_father,
-	     $cellphone_mother, $phone) = prepare_data_pre_registration($data);
+	list($birth_date, $cellphone, $cellphone_father, $cellphone_mother,
+	     $phone) = prepare_data_pre_registration($data);
+
+	$lessons_str = '';
+
+	if ($data['with_lessons'])
+		$lessons_str = lessons_to_string($data);
 
 	$link = connect_database();
 
@@ -677,8 +683,8 @@ function modify_teacher($teacher_id, $data)
 	$link = connect_database();
 
 	$query = 'UPDATE teacher SET first_name = "' . $data['first_name'] .
-		 '", last_name = "' . $data['last_name'] . '", birth_date = "' .
-		 $birth_date . '", address = "' . $data['address'] .
+		 '", last_name = "' . $data['last_name'] . '", birth_date = ' .
+		 $birth_date . ', address = "' . $data['address'] .
 		 '", postal_code = "' . $data['postal_code'] . '", city = "' .
 		 $data['city'] . '", cellphone = "' . $cellphone .
 		 '", phone = "' . $phone . '", email = "' . $data['email'] .
