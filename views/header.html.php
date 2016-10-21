@@ -39,7 +39,7 @@
 
   <nav class="navbar">
     <a href="index.php">
-      <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
+      <img src="img/logo-site-noir1.jpg" alt="Logo">
     </a>
 
     <ul>

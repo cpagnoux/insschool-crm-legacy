@@ -17,7 +17,7 @@
 <body>
 
 <header class="pre-registration-header">
-  <img src="http://www.insschool.fr/wp-content/uploads/2012/08/logo-site-noir1.jpg" alt="Logo">
+  <img src="img/logo-site-noir1.jpg" alt="Logo">
   <h1>Pré-inscription</h1>
 </header>
 
