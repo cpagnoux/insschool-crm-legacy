@@ -579,6 +579,9 @@ function date_to_season($date)
 
 function duration($start_time, $end_time)
 {
+	if ($start_time == null || $end_time == null)
+		return 'N/A';
+
 	// time is in 'HH:MM:SS' format
 	list($start_hour, $start_minute) = sscanf($start_time, '%d:%d');
 	list($end_hour, $end_minute) = sscanf($end_time, '%d:%d');
@@ -696,8 +699,9 @@ function followed_quarters_to_string($followed_quarters)
 
 function format_date($date)
 {
-	if ($date == '0000-00-00' || $date == '0000-00-00 00:00:00')
-		return 'Inconnue';
+	if ($date == null || $date == '0000-00-00' ||
+	    $date == '0000-00-00 00:00:00')
+		return '';
 
 	// date is in 'YYYY-MM-DD' format
 	list($year, $month, $day) = sscanf($date, '%d-%d-%d');
@@ -708,8 +712,8 @@ function format_date($date)
 
 function format_datetime($datetime)
 {
-	if ($date == '0000-00-00 00:00:00')
-		return 'Inconnue';
+	if ($datetime == null || $datetime == '0000-00-00 00:00:00')
+		return '';
 
 	// datetime is in 'YYYY-MM-DD HH:MM:SS' format
 	list($year, $month, $day, $hour, $minute) =
@@ -722,7 +726,7 @@ function format_datetime($datetime)
 
 function format_phone_number($phone_number)
 {
-	if ($phone_number == '')
+	if ($phone_number == null || $phone_number == '')
 		return '';
 
 	// user input is in '##########' format
@@ -735,6 +739,9 @@ function format_phone_number($phone_number)
 
 function format_time($time)
 {
+	if ($time == null)
+		return '';
+
 	// time is in 'HH:MM:SS' format
 	list($hour, $minute) = sscanf($time, '%d:%d');
 
@@ -784,7 +791,7 @@ function product_status($stock)
 
 function reverse_format_phone_number($phone_number)
 {
-	if ($phone_number == '')
+	if ($phone_number == null || $phone_number == '')
 		return '';
 
 	// stored data is in '## ## ## ## ##' format
