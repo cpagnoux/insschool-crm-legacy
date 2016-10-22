@@ -1,186 +1,188 @@
+/* vim: set sw=2: */
+
 body {
-	background-attachment: fixed;
-	background-color: #000000;
-	background-image: url('../img/affiche-15-16-site-RVB-fusionne%CC%811.jpg');
-	background-position: center top;
-	color: #808080;
+  background-attachment: fixed;
+  background-color: #000000;
+  background-image: url('../img/affiche-15-16-site-RVB-fusionne%CC%811.jpg');
+  background-position: center top;
+  color: #808080;
 }
 
 a {
-	color: #ffffff;
-	text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 a:hover {
-	color: #c0c0c0;
+  color: #c0c0c0;
 }
 
 h1, h2 {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 h2 {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 input, select {
-	background-color: #000000;
-	border: 2px solid #404040;
-	border-radius: 2px;
-	box-sizing: border-box;
-	color: #808080;
-	padding: 10px 20px;
-	width: 500px;
+  background-color: #000000;
+  border: 2px solid #404040;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #808080;
+  padding: 10px 20px;
+  width: 500px;
 }
 
 input:focus, select:focus {
-	box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
 }
 
 input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
-	width: auto;
+  width: auto;
 }
 
 input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
-	box-shadow: none;
+  box-shadow: none;
 }
 
 input[type=submit] {
-	background-color: #404040;
-	border: none;
-	color: #ffffff;
-	display: inline-block;
+  background-color: #404040;
+  border: none;
+  color: #ffffff;
+  display: inline-block;
 }
 
 input[type=submit]:hover {
-	background-color: #606060;
+  background-color: #606060;
 }
 
 input[type=submit]:focus {
-	background-color: #404040;
+  background-color: #404040;
 }
 
 input + span, select + span {
-	display: block;
-	width: 500px;
+  display: block;
+  width: 500px;
 }
 
 input:not([required]) + span::before, select:not([required]) + span::before {
-	content: '(facultatif) ';
+  content: '(facultatif) ';
 }
 
 .attribute-name {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .centered {
-	text-align: center;
+  text-align: center;
 }
 
 table {
-	border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 th, td {
-	border-left: 2px solid #404040;
-	border-right: 2px solid #404040;
-	padding: 10px 20px;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #404040;
+  padding: 10px 20px;
 }
 
 th {
-	background-color: #404040;
-	color: #ffffff;
+  background-color: #404040;
+  color: #ffffff;
 }
 
 tr:last-child td {
-	border-bottom: 2px solid #404040;
+  border-bottom: 2px solid #404040;
 }
 
 .room, .MONDAY, .TUESDAY, .WEDNESDAY, .THURSDAY, .FRIDAY {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .room {
-	background-color: #000000;
-	border-top: 2px solid #404040;
+  background-color: #000000;
+  border-top: 2px solid #404040;
 }
 
 .MONDAY {
-	background-color: #0b7597;
+  background-color: #0b7597;
 }
 
 .TUESDAY {
-	background-color: #094e85;
+  background-color: #094e85;
 }
 
 .WEDNESDAY {
-	background-color: #50436b;
+  background-color: #50436b;
 }
 
 .THURSDAY {
-	background-color: #9f3f6c;
+  background-color: #9f3f6c;
 }
 
 .FRIDAY {
-	background-color: #9c4c49;
+  background-color: #9c4c49;
 }
 
 header, .container, .footer-container {
-	box-sizing: border-box;
-	margin: auto;
-	width: 1024px;
+  box-sizing: border-box;
+  margin: auto;
+  width: 1024px;
 }
 
 header {
-	background-color: #000000;
-	line-height: 85px;
-	margin-bottom: 40px;
-	margin-top: 100px;
-	opacity: 0.8;
+  background-color: #000000;
+  line-height: 85px;
+  margin-bottom: 40px;
+  margin-top: 100px;
+  opacity: 0.8;
 }
 
 header img {
-	float: left;
+  float: left;
 }
 
 .container {
-	background-color: #000000;
-	margin-bottom: 20px;
-	padding: 20px;
+  background-color: #000000;
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
 fieldset {
-	border: none;
+  border: none;
 }
 
 .form-group {
-	margin-bottom: 1em;
-	margin-top: 1em;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .form-group label {
-	display: block;
+  display: block;
 }
 
 .form-group-option {
-	display: inline-block;
-	padding-right: 20px;
+  display: inline-block;
+  padding-right: 20px;
 }
 
 .form-group-option label {
-	display: inline;
+  display: inline;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .hidden.show {
-	display: block;
+  display: block;
 }
 
 .footer-container {
-	background-color: #000000;
-	height: 100px;
-	padding: 1px 20px;
+  background-color: #000000;
+  height: 100px;
+  padding: 1px 20px;
 }

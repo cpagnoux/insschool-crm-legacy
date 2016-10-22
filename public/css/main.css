@@ -1,447 +1,449 @@
+/* vim: set sw=2: */
+
 body {
-	background-attachment: fixed;
-	background-color: #000000;
-	background-image: url('../img/affiche-15-16-site-RVB-fusionne%CC%811.jpg');
-	background-position: center top;
-	color: #808080;
+  background-attachment: fixed;
+  background-color: #000000;
+  background-image: url('../img/affiche-15-16-site-RVB-fusionne%CC%811.jpg');
+  background-position: center top;
+  color: #808080;
 }
 
 a {
-	color: #ffffff;
-	text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 a:hover {
-	color: #c0c0c0;
+  color: #c0c0c0;
 }
 
 h1, h2 {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 h2 {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 input, select, textarea {
-	background-color: #000000;
-	border: 2px solid #404040;
-	border-radius: 2px;
-	box-sizing: border-box;
-	color: #808080;
-	padding: 10px 20px;
-	width: 500px;
+  background-color: #000000;
+  border: 2px solid #404040;
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #808080;
+  padding: 10px 20px;
+  width: 500px;
 }
 
 input:focus, select:focus, textarea:focus {
-	box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
 }
 
 ::-webkit-input-placeholder {
-	color: #606060;
+  color: #606060;
 }
 
 ::-moz-placeholder {
-	color: #606060;
-	opacity: 1;
+  color: #606060;
+  opacity: 1;
 }
 
 :-ms-input-placeholder {
-	color: #606060;
+  color: #606060;
 }
 
 input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
-	width: auto;
+  width: auto;
 }
 
 input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
-	box-shadow: none;
+  box-shadow: none;
 }
 
 input[type=submit], .button {
-	background-color: #404040;
-	border: none;
-	border-radius: 2px;
-	color: #ffffff;
-	display: inline-block;
+  background-color: #404040;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  display: inline-block;
 }
 
 input[type=submit]:hover, .button:hover {
-	background-color: #606060;
-	color: #ffffff;
+  background-color: #606060;
+  color: #ffffff;
 }
 
 input[type=submit]:focus, .button:focus {
-	background-color: #404040;
+  background-color: #404040;
 }
 
 input[type=submit], .button {
-	padding: 10px 20px;
+  padding: 10px 20px;
 }
 
 input + span, select + span, textarea + span {
-	display: block;
-	width: 500px;
+  display: block;
+  width: 500px;
 }
 
 input:not([required]) + span::before, select:not([required]) + span::before, textarea:not([required]) + span::before {
-	content: '(facultatif) ';
+  content: '(facultatif) ';
 }
 
 .attribute-name {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .blank {
-	display: inline-block;
-	width: 20px;
+  display: inline-block;
+  width: 20px;
 }
 
 .button.true {
-	background-color: #008000;
+  background-color: #008000;
 }
 
 .button.true:hover {
-	background-color: #00a000;
+  background-color: #00a000;
 }
 
 .button.true:focus {
-	background-color: #008000;
+  background-color: #008000;
 }
 
 .centered {
-	text-align: center;
+  text-align: center;
 }
 
 .dropdown-toggle {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .error {
-	color: #ff0000;
-	display: block;
+  color: #ff0000;
+  display: block;
 }
 
 .message {
-	height: 200px;
-	width: 600px;
+  height: 200px;
+  width: 600px;
 }
 
 .quantity-input {
-	width: 60px;
+  width: 60px;
 }
 
 table {
-	border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 tr:hover {
-	background-color: #202020;
+  background-color: #202020;
 }
 
 th, td {
-	border-bottom: 2px solid #404040;
-	padding: 10px 20px;
+  border-bottom: 2px solid #404040;
+  padding: 10px 20px;
 }
 
 th {
-	background-color: #404040;
-	color: #ffffff;
+  background-color: #404040;
+  color: #ffffff;
 }
 
 tr:last-child td {
-	border-bottom: none;
+  border-bottom: none;
 }
 
 .text-cell {
-	max-width: 200px;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .schedule tr:hover {
-	background-color: #000000;
+  background-color: #000000;
 }
 
 .schedule th, .schedule td {
-	border: none;
-	border-left: 2px solid #404040;
-	border-right: 2px solid #404040;
+  border: none;
+  border-left: 2px solid #404040;
+  border-right: 2px solid #404040;
 }
 
 .schedule tr:last-child td {
-	border-bottom: 2px solid #404040;
+  border-bottom: 2px solid #404040;
 }
 
 .room, .MONDAY, .TUESDAY, .WEDNESDAY, .THURSDAY, .FRIDAY {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .schedule .room {
-	background-color: #000000;
-	border-top: 2px solid #404040;
+  background-color: #000000;
+  border-top: 2px solid #404040;
 }
 
 .MONDAY {
-	background-color: #0b7597;
+  background-color: #0b7597;
 }
 
 .TUESDAY {
-	background-color: #094e85;
+  background-color: #094e85;
 }
 
 .WEDNESDAY {
-	background-color: #50436b;
+  background-color: #50436b;
 }
 
 .THURSDAY {
-	background-color: #9f3f6c;
+  background-color: #9f3f6c;
 }
 
 .FRIDAY {
-	background-color: #9c4c49;
+  background-color: #9c4c49;
 }
 
 header {
-	background-color: #000000;
+  background-color: #000000;
 }
 
 .utility-bar {
-	line-height: 40px;
-	padding: 0 20px;
-	position: relative;
-	text-align: right;
-	z-index: 1;
+  line-height: 40px;
+  padding: 0 20px;
+  position: relative;
+  text-align: right;
+  z-index: 1;
 }
 
 .dropdown-menu, .navbar ul, .breadcrumb, .pagination ul, .action-links {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .dropdown {
-	display: inline-block;
-	float: right;
-	position: relative;
+  display: inline-block;
+  float: right;
+  position: relative;
 }
 
 .dropdown-menu {
-	background-color: #404040;
-	border-radius: 2px;
-	box-shadow: 0 8px 8px 8px rgba(255, 255, 255, 0.2);
-	display: none;
-	position: absolute;
-	right: 0;
-	width: 250px;
+  background-color: #404040;
+  border-radius: 2px;
+  box-shadow: 0 8px 8px 8px rgba(255, 255, 255, 0.2);
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 250px;
 }
 
 .dropdown-menu li {
-	display: block;
+  display: block;
 }
 
 .dropdown-menu li a {
-	border-radius: 2px;
-	color: #ffffff;
-	display: block;
-	padding: 0 20px;
+  border-radius: 2px;
+  color: #ffffff;
+  display: block;
+  padding: 0 20px;
 }
 
 .dropdown-menu li a:hover {
-	background-color: #606060;
-	color: #ffffff;
+  background-color: #606060;
+  color: #ffffff;
 }
 
 .dropdown-menu.show {
-	display: block;
+  display: block;
 }
 
 .navbar, .breadcrumb, .container, .super-container, .footer-container {
-	box-sizing: border-box;
-	margin: auto;
-	width: 1280px;
+  box-sizing: border-box;
+  margin: auto;
+  width: 1280px;
 }
 
 .navbar {
-	height: 85px;
-	line-height: 85px;
-	margin-bottom: 40px;
-	position: relative;
-	text-transform: uppercase;
-	z-index: 0;
+  height: 85px;
+  line-height: 85px;
+  margin-bottom: 40px;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 0;
 }
 
 .navbar img {
-	float: left;
+  float: left;
 }
 
 .navbar li {
-	display: inline;
+  display: inline;
 }
 
 .navbar li a {
-	display: inline-block;
-	float: left;
-	padding: 0 10px;
+  display: inline-block;
+  float: left;
+  padding: 0 10px;
 }
 
 .utility-bar a, .dropdown-toggle, .navbar li a {
-	color: #c0c0c0;
+  color: #c0c0c0;
 }
 
 .utility-bar a:hover, .dropdown-toggle:hover, .dropdown-toggle.highlight, .navbar li a:hover {
-	color: #ffffff;
+  color: #ffffff;
 }
 
 
 .breadcrumb {
-	color: #c0c0c0;
-	margin-bottom: 20px;
-	padding: 0 20px;
+  color: #c0c0c0;
+  margin-bottom: 20px;
+  padding: 0 20px;
 }
 
 .breadcrumb li {
-	display: inline;
+  display: inline;
 }
 
 .breadcrumb li::before {
-	content: '> ';
+  content: '> ';
 }
 
 .breadcrumb li:first-child::before {
-	content: none;
+  content: none;
 }
 
 .container {
-	background-color: #000000;
-	margin-bottom: 20px;
-	padding: 20px;
+  background-color: #000000;
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
 .filters {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .filter {
-	display: inline-block;
-	padding-right: 20px;
+  display: inline-block;
+  padding-right: 20px;
 }
 
 .display-options {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .display-option {
-	display: inline-block;
-	padding-right: 20px;
+  display: inline-block;
+  padding-right: 20px;
 }
 
 .filter select, .display-option select {
-	width: auto;
+  width: auto;
 }
 
 .pagination {
-	margin-top: 20px;
-	text-align: center;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .pagination ul {
-	display: inline-block;
+  display: inline-block;
 }
 
 .pagination li {
-	display: inline;
+  display: inline;
 }
 
 .pagination li a, .pagination li .active, .pagination li .disabled {
-	border-radius: 2px;
-	color: #ffffff;
-	display: inline-block;
-	float: left;
-	padding: 5px 10px;
+  border-radius: 2px;
+  color: #ffffff;
+  display: inline-block;
+  float: left;
+  padding: 5px 10px;
 }
 
 .pagination li a:hover {
-	background-color: #202020;
-	color: #ffffff;
+  background-color: #202020;
+  color: #ffffff;
 }
 
 .pagination li .active {
-	background-color: #404040;
+  background-color: #404040;
 }
 
 .action-links {
-	margin-bottom: 20px;
-	margin-top: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .action-links li {
-	display: inline;
+  display: inline;
 }
 
 fieldset {
-	border: none;
+  border: none;
 }
 
 .form-group, .editor {
-	margin-bottom: 1em;
-	margin-top: 1em;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 .form-group label {
-	display: block;
+  display: block;
 }
 
 .form-group-option {
-	display: inline-block;
-	padding-right: 20px;
+  display: inline-block;
+  padding-right: 20px;
 }
 
 .form-group-option label {
-	display: inline;
+  display: inline;
 }
 
 .editor {
-	width: 650px;
+  width: 650px;
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .hidden.show {
-	display: block;
+  display: block;
 }
 
 .super-container {
-	margin-top: 100px;
+  margin-top: 100px;
 }
 
 .tiny-container {
-	background-color: #000000;
-	height: 250px;
-	overflow: scroll;
-	padding: 20px;
-	width: 500px;
+  background-color: #000000;
+  height: 250px;
+  overflow: scroll;
+  padding: 20px;
+  width: 500px;
 }
 
 .tiny-container:first-child {
-	float: left;
-	margin-left: 50px;
+  float: left;
+  margin-left: 50px;
 }
 
 .tiny-container:last-child {
-	float: right;
-	margin-right: 50px;
+  float: right;
+  margin-right: 50px;
 }
 
 footer {
-	background-color: #000000;
+  background-color: #000000;
 }
 
 .entypo-ok {
-	color: #00ff00;
+  color: #00ff00;
 }
 
 .entypo-remove {
-	color: #ff0000;
-:
+  color: #ff0000;
+}
