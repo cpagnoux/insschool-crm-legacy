@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 13, 2016 at 07:53 PM
+-- Generation Time: Oct 22, 2016 at 09:12 PM
 -- Server version: 10.1.18-MariaDB
--- PHP Version: 7.0.11
+-- PHP Version: 7.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -110,6 +110,8 @@ CREATE TABLE `order_payment` (
   `order_id` smallint(5) UNSIGNED NOT NULL,
   `amount` decimal(5,2) NOT NULL,
   `mode` enum('CASH','CHECK') NOT NULL,
+  `cashing_date` date NOT NULL,
+  `comment` tinytext,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -195,6 +197,8 @@ CREATE TABLE `registration_payment` (
   `registration_id` smallint(5) UNSIGNED NOT NULL,
   `amount` decimal(5,2) NOT NULL,
   `mode` enum('CASH','CHECK') NOT NULL,
+  `cashing_date` date NOT NULL,
+  `comment` tinytext,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

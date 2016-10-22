@@ -6,6 +6,8 @@
       <tr>
         <th>Montant</th>
         <th>Mode de paiement</th>
+        <th>Date d'encaissement</th>
+        <th>Commentaire</th>
         <th>Date</th>
         <th></th>
       </tr>
@@ -14,6 +16,8 @@
         <tr>
           <td><?php echo $row['amount'] ?> €</td>
           <td><?php echo eval_enum($row['mode']) ?></td>
+          <td><?php echo format_date($row['cashing_date']) ?></td>
+          <td class="text-cell"><?php echo $row['comment'] ?></td>
           <td><?php echo format_date($row['date']) ?></td>
 
           <td>

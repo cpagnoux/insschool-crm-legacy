@@ -241,11 +241,15 @@ function add_order_content($data)
 
 function add_payment($table, $data)
 {
+	$cashing_date = prepare_data_payment($data);
+
 	$link = connect_database();
 
 	$query = 'INSERT INTO ' . $table . '_payment (' . $table . '_id, ' .
-		 'amount, mode, date) VALUES (' . $data[$table . '_id'] . ', ' .
-		 $data['amount'] . ', "' . $data['mode'] . '", NOW())';
+		 'amount, mode, cashing_date, comment, date) VALUES (' .
+		 $data[$table . '_id'] . ', ' . $data['amount'] . ', "' .
+		 $data['mode'] . '", "' . $cashing_date . '", "' .
+		 $data['comment'] . '", NOW())';
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -568,11 +572,15 @@ function modify_member($member_id, $data)
 
 function modify_payment($table, $id, $data)
 {
+	$cashing_date = prepare_data_payment($data);
+
 	$link = connect_database();
 
 	$query = 'UPDATE ' . $table . '_payment SET amount = ' .
 		 $data['amount'] . ', mode = "' . $data['mode'] .
-		 '" WHERE ' . $table . '_payment_id = ' . $id;
+		 '", cashing_date = "' . $cashing_date . '", comment = "' .
+		 $data['comment'] . '" WHERE ' . $table . '_payment_id = ' .
+		 $id;
 	if (!mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;

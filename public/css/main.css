@@ -153,6 +153,12 @@ tr:last-child td {
 	border-bottom: none;
 }
 
+.text-cell {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .schedule tr:hover {
 	background-color: #000000;
 }

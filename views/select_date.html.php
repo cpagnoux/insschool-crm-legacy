@@ -28,7 +28,7 @@
   <select class="datetime-select" name="<?php echo $prefix ?>_year"<?php echo $required_attribute ?>>
     <option value="">Année</option>
 
-    <?php for ($i = date('Y') - 6; $i >= date('Y') - 100; $i--): ?>
+    <?php for ($i = date('Y') + 1; $i >= date('Y') - 100; $i--): ?>
       <?php if (isset($year) && $i == $year): ?>
         <option value="<?php echo $i ?>" selected><?php echo $i ?></option>
       <?php else: ?>

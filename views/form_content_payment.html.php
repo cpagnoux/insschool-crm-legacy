@@ -18,6 +18,18 @@
 </fieldset>
 
 <fieldset>
+  <?php select_date('Date d\'encaissement', 'cd', true, $row['cashing_date']) ?>
+</fieldset>
+
+<fieldset>
+  <div class="form-group">
+    <label for="comment">Commentaire</label>
+    <textarea id="comment" name="comment"><?php echo $row['comment'] ?></textarea>
+    <span></span>
+  </div>
+</fieldset>
+
+<fieldset>
   <div class="form-group">
     <input type="submit" name="submit" value="Valider">
   </div>

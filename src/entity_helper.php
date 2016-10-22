@@ -159,6 +159,14 @@ function prepare_data_member($data)
 		     $cellphone_mother, $phone);
 }
 
+function prepare_data_payment($data)
+{
+	$cashing_date = to_date($data['cd_day'], $data['cd_month'],
+				$data['cd_year']);
+
+	return $cashing_date;
+}
+
 function prepare_data_pre_registration(&$data)
 {
 	if (!$data['with_lessons'])

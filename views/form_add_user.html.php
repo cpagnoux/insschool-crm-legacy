@@ -9,7 +9,7 @@
     <fieldset>
       <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
-	<input id="username" type="text" name="username" <?php regexp_username() ?> required autofocus>
+        <input id="username" type="text" name="username" <?php regexp_username() ?> required autofocus>
         <span>Entre 4 et 24 caractères, ne doit contenir que des lettres, des chiffres, &quot;_&quot; et &quot;-&quot;.</span>
       </div>
 
