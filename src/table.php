@@ -254,7 +254,7 @@ function table_pagination($table, $page, $filter = '')
 	if ($num_rows <= $_SESSION['limit'])
 		return;
 
-	$num_pages = intdiv($num_rows, $_SESSION['limit']);
+	$num_pages = int_div($num_rows, $_SESSION['limit']);
 
 	if ($num_rows % $_SESSION['limit'] != 0)
 		$num_pages++;

@@ -765,6 +765,13 @@ function generate_password($length = 8)
 	return $password;
 }
 
+function int_div($dividend, $divisor)
+{
+	$result = $dividend / $divisor;
+
+	return (int) $result;
+}
+
 function previous_season()
 {
 	if (date('m') >= 6)
