@@ -10,9 +10,9 @@
           <?php $row = html_encode_strings($row) ?>
 
           <?php if ($row['member_id'] == $_SESSION['order_filter_by_member']): ?>
-            <option value="<?php echo $row['member_id'] ?>" selected><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
+            <option value="<?php echo $row['member_id'] ?>" selected><?php echo strtoupper($row['last_name']) ?> <?php echo $row['first_name'] ?></option>
           <?php else: ?>
-            <option value="<?php echo $row['member_id'] ?>"><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
+            <option value="<?php echo $row['member_id'] ?>"><?php echo strtoupper($row['last_name']) ?> <?php echo $row['first_name'] ?></option>
           <?php endif ?>
         <?php endwhile ?>
       </select>

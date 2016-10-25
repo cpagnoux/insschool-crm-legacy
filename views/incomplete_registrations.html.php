@@ -5,7 +5,7 @@
     <ul>
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <?php $row = html_encode_strings($row) ?>
-        <li><?php link_entity('registration', $row['registration_id'], $row['first_name'] . ' ' .$row['last_name'] . ' (' . $row['season'] . ')') ?></li>
+        <li><?php link_entity('registration', $row['registration_id'], $row['first_name'] . ' ' . strtoupper($row['last_name']) . ' (' . $row['season'] . ')') ?></li>
       <?php endwhile ?>
     </ul>
   <?php else: ?>

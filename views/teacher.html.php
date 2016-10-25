@@ -1,15 +1,15 @@
 <ol class="breadcrumb">
   <li><?php link_home() ?></li>
   <li><?php link_table('teacher') ?></li>
-  <li><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></li>
+  <li><?php echo $row['first_name'] ?> <?php echo strtoupper($row['last_name']) ?></li>
 </ol>
 
 <div class="container">
-  <h1><?php echo $row['first_name'] ?> <?php echo $row['last_name'] ?></h1>
+  <h1><?php echo $row['first_name'] ?> <?php echo strtoupper($row['last_name']) ?></h1>
 
   <p>
     <span class="attribute-name">Nom :</span>
-    <?php echo $row['last_name'] ?><br>
+    <?php echo strtoupper($row['last_name']) ?><br>
     <span class="attribute-name">Prénom :</span>
     <?php echo $row['first_name'] ?><br>
     <span class="attribute-name">Date de naissance :</span>

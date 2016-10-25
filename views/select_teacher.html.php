@@ -8,9 +8,9 @@
       <?php $row = html_encode_strings($row) ?>
 
       <?php if ($row['teacher_id'] == $teacher_id): ?>
-        <option value="<?php echo $row['teacher_id'] ?>" selected><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
+        <option value="<?php echo $row['teacher_id'] ?>" selected><?php echo strtoupper($row['last_name']) ?> <?php echo $row['first_name'] ?></option>
       <?php else: ?>
-        <option value="<?php echo $row['teacher_id'] ?>"><?php echo $row['last_name'] ?> <?php echo $row['first_name'] ?></option>
+        <option value="<?php echo $row['teacher_id'] ?>"><?php echo strtoupper($row['last_name']) ?> <?php echo $row['first_name'] ?></option>
       <?php endif ?>
     <?php endwhile ?>
   </select>

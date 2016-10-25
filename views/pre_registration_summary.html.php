@@ -3,7 +3,7 @@
 
   <p>
     <span class="attribute-name">Nom :</span>
-    <?php echo $data['last_name'] ?><br>
+    <?php echo strtoupper($data['last_name']) ?><br>
     <span class="attribute-name">Prénom :</span>
     <?php echo $data['first_name'] ?><br>
     <span class="attribute-name">Date de naissance :</span>
