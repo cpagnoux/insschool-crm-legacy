@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="form-group">
   <label for="<?php echo $prefix ?>_day"><?php echo $label ?></label>
 

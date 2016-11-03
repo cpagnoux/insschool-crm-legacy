@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <?php switch ($table): ?>
 <?php case 'order_payment': ?>
   <input type="hidden" name="order_id" value="<?php echo $order_id ?>">

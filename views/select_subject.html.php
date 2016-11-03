@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="form-group">
   <label for="topic">Quel problème rencontrez-vous ?</label>
 

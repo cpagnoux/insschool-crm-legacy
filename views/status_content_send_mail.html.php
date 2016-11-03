@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="container">
   <?php if ($_GET['status'] == 'success'): ?>
     <p>Mail envoyé avec succès !</p>

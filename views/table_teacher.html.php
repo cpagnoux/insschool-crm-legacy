@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <ol class="breadcrumb">
   <li><?php link_home() ?></li>
   <li>Professeurs</li>

@@ -1,3 +1,4 @@
+<!-- vim: set expandtab: -->
 
 <footer>
   <div class="footer-container">

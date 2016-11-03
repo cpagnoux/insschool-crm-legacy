@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <input type="hidden" name="member_id" value="<?php echo $member_id ?>">
 
 <?php if (!isset($row)): ?>

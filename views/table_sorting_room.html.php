@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="display-option">
   <label for="room_sorting">Trier par :</label>
 

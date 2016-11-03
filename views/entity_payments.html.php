@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="container">
   <h1>Paiements</h1>
 

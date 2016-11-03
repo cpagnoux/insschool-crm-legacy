@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="display-option">
   <label for="limit">Lignes par page :</label>
 

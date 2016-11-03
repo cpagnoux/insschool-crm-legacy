@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="form-group">
   <?php if ($pre_registration_form && !isset($means_of_knowledge)): ?>
     <label for="means_of_knowledge">Comment nous avez-vous connus ?</label>

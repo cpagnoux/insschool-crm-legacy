@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <?php if (mysqli_num_rows($result) != 0): ?>
   <table>
     <tr>

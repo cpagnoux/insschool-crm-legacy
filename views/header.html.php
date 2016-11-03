@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

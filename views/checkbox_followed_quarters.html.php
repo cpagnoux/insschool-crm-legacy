@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="form-group hidden<?php echo $state ?>" id="followed_quarters">
   Trimestre(s) suivi(s)<br>
 

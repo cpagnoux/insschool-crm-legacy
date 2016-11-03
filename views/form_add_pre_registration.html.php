@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="container">
   <p><?php link_website() ?></p>
 

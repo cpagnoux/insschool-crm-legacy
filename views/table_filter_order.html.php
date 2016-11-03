@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="filters">
   <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?table=order" method="post">
     <div class="filter">

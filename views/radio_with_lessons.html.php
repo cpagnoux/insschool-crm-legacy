@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="form-row">
   Type de pré-inscription<br>
 

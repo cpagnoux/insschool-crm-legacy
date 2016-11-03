@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <div class="container">
   <h2>Récapitulatif :</h2>
 

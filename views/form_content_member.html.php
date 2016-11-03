@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <fieldset>
   <div class="form-group">
     <label for="last_name">Nom</label>

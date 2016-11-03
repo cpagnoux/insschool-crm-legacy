@@ -1,3 +1,5 @@
+<!-- vim: set expandtab: -->
+
 <nav class="pagination">
   <ul>
     <?php if ($page > 1): ?>
