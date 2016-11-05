@@ -1,6 +1,6 @@
 <!-- vim: set expandtab: -->
 
-<div class="tiny-container">
+<div class="tiny-container-left">
   <p><strong>Inscriptions incomplètes</strong></p>
 
   <?php if (mysqli_num_rows($result) != 0): ?>

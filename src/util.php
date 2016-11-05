@@ -1140,6 +1140,11 @@ function lesson_registrant_count($lesson_id, $season)
 	return $row[0];
 }
 
+function member_count($season)
+{
+	return row_count('registration', ' WHERE season = "' . $season . '"');
+}
+
 function order_paid($order_id)
 {
 	return (total_paid('order', $order_id) == order_total($order_id));

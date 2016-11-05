@@ -8,10 +8,12 @@ TODO:
 - Refactor isolating controllers
 - Refactor design using persistent navbar and menu
 - Add ability to display simple schedule
-- Implement SMS functionality
+- ! Implement SMS functionality
 - Rework member section to distinguish members and non-members
 - Make volunteer per season
 - Add internships to model
 - Add photos for members and goodies
 - Make cellphone and email required in pre-registration form
 - Add ability to send bill by mail
+- ! Add ability to edit call sheet
+- ! Add professional contacts and estimates and bills for them

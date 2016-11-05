@@ -418,22 +418,32 @@ fieldset {
   margin-top: 100px;
 }
 
-.tiny-container {
+.tiny-container-left, .tiny-container-right {
   background-color: #000000;
   height: 250px;
+  margin-bottom: 40px;
   overflow: scroll;
   padding: 20px;
   width: 500px;
 }
 
-.tiny-container:first-child {
+.tiny-container-left {
   float: left;
   margin-left: 50px;
 }
 
-.tiny-container:last-child {
+.tiny-container-right {
   float: right;
   margin-right: 50px;
+}
+
+.member-counter {
+  background-color: #000000;
+  clear: both;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  width: 400px;
 }
 
 footer {

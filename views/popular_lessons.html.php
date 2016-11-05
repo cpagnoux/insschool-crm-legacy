@@ -1,6 +1,6 @@
 <!-- vim: set expandtab: -->
 
-<div class="tiny-container">
+<div class="tiny-container-right">
   <p><strong>Cours les plus populaires de la saison <?php echo current_season() ?></strong></p>
 
   <?php if (isset($registrant_counts)): ?>
