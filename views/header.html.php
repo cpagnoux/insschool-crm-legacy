@@ -41,7 +41,7 @@
 
   <nav class="navbar">
     <a href="index.php">
-      <img src="img/logo-site-noir1.jpg" alt="Logo">
+      <img src="img/logo-black.jpg" alt="Logo">
     </a>
 
     <ul>

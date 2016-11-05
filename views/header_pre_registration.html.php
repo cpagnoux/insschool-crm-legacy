@@ -19,7 +19,7 @@
 <body>
 
 <header class="pre-registration-header">
-  <img src="img/logo-site-noir1.jpg" alt="Logo">
+  <img src="img/logo-black.jpg" alt="Logo">
   <h1>Pré-inscription</h1>
 </header>
 
