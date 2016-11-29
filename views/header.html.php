@@ -18,7 +18,7 @@
 <script src="js/main.js"></script>
 
 <?php if (strpos($_SERVER['SCRIPT_NAME'], 'send_mail.php') !== false): ?>
-  <script src="ckeditor/ckeditor.js"></script>
+  <script src="js/ckeditor/ckeditor.js"></script>
 <?php endif ?>
 
 </head>
