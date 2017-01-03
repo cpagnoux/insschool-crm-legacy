@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="container">
   <h1>Paiements</h1>

@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <nav class="pagination">
   <ul>

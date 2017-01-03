@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="tiny-container-right">
   <p><strong>Cours les plus populaires de la saison <?php echo current_season() ?></strong></p>

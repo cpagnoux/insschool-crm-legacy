@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <?php switch ($table): ?>
 <?php case 'order_payment': ?>

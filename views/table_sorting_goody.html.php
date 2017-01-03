@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="display-option">
   <label for="goody_sorting">Trier par :</label>

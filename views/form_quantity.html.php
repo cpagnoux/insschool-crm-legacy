@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=modify_quantity&amp;order_id=<?php echo $order_id ?>&amp;goody_id=<?php echo $row['goody_id'] ?>" method="post">
   <?php link_quantity_minus($order_id, $row['goody_id'], $row['quantity'] - 1) ?>

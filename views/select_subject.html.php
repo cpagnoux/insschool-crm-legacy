@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="form-group">
   <label for="topic">Quel problème rencontrez-vous ?</label>

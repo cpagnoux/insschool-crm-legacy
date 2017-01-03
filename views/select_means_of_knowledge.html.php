@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="form-group">
   <?php if ($pre_registration_form && !isset($means_of_knowledge)): ?>

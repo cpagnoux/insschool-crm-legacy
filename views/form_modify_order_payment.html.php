@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <ol class="breadcrumb">
   <li><?php link_home() ?></li>

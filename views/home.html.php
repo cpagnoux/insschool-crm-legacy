@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="super-container">
   <?php display_incomplete_registrations() ?>

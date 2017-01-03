@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="container">
   <?php if ($_GET['status'] == 'success'): ?>

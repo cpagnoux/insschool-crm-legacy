@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <input type="hidden" name="member_id" value="<?php echo $member_id ?>">
 

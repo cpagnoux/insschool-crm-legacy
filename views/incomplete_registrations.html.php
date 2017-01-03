@@ -1,4 +1,4 @@
-<!-- vim: set expandtab: -->
+<!-- vim: set et: -->
 
 <div class="tiny-container-left">
   <p><strong>Inscriptions incomplètes</strong></p>
