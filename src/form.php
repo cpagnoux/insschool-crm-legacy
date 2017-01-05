@@ -343,4 +343,3 @@ function select_time($label, $prefix, $time = null)
 
 	require 'views/select_time.html.php';
 }
-?>

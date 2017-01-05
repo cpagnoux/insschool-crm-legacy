@@ -24,4 +24,3 @@ function sql_error($link, $query)
 		echo '<p>Une erreur est survenue !</p>' . PHP_EOL;
 	}
 }
-?>

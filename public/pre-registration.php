@@ -30,4 +30,3 @@ default:
 }
 
 require 'views/footer_pre_registration.html.php';
-?>

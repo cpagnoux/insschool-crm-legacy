@@ -1,6 +1,5 @@
-<!-- vim: set et: -->
-
 <!DOCTYPE html>
+<!-- vim: set et: -->
 <html lang="fr">
 <head>
 

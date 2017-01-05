@@ -363,4 +363,3 @@ function update_goody_stock_by_order($link, $order_id)
 
 	mysqli_free_result($result);
 }
-?>

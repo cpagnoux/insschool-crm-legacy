@@ -130,4 +130,3 @@ class Bill extends FPDF
 		$this->Cell(30, 5, $to_be_paid, 1, 0, 'R');
 	}
 }
-?>

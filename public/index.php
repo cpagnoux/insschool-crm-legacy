@@ -36,4 +36,3 @@ default:
 	require 'views/footer.html.php';
 	break;
 }
-?>

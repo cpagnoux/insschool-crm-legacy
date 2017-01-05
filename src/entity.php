@@ -994,4 +994,3 @@ function delete_user($username)
 
 	redirect('user');
 }
-?>

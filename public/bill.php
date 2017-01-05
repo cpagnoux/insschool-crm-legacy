@@ -21,4 +21,3 @@ if (!session_valid())
 	redirect_login();
 
 generate_bill($_GET['registration_id']);
-?>

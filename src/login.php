@@ -140,4 +140,3 @@ function logout()
 
 	redirect_login();
 }
-?>

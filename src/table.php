@@ -589,4 +589,3 @@ function display_popular_lessons()
 
 	require 'views/popular_lessons.html.php';
 }
-?>

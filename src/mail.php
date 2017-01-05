@@ -221,4 +221,3 @@ function send_ticket($topic, $message)
 
 	redirect_after_send_ticket($status);
 }
-?>

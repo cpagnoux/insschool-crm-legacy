@@ -34,4 +34,3 @@ default:
 	display_table($_GET['table'], $_GET['page']);
 	break;
 }
-?>

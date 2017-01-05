@@ -38,4 +38,3 @@ default:
 	form_send_mail($_GET['to']);
 	break;
 }
-?>

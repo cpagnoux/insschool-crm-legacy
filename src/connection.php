@@ -39,4 +39,3 @@ function sql_escape_strings($array)
 
 	return $array;
 }
-?>

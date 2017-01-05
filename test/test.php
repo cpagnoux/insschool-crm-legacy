@@ -19,4 +19,3 @@ echo 'Inserting sample member data...' . PHP_EOL;
 exec($command . DATABASE . ' < test_member.sql');
 echo 'Inserting other sample data...' . PHP_EOL;
 exec($command . DATABASE . ' < test_other.sql');
-?>

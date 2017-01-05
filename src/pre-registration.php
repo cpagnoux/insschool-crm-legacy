@@ -403,4 +403,3 @@ function commit_pre_registration($pre_registration_id)
 	delete_entity('pre_registration', $pre_registration_id);
 	redirect('member', $member_id);
 }
-?>

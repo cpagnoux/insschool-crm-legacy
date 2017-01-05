@@ -97,4 +97,3 @@ function generate_bill($registration_id)
 	$bill->PrintBillTotal($total, TVA, $total_paid);
 	$bill->Output();
 }
-?>

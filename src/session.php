@@ -28,4 +28,3 @@ function init_session()
 	if (isset($_POST['limit']))
 		$_SESSION['limit'] = $_POST['limit'];
 }
-?>

@@ -21,4 +21,3 @@ if (session_valid())
 
 require 'views/login.html.php';
 require 'views/footer.html.php';
-?>

@@ -101,4 +101,3 @@ default:
 	display_entity($_GET['table'], $_GET['id']);
 	break;
 }
-?>

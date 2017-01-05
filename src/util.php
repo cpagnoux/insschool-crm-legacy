@@ -1303,4 +1303,3 @@ function total_paid($table, $id)
 
 	return sprintf('%.2f', $total_paid);
 }
-?>
