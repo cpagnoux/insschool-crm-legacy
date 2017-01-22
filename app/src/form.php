@@ -259,7 +259,8 @@ function select_lesson()
 	mysqli_close($link);
 }
 
-function select_means_of_knowledge($pre_registration_form, $means_of_knowledge = null)
+function select_means_of_knowledge($pre_registration_form,
+				   $means_of_knowledge = null)
 {
 	$poster_flyer = '';
 	$internet = '';

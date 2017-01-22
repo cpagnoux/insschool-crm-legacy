@@ -17,10 +17,12 @@ function form_send_mail($to)
 
 	switch ($to) {
 	case 'multiple_recipients':
-		require 'app/views/form_send_mail_to_multiple_recipients.html.php';
+		require 'app/views/' .
+			'form_send_mail_to_multiple_recipients.html.php';
 		break;
 	case 'lesson_registrants':
-		require 'app/views/form_send_mail_to_lesson_registrants.html.php';
+		require 'app/views/' .
+			'form_send_mail_to_lesson_registrants.html.php';
 		break;
 	default:
 		send_mail_to_single_recipient($_GET['table'], $_GET['id'], '',
@@ -185,7 +187,8 @@ function status_send_mail($to)
 			'status_send_mail_to_multiple_recipients.html.php';
 		break;
 	case 'lesson_registrants':
-		require 'app/views/status_send_mail_to_lesson_registrants.html.php';
+		require 'app/views/' .
+			'status_send_mail_to_lesson_registrants.html.php';
 		break;
 	default:
 		require 'app/views/status_send_mail.html.php';
