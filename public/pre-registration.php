@@ -6,17 +6,17 @@
 set_include_path(__DIR__ . '/..');
 define('PUBLIC_PATH', __DIR__);
 
-require_once 'src/connection.php';
-require_once 'src/util.php';
+require_once 'app/src/connection.php';
+require_once 'app/src/util.php';
 
-require_once 'src/pre-registration.php';
+require_once 'app/src/pre-registration.php';
 
 $action = '';
 
 if (isset($_POST['submit']))
 	$action = 'submit';
 
-require 'views/header_pre_registration.html.php';
+require 'app/views/header_pre_registration.html.php';
 
 switch ($action) {
 case 'submit':
@@ -25,8 +25,8 @@ case 'submit':
 	check_pre_registration($data);
 	break;
 default:
-	require 'views/form_add_pre_registration.html.php';
+	require 'app/views/form_add_pre_registration.html.php';
 	break;
 }
 
-require 'views/footer_pre_registration.html.php';
+require 'app/views/footer_pre_registration.html.php';

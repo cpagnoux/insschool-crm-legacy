@@ -6,12 +6,12 @@
 set_include_path(__DIR__ . '/..');
 define('PUBLIC_PATH', __DIR__);
 
-require_once 'src/connection.php';
-require_once 'src/session.php';
-require_once 'src/login.php';
-require_once 'src/util.php';
+require_once 'app/src/connection.php';
+require_once 'app/src/session.php';
+require_once 'app/src/login.php';
+require_once 'app/src/util.php';
 
-require_once 'src/table.php';
+require_once 'app/src/table.php';
 
 $_GET = sql_escape_strings($_GET);
 $_POST = sql_escape_strings($_POST);
@@ -31,8 +31,8 @@ case 'logout':
 	logout();
 	break;
 default:
-	require 'views/header.html.php';
-	require 'views/home.html.php';
-	require 'views/footer.html.php';
+	require 'app/views/header.html.php';
+	require 'app/views/home.html.php';
+	require 'app/views/footer.html.php';
 	break;
 }

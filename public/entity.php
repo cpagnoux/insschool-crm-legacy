@@ -6,13 +6,13 @@
 set_include_path(__DIR__ . '/..');
 define('PUBLIC_PATH', __DIR__);
 
-require_once 'src/connection.php';
-require_once 'src/session.php';
-require_once 'src/login.php';
-require_once 'src/util.php';
+require_once 'app/src/connection.php';
+require_once 'app/src/session.php';
+require_once 'app/src/login.php';
+require_once 'app/src/util.php';
 
-require_once 'src/entity.php';
-require_once 'src/pre-registration.php';
+require_once 'app/src/entity.php';
+require_once 'app/src/pre-registration.php';
 
 $_GET = sql_escape_strings($_GET);
 $_POST = sql_escape_strings($_POST);
@@ -77,9 +77,9 @@ case 'reset_absences':
 	reset_absences($_GET['teacher_id']);
 	break;
 case 'status_add_user':
-	require 'views/header.html.php';
-	require 'views/status_add_user.html.php';
-	require 'views/footer.html.php';
+	require 'app/views/header.html.php';
+	require 'app/views/status_add_user.html.php';
+	require 'app/views/footer.html.php';
 	unset($_SESSION['new_password']);
 	break;
 case 'toggle_admin':
@@ -89,9 +89,9 @@ case 'reset_password':
 	reset_password($_GET['username']);
 	break;
 case 'status_reset_password':
-	require 'views/header.html.php';
-	require 'views/status_reset_password.html.php';
-	require 'views/footer.html.php';
+	require 'app/views/header.html.php';
+	require 'app/views/status_reset_password.html.php';
+	require 'app/views/footer.html.php';
 	unset($_SESSION['new_password']);
 	break;
 case 'delete_user':
