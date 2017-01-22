@@ -1,15 +1,15 @@
 <?php
 // Connection parameters
-define('HOST', 'localhost');
-define('USERNAME', 'insschool');
-define('PASSWORD', 'admin');
-define('DATABASE', 'insschool');
+define('HOST', '');
+define('USERNAME', '');
+define('PASSWORD', '');
+define('DATABASE', '');
 
 // Debug mode
-define('DEBUG', 1);
+define('DEBUG', 0);
 
 // Mail
-define('EMAIL', 'user@example.com');
+define('EMAIL', '');
 define('DEV_EMAIL', 'christophe.pagnouxv@gmail.com');
 
 // Misc

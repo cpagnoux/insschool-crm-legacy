@@ -1,3 +1,6 @@
+## Project
+app/config/app.config.php
+
 ## Vim
 # swap
 [._]*.s[a-w][a-z]
