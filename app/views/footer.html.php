@@ -7,5 +7,11 @@
   </div>
 </footer>
 
+<script src="js/main.js"></script>
+
+<?php if ($_GET['controller'] == 'send_mail'): ?>
+  <script src="js/ckeditor/ckeditor.js"></script>
+<?php endif ?>
+
 </body>
 </html>

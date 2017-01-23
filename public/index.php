@@ -19,7 +19,6 @@ init_session();
 
 if (!session_valid()) {
 	require 'app/views/login.html.php';
-	require 'app/views/footer.html.php';
 	exit;
 }
 

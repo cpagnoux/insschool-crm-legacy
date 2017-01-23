@@ -36,3 +36,13 @@
     <p class="error"><span class="entypo entypo-alert"></span> Nom d'utilisateur ou mot de passe incorrect</p>
   <?php endif ?>
 </div>
+
+<footer>
+  <div class="footer-container">
+    <p>&copy; 2016 Christophe Pagnoux-Vieuxfort</p>
+    <p>Entypo pictograms by Daniel Bruce — www.entypo.com</p>
+  </div>
+</footer>
+
+</body>
+</html>
