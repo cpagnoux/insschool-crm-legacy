@@ -1,5 +1,6 @@
 ## Project
 app/config/app.config.php
+vendor/
 
 ## Vim
 # swap

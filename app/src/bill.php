@@ -3,7 +3,7 @@
  * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'vendor/fpdf181/fpdf.php';
+require_once 'vendor/setasign/fpdf/fpdf.php';
 
 define('FONT', 'Arial');
 define('FONT_SIZE_SMALL', 8);

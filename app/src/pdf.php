@@ -5,7 +5,7 @@
 
 require_once 'app/config/app.config.php';
 
-require_once 'vendor/fpdf181/fpdf.php';
+require_once 'vendor/setasign/fpdf/fpdf.php';
 
 require_once 'app/src/bill.php';
 
