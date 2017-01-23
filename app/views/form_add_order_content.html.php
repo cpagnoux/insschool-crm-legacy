@@ -8,7 +8,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=order_content" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=add&amp;table=order_content" method="post">
     <input type="hidden" name="order_id" value="<?php echo $order_id ?>">
 
     <fieldset>

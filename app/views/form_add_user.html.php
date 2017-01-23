@@ -7,7 +7,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=user" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=add&amp;table=user" method="post">
     <fieldset>
       <div class="form-group">
         <label for="username">Nom d'utilisateur</label>

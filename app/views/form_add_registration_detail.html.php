@@ -9,7 +9,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=registration_detail" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=add&amp;table=registration_detail" method="post">
     <input type="hidden" name="registration_id" value="<?php echo $registration_id ?>">
 
     <fieldset>

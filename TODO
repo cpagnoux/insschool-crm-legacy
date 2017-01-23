@@ -5,8 +5,6 @@ TODO:
 - Mail functionality -> make it work
 - Implement ability to send attachments with mails
 - UI for ordering rooms in schedule
-- Refactor isolating controllers
-- Refactor design using persistent navbar and menu
 - Add ability to display simple schedule
 - ! Implement SMS functionality
 - Rework member section to distinguish members and non-members

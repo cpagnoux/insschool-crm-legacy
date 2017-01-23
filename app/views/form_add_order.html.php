@@ -7,7 +7,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=add&amp;table=order" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=add&amp;table=order" method="post">
     <fieldset>
       <?php select_member() ?>
     </fieldset>

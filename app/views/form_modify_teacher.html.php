@@ -8,7 +8,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=modify&amp;table=teacher&amp;id=<?php echo $row['teacher_id'] ?>" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=modify&amp;table=teacher&amp;id=<?php echo $row['teacher_id'] ?>" method="post">
     <?php require 'app/views/form_content_teacher.html.php' ?>
   </form>
 </div>

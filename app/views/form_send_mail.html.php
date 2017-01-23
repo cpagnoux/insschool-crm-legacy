@@ -8,7 +8,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=send_mail" method="post">
     <input type="hidden" name="table" value="<?php echo $_GET['table'] ?>">
     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
     <?php require 'app/views/form_content_send_mail.html.php' ?>

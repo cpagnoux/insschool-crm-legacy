@@ -9,7 +9,7 @@
 </ol>
 
 <div class="container">
-  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?action=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">
+  <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;action=modify&amp;table=registration&amp;id=<?php echo $row['registration_id'] ?>" method="post">
     <?php require 'app/views/form_content_registration.html.php' ?>
   </form>
 </div>

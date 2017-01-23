@@ -138,5 +138,5 @@ function logout()
 	unset($_SESSION['username']);
 	unset($_SESSION['admin']);
 
-	redirect_login();
+	redirect_home();
 }
