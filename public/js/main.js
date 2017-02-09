@@ -1,5 +1,5 @@
 /*
- * Drop-down menu
+ * Dropdown menu
  */
 function showMenu()
 {

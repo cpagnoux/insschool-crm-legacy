@@ -8,7 +8,10 @@ require_once 'app/config/app.config.php';
 require_once 'vendor/setasign/fpdf/fpdf.php';
 
 require_once 'app/src/bill.php';
+require_once 'app/src/call_sheet.php';
 
+require_once 'app/src/connection.php';
+require_once 'app/src/error.php';
 require_once 'app/src/util.php';
 
 function get_member_data($member_id)
@@ -38,7 +41,8 @@ function get_registration_detail($registration_id)
 	$query = 'SELECT lesson.title FROM lesson ' .
 		 'INNER JOIN registration_detail ' .
 		 'ON registration_detail.lesson_id = lesson.lesson_id ' .
-		 'WHERE registration_id = ' . $registration_id;
+		 'WHERE registration_detail.registration_id = ' .
+		 $registration_id;
 	if (!$result = mysqli_query($link, $query)) {
 		sql_error($link, $query);
 		exit;
@@ -96,4 +100,70 @@ function generate_bill($registration_id)
 	$bill->PrintBillDetail($registration_detail);
 	$bill->PrintBillTotal($total, TVA, $total_paid);
 	$bill->Output();
+}
+
+function get_lesson_registrants($lesson_id, $season)
+{
+	$link = connect_database();
+
+	$query = 'SELECT member.first_name, member.last_name FROM member ' .
+		 'INNER JOIN registration ' .
+		 'ON registration.member_id = member.member_id ' .
+		 'INNER JOIN registration_detail ' .
+		 'ON registration_detail.registration_id = ' .
+		 'registration.registration_id ' .
+		 'WHERE registration_detail.lesson_id = ' . $lesson_id .
+		 ' AND registration.season = "' . $season .
+		 '" ORDER BY member.last_name, member.first_name';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$data = array();
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		$data[] = array(
+			'first_name' => $row['first_name'],
+			'last_name' => strtoupper($row['last_name'])
+		);
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $data;
+}
+
+function get_lesson_day($lesson_id)
+{
+	$link = connect_database();
+
+	$query = 'SELECT day FROM lesson WHERE lesson_id = ' . $lesson_id;
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$row = mysqli_fetch_assoc($result);
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $row['day'];
+}
+
+function generate_call_sheet($lesson_id, $season, $quarter)
+{
+	$lesson = get_lesson_title($lesson_id);
+	$registrants = get_lesson_registrants($lesson_id, $season);
+	$day_of_week = get_lesson_day($lesson_id);
+	$dates = dates_from_period($season, $quarter, $day_of_week);
+	$quarter = eval_quarter($quarter);
+
+	$call_sheet = new CallSheet();
+	$call_sheet->AddPage('L');
+	$call_sheet->PrintHeader($lesson, $season, $quarter);
+	$call_sheet->PrintTable($registrants, $dates);
+	$call_sheet->Output();
 }

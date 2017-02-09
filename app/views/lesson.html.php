@@ -44,6 +44,7 @@
   </p>
 
   <ul class="action-links">
+    <li><?php link_generate_call_sheet($row['lesson_id']) ?></li>
     <li><?php link_modify_entity('lesson', $row['lesson_id']) ?></li>
     <li><?php link_delete_entity('lesson', $row['lesson_id']) ?></li>
   </ul>

@@ -431,9 +431,16 @@ function link_send_mail_to_lesson_registrants($lesson_id, $season)
 
 function link_generate_bill($registration_id)
 {
-	echo '<a class="button" href="index.php?controller=bill&amp;' .
-	     'registration_id=' . $registration_id .
+	echo '<a class="button" href="index.php?controller=generate_pdf&amp;' .
+	     'document=bill&amp;registration_id=' . $registration_id .
 	     '" target="_blank">Éditer une facture</a>';
+}
+
+function link_generate_call_sheet($lesson_id)
+{
+	echo '<a class="button" href="index.php?controller=generate_pdf&amp;' .
+	     'document=call_sheet&amp;lesson_id=' . $lesson_id .
+	     '" target="_blank">Éditer une feuille d\'appel</a>';
 }
 
 function link_send_ticket()
@@ -593,6 +600,46 @@ function date_to_season($date)
 	return ($year - 1) . '-' . $year;
 }
 
+function dates_from_period($season, $quarter, $day_of_week)
+{
+	// season is in 'YYYY-YYYY' format
+	list($start_year, $end_year) = sscanf($season, '%d-%d');
+
+	switch ($quarter) {
+	case 1:
+		$year = $start_year;
+		$start_month = 9;
+		$end_month = 12;
+		break;
+	case 2:
+		$year = $end_year;
+		$start_month = 1;
+		$end_month = 3;
+		break;
+	case 3:
+		$year = $end_year;
+		$start_month = 4;
+		$end_month = 5;
+		break;
+	}
+
+	$dates = array();
+
+	for ($month = $start_month; $month <= $end_month; $month++) {
+		for ($day = 1; $day <= 31; $day++) {
+			$timestamp = strtotime($year . '-' .
+					       sprintf('%02d', $month) . '-' .
+					       sprintf('%02d', $day));
+
+			if (date('m', $timestamp) == $month &&
+			    strtoupper(date('l', $timestamp)) == $day_of_week)
+				$dates[] = date('d/m', $timestamp);
+		}
+	}
+
+	return $dates;
+}
+
 function duration($start_time, $end_time)
 {
 	if ($start_time == null || $end_time == null)
@@ -686,6 +733,25 @@ function eval_enum($value)
 		break;
 	case 'ANNUAL':
 		$result = 'Annuel';
+		break;
+	}
+
+	return $result;
+}
+
+function eval_quarter($value)
+{
+	$result = '';
+
+	switch ($value) {
+	case 1:
+		$result = '1er trimestre';
+		break;
+	case 2:
+		$result = '2ème trimestre';
+		break;
+	case 3:
+		$result = '3ème trimestre';
 		break;
 	}
 

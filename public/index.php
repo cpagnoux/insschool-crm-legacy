@@ -28,14 +28,14 @@ if (isset($_GET['controller']))
 	$controller = $_GET['controller'];
 
 switch ($controller) {
-case 'bill':
-	require 'app/src/controllers/bill.php';
-	break;
 case 'change_password':
 	require 'app/src/controllers/change_password.php';
 	break;
 case 'entity':
 	require 'app/src/controllers/entity.php';
+	break;
+case 'generate_pdf':
+	require 'app/src/controllers/generate_pdf.php';
 	break;
 case 'overview':
 	require 'app/src/controllers/overview.php';
