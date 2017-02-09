@@ -360,7 +360,7 @@ function add_registration_from_pr($link, $member_id, $row)
 	else
 		$row['plan'] = '"' . $row['plan'] . '"';
 
-	$season = date_to_season($row['date']);
+	$season = season_from_date($row['date']);
 
 	$query = 'INSERT INTO registration (member_id, season, plan, date) ' .
 		 'VALUES (' . $member_id . ', "' . $season . '", ' .

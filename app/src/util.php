@@ -589,7 +589,7 @@ function current_season()
 	return (date('Y') - 1) . '-' . date('Y');
 }
 
-function date_to_season($date)
+function season_from_date($date)
 {
 	// date is in 'YYYY-MM-DD' format
 	list($year, $month) = sscanf($date, '%d-%d');
