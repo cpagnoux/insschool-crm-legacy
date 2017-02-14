@@ -23,7 +23,7 @@
     <span class="blank"></span>
 
     <div class="dropdown">
-      <span class="dropdown-toggle" id="dropdown-toggle" onclick="showMenu()">Mon compte &#9662;</span>
+      <span class="dropdown-toggle" id="dropdown-toggle" onclick="toggleMenu()">Mon compte &#9662;</span>
 
       <ul class="dropdown-menu" id="dropdown-menu">
         <li><?php link_change_password() ?></li>

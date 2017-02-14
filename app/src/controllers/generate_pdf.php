@@ -15,6 +15,7 @@ case 'bill':
 	generate_bill($_GET['registration_id']);
 	break;
 case 'call_sheet':
-	generate_call_sheet($_GET['lesson_id']);
+	generate_call_sheet($_GET['lesson_id'], $_POST['season'],
+			    $_POST['quarter']);
 	break;
 }

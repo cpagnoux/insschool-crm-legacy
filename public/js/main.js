@@ -1,7 +1,7 @@
 /*
  * Dropdown menu
  */
-function showMenu()
+function toggleMenu()
 {
 	var toggle = document.getElementById('dropdown-toggle');
 	toggle.classList.toggle('highlight');
@@ -45,4 +45,10 @@ function hideContent(id)
 {
 	var element = document.getElementById(id);
 	element.classList.remove('show');
+}
+
+function toggleContent(id)
+{
+	var element = document.getElementById(id);
+	element.classList.toggle('show');
 }

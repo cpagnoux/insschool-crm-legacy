@@ -436,13 +436,6 @@ function link_generate_bill($registration_id)
 	     '" target="_blank">Éditer une facture</a>';
 }
 
-function link_generate_call_sheet($lesson_id)
-{
-	echo '<a class="button" href="index.php?controller=generate_pdf&amp;' .
-	     'document=call_sheet&amp;lesson_id=' . $lesson_id .
-	     '" target="_blank">Éditer une feuille d\'appel</a>';
-}
-
 function link_send_ticket()
 {
 	echo '<a href="index.php?controller=send_ticket">Assistance</a>';
