@@ -8,11 +8,11 @@
 
 <title>Espace de gestion INS School</title>
 
-<link rel="stylesheet" type="text/css" href="css/normalize.css">
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css">
-<link rel="stylesheet" type="text/css" href="fonts/entypo_regular_macroman/stylesheet.css">
-<link rel="stylesheet" type="text/css" href="css/entypo.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="fonts/entypo_regular_macroman/stylesheet.css">
+<link rel="stylesheet" href="css/entypo.css">
 
 </head>
 <body>

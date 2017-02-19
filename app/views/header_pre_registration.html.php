@@ -8,9 +8,9 @@
 
 <title>Pré-inscription - INS SCHOOL</title>
 
-<link rel="stylesheet" type="text/css" href="css/normalize.css">
-<link rel="stylesheet" type="text/css" href="css/pre-registration.css">
-<link rel="stylesheet" type="text/css" href="css/footer.css">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/pre-registration.css">
+<link rel="stylesheet" href="css/footer.css">
 
 </head>
 <body>
