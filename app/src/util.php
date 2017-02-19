@@ -903,6 +903,62 @@ function total_by_product($price, $quantity)
 /*
  * Database-related functions
  */
+function earnings_from_registrations($season)
+{
+	$link = connect_database();
+
+	$query = 'SELECT registration_payment.amount ' .
+		 'FROM registration_payment INNER JOIN registration ' .
+		 'ON registration.registration_id = ' .
+		 'registration_payment.registration_id ' .
+		 'WHERE registration.season = "' . $season . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$earnings = 0;
+
+	while ($row = mysqli_fetch_assoc($result))
+		$earnings += $row['amount'];
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return sprintf('%.2f', $earnings);
+}
+
+function earnings_from_orders($season)
+{
+	// season is in 'YYYY-YYYY' format
+	list($start_year, $end_year) = sscanf($season, '%d-%d');
+
+	$date_min = $start_year . '-09-01';
+	$date_max = $end_year . '-08-31';
+
+	$link = connect_database();
+
+	$query = 'SELECT order_payment.amount FROM order_payment ' .
+		 'INNER JOIN `order` ' .
+		 'ON order.order_id = order_payment.order_id ' .
+		 'WHERE order.date BETWEEN "' . $date_min . '" AND "' .
+		 $date_max . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$earnings = 0;
+
+	while ($row = mysqli_fetch_assoc($result))
+		$earnings += $row['amount'];
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return sprintf('%.2f', $earnings);
+}
+
 function get_entity_name($table, $id)
 {
 	$link = connect_database();
@@ -1190,6 +1246,39 @@ function get_teacher_id_from_name($first_name, $last_name)
 	mysqli_close($link);
 
 	return $row['teacher_id'];
+}
+
+function total_goodies_sold($season)
+{
+	// season is in 'YYYY-YYYY' format
+	list($start_year, $end_year) = sscanf($season, '%d-%d');
+
+	$date_min = $start_year . '-09-01';
+	$date_max = $end_year . '-08-31';
+
+	$link = connect_database();
+
+	$query = 'SELECT order_content.quantity, order.order_id ' .
+		 'FROM order_content INNER JOIN `order` ' .
+		 'ON order.order_id = order_content.order_id ' .
+		 'WHERE order.date BETWEEN "' . $date_min . '" AND "' .
+		 $date_max . '"';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$goodies_sold = 0;
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		if (order_paid($row['order_id']))
+			$goodies_sold += $row['quantity'];
+	}
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+
+	return $goodies_sold;
 }
 
 function lesson_registrant_count($lesson_id, $season)
