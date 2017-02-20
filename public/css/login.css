@@ -3,7 +3,7 @@
 body {
   background-attachment: fixed;
   background-color: #000000;
-  background-image: url('../img/background.jpg');
+  background-image: url(../img/background.jpg);
   background-position: center top;
   color: #808080;
 }
@@ -35,7 +35,7 @@ input:focus {
   color: #606060;
 }
 
-input[type=submit] {
+input[type="submit"] {
   background-color: #404040;
   border: none;
   color: #ffffff;
@@ -43,11 +43,11 @@ input[type=submit] {
   padding: 10px 20px;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #606060;
 }
 
-input[type=submit]:focus {
+input[type="submit"]:focus {
   background-color: #404040;
   box-shadow: none;
 }

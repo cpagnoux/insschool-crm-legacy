@@ -3,7 +3,7 @@
 body {
   background-attachment: fixed;
   background-color: #000000;
-  background-image: url('../img/background.jpg');
+  background-image: url(../img/background.jpg);
   background-position: center top;
   color: #808080;
 }
@@ -39,26 +39,26 @@ input:focus, select:focus {
   box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
 }
 
-input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
+input[type="checkbox"], input[type="radio"], input[type="submit"], .datetime-select {
   width: auto;
 }
 
-input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="submit"]:focus {
   box-shadow: none;
 }
 
-input[type=submit] {
+input[type="submit"] {
   background-color: #404040;
   border: none;
   color: #ffffff;
   display: inline-block;
 }
 
-input[type=submit]:hover {
+input[type="submit"]:hover {
   background-color: #606060;
 }
 
-input[type=submit]:focus {
+input[type="submit"]:focus {
   background-color: #404040;
 }
 
@@ -68,7 +68,7 @@ input + span, select + span {
 }
 
 input:not([required]) + span::before, select:not([required]) + span::before {
-  content: '(facultatif) ';
+  content: "(facultatif) ";
 }
 
 .attribute-name {

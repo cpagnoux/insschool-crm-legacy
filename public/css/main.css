@@ -3,7 +3,7 @@
 body {
   background-attachment: fixed;
   background-color: #000000;
-  background-image: url('../img/background.jpg');
+  background-image: url(../img/background.jpg);
   background-position: center top;
   color: #808080;
 }
@@ -52,15 +52,15 @@ input:focus, select:focus, textarea:focus {
   color: #606060;
 }
 
-input[type=checkbox], input[type=radio], input[type=submit], .datetime-select {
+input[type="checkbox"], input[type="radio"], input[type="submit"], .datetime-select {
   width: auto;
 }
 
-input[type=checkbox]:focus, input[type=radio]:focus, input[type=submit]:focus {
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="submit"]:focus {
   box-shadow: none;
 }
 
-input[type=submit], .button {
+input[type="submit"], .button {
   background-color: #404040;
   border: none;
   border-radius: 2px;
@@ -68,16 +68,16 @@ input[type=submit], .button {
   display: inline-block;
 }
 
-input[type=submit]:hover, .button:hover {
+input[type="submit"]:hover, .button:hover {
   background-color: #606060;
   color: #ffffff;
 }
 
-input[type=submit]:focus, .button:focus {
+input[type="submit"]:focus, .button:focus {
   background-color: #404040;
 }
 
-input[type=submit], .button {
+input[type="submit"], .button {
   padding: 10px 20px;
 }
 
@@ -87,7 +87,7 @@ input + span, select + span, textarea + span {
 }
 
 input:not([required]) + span::before, select:not([required]) + span::before, textarea:not([required]) + span::before {
-  content: '(facultatif) ';
+  content: "(facultatif) ";
 }
 
 .attribute-name {
@@ -306,7 +306,7 @@ header {
 }
 
 .breadcrumb li::before {
-  content: '> ';
+  content: "> ";
 }
 
 .breadcrumb li:first-child::before {

@@ -2,26 +2,26 @@
 
 .entypo {
   display: inline-block;
-  font-family: 'entyporegular';
+  font-family: entyporegular;
   font-size: 2em;
 }
 
 .entypo-ok::before {
-  content: 'W';
+  content: "W";
 }
 
 .entypo-remove::before {
-  content: 'X';
+  content: "X";
 }
 
 .entypo-minus-sign::before {
-  content: 'Y';
+  content: "Y";
 }
 
 .entypo-plus-sign::before {
-  content: 'Z';
+  content: "Z";
 }
 
 .entypo-alert::before {
-  content: 'c';
+  content: "c";
 }
