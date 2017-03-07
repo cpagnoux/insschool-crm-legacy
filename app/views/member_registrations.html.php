@@ -15,8 +15,8 @@
         <?php $row = html_encode_strings($row) ?>
 
         <tr>
-          <td><?php echo $row['season'] ?></td>
-          <td><?php echo eval_boolean(registration_ok($row['registration_id']), 'ok/nonok') ?></td>
+          <td class="centered"><?php echo $row['season'] ?></td>
+          <td class="centered"><?php echo eval_boolean(registration_ok($row['registration_id']), 'ok/nonok') ?></td>
           <td><?php link_entity('registration', $row['registration_id']) ?></td>
         </tr>
       <?php endwhile ?>

@@ -18,17 +18,17 @@
 
       <tr>
         <td><?php echo link_entity('goody', $row['goody_id'], $row['name']) ?></td>
-        <td><?php echo $row['price'] ?> €</td>
+        <td class="right-aligned"><?php echo $row['price'] ?> €</td>
 
         <?php if (order_paid($order_id)): ?>
-          <td><?php echo $row['quantity'] ?></td>
+          <td class="right-aligned"><?php echo $row['quantity'] ?></td>
         <?php else: ?>
-          <td>
+          <td class="centered">
             <?php require 'app/views/form_quantity.html.php' ?>
           </td>
         <?php endif ?>
 
-        <td><?php echo total_by_product($row['price'], $row['quantity']) ?> €</td>
+        <td class="right-aligned"><?php echo total_by_product($row['price'], $row['quantity']) ?> €</td>
 
         <?php if (!order_paid($order_id)): ?>
           <td><?php link_remove_product($order_id, $row['goody_id']) ?></td>

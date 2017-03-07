@@ -24,7 +24,7 @@
         <tr>
           <td><?php echo $row['username'] ?></td>
 
-          <td>
+          <td class="centered">
             <?php if ($row['username'] != $_SESSION['username']): ?>
               <?php link_toggle_admin($row['username'], $row['admin']) ?>
             <?php else: ?>

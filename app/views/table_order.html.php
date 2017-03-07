@@ -24,9 +24,9 @@
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <tr>
-          <td><?php echo $row['order_id'] ?></td>
+          <td class="right-aligned"><?php echo $row['order_id'] ?></td>
           <td><?php echo get_name('member', $row['member_id']) ?></td>
-          <td><?php echo format_date($row['date']) ?></td>
+          <td class="centered"><?php echo format_date($row['date']) ?></td>
           <td><?php link_entity('order', $row['order_id']) ?></td>
         </tr>
       <?php endwhile ?>

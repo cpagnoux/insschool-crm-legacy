@@ -16,11 +16,11 @@
 
       <?php while ($row = mysqli_fetch_assoc($result)): ?>
         <tr>
-          <td><?php echo $row['amount'] ?> €</td>
-          <td><?php echo eval_enum($row['mode']) ?></td>
-          <td><?php echo format_date($row['cashing_date']) ?></td>
+          <td class="right-aligned"><?php echo $row['amount'] ?> €</td>
+          <td class="centered"><?php echo eval_enum($row['mode']) ?></td>
+          <td class="centered"><?php echo format_date($row['cashing_date']) ?></td>
           <td class="text-cell"><?php echo $row['comment'] ?></td>
-          <td><?php echo format_date($row['date']) ?></td>
+          <td class="centered"><?php echo format_date($row['date']) ?></td>
 
           <td>
             <?php link_modify_entity($table . '_payment', $row[$table . '_payment_id']) ?>

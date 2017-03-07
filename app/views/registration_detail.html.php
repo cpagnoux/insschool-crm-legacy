@@ -17,7 +17,7 @@
         <tr>
           <td><?php echo link_entity('lesson', $row['lesson_id'], $row['title']) ?></td>
 
-          <td>
+          <td class="centered">
             <?php link_toggle_show_participation($registration_id, $row['lesson_id'], $row['show_participation']) ?>
           </td>
 
