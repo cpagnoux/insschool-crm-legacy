@@ -133,6 +133,10 @@ input:not([required]) + span::before, select:not([required]) + span::before, tex
   width: 60px;
 }
 
+.right-aligned {
+  text-align: right;
+}
+
 table {
   border-collapse: collapse;
 }
