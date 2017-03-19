@@ -16,3 +16,4 @@ tags
 
 ## SonarQube
 .sonar/
+.scannerwork/
