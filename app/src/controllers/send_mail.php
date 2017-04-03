@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2016 Christophe Pagnoux-Vieuxfort
+ * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
 require_once 'app/src/mail.php';
