@@ -3,7 +3,9 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require '../app/config/app.config.php';
+set_include_path(dirname(__DIR__));
+
+require 'app/config/app.config.php';
 
 $command = 'mysql -u ' . USERNAME . ' -p' . PASSWORD . ' ';
 
