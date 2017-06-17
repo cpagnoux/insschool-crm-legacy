@@ -1,5 +1,7 @@
 <?php
 
+define('VERSION', '0.4.0');
+
 // Connection parameters
 define('HOST', '');
 define('USERNAME', '');

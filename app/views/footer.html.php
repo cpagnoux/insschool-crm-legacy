@@ -2,7 +2,7 @@
 
 <footer>
   <div class="footer-container">
-    <p>&copy; 2016-2017 Christophe Pagnoux-Vieuxfort</p>
+    <p>&copy; 2016-2017 Christophe Pagnoux-Vieuxfort&emsp;|&emsp;Version <?php echo VERSION ?></p>
     <p>Entypo pictograms by Daniel Bruce — www.entypo.com</p>
   </div>
 </footer>
