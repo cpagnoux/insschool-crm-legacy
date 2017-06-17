@@ -843,14 +843,6 @@ function int_div($dividend, $divisor)
 	return (int) $result;
 }
 
-function previous_season()
-{
-	if (date('m') >= 6)
-		return (date('Y') - 1) . '-' . date('Y');
-
-	return (date('Y') - 2) . '-' . (date('Y') - 1);
-}
-
 function price_after_discount($price, $discount)
 {
 	// $discount is a percentage
