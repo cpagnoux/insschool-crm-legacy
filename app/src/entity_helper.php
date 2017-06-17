@@ -21,8 +21,12 @@ function display_entity_payments($link, $table, $id)
 	mysqli_free_result($result);
 }
 
-function display_lesson_registrants($link, $lesson_id, $season)
+function display_lesson_registrants($link, $lesson_id)
 {
+	$season = (isset($_POST['season'])) ?
+		$_POST['season'] :
+		current_season();
+
 	$query = 'SELECT member.member_id, member.first_name, ' .
 		 'member.last_name FROM member INNER JOIN registration ' .
 		 'ON registration.member_id = member.member_id ' .

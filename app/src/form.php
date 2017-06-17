@@ -315,6 +315,27 @@ function select_room($room_id)
 	mysqli_close($link);
 }
 
+function select_season($season = null, $auto_submit = false)
+{
+	$link = connect_database();
+
+	$query = 'SELECT DISTINCT season FROM registration ' .
+		 'ORDER BY season DESC';
+	if (!$result = mysqli_query($link, $query)) {
+		sql_error($link, $query);
+		exit;
+	}
+
+	$onchange = ($auto_submit) ?
+		' onchange="this.form.submit()"' :
+		'';
+
+	require 'app/views/select_season.html.php';
+
+	mysqli_free_result($result);
+	mysqli_close($link);
+}
+
 function select_teacher($teacher_id)
 {
 	$link = connect_database();

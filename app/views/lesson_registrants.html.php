@@ -3,6 +3,14 @@
 <div class="container">
   <h1>Inscrits</h1>
 
+  <div class="filters">
+    <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=entity&amp;table=lesson&amp;id=<?php echo $lesson_id ?>" method="post">
+      <div class="filter">
+        <?php select_season($season, true) ?>
+      </div>
+    </form>
+  </div>
+
   <?php if (mysqli_num_rows($result) != 0): ?>
     <table>
       <tr>

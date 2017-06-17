@@ -4,7 +4,7 @@
 
 <?php if (!isset($row)): ?>
   <fieldset>
-    <?php require 'app/views/select_season.html.php' ?>
+    <?php select_season() ?>
   </fieldset>
 <?php endif ?>
 

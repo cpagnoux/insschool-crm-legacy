@@ -51,7 +51,7 @@
 
   <div class="hidden" id="call_sheet_form">
     <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=generate_pdf&amp;document=call_sheet&amp;lesson_id=<?php echo $row['lesson_id'] ?>" method="post" target="_blank">
-      <?php require 'app/views/select_season.html.php' ?>
+      <?php select_season() ?>
       <?php require 'app/views/radio_quarter.html.php' ?>
 
       <div class="form-group">
@@ -61,4 +61,4 @@
   </div>
 </div>
 
-<?php display_lesson_registrants($link, $row['lesson_id'], current_season()) ?>
+<?php display_lesson_registrants($link, $row['lesson_id']) ?>
