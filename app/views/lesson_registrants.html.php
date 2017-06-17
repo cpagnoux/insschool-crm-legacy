@@ -31,7 +31,7 @@
     </table>
 
     <ul class="action-links">
-      <li><?php link_send_mail_to_lesson_registrants($lesson_id, current_season()) ?></li>
+      <li><?php link_send_mail_to_lesson_registrants($lesson_id, $season) ?></li>
       <li><button class="button" onclick="toggleContent('call_sheet_form')">Éditer une feuille d'appel</button></li>
     </ul>
 
