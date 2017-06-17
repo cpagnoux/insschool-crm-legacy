@@ -12,7 +12,7 @@ require_once 'app/config/app.config.php';
 require_once 'vendor/setasign/fpdf/fpdf.php';
 
 // Core
-require_once 'app/src/connection.php';
+require_once 'app/src/database.php';
 require_once 'app/src/entity.php';
 require_once 'app/src/entity_helper.php';
 require_once 'app/src/error.php';
