@@ -3,11 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'vendor/setasign/fpdf/fpdf.php';
-
-require_once 'app/src/bill.php';
-require_once 'app/src/call_sheet.php';
-
 function generate_bill($registration_id)
 {
 	$bill = new Bill();

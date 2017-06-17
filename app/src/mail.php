@@ -3,14 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/config/app.config.php';
-
-require_once 'app/src/connection.php';
-require_once 'app/src/error.php';
-require_once 'app/src/util.php';
-
-require_once 'app/src/table.php';
-
 function form_send_mail($to)
 {
 	require 'app/views/header.html.php';

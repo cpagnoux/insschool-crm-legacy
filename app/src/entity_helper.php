@@ -3,11 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/src/error.php';
-require_once 'app/src/util.php';
-
-require_once 'app/src/entity.php';
-
 /*
  * Helper functions for displaying entities
  */

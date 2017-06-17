@@ -3,8 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/src/login.php';
-
 $action = '';
 
 if (isset($_GET['action']))

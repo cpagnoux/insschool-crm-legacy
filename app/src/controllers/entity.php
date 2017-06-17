@@ -3,9 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/src/entity.php';
-require_once 'app/src/pre-registration.php';
-
 $action = '';
 
 if (isset($_GET['status']))

@@ -3,10 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/src/connection.php';
-require_once 'app/src/error.php';
-require_once 'app/src/util.php';
-
 function table_filter_member()
 {
 	$all = '';

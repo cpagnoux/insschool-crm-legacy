@@ -3,10 +3,6 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-require_once 'app/config/app.config.php';
-
-require_once 'app/src/error.php';
-
 function connect_database()
 {
 	$link = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
