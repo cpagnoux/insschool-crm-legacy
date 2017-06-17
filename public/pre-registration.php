@@ -3,7 +3,7 @@
  * Copyright (C) 2016-2017 Christophe Pagnoux-Vieuxfort
  */
 
-set_include_path(__DIR__ . '/..');
+set_include_path(dirname(__DIR__));
 define('PUBLIC_PATH', __DIR__);
 
 require_once 'app/src/connection.php';
