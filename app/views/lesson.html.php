@@ -44,21 +44,9 @@
   </p>
 
   <ul class="action-links">
-    <li><button class="button" onclick="toggleContent('call_sheet_form')">Éditer une feuille d'appel</button></li>
     <li><?php link_modify_entity('lesson', $row['lesson_id']) ?></li>
     <li><?php link_delete_entity('lesson', $row['lesson_id']) ?></li>
   </ul>
-
-  <div class="hidden" id="call_sheet_form">
-    <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=generate_pdf&amp;document=call_sheet&amp;lesson_id=<?php echo $row['lesson_id'] ?>" method="post" target="_blank">
-      <?php select_season() ?>
-      <?php require 'app/views/radio_quarter.html.php' ?>
-
-      <div class="form-group">
-        <input type="submit" value="OK">
-      </div>
-    </form>
-  </div>
 </div>
 
 <?php display_lesson_registrants($link, $row['lesson_id']) ?>

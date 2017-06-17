@@ -32,7 +32,20 @@
 
     <ul class="action-links">
       <li><?php link_send_mail_to_lesson_registrants($lesson_id, current_season()) ?></li>
+      <li><button class="button" onclick="toggleContent('call_sheet_form')">Éditer une feuille d'appel</button></li>
     </ul>
+
+    <div class="hidden" id="call_sheet_form">
+      <form action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?controller=generate_pdf&amp;document=call_sheet&amp;lesson_id=<?php echo $lesson_id ?>" method="post" target="_blank">
+        <input type="hidden" name="season" value="<?php echo $season ?>">
+
+        <?php require 'app/views/radio_quarter.html.php' ?>
+
+        <div class="form-group">
+          <input type="submit" value="OK">
+        </div>
+      </form>
+    </div>
   <?php else: ?>
     <p>Aucun inscrit</p>
   <?php endif ?>
