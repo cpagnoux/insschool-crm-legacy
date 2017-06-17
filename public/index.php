@@ -42,31 +42,9 @@ if (!session_valid()) {
 	exit;
 }
 
-$controller = '';
+$controller = 'index';
 
 if (isset($_GET['controller']))
 	$controller = $_GET['controller'];
 
-switch ($controller) {
-case 'change_password':
-	require 'app/src/controllers/change_password.php';
-	break;
-case 'entity':
-	require 'app/src/controllers/entity.php';
-	break;
-case 'generate_pdf':
-	require 'app/src/controllers/generate_pdf.php';
-	break;
-case 'overview':
-	require 'app/src/controllers/overview.php';
-	break;
-case 'send_mail':
-	require 'app/src/controllers/send_mail.php';
-	break;
-case 'send_ticket':
-	require 'app/src/controllers/send_ticket.php';
-	break;
-default:
-	require 'app/src/controllers/index.php';
-	break;
-}
+require 'app/src/controllers/' . $controller . '.php';
