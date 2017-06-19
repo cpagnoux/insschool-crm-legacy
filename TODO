@@ -1,21 +1,24 @@
-TODO:
-- Fix duplicate entry bug for goodies in orders and lessons in registrations
-- Table search bar
-- Call sheet
-- Mail functionality -> make it work
-- Implement ability to send attachments with mails
-- UI for ordering rooms in schedule
-- Add ability to display simple schedule
-- ! Implement SMS functionality
-- Rework member section to distinguish members and non-members
-- Make volunteer per season
-- Add internships to model
-- Add photos for members and goodies
-- Make cellphone and email required in pre-registration form
-- Add ability to send bill by mail
-- ! Add professional contacts, ability to send them mails and ability to edit
+TODO
+====
+
+* Fix duplicate entry bug for goodies in orders and lessons in registrations
+* Table search bar
+* Call sheet
+* Mail functionality -> make it work
+* Implement ability to send attachments with mails
+* UI for ordering rooms in schedule
+* Add ability to display simple schedule
+* ! Implement SMS functionality
+* Rework member section to distinguish members and non-members
+* Make volunteer per season
+* Add internships to model
+* Add photos for members and goodies
+* Make cellphone and email required in pre-registration form
+* Add ability to send bill by mail
+* ! Add professional contacts, ability to send them mails and ability to edit
   estimates and bills for them (with comment section, display RIB in bill
   footer)
-- Add table for services (with comment)
-- Add ability to send mail to prospects
-- Add calendar with notification system
+* Add table for services (with comment)
+* Add ability to send mail to prospects
+* Add calendar with notification system
+* ! Add page for statistics
