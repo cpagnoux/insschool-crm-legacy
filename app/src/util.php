@@ -572,21 +572,10 @@ function html_encode_strings($array)
  */
 function current_season()
 {
-	if (date('m') >= 6)
+	if (date('m') >= 9)
 		return date('Y') . '-' . (date('Y') + 1);
 
 	return (date('Y') - 1) . '-' . date('Y');
-}
-
-function season_from_date($date)
-{
-	// date is in 'YYYY-MM-DD' format
-	list($year, $month) = sscanf($date, '%d-%d');
-
-	if ($month >= 6)
-		return $year . '-' . ($year + 1);
-
-	return ($year - 1) . '-' . $year;
 }
 
 function dates_from_period($season, $quarter, $day_of_week)
@@ -869,6 +858,17 @@ function reverse_format_phone_number($phone_number)
 			'%2c %2c %2c %2c %2c');
 
 	return $part1 . $part2 . $part3 . $part4 . $part5;
+}
+
+function season_from_date($date)
+{
+	// date is in 'YYYY-MM-DD' format
+	list($year, $month) = sscanf($date, '%d-%d');
+
+	if ($month >= 6)
+		return $year . '-' . ($year + 1);
+
+	return ($year - 1) . '-' . $year;
 }
 
 function to_date($day, $month, $year)

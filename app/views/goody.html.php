@@ -22,9 +22,9 @@
   </p>
 
   <p>
-    <span class="attribute-name">Quantité vendue :</span>
+    <span class="attribute-name">Quantité vendue (<?php echo current_season() ?>) :</span>
     <?php echo goodies_sold($row['goody_id'], current_season()) ?><br>
-    <span class="attribute-name">Somme vendue :</span>
+    <span class="attribute-name">Somme vendue (<?php echo current_season() ?>) :</span>
     <?php echo earnings_from_goody($row['goody_id'], current_season()) ?> €
   </p>
 
