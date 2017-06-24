@@ -7,6 +7,10 @@
     <option value="<?php echo current_season() ?>"><?php echo current_season() ?></option>
 
     <?php while ($row = mysqli_fetch_assoc($result)): ?>
+      <?php if ($row['season'] == current_season()): ?>
+        <?php continue ?>
+      <?php endif ?>
+
       <?php $row = html_encode_strings($row) ?>
 
       <?php if ($row['season'] == $season): ?>
